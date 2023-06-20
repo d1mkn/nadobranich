@@ -114,6 +114,7 @@
       </ul>
     </div>
   </div>
+</header>
 
   <div class="mobile-menu__container">
     <div class="mobile-menu__content">
@@ -177,7 +178,6 @@
       </div>
     </div>
   </div>
-</div>
-</header>
+
 
 
