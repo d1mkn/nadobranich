@@ -141,6 +141,8 @@ function nadobranich_scripts() {
 	wp_enqueue_style( 'nadobranich-style', get_stylesheet_uri(), array(), _S_VERSION );
 	wp_style_add_data( 'nadobranich-style', 'rtl', 'replace' );
 
+    wp_enqueue_style('nadobranich-cabinet', get_template_directory_uri() . '/assets/css/cabinet.9e3d476f.css', array(), _S_VERSION);
+
 	wp_enqueue_script( 'nadobranich-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
