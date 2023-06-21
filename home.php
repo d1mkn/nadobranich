@@ -191,41 +191,66 @@ Template Name: Home
 
             // Check if the product is on sale
             $is_on_sale = $product->is_on_sale();
+            $attributes = $product->get_attributes();
 
             ?>
             <li class="single-category__item swiper-slide">
               <?php if ($is_on_sale): ?>
-                <div class="single-category__sale-item-link">
-            <?php else: ?>
-              <div class="single-category__item-link">
-            <?php endif; ?>
-                <div class="js-quick-view single-category__item-overlay">
-                  <p class="single-category__item-overlay-text">Швидкий перегляд</p>
-                  <p class="single-category__item-overlay-text-tab">+</p>
-                </div>
-                <div class="single-category__item-about">
-                  <a href="<?php echo get_permalink() ?>">
-                    <div class="single-category__item-img">
-                      <?php echo get_the_post_thumbnail() ?>
-                    </div>
-                  </a>
-                  <h4 class="single-category__item-title">
-                    <?php echo get_the_title() ?>
-                  </h4>
-                  <p class="single-category__item-desc">
-                    <?php echo $product->get_short_description() ?>
-                  </p>
-                  <?php if ($is_on_sale): ?>
-                    <span class="old-price single-category__item-price">Від <span class="item-price"><?php echo $product->get_regular_price() ?> грн</span><span class="item-new-price"><?php echo $product->get_sale_price() ?> грн</span></span>
+                <div class="single-category__sale-item"><p>Aкція</p></div>
+                <div class="single-category__item-link">
                 <?php else: ?>
-                  <span class="single-category__item-price">Від <?php echo $product->get_price_html(); ?>
-                  </span>
+                  <div class="single-category__item-link">
+                  <?php endif; ?>
+                  <div class="js-quick-view single-category__item-overlay">
+                    <p class="single-category__item-overlay-text">Швидкий перегляд</p>
+                    <p class="single-category__item-overlay-text-tab">+</p>
+                  </div>
+                  <div class="single-category__item-about">
+                    <a href="<?php echo get_permalink() ?>">
+                      <div class="single-category__item-img">
+                        <?php echo get_the_post_thumbnail() ?>
+                      </div>
+                    </a>
+                    <h4 class="single-category__item-title">
+                      <?php echo get_the_title() ?>
+                    </h4>
+                    <p class="single-category__item-desc">
+                      <?php echo $product->get_short_description() ?>
+                    </p>
+                    <?php if ($is_on_sale): ?>
+                      <span class="old-price single-category__item-price">Від <span class="item-price">
+                          <?php echo $product->regular_price ?> грн
+                        </span><span class="item-new-price">
+                          <?php echo $product->price ?> грн
+                        </span></span>
+                    <?php else: ?>
+                      <span class="single-category__item-price">Від
+                        <?php echo $product->price ?> грн
+                      </span>
+                    <?php endif; ?>
 
-                <?php endif; ?>
+                    <?php
+                    if ($attributes) {
+                      foreach ($attributes as $attribute) {
+                        if ($attribute->get_name() === 'Колір') {
+                          $options = $attribute->get_options();
+                          ?>
+                          <div class="modal__body-color-picker">
+                            <?php foreach ($options as $option) { ?>
+
+                              <a class="modal__body-color-item" href="#">
+                                <div style="background-color: <?php echo $option ?>;"></div>
+                              </a>
+
+                            <?php } ?>
+                          </div>
+                        <?php }
+                      }
+                    } ?>
+                  </div>
                 </div>
-              </div>
             </li>
-        <?php } ?>
+          <?php } ?>
         </ul>
       </section>
 
@@ -233,6 +258,8 @@ Template Name: Home
     }
   }
   ?>
+
+
 
 
 
