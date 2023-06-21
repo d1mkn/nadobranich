@@ -3,7 +3,7 @@
         <div class="container">
           <div class="footer__socials">
             <div class="footer__logo-wrap">
-              <a href=".">
+              <a href="<?php echo site_url('') ?>">
                 <svg class="footer__logo" width="188" height="50">
                   <use href="<?php echo get_template_directory_uri()?>/assets/images/icons.svg#logo-footer"></use>
                 </svg>
