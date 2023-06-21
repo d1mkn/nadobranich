@@ -7,66 +7,6 @@ Template Name: Home
 <?php get_header(); ?>
 
 	<div class="backdrop visually-hidden"></div>
-    <div class="mobile-menu__container">
-      <div class="mobile-menu__content">
-        <div class="mobile-menu__content-wrap">
-          <div class="container">
-            <button class="mobile-menu__close-btn">
-              <svg width="24" height="70">
-                <use href="<?php bloginfo('template_url')?>/assets/images/icons.svg#close"></use>
-              </svg>
-            </button>
-            <nav class="mobile-menu__nav">
-              <ul class="mobile-menu__list">
-                <li>
-                  <p class="mobile-menu__title">Каталог</p>
-                  <div class="mobile-menu__items-wrap">
-                    <ul>
-                      <li>
-                        <a class="mobile-menu__item" href="#"
-                          >Постільна білизна</a
-                        >
-                      </li>
-                      <li><a class="mobile-menu__item" href="#">Пледи</a></li>
-                      <li><a class="mobile-menu__item" href="#">Рушники</a></li>
-                      <li>
-                        <a class="mobile-menu__item" href="#">Покривала</a>
-                      </li>
-                      <li>
-                        <a class="mobile-menu__item" href="#">Акційні товари</a>
-                      </li>
-                    </ul>
-                  </div>
-                </li>
-                <li>
-                  <p class="mobile-menu__title">Інформація</p>
-                  <div class="mobile-menu__items-wrap">
-                    <ul>
-                      <li>
-                        <a class="mobile-menu__item" href="/bedding/faq.html"
-                          >Популярні питання</a
-                        >
-                      </li>
-                      <li>
-                        <a class="mobile-menu__item" href="#">Контакти</a>
-                      </li>
-                      <li><a class="mobile-menu__item" href="#">Про нас</a></li>
-                      <li>
-                        <a
-                          class="mobile-menu__item"
-                          href="/bedding/fabrics.html"
-                          >Тканини</a
-                        >
-                      </li>
-                    </ul>
-                  </div>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-      </div>
-    </div>
     <div
       class="animate__animated js-to-cart-modal to-cart__wrap visually-hidden"
     >

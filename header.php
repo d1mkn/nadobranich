@@ -22,20 +22,33 @@
           <button class="navigation__item-button">Каталог</button>
           <div class="navigation__dropdown-wrap">
             <ul class="navigation__dropdown">
-              <li class="navigation__dropdown-item">
-                <a href="#">Постільна білизна</a>
-              </li>
-              <li class="navigation__dropdown-item"><a href="#">Пледи</a></li>
-              <li class="navigation__dropdown-item"><a href="#">Рушники</a></li>
-              <li class="navigation__dropdown-item">
-                <a href="#">Покривала</a>
-              </li>
-              <li class="navigation__dropdown-item">
-                <a href="#">Акційні товари</a>
-              </li>
-            </ul>
-          </div>
-        </li>
+
+              <?php
+                $args = array(
+                    'taxonomy' => 'product_cat', // вказуємо таксономію товарних категорій
+                    'hide_empty' => false, // показуємо всі категорії, включаючи порожні
+                );
+
+                $categories = get_terms($args); // список категорій товарів
+
+                foreach ($categories as $category) {
+                    $category_id = $category->term_id;
+                    $category_name = $category->name;
+
+                    if ($category_name === 'Uncategorized') {
+                        continue; // пропускаємо ітерацію циклу та переходимо до наступної категорії
+                    }
+
+                    $category_link = get_term_link($category_id, 'product_cat'); // посилання на сторінку категорії товарів
+
+                    ?>
+                    <li class="navigation__dropdown-item">
+                    <a href=<?php echo $category_link?>><?php echo $category_name?></a>
+                    </li>
+                    <?php
+                }
+              ?>
+              </ul>
         <li class="navigation__item">
           <button class="navigation__item-button">Інформація</button>
           <div class="navigation__dropdown-wrap">
@@ -131,21 +144,31 @@
                 <p class="mobile-menu__title">Каталог</p>
                 <div class="mobile-menu__items-wrap">
                   <ul>
+                    <?php
+                $args = array(
+                    'taxonomy' => 'product_cat', // вказуємо таксономію товарних категорій
+                    'hide_empty' => false, // показуємо всі категорії, включаючи порожні
+                );
+
+                $categories = get_terms($args); // список категорій товарів
+
+                foreach ($categories as $category) {
+                    $category_id = $category->term_id;
+                    $category_name = $category->name;
+
+                    if ($category_name === 'Uncategorized') {
+                        continue; // пропускаємо ітерацію циклу та переходимо до наступної категорії
+                    }
+
+                    $category_link = get_term_link($category_id, 'product_cat'); // посилання на сторінку категорії товарів
+
+                    ?>
                     <li>
-                      <a class="mobile-menu__item" href="#">Постільна білизна</a>
+                    <a class="mobile-menu__item" href=<?php echo $category_link?>><?php echo $category_name?></a>
                     </li>
-                    <li>
-                      <a class="mobile-menu__item" href="#">Пледи</a>
-                    </li>
-                    <li>
-                      <a class="mobile-menu__item" href="#">Рушники</a>
-                    </li>
-                    <li>
-                      <a class="mobile-menu__item" href="#">Покривала</a>
-                    </li>
-                    <li>
-                      <a class="mobile-menu__item" href="#">Акційні товари</a>
-                    </li>
+                    <?php
+                }
+              ?>
                   </ul>
                 </div>
               </li>
