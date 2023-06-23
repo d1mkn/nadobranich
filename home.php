@@ -122,10 +122,12 @@ Template Name: Home
   </section>
 
   <?php
+
   $args = [
     "taxonomy" => "product_cat",
     "hide_empty" => true,
   ];
+  $i = 0;
 
   $categories = get_terms($args);
 
@@ -189,15 +191,72 @@ Template Name: Home
             $query->the_post();
             global $product;
 
-            // Check if the product is on sale
+            // Дані для ренедру та мобального вікна
             $is_on_sale = $product->is_on_sale();
             $attributes = $product->get_attributes();
+            $productId = $product->get_id();
+            $productPrice = $product->price;
+            $productBeforeSalePrice = $product->regular_price;
+            $productDesc = $product->description;
+            $productShortDesc = $product->get_short_description();
+            $productAttributes = array();
+            $productRating = array(
+              'average' => $product->average_rating,
+              'reviewCount' => $product->review_count
+            );
 
+            //Атрибути
+            foreach ($attributes as $attribute) {
+              $attributeName = $attribute->get_name();
+              $options = $attribute->get_options();
+
+              $productAttributes[] = array(
+                $attributeName => $options
+              );
+            }
+
+            // Варіації Колір/Розмір + ціна
+            $productVariations = get_children(
+              array(
+                'post_parent' => $productId,
+                'post_type' => 'product_variation',
+              )
+            );
+
+            $variations = array();
+
+            foreach ($productVariations as $variation) {
+              $variationDesc = $variation->post_excerpt;
+              $variationId = $variation->ID;
+              $variation = wc_get_product($variationId);
+              $variationPrice = $variation->get_price();
+
+              $variations[] = array(
+                'variationId' => $variationId,
+                'variationDesc' => $variationDesc,
+                'variationPrice' => $variationPrice,
+              );
+            }
+
+            $_SESSION['aboutProducts'][] = array(
+              'id' => $productId,
+              'category' => $category_name,
+              'productLink' => get_permalink(),
+              'price' => $productPrice,
+              'beforeSalePrice' => $productBeforeSalePrice,
+              'attributes' => $productAttributes,
+              'variations' => $variations,
+              'rating' => $productRating
+            );
             ?>
-            <li class="single-category__item swiper-slide">
+            <li class="single-category__item swiper-slide" productid=<?php echo $productId ?>>
+              <!-- Якщо товар акціний, то буде плашка -->
               <?php if ($is_on_sale): ?>
-                <div class="single-category__sale-item"><p>Aкція</p></div>
+                <div class="single-category__sale-item">
+                  <p>Aкція</p>
+                </div>
                 <div class="single-category__item-link">
+                  <!-- Якщо не акціний, то буде звичайна картка -->
                 <?php else: ?>
                   <div class="single-category__item-link">
                   <?php endif; ?>
@@ -215,37 +274,41 @@ Template Name: Home
                       <?php echo get_the_title() ?>
                     </h4>
                     <p class="single-category__item-desc">
-                      <?php echo $product->get_short_description() ?>
+                      <?php echo $productShortDesc ?>
                     </p>
+                    <!-- Якщо товар акціний, то буде стара та нова ціна -->
                     <?php if ($is_on_sale): ?>
                       <span class="old-price single-category__item-price">Від <span class="item-price">
-                          <?php echo $product->regular_price ?> грн
+                          <?php echo $productBeforeSalePrice ?> грн
                         </span><span class="item-new-price">
-                          <?php echo $product->price ?> грн
+                          <?php echo $productPrice ?> грн
                         </span></span>
+                      <!-- Якщо товар не акціний, то буде звичайна мінімальна ціна -->
                     <?php else: ?>
                       <span class="single-category__item-price">Від
-                        <?php echo $product->price ?> грн
+                        <?php echo $productPrice ?> грн
                       </span>
                     <?php endif; ?>
 
                     <?php
+                    // Якщо атрибути є, шукаємо атрибут "Колір"
                     if ($attributes) {
-                      foreach ($attributes as $attribute) {
-                        if ($attribute->get_name() === 'Колір') {
-                          $options = $attribute->get_options();
-                          ?>
-                          <div class="modal__body-color-picker">
-                            <?php foreach ($options as $option) { ?>
+                      if ($attributeName === 'Колір') {
+                        ?>
+                        <div class="modal__body-color-picker">
 
-                              <a class="modal__body-color-item" href="#">
-                                <div style="background-color: <?php echo $option ?>;"></div>
-                              </a>
+                          <?php
+                          // Підставляємо значення кольору як bg для кружечків
+                          foreach ($options as $option) { ?>
 
-                            <?php } ?>
-                          </div>
-                        <?php }
-                      }
+                            <a class="modal__body-color-item" href="#">
+                              <div style="background-color: <?php echo $option ?>;"></div>
+                            </a>
+
+                          <?php } ?>
+
+                        </div>
+                      <?php }
                     } ?>
                   </div>
                 </div>
@@ -254,488 +317,43 @@ Template Name: Home
         </ul>
       </section>
 
+      <?php
+      //Рекламна секція кожні 2 сладера
+      $i += 1;
+      if ($i === 2) { ?>
+        <section class="self-promotion">
+          <div class="container">
+            <div class="self-promotion__text">
+              <p>
+                Магазин «На добраніч» представляє сучасну колекцію домашнього
+                текстилю. Елегантність та стиль у поєднанні із якістю. У нас ви
+                можете придбати фірмову постільну білизну, банні халати і рушники,
+                пледи, покривала, ковдри і подушки, кухонні рушники.
+              </p>
+              <p>
+                В "На добраніч" ми віримо, що ваша спальня повинна бути місцем для
+                відпочинку та релаксації, тому ми докладаємо зусиль, щоб
+                забезпечити вам максимальний комфорт. Купуючи товар у нашому
+                інтернет-магазині, можете бути впевнені в бездоганній якості
+                продукції.
+              </p>
+            </div>
+            <a class="self-promotion__link" href="#catalog">Обрати категорію</a>
+          </div>
+        </section>
+      <?php } ?>
+
       <?php wp_reset_postdata();
     }
   }
   ?>
 
+  <script>
+    const aboutProducts = <?php echo json_encode($_SESSION['aboutProducts']); ?>;
+    console.log(aboutProducts);
+    localStorage.setItem('aboutProducts', JSON.stringify(aboutProducts))
+  </script>
 
-
-
-
-
-  <section class="self-promotion">
-    <div class="container">
-      <div class="self-promotion__text">
-        <p>
-          Магазин «На добраніч» представляє сучасну колекцію домашнього
-          текстилю. Елегантність та стиль у поєднанні із якістю. У нас ви
-          можете придбати фірмову постільну білизну, банні халати і рушники,
-          пледи, покривала, ковдри і подушки, кухонні рушники.
-        </p>
-        <p>
-          В "На добраніч" ми віримо, що ваша спальня повинна бути місцем для
-          відпочинку та релаксації, тому ми докладаємо зусиль, щоб
-          забезпечити вам максимальний комфорт. Купуючи товар у нашому
-          інтернет-магазині, можете бути впевнені в бездоганній якості
-          продукції.
-        </p>
-      </div>
-      <a class="self-promotion__link" href="#">Обрати категорію</a>
-    </div>
-  </section>
-  <section class="container single-category swiper-container">
-    <div class="single-category__title-wrap">
-      <h3 class="single-category__title">Пледи</h3>
-      <a href="/bedding/category.html">
-        <svg width="20" height="18">
-          <use href="<?php bloginfo(
-            "template_url",
-          ); ?>/assets/images/icons.svg#to-category"></use>
-        </svg>
-      </a>
-      <div class="single-category__navigation">
-        <div class="swiper-button-next">
-          <svg class="single-category__navigation-icon-next" width="30" height="30">
-            <use href="<?php bloginfo(
-              "template_url",
-            ); ?>/assets/images/icons.svg#arrowR-s"></use>
-          </svg>
-        </div>
-        <div class="swiper-button-prev">
-          <svg class="single-category__navigation-icon-prev" width="30" height="30">
-            <use href="<?php bloginfo(
-              "template_url",
-            ); ?>/assets/images/icons.svg#arrowL-s"></use>
-          </svg>
-        </div>
-      </div>
-    </div>
-    <ul class="single-category__list swiper-wrapper">
-      <li class="single-category__item swiper-slide">
-        <div class="single-category__item-link">
-          <div class="js-quick-view single-category__item-overlay">
-            <p class="single-category__item-overlay-text">
-              Швидкий перегляд
-            </p>
-            <p class="single-category__item-overlay-text-tab">+</p>
-          </div>
-          <div class="single-category__item-about">
-            <a href="/bedding/item.html">
-              <div class="single-category__item-img"><img /></div>
-            </a>
-            <h4 class="single-category__item-title">Ковдра Soft Grid</h4>
-            <p class="single-category__item-desc">
-              Зроблена з преміальної бавовни
-            </p>
-            <span class="single-category__item-price">Від 1600 грн</span>
-          </div>
-        </div>
-        <div class="modal__body-color-picker">
-          <a class="modal__body-color-item" href="#"></a>
-          <a class="active modal__body-color-item" href="#"></a>
-          <a class="modal__body-color-item" href="#"></a>
-          <a class="modal__body-color-item" href="#"></a>
-        </div>
-      </li>
-      <li class="single-category__item swiper-slide">
-        <div class="single-category__sale-item-link">
-          <div class="js-quick-view single-category__item-overlay">
-            <p class="single-category__item-overlay-text">
-              Швидкий перегляд
-            </p>
-            <p class="single-category__item-overlay-text-tab">+</p>
-          </div>
-          <div class="single-category__item-about">
-            <a href="/bedding/item.html">
-              <div class="single-category__item-img"><img /></div>
-            </a>
-            <h4 class="single-category__item-title">Ковдра Soft Grid</h4>
-            <p class="single-category__item-desc">
-              Зроблена з преміальної бавовни
-            </p>
-            <span class="old-price single-category__item-price">Від <span class="item-price">1600 грн</span><span
-                class="item-new-price">999 грн</span>
-            </span>
-          </div>
-        </div>
-        <div class="modal__body-color-picker">
-          <a class="modal__body-color-item" href="#"></a>
-          <a class="active modal__body-color-item" href="#"></a>
-          <a class="modal__body-color-item" href="#"></a>
-          <a class="modal__body-color-item" href="#"></a>
-        </div>
-      </li>
-      <li class="single-category__item swiper-slide">
-        <div class="single-category__item-link">
-          <div class="js-quick-view single-category__item-overlay">
-            <p class="single-category__item-overlay-text">
-              Швидкий перегляд
-            </p>
-            <p class="single-category__item-overlay-text-tab">+</p>
-          </div>
-          <div class="single-category__item-about">
-            <a href="/bedding/item.html">
-              <div class="single-category__item-img"><img /></div>
-            </a>
-            <h4 class="single-category__item-title">Ковдра Soft Grid</h4>
-            <p class="single-category__item-desc">
-              Зроблена з преміальної бавовни
-            </p>
-            <span class="single-category__item-price">Від 1600 грн</span>
-          </div>
-        </div>
-        <div class="modal__body-color-picker">
-          <a class="modal__body-color-item" href="#"></a>
-          <a class="active modal__body-color-item" href="#"></a>
-          <a class="modal__body-color-item" href="#"></a>
-          <a class="modal__body-color-item" href="#"></a>
-        </div>
-      </li>
-      <li class="single-category__item swiper-slide">
-        <div class="single-category__item-link">
-          <div class="js-quick-view single-category__item-overlay">
-            <p class="single-category__item-overlay-text">
-              Швидкий перегляд
-            </p>
-            <p class="single-category__item-overlay-text-tab">+</p>
-          </div>
-          <div class="single-category__item-about">
-            <a href="/bedding/item.html">
-              <div class="single-category__item-img"><img /></div>
-            </a>
-            <h4 class="single-category__item-title">Ковдра Soft Grid</h4>
-            <p class="single-category__item-desc">
-              Зроблена з преміальної бавовни
-            </p>
-            <span class="single-category__item-price">Від 1600 грн</span>
-          </div>
-        </div>
-        <div class="modal__body-color-picker">
-          <a class="modal__body-color-item" href="#"></a>
-          <a class="active modal__body-color-item" href="#"></a>
-          <a class="modal__body-color-item" href="#"></a>
-          <a class="modal__body-color-item" href="#"></a>
-        </div>
-      </li>
-      <li class="single-category__item swiper-slide">
-        <div class="single-category__item-link">
-          <div class="js-quick-view single-category__item-overlay">
-            <p class="single-category__item-overlay-text">
-              Швидкий перегляд
-            </p>
-            <p class="single-category__item-overlay-text-tab">+</p>
-          </div>
-          <div class="single-category__item-about">
-            <a href="/bedding/item.html">
-              <div class="single-category__item-img"><img /></div>
-            </a>
-            <h4 class="single-category__item-title">Ковдра Soft Grid</h4>
-            <p class="single-category__item-desc">
-              Зроблена з преміальної бавовни
-            </p>
-            <span class="single-category__item-price">Від 1600 грн</span>
-          </div>
-        </div>
-        <div class="modal__body-color-picker">
-          <a class="modal__body-color-item" href="#"></a>
-          <a class="active modal__body-color-item" href="#"></a>
-          <a class="modal__body-color-item" href="#"></a>
-          <a class="modal__body-color-item" href="#"></a>
-        </div>
-      </li>
-      <li class="single-category__item swiper-slide">
-        <div class="single-category__item-link">
-          <div class="js-quick-view single-category__item-overlay">
-            <p class="single-category__item-overlay-text">
-              Швидкий перегляд
-            </p>
-            <p class="single-category__item-overlay-text-tab">+</p>
-          </div>
-          <div class="single-category__item-about">
-            <a href="/bedding/item.html">
-              <div class="single-category__item-img"><img /></div>
-            </a>
-            <h4 class="single-category__item-title">Ковдра Soft Grid</h4>
-            <p class="single-category__item-desc">
-              Зроблена з преміальної бавовни
-            </p>
-            <span class="single-category__item-price">Від 1600 грн</span>
-          </div>
-        </div>
-        <div class="modal__body-color-picker">
-          <a class="modal__body-color-item" href="#"></a>
-          <a class="active modal__body-color-item" href="#"></a>
-          <a class="modal__body-color-item" href="#"></a>
-          <a class="modal__body-color-item" href="#"></a>
-        </div>
-      </li>
-      <li class="single-category__item swiper-slide">
-        <div class="single-category__sale-item-link">
-          <div class="js-quick-view single-category__item-overlay">
-            <p class="single-category__item-overlay-text">
-              Швидкий перегляд
-            </p>
-            <p class="single-category__item-overlay-text-tab">+</p>
-          </div>
-          <div class="single-category__item-about">
-            <a href="/bedding/item.html">
-              <div class="single-category__item-img"><img /></div>
-            </a>
-            <h4 class="single-category__item-title">Ковдра Soft Grid</h4>
-            <p class="single-category__item-desc">
-              Зроблена з преміальної бавовни
-            </p>
-            <span class="old-price single-category__item-price">Від <span class="item-price">1600 грн</span><span
-                class="item-new-price">999 грн</span>
-            </span>
-          </div>
-        </div>
-        <div class="modal__body-color-picker">
-          <a class="modal__body-color-item" href="#"></a>
-          <a class="active modal__body-color-item" href="#"></a>
-          <a class="modal__body-color-item" href="#"></a>
-          <a class="modal__body-color-item" href="#"></a>
-        </div>
-      </li>
-      <li class="single-category__item swiper-slide">
-        <div class="single-category__item-link">
-          <div class="js-quick-view single-category__item-overlay">
-            <p class="single-category__item-overlay-text">
-              Швидкий перегляд
-            </p>
-            <p class="single-category__item-overlay-text-tab">+</p>
-          </div>
-          <div class="single-category__item-about">
-            <a href="/bedding/item.html">
-              <div class="single-category__item-img"><img /></div>
-            </a>
-            <h4 class="single-category__item-title">Ковдра Soft Grid</h4>
-            <p class="single-category__item-desc">
-              Зроблена з преміальної бавовни
-            </p>
-            <span class="single-category__item-price">Від 1600 грн</span>
-          </div>
-        </div>
-        <div class="modal__body-color-picker">
-          <a class="modal__body-color-item" href="#"></a>
-          <a class="active modal__body-color-item" href="#"></a>
-          <a class="modal__body-color-item" href="#"></a>
-          <a class="modal__body-color-item" href="#"></a>
-        </div>
-      </li>
-      <li class="single-category__item swiper-slide">
-        <div class="single-category__item-link">
-          <div class="js-quick-view single-category__item-overlay">
-            <p class="single-category__item-overlay-text">
-              Швидкий перегляд
-            </p>
-            <p class="single-category__item-overlay-text-tab">+</p>
-          </div>
-          <div class="single-category__item-about">
-            <a href="/bedding/item.html">
-              <div class="single-category__item-img"><img /></div>
-            </a>
-            <h4 class="single-category__item-title">Ковдра Soft Grid</h4>
-            <p class="single-category__item-desc">
-              Зроблена з преміальної бавовни
-            </p>
-            <span class="single-category__item-price">Від 1600 грн</span>
-          </div>
-        </div>
-        <div class="modal__body-color-picker">
-          <a class="modal__body-color-item" href="#"></a>
-          <a class="active modal__body-color-item" href="#"></a>
-          <a class="modal__body-color-item" href="#"></a>
-          <a class="modal__body-color-item" href="#"></a>
-        </div>
-      </li>
-      <li class="single-category__item swiper-slide">
-        <div class="single-category__item-link">
-          <div class="js-quick-view single-category__item-overlay">
-            <p class="single-category__item-overlay-text">
-              Швидкий перегляд
-            </p>
-            <p class="single-category__item-overlay-text-tab">+</p>
-          </div>
-          <div class="single-category__item-about">
-            <a href="/bedding/item.html">
-              <div class="single-category__item-img"><img /></div>
-            </a>
-            <h4 class="single-category__item-title">Ковдра Soft Grid</h4>
-            <p class="single-category__item-desc">
-              Зроблена з преміальної бавовни
-            </p>
-            <span class="single-category__item-price">Від 1600 грн</span>
-          </div>
-        </div>
-        <div class="modal__body-color-picker">
-          <a class="modal__body-color-item" href="#"></a>
-          <a class="active modal__body-color-item" href="#"></a>
-          <a class="modal__body-color-item" href="#"></a>
-          <a class="modal__body-color-item" href="#"></a>
-        </div>
-      </li>
-      <li class="single-category__item swiper-slide">
-        <div class="single-category__item-link">
-          <div class="js-quick-view single-category__item-overlay">
-            <p class="single-category__item-overlay-text">
-              Швидкий перегляд
-            </p>
-            <p class="single-category__item-overlay-text-tab">+</p>
-          </div>
-          <div class="single-category__item-about">
-            <a href="/bedding/item.html">
-              <div class="single-category__item-img"><img /></div>
-            </a>
-            <h4 class="single-category__item-title">Ковдра Soft Grid</h4>
-            <p class="single-category__item-desc">
-              Зроблена з преміальної бавовни
-            </p>
-            <span class="single-category__item-price">Від 1600 грн</span>
-          </div>
-        </div>
-        <div class="modal__body-color-picker">
-          <a class="modal__body-color-item" href="#"></a>
-          <a class="active modal__body-color-item" href="#"></a>
-          <a class="modal__body-color-item" href="#"></a>
-          <a class="modal__body-color-item" href="#"></a>
-        </div>
-      </li>
-      <li class="single-category__item swiper-slide">
-        <div class="single-category__sale-item-link">
-          <div class="js-quick-view single-category__item-overlay">
-            <p class="single-category__item-overlay-text">
-              Швидкий перегляд
-            </p>
-            <p class="single-category__item-overlay-text-tab">+</p>
-          </div>
-          <div class="single-category__item-about">
-            <a href="/bedding/item.html">
-              <div class="single-category__item-img"><img /></div>
-            </a>
-            <h4 class="single-category__item-title">Ковдра Soft Grid</h4>
-            <p class="single-category__item-desc">
-              Зроблена з преміальної бавовни
-            </p>
-            <span class="old-price single-category__item-price">Від <span class="item-price">1600 грн</span><span
-                class="item-new-price">999 грн</span>
-            </span>
-          </div>
-        </div>
-        <div class="modal__body-color-picker">
-          <a class="modal__body-color-item" href="#"></a>
-          <a class="active modal__body-color-item" href="#"></a>
-          <a class="modal__body-color-item" href="#"></a>
-          <a class="modal__body-color-item" href="#"></a>
-        </div>
-      </li>
-      <li class="single-category__item swiper-slide">
-        <div class="single-category__item-link">
-          <div class="js-quick-view single-category__item-overlay">
-            <p class="single-category__item-overlay-text">
-              Швидкий перегляд
-            </p>
-            <p class="single-category__item-overlay-text-tab">+</p>
-          </div>
-          <div class="single-category__item-about">
-            <a href="/bedding/item.html">
-              <div class="single-category__item-img"><img /></div>
-            </a>
-            <h4 class="single-category__item-title">Ковдра Soft Grid</h4>
-            <p class="single-category__item-desc">
-              Зроблена з преміальної бавовни
-            </p>
-            <span class="single-category__item-price">Від 1600 грн</span>
-          </div>
-        </div>
-        <div class="modal__body-color-picker">
-          <a class="modal__body-color-item" href="#"></a>
-          <a class="active modal__body-color-item" href="#"></a>
-          <a class="modal__body-color-item" href="#"></a>
-          <a class="modal__body-color-item" href="#"></a>
-        </div>
-      </li>
-      <li class="single-category__item swiper-slide">
-        <div class="single-category__item-link">
-          <div class="js-quick-view single-category__item-overlay">
-            <p class="single-category__item-overlay-text">
-              Швидкий перегляд
-            </p>
-            <p class="single-category__item-overlay-text-tab">+</p>
-          </div>
-          <div class="single-category__item-about">
-            <a href="/bedding/item.html">
-              <div class="single-category__item-img"><img /></div>
-            </a>
-            <h4 class="single-category__item-title">Ковдра Soft Grid</h4>
-            <p class="single-category__item-desc">
-              Зроблена з преміальної бавовни
-            </p>
-            <span class="single-category__item-price">Від 1600 грн</span>
-          </div>
-        </div>
-        <div class="modal__body-color-picker">
-          <a class="modal__body-color-item" href="#"></a>
-          <a class="active modal__body-color-item" href="#"></a>
-          <a class="modal__body-color-item" href="#"></a>
-          <a class="modal__body-color-item" href="#"></a>
-        </div>
-      </li>
-      <li class="single-category__item swiper-slide">
-        <div class="single-category__item-link">
-          <div class="js-quick-view single-category__item-overlay">
-            <p class="single-category__item-overlay-text">
-              Швидкий перегляд
-            </p>
-            <p class="single-category__item-overlay-text-tab">+</p>
-          </div>
-          <div class="single-category__item-about">
-            <a href="/bedding/item.html">
-              <div class="single-category__item-img"><img /></div>
-            </a>
-            <h4 class="single-category__item-title">Ковдра Soft Grid</h4>
-            <p class="single-category__item-desc">
-              Зроблена з преміальної бавовни
-            </p>
-            <span class="single-category__item-price">Від 1600 грн</span>
-          </div>
-        </div>
-        <div class="modal__body-color-picker">
-          <a class="modal__body-color-item" href="#"></a>
-          <a class="active modal__body-color-item" href="#"></a>
-          <a class="modal__body-color-item" href="#"></a>
-          <a class="modal__body-color-item" href="#"></a>
-        </div>
-      </li>
-      <li class="single-category__item swiper-slide">
-        <div class="single-category__item-link">
-          <div class="js-quick-view single-category__item-overlay">
-            <p class="single-category__item-overlay-text">
-              Швидкий перегляд
-            </p>
-            <p class="single-category__item-overlay-text-tab">+</p>
-          </div>
-          <div class="single-category__item-about">
-            <a href="/bedding/item.html">
-              <div class="single-category__item-img"><img /></div>
-            </a>
-            <h4 class="single-category__item-title">Ковдра Soft Grid</h4>
-            <p class="single-category__item-desc">
-              Зроблена з преміальної бавовни
-            </p>
-            <span class="single-category__item-price">Від 1600 грн</span>
-          </div>
-        </div>
-        <div class="modal__body-color-picker">
-          <a class="modal__body-color-item" href="#"></a>
-          <a class="active modal__body-color-item" href="#"></a>
-          <a class="modal__body-color-item" href="#"></a>
-          <a class="modal__body-color-item" href="#"></a>
-        </div>
-      </li>
-    </ul>
-  </section>
   <section class="insta">
     <div class="container">
       <div class="insta__text">

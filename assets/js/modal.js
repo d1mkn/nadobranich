@@ -28,7 +28,17 @@ function closeToCartModal() {
   }, 1000);
 }
 
-refs.modalTriggerList.forEach((item) => item.addEventListener("click", openModal));
+function aboutProductToLocal(e) {
+  const productId = e.target.closest(".single-category__item").attributes.productid.value;
+  localStorage.setItem("productId", productId);
+}
+
+refs.modalTriggerList.forEach((item) =>
+  item.addEventListener("click", (e) => {
+    openModal();
+    aboutProductToLocal(e);
+  })
+);
 
 refs.modalBackdrop.addEventListener("click", closeModal);
 

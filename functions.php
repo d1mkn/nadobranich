@@ -162,6 +162,7 @@ function nadobranich_scripts()
 	wp_enqueue_style('nadobranich-general', get_template_directory_uri() . '/assets/css/general.css', array(), _S_VERSION, );
 
 	wp_enqueue_script('swiper', 'https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js', null, _S_VERSION, true);
+	wp_enqueue_script('nadobranich-refs', get_template_directory_uri() . '/assets/js/refs.js', array(), _S_VERSION, true);
 	wp_enqueue_script('nadobranich-mainPage', get_template_directory_uri() . '/assets/js/mainPage.js', array("swiper"), _S_VERSION, true);
 	wp_enqueue_script('nadobranich-modal', get_template_directory_uri() . '/assets/js/modal.js', null, _S_VERSION, true);
 	wp_enqueue_script('nadobranich-footer', get_template_directory_uri() . '/assets/js/footer.js', null, _S_VERSION, true);
