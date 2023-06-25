@@ -190,7 +190,7 @@ Template Name: Home
           <?php while ($query->have_posts()) {
             $query->the_post();
             global $product;
-      
+
             // Дані для ренедру та мобального вікна
             $is_on_sale = $product->is_on_sale();
             $attributes = $product->get_attributes();
@@ -245,7 +245,7 @@ Template Name: Home
             // Посилання на зображення
             foreach ($productImagesIds as $image_id) {
               $image_url = wp_get_attachment_url($image_id);
-              $image_url !== $productImages['mainImg'] && $productImages['gallery'][] = $image_url;
+              $productImages['gallery'][] = $image_url;
             }
 
             $_SESSION['aboutProducts'][] = array(
