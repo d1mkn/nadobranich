@@ -190,7 +190,7 @@ Template Name: Home
           <?php while ($query->have_posts()) {
             $query->the_post();
             global $product;
-
+      
             // Дані для ренедру та мобального вікна
             $is_on_sale = $product->is_on_sale();
             $attributes = $product->get_attributes();
@@ -199,6 +199,10 @@ Template Name: Home
             $productBeforeSalePrice = $product->regular_price;
             $productDesc = $product->description;
             $productShortDesc = $product->get_short_description();
+            $productImagesIds = $product->get_gallery_image_ids();
+            $productImages = array(
+              'mainImg' => wp_get_attachment_url(get_post_thumbnail_id($productId)),
+            );
             $productAttributes = array();
             $productRating = array(
               'average' => $product->average_rating,
@@ -238,10 +242,17 @@ Template Name: Home
               );
             }
 
+            // Посилання на зображення
+            foreach ($productImagesIds as $image_id) {
+              $image_url = wp_get_attachment_url($image_id);
+              $image_url !== $productImages['mainImg'] && $productImages['gallery'][] = $image_url;
+            }
+
             $_SESSION['aboutProducts'][] = array(
               'id' => $productId,
               'category' => $category_name,
               'productLink' => get_permalink(),
+              'productImages' => $productImages,
               'price' => $productPrice,
               'beforeSalePrice' => $productBeforeSalePrice,
               'attributes' => $productAttributes,
@@ -350,7 +361,6 @@ Template Name: Home
 
   <script>
     const aboutProducts = <?php echo json_encode($_SESSION['aboutProducts']); ?>;
-    console.log(aboutProducts);
     localStorage.setItem('aboutProducts', JSON.stringify(aboutProducts))
   </script>
 
