@@ -20,6 +20,8 @@ const refs = {
   mainImgWrap: document.querySelector(".modal__images-main-wrap"),
   productTitle: document.querySelector(".modal__body-title"),
   productDesc: document.querySelector(".modal__body-composition"),
+  ratingStars: document.querySelector(".js-modal-rating"),
+  ratingLink: document.querySelector(".modal__body-raiting-link"),
   // faq
   faqItems: document.querySelectorAll(".faq__item"),
   // fabrics

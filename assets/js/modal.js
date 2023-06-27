@@ -44,6 +44,14 @@ function renderInfoFromLocal(e) {
 
   // description
   refs.productDesc.textContent = currProduct.productDesc;
+
+  // rating
+  refs.ratingStars.setAttribute(
+    "style",
+    `width: ${(parseInt(currProduct.rating.average) * 100) / 5.6}%;`
+  );
+  refs.ratingLink.textContent = currProduct.rating.reviewCount;
+  refs.ratingLink.setAttribute("href", `${currProduct.productLink}#reviews`);
 }
 
 refs.modalTriggerList.forEach((item) =>

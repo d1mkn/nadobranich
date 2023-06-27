@@ -321,7 +321,7 @@ Template Name: Home
                             <?php
                             // Підставляємо значення кольору як bg для кружечків
                             foreach ($options as $option) { ?>
-                              <a class="modal__body-color-item" href="#">
+                              <a class="modal__body-color-item" href="<?php echo get_permalink() ?>">
                                 <div style="background-color: <?php echo $option ?>;"></div>
                               </a>
                             <?php } ?>
@@ -423,35 +423,9 @@ Template Name: Home
                 <div class="modal__body-price-wrap">
                   <p class="modal__body-price">650 грн</p>
                 </div>
-                <div class="modal__body-raiting">
-                  <div class="modal__body-raiting-stars">
-                    <svg width="30" height="30">
-                      <use href="<?php bloginfo(
-                        "template_url",
-                      ); ?>/assets/images/icons.svg#star"></use>
-                    </svg>
-                    <svg width="30" height="30">
-                      <use href="<?php bloginfo(
-                        "template_url",
-                      ); ?>/assets/images/icons.svg#star"></use>
-                    </svg>
-                    <svg width="30" height="30">
-                      <use href="<?php bloginfo(
-                        "template_url",
-                      ); ?>/assets/images/icons.svg#star"></use>
-                    </svg>
-                    <svg width="30" height="30">
-                      <use href="<?php bloginfo(
-                        "template_url",
-                      ); ?>/assets/images/icons.svg#star"></use>
-                    </svg>
-                    <svg width="30" height="30">
-                      <use href="<?php bloginfo(
-                        "template_url",
-                      ); ?>/assets/images/icons.svg#star"></use>
-                    </svg>
-                  </div>
-                  <a href="#">25</a>
+                <div class="modal__body-raiting woocommerce">
+                  <div class="star-rating"><span class='js-modal-rating'>Рейтинг</span></div>
+                  <a class="modal__body-raiting-link" href="#">25</a>
                 </div>
               </div>
               <div class="modal__body-color-wrap">
