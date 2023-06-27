@@ -48,7 +48,7 @@ function renderInfoFromLocal(e) {
   // rating
   refs.ratingStars.setAttribute(
     "style",
-    `width: ${(parseInt(currProduct.rating.average) * 100) / 5.6}%;`
+    `width: ${(parseInt(currProduct.rating.average) * 100) / 5}%;`
   );
   refs.ratingLink.textContent = currProduct.rating.reviewCount;
   refs.ratingLink.setAttribute("href", `${currProduct.productLink}#reviews`);

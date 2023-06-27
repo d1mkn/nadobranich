@@ -3520,7 +3520,7 @@ header button {
 }
 @media screen and (min-width: 768px) {
   .modal__body-header {
-    width: 50%;
+    width: 60%;
   }
 }
 .modal__body-title {
@@ -3549,75 +3549,44 @@ header button {
   }
 }
 .modal__body-raiting {
-  position: relative;
+  position: absolute;
   height: 26px;
   align-items: center;
   display: flex;
 }
 @media screen and (min-width: 768px) {
   .modal__body-raiting {
+    width: 169px;
     height: 33px;
     margin-bottom: 0;
+    right: 50px;
   }
 }
 @media screen and (min-width: 1240px) {
   .modal__body-raiting {
+    position: relative;
     margin-bottom: 10px;
+    right: unset;
   }
+}
+.js-modal-rating {
+  position: absolute;
+  overflow: hidden;
+}
+.js-modal-rating svg {
+  max-width: 145px;
+  width: 145px;
+  height: 33px;
 }
 .modal__body-raiting a {
   -webkit-text-decoration: revert;
   -webkit-text-decoration: revert;
   text-decoration: revert;
 }
-@media screen and (min-width: 768px) {
-  .modal__body-raiting a {
-    position: absolute;
-    top: 5px;
-    right: 0px;
-  }
-}
-@media screen and (min-width: 1240px) {
-  .modal__body-raiting a {
-    top: 5px;
-    right: 285px;
-  }
-}
 .modal__body-raiting-stars {
   position: relative;
   display: flex;
   font-family: star;
-}
-.modal .woocommerce .star-rating {
-  width: 5.36em;
-}
-@media screen and (min-width: 768px) {
-  .modal .woocommerce .star-rating {
-    height: 26px;
-    font-size: 27px;
-  }
-}
-.modal .woocommerce .star-rating::before {
-  position: absolute;
-  top: 0;
-  left: 0;
-  content: "sssss";
-  font-size: 21px;
-  color: #83b0e6;
-}
-.modal .woocommerce span {
-  position: absolute;
-  top: 0;
-  left: 0;
-  overflow: hidden;
-}
-.modal .woocommerce .star-rating span::before {
-  position: absolute;
-  top: 0;
-  left: 0;
-  content: "SSSSS";
-  color: #ffdf3f;
-  font-size: 21px;
 }
 .modal__body-color-wrap {
   margin-bottom: 5px;

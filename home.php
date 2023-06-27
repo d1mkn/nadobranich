@@ -423,8 +423,19 @@ Template Name: Home
                 <div class="modal__body-price-wrap">
                   <p class="modal__body-price">650 грн</p>
                 </div>
-                <div class="modal__body-raiting woocommerce">
-                  <div class="star-rating"><span class='js-modal-rating'>Рейтинг</span></div>
+                <div class="modal__body-raiting">
+                  <svg class="rating-pack" width='145' height='33'>
+                    <use href="<?php bloginfo(
+                      "template_url",
+                    ); ?>/assets/images/icons.svg#stars-pack-nf"></use>
+                  </svg>
+                  <div class='js-modal-rating'>
+                    <svg width='145' height='33'>
+                      <use href="<?php bloginfo(
+                        "template_url",
+                      ); ?>/assets/images/icons.svg#stars-pack"></use>
+                    </svg>
+                  </div>
                   <a class="modal__body-raiting-link" href="#">25</a>
                 </div>
               </div>
