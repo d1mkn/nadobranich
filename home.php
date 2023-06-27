@@ -195,6 +195,7 @@ Template Name: Home
             $is_on_sale = $product->is_on_sale();
             $attributes = $product->get_attributes();
             $productId = $product->get_id();
+            $productTitle = get_the_title();
             $productPrice = $product->price;
             $productBeforeSalePrice = $product->regular_price;
             $productDesc = $product->description;
@@ -251,6 +252,8 @@ Template Name: Home
             $_SESSION['aboutProducts'][] = array(
               'id' => $productId,
               'category' => $category_name,
+              'productTitle' => $productTitle,
+              'productDesc' => $productShortDesc,
               'productLink' => get_permalink(),
               'productImages' => $productImages,
               'price' => $productPrice,
@@ -261,14 +264,16 @@ Template Name: Home
             );
             ?>
             <li class="single-category__item swiper-slide" productid=<?php echo $productId ?>>
-              <!-- Якщо товар акціний, то буде плашка -->
-              <?php if ($is_on_sale): ?>
+              <?php
+              // Якщо товар акціний, то буде плашка
+              if ($is_on_sale): ?>
                 <div class="single-category__sale-item">
                   <p>Aкція</p>
                 </div>
                 <div class="single-category__item-link">
-                  <!-- Якщо не акціний, то буде звичайна картка -->
-                <?php else: ?>
+                  <?php
+                // Якщо не акціний, то буде звичайна картка
+              else: ?>
                   <div class="single-category__item-link">
                   <?php endif; ?>
                   <div class="js-quick-view single-category__item-overlay">
@@ -282,44 +287,47 @@ Template Name: Home
                       </div>
                     </a>
                     <h4 class="single-category__item-title">
-                      <?php echo get_the_title() ?>
+                      <?php echo $productTitle ?>
                     </h4>
                     <p class="single-category__item-desc">
                       <?php echo $productShortDesc ?>
                     </p>
-                    <!-- Якщо товар акціний, то буде стара та нова ціна -->
-                    <?php if ($is_on_sale): ?>
+
+                    <?php
+                    // Якщо товар акціний, то буде стара та нова ціна
+                    if ($is_on_sale): ?>
                       <span class="old-price single-category__item-price">Від <span class="item-price">
                           <?php echo $productBeforeSalePrice ?> грн
                         </span><span class="item-new-price">
                           <?php echo $productPrice ?> грн
                         </span></span>
-                      <!-- Якщо товар не акціний, то буде звичайна мінімальна ціна -->
-                    <?php else: ?>
+
+                      <?php
+                      // Якщо товар не акціний, то буде звичайна мінімальна ціна
+                    else: ?>
                       <span class="single-category__item-price">Від
                         <?php echo $productPrice ?> грн
                       </span>
                     <?php endif; ?>
-
                     <?php
-                    // Якщо атрибути є, шукаємо атрибут "Колір"
-                    if ($attributes) {
-                      if ($attributeName === 'Колір') {
-                        ?>
-                        <div class="modal__body-color-picker">
-
-                          <?php
-                          // Підставляємо значення кольору як bg для кружечків
-                          foreach ($options as $option) { ?>
-
-                            <a class="modal__body-color-item" href="#">
-                              <div style="background-color: <?php echo $option ?>;"></div>
-                            </a>
-
-                          <?php } ?>
-
-                        </div>
-                      <?php }
+                    // Якщо атрибути є, шукаємо атрибут "Color"
+                    if ($productAttributes) {
+                      foreach ($attributes as $attribute) {
+                        $attributeName = $attribute->get_name();
+                        $options = $attribute->get_options();
+                        if ($attributeName === 'Color') {
+                          ?>
+                          <div class="modal__body-color-picker">
+                            <?php
+                            // Підставляємо значення кольору як bg для кружечків
+                            foreach ($options as $option) { ?>
+                              <a class="modal__body-color-item" href="#">
+                                <div style="background-color: <?php echo $option ?>;"></div>
+                              </a>
+                            <?php } ?>
+                          </div>
+                        <?php }
+                      }
                     } ?>
                   </div>
                 </div>
@@ -361,7 +369,7 @@ Template Name: Home
 
   <script>
     const aboutProducts = <?php echo json_encode($_SESSION['aboutProducts']); ?>;
-    localStorage.setItem('aboutProducts', JSON.stringify(aboutProducts))
+    localStorage.setItem('aboutProducts', JSON.stringify(aboutProducts));
   </script>
 
   <section class="insta">
@@ -395,7 +403,9 @@ Template Name: Home
           </button>
           <div class="modal__body">
             <div class="modal__images">
-              <div class="modal__images-main"></div>
+              <div class="modal__images-main-wrap">
+
+              </div>
               <ul class="modal__images-list">
                 <li class="modal__images-item"></li>
                 <li class="modal__images-item"></li>

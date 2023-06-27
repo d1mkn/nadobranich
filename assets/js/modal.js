@@ -28,15 +28,28 @@ function closeToCartModal() {
   }, 1000);
 }
 
-function aboutProductToLocal(e) {
+function renderInfoFromLocal(e) {
   const productId = e.target.closest(".single-category__item").attributes.productid.value;
-  localStorage.setItem("productId", productId);
+  const aboutProducts = JSON.parse(localStorage.getItem("aboutProducts"));
+  console.log(productId);
+  console.log(aboutProducts);
+  const currProduct = aboutProducts.find((product) => product.id == productId);
+  console.log(currProduct);
+
+  // main img
+  refs.mainImgWrap.innerHTML = `<img class="modal__images-main" src="${currProduct.productImages.mainImg}" alt="modal main image">`;
+
+  // title
+  refs.productTitle.textContent = currProduct.productTitle;
+
+  // description
+  refs.productDesc.textContent = currProduct.productDesc;
 }
 
 refs.modalTriggerList.forEach((item) =>
   item.addEventListener("click", (e) => {
     openModal();
-    aboutProductToLocal(e);
+    renderInfoFromLocal(e);
   })
 );
 

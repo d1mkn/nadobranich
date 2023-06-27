@@ -17,6 +17,9 @@ const refs = {
   addButton: document.querySelector(".js-add-to-cart"),
   toCardWrap: document.querySelector(".js-to-cart-modal"),
   toCardClsBtn: document.querySelector(".js-to-cart-close-btn"),
+  mainImgWrap: document.querySelector(".modal__images-main-wrap"),
+  productTitle: document.querySelector(".modal__body-title"),
+  productDesc: document.querySelector(".modal__body-composition"),
   // faq
   faqItems: document.querySelectorAll(".faq__item"),
   // fabrics
