@@ -19,7 +19,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                 $currency_symbol = 'грн';
                 break;
             default:
-                $currency_symbol = '';
+                $currency_symbol = 'грн';
         }
         return $currency_symbol;
     }

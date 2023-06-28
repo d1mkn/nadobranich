@@ -52,6 +52,30 @@ function renderInfoFromLocal(e) {
   );
   refs.ratingLink.textContent = currProduct.rating.reviewCount;
   refs.ratingLink.setAttribute("href", `${currProduct.productLink}#reviews`);
+
+  // colors
+  let colorList = [];
+  function colorListMarkup() {
+    currProduct.attributes.forEach((attribute) => {
+      if (attribute.hasOwnProperty("Color")) {
+        colorList = attribute.Color;
+      }
+    });
+
+    let markup = "";
+    for (let i = 0; i < colorList.length; i++) {
+      const color = colorList[i];
+      i === 0
+        ? (markup += `<div class="modal__body-color-item active">
+        <div style="background-color: ${color};"></div>
+                  </div>`)
+        : (markup += `<div class="modal__body-color-item" style="background-color: ${color};">
+                  </div>`);
+    }
+    return markup;
+  }
+  refs.productColor.textContent;
+  refs.colorList.innerHTML = colorListMarkup();
 }
 
 refs.modalTriggerList.forEach((item) =>

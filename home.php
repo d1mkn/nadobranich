@@ -321,8 +321,8 @@ Template Name: Home
                             <?php
                             // Підставляємо значення кольору як bg для кружечків
                             foreach ($options as $option) { ?>
-                              <a class="modal__body-color-item" href="<?php echo get_permalink() ?>">
-                                <div style="background-color: <?php echo $option ?>;"></div>
+                              <a class="modal__body-color-item" href="<?php echo get_permalink() ?>"
+                                style="background-color: <?php echo $option ?>;">
                               </a>
                             <?php } ?>
                           </div>
@@ -331,13 +331,17 @@ Template Name: Home
                     } ?>
                   </div>
                 </div>
+                <?php
+                var_dump($terms = get_the_terms($product->id, 'pa_color'));
+                
+                ?>
             </li>
           <?php } ?>
         </ul>
       </section>
 
       <?php
-      //Рекламна секція кожні 2 сладера
+      //Рекламна секція після 2 сладера
       $i += 1;
       if ($i === 2) { ?>
         <section class="self-promotion">
@@ -404,7 +408,6 @@ Template Name: Home
           <div class="modal__body">
             <div class="modal__images">
               <div class="modal__images-main-wrap">
-
               </div>
               <ul class="modal__images-list">
                 <li class="modal__images-item"></li>
@@ -441,11 +444,11 @@ Template Name: Home
               </div>
               <div class="modal__body-color-wrap">
                 <p class="modal__body-color">
-                  Колір: <span class="modal__body-item-color">###</span>
+                  Колір: <span class="modal__body-item-color js-modal-color">###</span>
                 </p>
-                <div class="modal__body-color-picker">
+                <div class="modal__body-color-picker js-modal-color-list">
                   <a class="modal__body-color-item" href="#"></a>
-                  <a class="active modal__body-color-item" href="#"></a>
+                  <a class="modal__body-color-item active" href="#"></a>
                   <a class="modal__body-color-item" href="#"></a>
                   <a class="modal__body-color-item" href="#"></a>
                 </div>

@@ -168,6 +168,7 @@ function nadobranich_scripts()
 	wp_enqueue_script('nadobranich-footer', get_template_directory_uri() . '/assets/js/footer.js', null, _S_VERSION, true);
 
 	wp_enqueue_script('nadobranich-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true);
+	
 
 	if (is_singular() && comments_open() && get_option('thread_comments')) {
 		wp_enqueue_script('comment-reply');
