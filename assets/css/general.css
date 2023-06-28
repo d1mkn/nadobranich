@@ -3087,6 +3087,10 @@ header button {
   margin-right: 10px;
   text-decoration: line-through;
 }
+.modal .item-price {
+  margin-right: 5px;
+  text-decoration: line-through;
+}
 .item-new-price {
   color: #f51010;
 }

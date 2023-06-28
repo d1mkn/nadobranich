@@ -29,6 +29,7 @@ function closeToCartModal() {
 }
 
 let currProduct = null;
+let singleSize = null;
 
 function renderInfoFromLocal(e) {
   const productId = e.target.closest(".single-category__item").attributes.productid.value;
@@ -53,12 +54,15 @@ function renderInfoFromLocal(e) {
   refs.ratingLink.textContent = currProduct.rating.reviewCount;
   refs.ratingLink.setAttribute("href", `${currProduct.productLink}#reviews`);
 
-  // colors
+  // price color size
   let colorList = [];
   function colorListMarkup() {
     currProduct.attributes.forEach((attribute) => {
       if (attribute.hasOwnProperty("pa_color")) {
         colorList = attribute.pa_color;
+      }
+      if (attribute.hasOwnProperty("Розмір")) {
+        singleSize = attribute.Розмір;
       }
     });
 
@@ -100,6 +104,19 @@ function pickColor() {
       }
     });
   });
+
+  // Якщо у товара немає варіацій (акційний)
+  if (currProduct.variations.length === 0) {
+    refs.productPrice.innerHTML = `<span class="item-price">
+                          ${currProduct.beforeSalePrice} грн
+                        </span><span class="item-new-price">
+                          ${currProduct.price} грн
+                        </span>`;
+    refs.sizeList.innerHTML = `<button class="modal__body-size-btn active" data-size="${singleSize[0]}" type="button">
+                    ${singleSize[0]}</button>`;
+    refs.productSize.textContent = singleSize[0];
+    return;
+  }
   renderVariations(refs.productColor.textContent);
 }
 
