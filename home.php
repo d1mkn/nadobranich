@@ -215,6 +215,10 @@ Template Name: Home
               $attributeName = $attribute->get_name();
               $options = $attribute->get_options();
 
+              if ($attributeName === 'pa_color') {
+                $options = get_the_terms($product->id, 'pa_color');
+              }
+
               $productAttributes[] = array(
                 $attributeName => $options
               );
@@ -414,14 +418,12 @@ Template Name: Home
             </div>
             <div class="modal__body-desc">
               <div class="modal__body-header">
-                <h5 class="modal__body-title">Комплект шовкових подушок</h5>
-                <p class="modal__body-composition">
-                  2 подушки + 2 наволочки
-                </p>
+                <h5 class="modal__body-title"> </h5>
+                <p class="modal__body-composition"> </p>
               </div>
               <div>
                 <div class="modal__body-price-wrap">
-                  <p class="modal__body-price">650 грн</p>
+                  <p class="modal__body-price js-modal-price">###</p>
                 </div>
                 <div class="modal__body-raiting">
                   <svg class="rating-pack" width='145' height='33'>
@@ -444,27 +446,16 @@ Template Name: Home
                   Колір: <span class="modal__body-item-color js-modal-color">###</span>
                 </p>
                 <div class="modal__body-color-picker js-modal-color-list">
-                  <a class="modal__body-color-item" href="#"></a>
                   <a class="modal__body-color-item active" href="#"></a>
-                  <a class="modal__body-color-item" href="#"></a>
-                  <a class="modal__body-color-item" href="#"></a>
                 </div>
               </div>
               <div class="modal__body-size-wrap">
                 <div>
                   <p class="modal__body-size">
-                    Розмір: <span class="modal__body-item-size">###</span>
+                    Розмір: <span class="modal__body-item-size js-modal-size">###</span>
                   </p>
-                  <div class="modal__body-size-picker">
-                    <button class="modal__body-size-btn" type="button">
-                      Євро
-                    </button>
-                    <button class="modal__body-size-btn" type="button">
-                      Двоспальний
-                    </button>
-                    <button class="modal__body-size-btn" type="button">
-                      Полуторний
-                    </button>
+                  <div class="modal__body-size-picker js-modal-size-list">
+                    <button class="modal__body-size-btn active" type="button"> </button>
                   </div>
                   <button class="modal__body-size-info">
                     Розмірна сітка

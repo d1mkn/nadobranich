@@ -28,12 +28,12 @@ function closeToCartModal() {
   }, 1000);
 }
 
+let currProduct = null;
+
 function renderInfoFromLocal(e) {
   const productId = e.target.closest(".single-category__item").attributes.productid.value;
   const aboutProducts = JSON.parse(localStorage.getItem("aboutProducts"));
-  console.log(productId);
-  console.log(aboutProducts);
-  const currProduct = aboutProducts.find((product) => product.id == productId);
+  currProduct = aboutProducts.find((product) => product.id == productId);
   console.log(currProduct);
 
   // main img
@@ -57,33 +57,124 @@ function renderInfoFromLocal(e) {
   let colorList = [];
   function colorListMarkup() {
     currProduct.attributes.forEach((attribute) => {
-      if (attribute.hasOwnProperty("Color")) {
-        colorList = attribute.Color;
+      if (attribute.hasOwnProperty("pa_color")) {
+        colorList = attribute.pa_color;
       }
     });
 
     let markup = "";
     for (let i = 0; i < colorList.length; i++) {
-      const color = colorList[i];
+      const color = colorList[i].slug;
+      const colorName = colorList[i].name;
+      prevActiveColor = colorList[0].name;
       i === 0
-        ? (markup += `<div class="modal__body-color-item active">
+        ? (markup += `<div class="modal__body-color-item active" data-color="${colorName}">
         <div style="background-color: ${color};"></div>
                   </div>`)
-        : (markup += `<div class="modal__body-color-item" style="background-color: ${color};">
+        : (markup += `<div class="modal__body-color-item" data-color="${colorName}">
+        <div style="background-color: ${color};"></div>
                   </div>`);
     }
     return markup;
   }
-  refs.productColor.textContent;
   refs.colorList.innerHTML = colorListMarkup();
+  refs.productColor.textContent = prevActiveColor;
 }
 
-refs.modalTriggerList.forEach((item) =>
+function pickColor() {
+  let activeIndex = 0;
+  document.querySelectorAll("[data-color]").forEach((color, index) => {
+    color.addEventListener("click", (e) => {
+      const targetColor = e.currentTarget;
+      const targetIndex = Array.from(targetColor.parentElement.children).indexOf(targetColor);
+
+      if (activeIndex !== targetIndex) {
+        document.querySelectorAll("[data-color]")[activeIndex].classList.remove("active");
+        targetColor.classList.add("active");
+        activeIndex = targetIndex;
+
+        // Оновлення інформації про обраний колір
+        refs.productColor.textContent = targetColor.dataset.color;
+
+        renderVariations(targetColor.dataset.color);
+      }
+    });
+  });
+  renderVariations(refs.productColor.textContent);
+}
+
+function renderVariations(selectedColor) {
+  let prevActivePrice = null;
+  let prevActiveSize = null;
+  const selectedVariations = currProduct.variations.filter((variation) => {
+    const colorIndex = variation.variationDesc.indexOf(`Колір: ${selectedColor}`);
+    return colorIndex !== -1;
+  });
+
+  // Создание объекта для хранения соответствия цвета и размера с их ценой
+  const variationPrices = {};
+
+  selectedVariations.forEach((variation) => {
+    const variationDesc = variation.variationDesc;
+    const sizeStartIndex = variationDesc.indexOf("Розмір: ") + 8; // Позиция после "Розмір: "
+    const sizeEndIndex = variationDesc.indexOf(",", sizeStartIndex); // Позиция перед запятой
+
+    if (sizeStartIndex !== -1 && sizeEndIndex !== -1) {
+      const size = variationDesc.substring(sizeStartIndex, sizeEndIndex).trim();
+      const price = variation.variationPrice;
+      variationPrices[size] = price;
+    }
+  });
+
+  let markup = "";
+
+  for (const size in variationPrices) {
+    if (variationPrices.hasOwnProperty(size)) {
+      const price = variationPrices[size];
+      prevActiveSize = prevActiveSize || size; // Перший розмір за замовчуванням
+      prevActivePrice = prevActivePrice || price; // Перший розмір за замовчуванням
+      markup += `<button class="modal__body-size-btn${
+        size === prevActiveSize ? " active" : ""
+      }" data-size="${size}" data-price="${price}" type="button">
+                    ${size}</button>`;
+    }
+  }
+  refs.productPrice.textContent = prevActivePrice + " грн";
+  refs.sizeList.innerHTML = markup;
+  refs.productSize.textContent = prevActiveSize;
+  pickSize();
+}
+
+function pickSize() {
+  let activeIndex = 0;
+  document.querySelectorAll("[data-size]").forEach((size, index) => {
+    size.addEventListener("click", (e) => {
+      const targetSize = e.currentTarget;
+      const targetIndex = Array.from(targetSize.parentElement.children).indexOf(targetSize);
+
+      if (activeIndex !== targetIndex) {
+        document.querySelectorAll("[data-size]")[activeIndex].classList.remove("active");
+        targetSize.classList.add("active");
+        activeIndex = targetIndex;
+
+        // Оновлення інформації про обраний розмір
+        refs.productSize.textContent = targetSize.dataset.size;
+
+        // Оновлення інформації про ціну
+        refs.productPrice.textContent = targetSize.dataset.price + " грн";
+      }
+    });
+  });
+}
+
+refs.modalTriggerList.forEach((item) => {
   item.addEventListener("click", (e) => {
     openModal();
     renderInfoFromLocal(e);
-  })
-);
+    pickColor();
+    pickSize();
+  });
+});
 
 refs.modalBackdrop.addEventListener("click", closeModal);
 

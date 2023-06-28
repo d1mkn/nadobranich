@@ -22,9 +22,11 @@ const refs = {
   productDesc: document.querySelector(".modal__body-composition"),
   ratingStars: document.querySelector(".js-modal-rating"),
   ratingLink: document.querySelector(".modal__body-raiting-link"),
+  productPrice: document.querySelector(".js-modal-price"),
   productColor: document.querySelector(".js-modal-color"),
   colorList: document.querySelector(".js-modal-color-list"),
-  activeColor: document.querySelector(".modal__body-color-item.active"),
+  productSize: document.querySelector(".js-modal-size"),
+  sizeList: document.querySelector(".js-modal-size-list"),
   // faq
   faqItems: document.querySelectorAll(".faq__item"),
   // fabrics
