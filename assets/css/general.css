@@ -3740,7 +3740,6 @@ header button {
 @media screen and (min-width: 1240px) {
   .modal__images {
     justify-content: space-between;
-    gap: unset;
     flex-direction: column;
     margin-bottom: 0;
   }

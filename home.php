@@ -314,15 +314,16 @@ Template Name: Home
                     if ($productAttributes) {
                       foreach ($attributes as $attribute) {
                         $attributeName = $attribute->get_name();
-                        $options = $attribute->get_options();
-                        if ($attributeName === 'Color') {
+                        if ($attributeName === 'pa_color') {
+                          $terms = get_the_terms($product->id, 'pa_color');
                           ?>
                           <div class="modal__body-color-picker">
                             <?php
                             // Підставляємо значення кольору як bg для кружечків
-                            foreach ($options as $option) { ?>
+                            foreach ($terms as $term) {
+                              $color = $term->slug; ?>
                               <a class="modal__body-color-item" href="<?php echo get_permalink() ?>"
-                                style="background-color: <?php echo $option ?>;">
+                                style="background-color: <?php echo $color ?>;">
                               </a>
                             <?php } ?>
                           </div>
@@ -331,10 +332,6 @@ Template Name: Home
                     } ?>
                   </div>
                 </div>
-                <?php
-                var_dump($terms = get_the_terms($product->id, 'pa_color'));
-                
-                ?>
             </li>
           <?php } ?>
         </ul>
