@@ -2644,6 +2644,9 @@ header button {
   }
 }
 .category__item-img-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 240px;
   height: 210px;
   background-color: #fff;
@@ -2663,11 +2666,6 @@ header button {
     width: 293px;
     height: 288px;
   }
-}
-.category__item-img {
-  width: 100%;
-  object-fit: fill;
-  display: block;
 }
 .category__item-link:hover .category__item-desc,
 .category__item-link:focus .category__item-desc {
@@ -2934,13 +2932,15 @@ header button {
   }
 }
 .single-category__item-img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
   width: 240px;
   height: 250px;
   background-color: #fff;
   border: 1px solid #7d7d7d;
   border-radius: 5px;
-  display: block;
 }
 @media screen and (min-width: 768px) {
   .single-category__item-img {
@@ -2952,20 +2952,6 @@ header button {
 }
 @media screen and (min-width: 1240px) {
   .single-category__item-img {
-    width: 295px;
-    height: 310px;
-  }
-}
-@media screen and (min-width: 768px) {
-  .single-category__item-img img {
-    width: 325px;
-    height: 300px;
-    min-width: 0;
-    min-height: 0;
-  }
-}
-@media screen and (min-width: 1240px) {
-  .single-category__item-img img {
     width: 295px;
     height: 310px;
   }
