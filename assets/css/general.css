@@ -3758,6 +3758,9 @@ header button {
   }
 }
 .modal__images-main-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
   background-color: #fff;
   border: 1px solid #7d7d7d;
