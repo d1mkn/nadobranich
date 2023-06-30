@@ -1,3 +1,6 @@
+import { refs } from "./refs";
+import SimpleLightbox from "simplelightbox";
+
 let isToCartOpened = false;
 
 function openModal() {
@@ -38,7 +41,22 @@ function renderInfoFromLocal(e) {
   console.log(currProduct);
 
   // main img
-  refs.mainImgWrap.innerHTML = `<img class="modal__images-main" src="${currProduct.productImages.mainImg}" alt="modal main image">`;
+  const mainImg = currProduct.productImages.mainImg;
+  refs.mainImgWrap.innerHTML = `<img class="modal__images-main js-modal-main-img" src="${mainImg.url}" alt="${mainImg.alt}">`;
+
+  // image gallery
+  refs.modalGallery.innerHTML = galleryMarkup();
+
+  function galleryMarkup() {
+    let markup = `<li class="modal__images-item"><a href="${mainImg.url}"><img src="${mainImg.url}" alt="${mainImg.alt}"></a></li>`;
+    const imagesList = currProduct.productImages.gallery;
+
+    imagesList.forEach((image) => {
+      markup += `<li class="modal__images-item"><a href="${image.url}"><img src="${image.url}" alt="${image.alt}"></a></li>`;
+    });
+    return markup;
+  }
+  initGallery();
 
   // title
   refs.productTitle.textContent = currProduct.productTitle;
@@ -181,6 +199,21 @@ function pickSize() {
         refs.productPrice.textContent = targetSize.dataset.price + " грн";
       }
     });
+  });
+}
+
+function initGallery() {
+  const mainImg = document.querySelector(".js-modal-main-img");
+  console.log(mainImg);
+  const gallery = new SimpleLightbox(".js-modal-gallery a", {
+    captionsData: "alt",
+    captionDelay: 250,
+    scrollZoom: false,
+  });
+
+  mainImg.addEventListener("click", (e) => {
+    e.preventDefault;
+    gallery.open();
   });
 }
 

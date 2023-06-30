@@ -1,4 +1,4 @@
-const refs = {
+export const refs = {
   // header
   searchBtn: document.querySelector(".js-search-btn"),
   searchForm: document.querySelector(".js-search-form"),
@@ -18,6 +18,7 @@ const refs = {
   toCardWrap: document.querySelector(".js-to-cart-modal"),
   toCardClsBtn: document.querySelector(".js-to-cart-close-btn"),
   mainImgWrap: document.querySelector(".modal__images-main-wrap"),
+  modalGallery: document.querySelector(".js-modal-gallery"),
   productTitle: document.querySelector(".modal__body-title"),
   productDesc: document.querySelector(".modal__body-composition"),
   ratingStars: document.querySelector(".js-modal-rating"),

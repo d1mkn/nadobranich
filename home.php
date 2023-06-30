@@ -201,8 +201,14 @@ Template Name: Home
             $productDesc = $product->description;
             $productShortDesc = $product->get_short_description();
             $productImagesIds = $product->get_gallery_image_ids();
+            $mainImageId = get_post_thumbnail_id($productId);
+            $mainImageAlt = get_post_meta($mainImageId, '_wp_attachment_image_alt', true);
             $productImages = array(
-              'mainImg' => wp_get_attachment_url(get_post_thumbnail_id($productId)),
+              'mainImg' => array(
+                'url' => wp_get_attachment_url(get_post_thumbnail_id($productId)),
+                'alt' => $mainImageAlt
+              ),
+              'gallery' => [],
             );
             $productAttributes = array();
             $productRating = array(
@@ -250,7 +256,12 @@ Template Name: Home
             // Посилання на зображення
             foreach ($productImagesIds as $image_id) {
               $image_url = wp_get_attachment_url($image_id);
-              $productImages['gallery'][] = $image_url;
+              $image_alt = get_post_meta($image_id, '_wp_attachment_image_alt', true);
+
+              $productImages['gallery'][] = array(
+                'url' => $image_url,
+                'alt' => $image_alt
+              );
             }
 
             $_SESSION['aboutProducts'][] = array(
@@ -410,11 +421,11 @@ Template Name: Home
             <div class="modal__images">
               <div class="modal__images-main-wrap">
               </div>
-              <ul class="modal__images-list">
-                <li class="modal__images-item"></li>
-                <li class="modal__images-item"></li>
-                <li class="modal__images-item"></li>
-              </ul>
+              <div class="modal__images-list-wrap">
+                <ul class="modal__images-list js-modal-gallery">
+                  <li class="modal__images-item"><a href="#"><img src="#" alt="#"></a></li>
+                </ul>
+              </div>
             </div>
             <div class="modal__body-desc">
               <div class="modal__body-header">

@@ -1,5 +1,3 @@
-"use strict";
-
 const footerRefs = {
   // footer
   footerSections: document.querySelectorAll(".js-footer-section"),

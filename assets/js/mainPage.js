@@ -1,4 +1,7 @@
-"use strict";
+import { refs } from "./refs";
+import Swiper, { Navigation } from "swiper";
+
+Swiper.use([Navigation]);
 
 function headerSearchForm() {
   const searchBtn = refs.searchBtn;
