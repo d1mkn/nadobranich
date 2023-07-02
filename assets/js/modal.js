@@ -144,23 +144,25 @@ function pickColor() {
 function renderVariations(selectedColor) {
   let prevActivePrice = null;
   let prevActiveSize = null;
+  let prevActiveId = null;
   const selectedVariations = currProduct.variations.filter((variation) => {
     const colorIndex = variation.variationDesc.indexOf(`Колір: ${selectedColor}`);
     return colorIndex !== -1;
   });
 
-  // Создание объекта для хранения соответствия цвета и размера с их ценой
+  // Збереження комбінацій кольору та розміру + ціна
   const variationPrices = {};
 
   selectedVariations.forEach((variation) => {
     const variationDesc = variation.variationDesc;
-    const sizeStartIndex = variationDesc.indexOf("Розмір: ") + 8; // Позиция после "Розмір: "
-    const sizeEndIndex = variationDesc.indexOf(",", sizeStartIndex); // Позиция перед запятой
+    const sizeStartIndex = variationDesc.indexOf("Розмір: ") + 8;
+    const sizeEndIndex = variationDesc.indexOf(",", sizeStartIndex);
 
     if (sizeStartIndex !== -1 && sizeEndIndex !== -1) {
       const size = variationDesc.substring(sizeStartIndex, sizeEndIndex).trim();
       const price = variation.variationPrice;
-      variationPrices[size] = price;
+      const variationId = variation.variationId;
+      variationPrices[size] = { price, variationId };
     }
   });
 
@@ -168,12 +170,13 @@ function renderVariations(selectedColor) {
 
   for (const size in variationPrices) {
     if (variationPrices.hasOwnProperty(size)) {
-      const price = variationPrices[size];
+      const { price, variationId } = variationPrices[size];
       prevActiveSize = prevActiveSize || size; // Перший розмір за замовчуванням
       prevActivePrice = prevActivePrice || price; // Ціна за замовчуванням
+      prevActiveId = prevActiveId || variationId; // Ціна за замовчуванням
       markup += `<button class="modal__body-size-btn${
         size === prevActiveSize ? " active" : ""
-      }" data-size="${size}" data-price="${price}" type="button">
+      }" data-size="${size}" data-price="${price}" data-variation-id="${variationId}" type="button">
                     ${size}</button>`;
     }
   }
@@ -181,6 +184,7 @@ function renderVariations(selectedColor) {
   refs.sizeList.innerHTML = markup;
   refs.productSize.textContent = prevActiveSize;
   pickSize();
+  console.log(prevActiveId); // Вывод ID вариации в консоль
 }
 
 function pickSize() {
@@ -200,6 +204,10 @@ function pickSize() {
 
         // Оновлення інформації про ціну
         refs.productPrice.textContent = targetSize.dataset.price + " грн";
+
+        // ID варіації для додавання у кошик
+        prevActiveId = targetSize.dataset.variationId;
+        console.log(prevActiveId); // Вывод ID вариации в консоль
       }
     });
   });
@@ -207,7 +215,6 @@ function pickSize() {
 
 function initGallery() {
   const mainImg = document.querySelector(".js-modal-main-img");
-  console.log(mainImg);
   const gallery = new SimpleLightbox(".js-modal-gallery a", {
     captionsData: "alt",
     captionDelay: 250,

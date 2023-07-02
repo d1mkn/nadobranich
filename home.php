@@ -6,6 +6,10 @@ Template Name: Home
 
 <?php get_header(); ?>
 
+<?php $cart = WC()->cart;
+
+var_dump($cart->get_cart());?>
+
 <div class="backdrop visually-hidden"></div>
 <div class="animate__animated js-to-cart-modal to-cart__wrap visually-hidden">
   <div class="to-cart__content">
@@ -487,7 +491,8 @@ Template Name: Home
                 <button class="js-add-to-cart modal__body-actions-add" type="button">
                   Додати до кошика
                 </button>
-                <a class="modal__body-actions-item-page js-to-item-page" href="/bedding/item.html">На сторінку товару</a>
+                <a class="modal__body-actions-item-page js-to-item-page" href="/bedding/item.html">На сторінку
+                  товару</a>
               </div>
             </div>
           </div>
