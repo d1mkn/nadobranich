@@ -397,11 +397,7 @@ Template Name: Home
         </div>
       </div>
       <div class="insta__gallery">
-        <ul class="insta__gallery-list">
-          <li class="insta__gallery-item"></li>
-          <li class="insta__gallery-item"></li>
-          <li class="insta__gallery-item"></li>
-          <li class="insta__gallery-item"></li>
+        <ul class="insta__gallery-list js-insta-gallery">
         </ul>
       </div>
     </div>

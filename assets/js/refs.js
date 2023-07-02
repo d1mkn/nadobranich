@@ -2,12 +2,15 @@ export const refs = {
   // header
   searchBtn: document.querySelector(".js-search-btn"),
   searchForm: document.querySelector(".js-search-form"),
+
   // backdrop
   backdrop: document.querySelector(".backdrop"),
+
   // mobile menu
   menuBtn: document.querySelector(".mobile-menu-btn"),
   menuContainer: document.querySelector(".mobile-menu__container"),
   closeBtn: document.querySelector(".mobile-menu__close-btn"),
+
   // modal
   modalTriggerList: document.querySelectorAll(".js-quick-view"),
   modal: document.querySelector(".modal"),
@@ -28,21 +31,30 @@ export const refs = {
   colorList: document.querySelector(".js-modal-color-list"),
   productSize: document.querySelector(".js-modal-size"),
   sizeList: document.querySelector(".js-modal-size-list"),
+
   // faq
   faqItems: document.querySelectorAll(".faq__item"),
+
   // fabrics
   fabricsItems: document.querySelectorAll(".fabrics__item"),
+
   // category
   categoryItems: document.querySelectorAll(".category-page__filter-item"),
   categoryDrop: document.querySelectorAll(".category-page__filter-drop"),
+
   // ordering
   orderingCheckbox1: document.querySelector(".js-checkbox1"),
   orderingCheckbox2: document.querySelector(".js-checkbox2"),
   orderingSummary: document.querySelector(".ordering-details-js"),
   orderingDetails: document.querySelector(".ordering-items-js"),
+
   // item
   formShowBtn: document.querySelector(".js-form-open-btn"),
   reviewForm: document.querySelector(".js-review-form"),
+
+  //insta
+  instaGallery: document.querySelector(".js-insta-gallery"),
+
   // footer
   footerSections: document.querySelectorAll(".js-footer-section"),
   catalogTitle: document.querySelector(".footer__catalog"),
