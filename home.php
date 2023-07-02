@@ -487,7 +487,7 @@ Template Name: Home
                 <button class="js-add-to-cart modal__body-actions-add" type="button">
                   Додати до кошика
                 </button>
-                <a class="modal__body-actions-item-page" href="/bedding/item.html">На сторінку товару</a>
+                <a class="modal__body-actions-item-page js-to-item-page" href="/bedding/item.html">На сторінку товару</a>
               </div>
             </div>
           </div>

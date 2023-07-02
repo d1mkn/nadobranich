@@ -31,6 +31,7 @@ export const refs = {
   colorList: document.querySelector(".js-modal-color-list"),
   productSize: document.querySelector(".js-modal-size"),
   sizeList: document.querySelector(".js-modal-size-list"),
+  toItemBtn: document.querySelector(".js-to-item-page"),
 
   // faq
   faqItems: document.querySelectorAll(".faq__item"),

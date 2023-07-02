@@ -101,6 +101,9 @@ function renderInfoFromLocal(e) {
   }
   refs.colorList.innerHTML = colorListMarkup();
   refs.productColor.textContent = prevActiveColor;
+
+  // Nav buttons
+  refs.toItemBtn.setAttribute("href", currProduct.productLink);
 }
 
 function pickColor() {
@@ -167,7 +170,7 @@ function renderVariations(selectedColor) {
     if (variationPrices.hasOwnProperty(size)) {
       const price = variationPrices[size];
       prevActiveSize = prevActiveSize || size; // Перший розмір за замовчуванням
-      prevActivePrice = prevActivePrice || price; // Перший розмір за замовчуванням
+      prevActivePrice = prevActivePrice || price; // Ціна за замовчуванням
       markup += `<button class="modal__body-size-btn${
         size === prevActiveSize ? " active" : ""
       }" data-size="${size}" data-price="${price}" type="button">
