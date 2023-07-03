@@ -1,4 +1,5 @@
 import { refs } from "./refs";
+import axios from "axios";
 import SimpleLightbox from "simplelightbox";
 
 let isToCartOpened = false;
@@ -36,6 +37,7 @@ let singleSize = null;
 
 function renderInfoFromLocal(e) {
   const productId = e.target.closest(".single-category__item").attributes.productid.value;
+  localStorage.setItem("productId", productId);
   const aboutProducts = JSON.parse(localStorage.getItem("aboutProducts"));
   currProduct = aboutProducts.find((product) => product.id == productId);
   console.log(currProduct);
@@ -183,6 +185,7 @@ function renderVariations(selectedColor) {
   refs.productPrice.textContent = prevActivePrice + " грн";
   refs.sizeList.innerHTML = markup;
   refs.productSize.textContent = prevActiveSize;
+  localStorage.setItem("variationId", prevActiveId);
   pickSize();
   console.log(prevActiveId); // Вывод ID вариации в консоль
 }
@@ -207,6 +210,7 @@ function pickSize() {
 
         // ID варіації для додавання у кошик
         prevActiveId = targetSize.dataset.variationId;
+        localStorage.setItem("variationId", prevActiveId);
         console.log(prevActiveId); // Вывод ID вариации в консоль
       }
     });
@@ -250,17 +254,26 @@ refs.modal.addEventListener("click", (e) => {
   e.stopPropagation();
 });
 
-refs.addButton.addEventListener("click", () => {
-  closeModal();
-  isToCartOpened = true;
-  refs.toCardWrap.classList.toggle("animate__fadeInRight");
-  refs.toCardWrap.classList.toggle("visually-hidden");
+refs.addToCartButton.addEventListener("click", () => {
+  const variationId = localStorage.getItem("variationId");
+  axios
+    .post(`?add-to-cart=${variationId}`)
+    .then((response) => {
+      closeModal();
+      isToCartOpened = true;
+      refs.toCardWrap.classList.toggle("animate__fadeInRight");
+      refs.toCardWrap.classList.toggle("visually-hidden");
 
-  setTimeout(() => {
-    if (isToCartOpened) {
-      closeToCartModal();
-    }
-  }, 5000);
+      setTimeout(() => {
+        if (isToCartOpened) {
+          closeToCartModal();
+        }
+      }, 5000);
+    })
+    .catch((error) => {
+      // Обработка ошибки запроса
+      console.error("Ошибка при добавлении товара в корзину:", error);
+    });
 });
 
 refs.toCardClsBtn.addEventListener("click", () => {

@@ -7,7 +7,6 @@ Template Name: Home
 <?php get_header(); ?>
 
 <?php $cart = WC()->cart;
-
 var_dump($cart->get_cart());?>
 
 <div class="backdrop visually-hidden"></div>
@@ -488,7 +487,7 @@ var_dump($cart->get_cart());?>
                 </div>
               </div>
               <div class="modal__body-actions-wrap">
-                <button class="js-add-to-cart modal__body-actions-add" type="button">
+                <button class="js-add-to-cart modal__body-actions-add ajax_add_to_cart" type="button">
                   Додати до кошика
                 </button>
                 <a class="modal__body-actions-item-page js-to-item-page" href="/bedding/item.html">На сторінку

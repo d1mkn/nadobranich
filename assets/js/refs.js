@@ -17,7 +17,7 @@ export const refs = {
   modalDialog: document.querySelector(".modal__dialog"),
   modalBackdrop: document.querySelector(".modal-backdrop"),
   closeButton: document.querySelector(".modal__dialog-close"),
-  addButton: document.querySelector(".js-add-to-cart"),
+  addToCartButton: document.querySelector(".js-add-to-cart"),
   toCardWrap: document.querySelector(".js-to-cart-modal"),
   toCardClsBtn: document.querySelector(".js-to-cart-close-btn"),
   mainImgWrap: document.querySelector(".modal__images-main-wrap"),
