@@ -106,10 +106,12 @@ session_unset();
                 <use href="<?php bloginfo('template_url') ?>/assets/images/icons.svg#cart"></use>
               </svg>
               <?php if (WC()->cart->get_cart_contents_count() > 0): ?>
-                <span class="cart-counter">
+                <span class="cart-counter js-cart-counter">
                   <?php echo WC()->cart->get_cart_contents_count(); ?>
                 </span>
-              <?php endif; ?>
+              <?php else: ?>
+                <span class="js-cart-counter"></span>
+              <?php endif ?>
             </a>
           </li>
           <li class="header__controls-item user">

@@ -2,6 +2,7 @@ export const refs = {
   // header
   searchBtn: document.querySelector(".js-search-btn"),
   searchForm: document.querySelector(".js-search-form"),
+  cartCounter: document.querySelector(".js-cart-counter"),
 
   // backdrop
   backdrop: document.querySelector(".backdrop"),

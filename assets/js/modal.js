@@ -255,7 +255,6 @@ function fetchAddToCart() {
   axios
     .get(`wp-json/wc/store/cart`)
     .then((response) => {
-      console.log(response.data.items);
       const data = response.data.items;
       for (let i = 0; i < data.length; i += 1) {
         const variation = data[i];
@@ -273,7 +272,10 @@ function fetchAddToCart() {
               closeToCartModal();
             }
           }, 3000);
-          return;
+        }
+        if (refs.cartCounter) {
+          refs.cartCounter.setAttribute("class", "cart-counter");
+          refs.cartCounter.textContent = response.data.items_count;
         }
       }
     })
