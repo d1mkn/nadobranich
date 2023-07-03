@@ -2177,6 +2177,35 @@ header button {
   pointer-events: all;
   transform: translate(-80%) translateY(0%);
 }
+.cart-counter {
+  min-width: 13px;
+  height: 13px;
+  color: #fff;
+  pointer-events: none;
+  background-color: #83b0e5;
+  border-radius: 20px;
+  justify-content: center;
+  align-items: center;
+  padding-top: 2px;
+  padding-left: 4px;
+  padding-right: 4px;
+  font-size: 10px;
+  font-weight: 600;
+  display: flex;
+  position: absolute;
+  top: -5px;
+  left: 13px;
+}
+@media screen and (min-width: 768px) {
+  .cart-counter {
+    min-width: 17px;
+    height: 17px;
+    padding: 0.5px 5.5px;
+    font-size: 13px;
+    top: 15px;
+    left: 10px;
+  }
+}
 .navigation__item:after {
   width: 0%;
   opacity: 0;
@@ -2218,6 +2247,7 @@ header button {
   display: flex;
 }
 .header__controls-item {
+  position: relative;
   height: 20px;
   align-items: center;
   display: flex;

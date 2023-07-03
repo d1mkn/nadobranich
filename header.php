@@ -105,6 +105,11 @@ session_unset();
               <svg class="header__controls-item-icon" width="24" height="70">
                 <use href="<?php bloginfo('template_url') ?>/assets/images/icons.svg#cart"></use>
               </svg>
+              <?php if (WC()->cart->get_cart_contents_count() > 0): ?>
+                <span class="cart-counter">
+                  <?php echo WC()->cart->get_cart_contents_count(); ?>
+                </span>
+              <?php endif; ?>
             </a>
           </li>
           <li class="header__controls-item user">
