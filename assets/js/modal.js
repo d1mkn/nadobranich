@@ -244,6 +244,8 @@ function initGallery() {
 
 function fetchAddToCart() {
   const variationId = localStorage.getItem("variationId");
+  refs.addToCartButton.setAttribute("disabled", "true");
+  refs.modalLoader.classList.remove("visually-hidden");
   axios
     .post(`?add-to-cart=${variationId}`)
     .then()
@@ -267,7 +269,9 @@ function fetchAddToCart() {
           closeModal();
           renderAddToCartModal(name, image, combination, qty);
           openToCartModal();
-          const modalTimeout = setTimeout(() => {
+          refs.addToCartButton.removeAttribute("disabled");
+          refs.modalLoader.classList.add("visually-hidden");
+          setTimeout(() => {
             if (isToCartOpened) {
               closeToCartModal();
             }

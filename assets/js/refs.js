@@ -31,6 +31,7 @@ export const refs = {
   productSize: document.querySelector(".js-modal-size"),
   sizeList: document.querySelector(".js-modal-size-list"),
   toItemBtn: document.querySelector(".js-to-item-page"),
+  modalLoader: document.querySelector(".js-modal-loader"),
 
   // added to cart modal
   toCartWrap: document.querySelector(".js-to-cart-modal"),

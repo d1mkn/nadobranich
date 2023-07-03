@@ -486,8 +486,8 @@ Template Name: Home
                 </div>
               </div>
               <div class="modal__body-actions-wrap">
-                <button class="js-add-to-cart modal__body-actions-add ajax_add_to_cart" type="button">
-                  Додати до кошика
+                <button class="js-add-to-cart modal__body-actions-add" type="button">
+                  Додати до кошика<span class="loader visually-hidden js-modal-loader"></span>
                 </button>
                 <a class="modal__body-actions-item-page js-to-item-page" href="/bedding/item.html">На сторінку
                   товару</a>
