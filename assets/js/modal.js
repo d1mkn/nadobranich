@@ -22,18 +22,27 @@ function closeModal() {
   }, 500);
 }
 
+function openToCartModal() {
+  isToCartOpened = true;
+  refs.toCartWrap.classList.toggle("animate__fadeInRight");
+  refs.toCartWrap.classList.toggle("visually-hidden");
+}
+
 function closeToCartModal() {
-  refs.toCardWrap.classList.toggle("animate__fadeInRight");
-  refs.toCardWrap.classList.toggle("animate__fadeOutRight");
+  refs.toCartWrap.classList.toggle("animate__fadeInRight");
+  refs.toCartWrap.classList.toggle("animate__fadeOutRight");
 
   setTimeout(() => {
-    refs.toCardWrap.classList.toggle("visually-hidden");
-    refs.toCardWrap.classList.toggle("animate__fadeOutRight");
+    refs.toCartWrap.classList.toggle("visually-hidden");
+    refs.toCartWrap.classList.toggle("animate__fadeOutRight");
   }, 1000);
 }
 
 let currProduct = null;
 let singleSize = null;
+let prevActiveId;
+let prevActiveColor;
+let prevActiveSize;
 
 function renderInfoFromLocal(e) {
   const productId = e.target.closest(".single-category__item").attributes.productid.value;
@@ -122,6 +131,7 @@ function pickColor() {
 
         // Оновлення інформації про обраний колір
         refs.productColor.textContent = targetColor.dataset.color;
+        prevActiveColor = targetColor.dataset.color;
 
         renderVariations(targetColor.dataset.color);
       }
@@ -146,7 +156,6 @@ function pickColor() {
 function renderVariations(selectedColor) {
   let prevActivePrice = null;
   let prevActiveSize = null;
-  let prevActiveId = null;
   const selectedVariations = currProduct.variations.filter((variation) => {
     const colorIndex = variation.variationDesc.indexOf(`Колір: ${selectedColor}`);
     return colorIndex !== -1;
@@ -175,7 +184,7 @@ function renderVariations(selectedColor) {
       const { price, variationId } = variationPrices[size];
       prevActiveSize = prevActiveSize || size; // Перший розмір за замовчуванням
       prevActivePrice = prevActivePrice || price; // Ціна за замовчуванням
-      prevActiveId = prevActiveId || variationId; // Ціна за замовчуванням
+      prevActiveId = variationId; // Варіація за замовчуванням
       markup += `<button class="modal__body-size-btn${
         size === prevActiveSize ? " active" : ""
       }" data-size="${size}" data-price="${price}" data-variation-id="${variationId}" type="button">
@@ -185,9 +194,9 @@ function renderVariations(selectedColor) {
   refs.productPrice.textContent = prevActivePrice + " грн";
   refs.sizeList.innerHTML = markup;
   refs.productSize.textContent = prevActiveSize;
-  localStorage.setItem("variationId", prevActiveId);
   pickSize();
-  console.log(prevActiveId); // Вывод ID вариации в консоль
+  localStorage.setItem("variationId", prevActiveId);
+  localStorage.setItem("combination", `${prevActiveColor} / ${prevActiveSize}`);
 }
 
 function pickSize() {
@@ -204,6 +213,7 @@ function pickSize() {
 
         // Оновлення інформації про обраний розмір
         refs.productSize.textContent = targetSize.dataset.size;
+        prevActiveSize = targetSize.dataset.size;
 
         // Оновлення інформації про ціну
         refs.productPrice.textContent = targetSize.dataset.price + " грн";
@@ -211,7 +221,8 @@ function pickSize() {
         // ID варіації для додавання у кошик
         prevActiveId = targetSize.dataset.variationId;
         localStorage.setItem("variationId", prevActiveId);
-        console.log(prevActiveId); // Вывод ID вариации в консоль
+
+        localStorage.setItem("combination", `${prevActiveColor} / ${prevActiveSize}`);
       }
     });
   });
@@ -229,6 +240,56 @@ function initGallery() {
     e.preventDefault;
     gallery.open();
   });
+}
+
+function fetchAddToCart() {
+  const variationId = localStorage.getItem("variationId");
+  axios
+    .post(`?add-to-cart=${variationId}`)
+    .then()
+    .catch((error) => {
+      alert(
+        "Під час додавання товару до кошика відбулася неочікувана помилка. Будь ласка, зверніться до менеджера."
+      );
+    });
+  axios
+    .get(`wp-json/wc/store/cart`)
+    .then((response) => {
+      console.log(response.data.items);
+      const data = response.data.items;
+      for (let i = 0; i < data.length; i += 1) {
+        const variation = data[i];
+        if (variation.id === parseInt(variationId)) {
+          const name = variation.name;
+          const image = variation.images[0].thumbnail;
+          const combination = localStorage.getItem("combination");
+          const qty = 1;
+          const link = variation.permalink;
+          closeModal();
+          renderAddToCartModal(name, image, combination, qty);
+          openToCartModal();
+          const modalTimeout = setTimeout(() => {
+            if (isToCartOpened) {
+              closeToCartModal();
+            }
+          }, 3000);
+          return;
+        }
+      }
+    })
+    .catch((error) => {
+      alert(
+        "Під час додавання товару до кошика відбулася неочікувана помилка. Будь ласка, зверніться до менеджера."
+      );
+    });
+}
+
+function renderAddToCartModal(name, image, combination, qty) {
+  refs.toCartTitle.textContent = name;
+  refs.toCartImg.setAttribute("src", image);
+  refs.toCartImg.setAttribute("alt", `Зображення ${name}`);
+  refs.toCartVar.textContent = combination;
+  refs.toCartQty.textContent = `Кількість: ${qty} шт.`;
 }
 
 refs.modalTriggerList.forEach((item) => {
@@ -254,35 +315,15 @@ refs.modal.addEventListener("click", (e) => {
   e.stopPropagation();
 });
 
-refs.addToCartButton.addEventListener("click", () => {
-  const variationId = localStorage.getItem("variationId");
-  axios
-    .post(`?add-to-cart=${variationId}`)
-    .then((response) => {
-      closeModal();
-      isToCartOpened = true;
-      refs.toCardWrap.classList.toggle("animate__fadeInRight");
-      refs.toCardWrap.classList.toggle("visually-hidden");
+refs.addToCartButton.addEventListener("click", fetchAddToCart);
 
-      setTimeout(() => {
-        if (isToCartOpened) {
-          closeToCartModal();
-        }
-      }, 5000);
-    })
-    .catch((error) => {
-      // Обработка ошибки запроса
-      console.error("Ошибка при добавлении товара в корзину:", error);
-    });
-});
-
-refs.toCardClsBtn.addEventListener("click", () => {
+refs.toCartClsBtn.addEventListener("click", () => {
   isToCartOpened = false;
-  refs.toCardWrap.classList.toggle("animate__fadeInRight");
-  refs.toCardWrap.classList.toggle("animate__fadeOutRight");
+  refs.toCartWrap.classList.toggle("animate__fadeInRight");
+  refs.toCartWrap.classList.toggle("animate__fadeOutRight");
 
   setTimeout(() => {
-    refs.toCardWrap.classList.toggle("visually-hidden");
-    refs.toCardWrap.classList.toggle("animate__fadeOutRight");
+    refs.toCartWrap.classList.toggle("visually-hidden");
+    refs.toCartWrap.classList.toggle("animate__fadeOutRight");
   }, 1000);
 });

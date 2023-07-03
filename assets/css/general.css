@@ -2412,12 +2412,14 @@ header button {
   display: flex;
 }
 .to-cart__added-goods-img {
+  width: 100px;
+  height: 95px;
   border: 1px solid #7d7d7d;
   border-radius: 5px;
   display: block;
 }
 .to-cart__added-goods-text {
-  width: 164px;
+  width: 95%;
   flex-direction: column;
   gap: 5px;
   font-size: 15px;

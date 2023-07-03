@@ -101,7 +101,7 @@ session_unset();
             </form>
           </li>
           <li class="header__controls-item cart">
-            <a class="cart-link" href="./cart.html">
+            <a class="cart-link" href="<?php echo wc_get_cart_url() ?>">
               <svg class="header__controls-item-icon" width="24" height="70">
                 <use href="<?php bloginfo('template_url') ?>/assets/images/icons.svg#cart"></use>
               </svg>

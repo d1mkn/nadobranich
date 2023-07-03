@@ -6,8 +6,7 @@ Template Name: Home
 
 <?php get_header(); ?>
 
-<?php $cart = WC()->cart;
-var_dump($cart->get_cart());?>
+
 
 <div class="backdrop visually-hidden"></div>
 <div class="animate__animated js-to-cart-modal to-cart__wrap visually-hidden">
@@ -21,16 +20,16 @@ var_dump($cart->get_cart());?>
     </button>
     <h6 class="to-cart__content-title">Товар додано до кошика!</h6>
     <div class="to-cart__added-goods">
-      <img class="to-cart__added-goods-img" src="https://placehold.co/100x95" alt="" />
+      <img class="to-cart__added-goods-img js-to-cart-modal-img" src="https://placehold.co/100x95" alt="" />
       <div class="to-cart__added-goods-text">
-        <p class="to-cart__added-goods-title">Комплект шовкових подушок</p>
-        <p>Жовтий / Середній</p>
-        <p>Кількість: 5 шт.</p>
+        <p class="to-cart__added-goods-title js-to-cart-modal-title">*</p>
+        <p class="js-to-cart-modal-variation">* / *</p>
+        <p class="js-to-cart-modal-qty">Кількість: * шт.</p>
       </div>
     </div>
     <div class="to-cart__nav">
-      <a class="to-cart__nav-link" href="/bedding/ordering.html">Купити</a>
-      <a class="to-cart__nav-link" href="/bedding/cart.html">Кошик</a>
+      <a class="to-cart__nav-link" href="<?php echo wc_get_checkout_url() ?>">Купити</a>
+      <a class="to-cart__nav-link" href="<?php echo wc_get_cart_url() ?>">Кошик</a>
     </div>
   </div>
 </div>

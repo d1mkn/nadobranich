@@ -18,8 +18,6 @@ export const refs = {
   modalBackdrop: document.querySelector(".modal-backdrop"),
   closeButton: document.querySelector(".modal__dialog-close"),
   addToCartButton: document.querySelector(".js-add-to-cart"),
-  toCardWrap: document.querySelector(".js-to-cart-modal"),
-  toCardClsBtn: document.querySelector(".js-to-cart-close-btn"),
   mainImgWrap: document.querySelector(".modal__images-main-wrap"),
   modalGallery: document.querySelector(".js-modal-gallery"),
   productTitle: document.querySelector(".modal__body-title"),
@@ -32,6 +30,14 @@ export const refs = {
   productSize: document.querySelector(".js-modal-size"),
   sizeList: document.querySelector(".js-modal-size-list"),
   toItemBtn: document.querySelector(".js-to-item-page"),
+
+  // added to cart modal
+  toCartWrap: document.querySelector(".js-to-cart-modal"),
+  toCartClsBtn: document.querySelector(".js-to-cart-close-btn"),
+  toCartImg: document.querySelector(".js-to-cart-modal-img"),
+  toCartTitle: document.querySelector(".js-to-cart-modal-title"),
+  toCartVar: document.querySelector(".js-to-cart-modal-variation"),
+  toCartQty: document.querySelector(".js-to-cart-modal-qty"),
 
   // faq
   faqItems: document.querySelectorAll(".faq__item"),
