@@ -452,7 +452,7 @@ Template Name: Home
               </div>
               <div class="modal__body-color-wrap">
                 <p class="modal__body-color">
-                  Колір: <span class="modal__body-item-color js-modal-color">###</span>
+                  Колір:<span class="modal__body-item-color js-modal-color">###</span>
                 </p>
                 <div class="modal__body-color-picker js-modal-color-list">
                   <a class="modal__body-color-item active" href="#"></a>
@@ -461,7 +461,7 @@ Template Name: Home
               <div class="modal__body-size-wrap">
                 <div>
                   <p class="modal__body-size">
-                    Розмір: <span class="modal__body-item-size js-modal-size">###</span>
+                    Розмір:<span class="modal__body-item-size js-modal-size">###</span>
                   </p>
                   <div class="modal__body-size-picker js-modal-size-list">
                     <button class="modal__body-size-btn active" type="button"> </button>
