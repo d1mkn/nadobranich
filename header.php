@@ -27,7 +27,6 @@ session_unset();
             <button class="navigation__item-button">Каталог</button>
             <div class="navigation__dropdown-wrap">
               <ul class="navigation__dropdown">
-
                 <?php
                 $args = array(
                   'taxonomy' => 'product_cat',
