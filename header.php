@@ -123,14 +123,9 @@ session_unset();
           </li>
         </ul>
       </div>
-      <form class="search__form js-search-form animate__animated animate__faster visually-hidden">
-        <button class="search__submit-btn" type="submit">
-          <svg width="24" height="24">
-            <use href="<?php bloginfo('template_url') ?>/assets/images/icons.svg#search"></use>
-          </svg>
-        </button>
-        <input class="search__form-input" type="search" placeholder="Пошук по сайту" aria-label="Пошук по сайту" />
-      </form>
+      <div class="search__form js-search-form animate__animated animate__faster visually-hidden">
+        <?php echo do_shortcode('[fibosearch]'); ?>
+      </div>
     </div>
 
   </header>
