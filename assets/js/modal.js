@@ -248,14 +248,9 @@ function fetchAddToCart() {
   refs.modalLoader.classList.remove("visually-hidden");
   axios
     .post(`?add-to-cart=${variationId}`)
-    .then()
-    .catch((error) => {
-      alert(
-        "Під час додавання товару до кошика відбулася неочікувана помилка. Будь ласка, зверніться до менеджера."
-      );
-    });
-  axios
-    .get(`wp-json/wc/store/cart`)
+    .then(() => {
+      return axios.get(`wp-json/wc/store/cart`);
+    })
     .then((response) => {
       const data = response.data.items;
       for (let i = 0; i < data.length; i += 1) {
