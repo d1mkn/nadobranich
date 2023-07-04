@@ -89,15 +89,6 @@ session_unset();
                 <use href="<?php bloginfo('template_url') ?>/assets/images/icons.svg#search"></use>
               </svg>
             </button>
-            <form class="search__form js-search-form animate__animated animate__faster visually-hidden">
-              <button class="search__submit-btn" type="submit">
-                <svg width="24" height="24">
-                  <use href="<?php bloginfo('template_url') ?>/assets/images/icons.svg#search"></use>
-                </svg>
-              </button>
-              <input class="search__form-input" type="search" placeholder="Пошук по сайту"
-                aria-label="Пошук по сайту" />
-            </form>
           </li>
           <li class="header__controls-item cart">
             <a class="cart-link" href="<?php echo wc_get_cart_url() ?>">
@@ -132,7 +123,16 @@ session_unset();
           </li>
         </ul>
       </div>
+      <form class="search__form js-search-form animate__animated animate__faster visually-hidden">
+        <button class="search__submit-btn" type="submit">
+          <svg width="24" height="24">
+            <use href="<?php bloginfo('template_url') ?>/assets/images/icons.svg#search"></use>
+          </svg>
+        </button>
+        <input class="search__form-input" type="search" placeholder="Пошук по сайту" aria-label="Пошук по сайту" />
+      </form>
     </div>
+
   </header>
 
   <div class="mobile-menu__container">

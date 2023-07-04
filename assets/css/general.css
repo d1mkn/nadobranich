@@ -2319,23 +2319,60 @@ header button {
 }
 .search__form {
   z-index: 1;
-  width: 100%;
+  width: calc(100% - 30px);
   background-color: #fff;
   border: 0.5px solid #1c1c1c;
   border-radius: 0 0 5px 5px;
   align-items: center;
   display: flex;
   position: absolute;
-  top: 70px;
-  left: 0;
+  top: 45px;
+  left: 15px;
+}
+@media screen and (min-width: 768px) {
+  .search__form {
+    width: 666px;
+    left: 51px;
+    top: 70px;
+  }
+}
+@media screen and (min-width: 1240px) {
+  .search__form {
+    width: 100%;
+    left: 0;
+  }
 }
 .search__form-input {
-  height: 60px;
   width: 90%;
+  height: 40px;
   border: none;
 }
+@media screen and (min-width: 768px) {
+  .search__form-input {
+    width: 89%;
+    height: 60px;
+  }
+}
+@media screen and (min-width: 1240px) {
+  .search__form-input {
+    width: 94%;
+  }
+}
 .search__submit-btn {
-  margin: 0 20px 0 25px;
+  margin: 0 15px 0 10px;
+}
+.search__submit-btn svg {
+    width: 15px;
+    height: 15px;
+  }
+@media screen and (min-width: 768px) {
+  .search__submit-btn {
+    margin: 0 20px 0 25px;
+  }
+  .search__submit-btn svg {
+    width: 24px;
+    height: 24px;
+  }
 }
 .search__submit-btn:hover,
 .search__submit-btn:focus {
