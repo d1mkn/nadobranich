@@ -130,6 +130,8 @@ session_unset();
 
   </header>
 
+  <div class="backdrop visually-hidden"></div>
+
   <div class="mobile-menu__container">
     <div class="mobile-menu__content">
       <div class="mobile-menu__content-wrap">

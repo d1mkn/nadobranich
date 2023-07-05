@@ -8,7 +8,6 @@ Template Name: Home
 
 
 
-<div class="backdrop visually-hidden"></div>
 <div class="animate__animated js-to-cart-modal to-cart__wrap visually-hidden">
   <div class="to-cart__content">
     <button class="js-to-cart-close-btn to-cart__close-btn">
