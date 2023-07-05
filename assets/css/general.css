@@ -3623,6 +3623,7 @@ header button {
 }
 @media screen and (min-width: 768px) {
   .modal__dialog {
+    width: unset;
     top: 35%;
     left: 50%;
     transform: translate(-50%, -40%) scale(1);

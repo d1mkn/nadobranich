@@ -85,13 +85,15 @@ function renderInfoFromLocal(e) {
 
   // price color size
   let colorList = [];
+  let sizeList = [];
   function colorListMarkup() {
     currProduct.attributes.forEach((attribute) => {
       if (attribute.hasOwnProperty("pa_color")) {
         colorList = attribute.pa_color;
       }
-      if (attribute.hasOwnProperty("Розмір")) {
-        singleSize = attribute.Розмір;
+      if (attribute.hasOwnProperty("pa_size")) {
+        singleSize = attribute.pa_size[0].name;
+        sizeList = attribute.pa_size;
       }
     });
 
@@ -145,9 +147,9 @@ function pickColor() {
                         </span><span class="item-new-price">
                           ${currProduct.price} грн
                         </span>`;
-    refs.sizeList.innerHTML = `<button class="modal__body-size-btn active" data-size="${singleSize[0]}" type="button">
-                    ${singleSize[0]}</button>`;
-    refs.productSize.textContent = singleSize[0];
+    refs.sizeList.innerHTML = `<button class="modal__body-size-btn active" data-size="${singleSize}" type="button">
+                    ${singleSize}</button>`;
+    refs.productSize.textContent = singleSize;
     return;
   }
   renderVariations(refs.productColor.textContent);

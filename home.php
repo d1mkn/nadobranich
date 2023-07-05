@@ -227,6 +227,10 @@ Template Name: Home
                 $options = get_the_terms($product->id, 'pa_color');
               }
 
+              if ($attributeName === 'pa_size') {
+                $options = get_the_terms($product->id, 'pa_size');
+              }
+
               $productAttributes[] = array(
                 $attributeName => $options
               );
