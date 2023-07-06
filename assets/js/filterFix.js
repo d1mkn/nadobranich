@@ -27,6 +27,7 @@ window.addEventListener("load", rerenderFilter);
 window.addEventListener("resize", rerenderFilter);
 
 function rerenderFilter() {
+  const filterSections = document.querySelectorAll(".wpc-filters-section");
   const screenWidth = window.innerWidth;
   const mediaQuery = window.matchMedia("(max-width: 767px) and (orientation: portrait)");
 
@@ -77,4 +78,26 @@ function rerenderFilter() {
       chip.textContent = newText;
     });
   }
+
+  if (screenWidth >= 1240) {
+    filterSections.forEach((section) => {
+      section.addEventListener("mouseover", () => {
+        section.classList.remove("wpc-closed");
+        section.classList.add("wpc-opened");
+      });
+
+      section.addEventListener("mouseout", () => {
+        section.classList.remove("wpc-opened");
+        section.classList.add("wpc-closed");
+      });
+    });
+  }
+
+  filterSections.forEach((section) => {
+    if (section.classList.contains("wpc-opened")) {
+      section.classList.remove("wpc-opened");
+    } else {
+      section.classList.add("wpc-closed");
+    }
+  });
 }
