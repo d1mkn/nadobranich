@@ -61,9 +61,6 @@ export const refs = {
   formShowBtn: document.querySelector(".js-form-open-btn"),
   reviewForm: document.querySelector(".js-review-form"),
 
-  //insta
-  instaGallery: document.querySelector(".js-insta-gallery"),
-
   // footer
   footerSections: document.querySelectorAll(".js-footer-section"),
   catalogTitle: document.querySelector(".footer__catalog"),

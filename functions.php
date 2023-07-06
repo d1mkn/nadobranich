@@ -207,3 +207,5 @@ if (defined('JETPACK__VERSION')) {
 }
 
 require get_template_directory() . '/inc/woocommerce.php';
+
+require get_template_directory() . '/inc/shortcodes.php';

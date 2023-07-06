@@ -3473,6 +3473,7 @@ header button {
 }
 .insta .container {
   min-height: 180px;
+  max-height: 500px;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
@@ -3565,12 +3566,15 @@ header button {
   }
 }
 .insta__gallery-list {
-  gap: 5px;
   display: flex;
+  gap: 5px;
+  overflow: hidden;
+  width: 295px;
 }
 @media screen and (min-width: 768px) {
   .insta__gallery-list {
     width: 262px;
+    height: 262px;
     flex-wrap: wrap;
     gap: 10px;
   }
@@ -3578,6 +3582,7 @@ header button {
 @media screen and (min-width: 1240px) {
   .insta__gallery-list {
     width: 620px;
+    height: 100%;
   }
 }
 .insta__gallery-item {
@@ -7130,5 +7135,57 @@ footer h3 {
   padding: 0;
   position: absolute;
   overflow: hidden;
+}
+.sbi_item {
+  border-radius: 5px;
+}
+.sbi_photo_wrap {
+  width: 70px;
+  height: 70px;
+}
+@media screen and (min-width: 768px) {
+  .sbi_photo_wrap {
+    width: 126px;
+    height: 126px;
+  }
+}
+@media screen and (min-width: 1240px) {
+  .sbi_photo_wrap {
+    width: 200px;
+    height: 200px;
+  }
+}
+#sb_instagram.sbi_col_1 #sbi_images .sbi_item {
+  width: fit-content;
+}
+#sbi_images {
+  display: flex;
+  gap: 5px;
+  flex-wrap: nowrap;
+}
+@media screen and (min-width: 768px) {
+  #sbi_images {
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+}
+#sb_instagram #sbi_images {
+  width: fit-content;
+}
+#sb_instagram .sbi_type_video .sbi_playbtn {
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  margin-top: 0;
+  margin-left: 0;
+  padding: 0;
+  font-size: 20px;
+  transform: translate(-50%, -50%);
+}
+#sb_instagram .sbi_type_carousel .fa-clone {
+  right: 5px;
+  top: 5px;
+  font-size: 15px;
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
 }
 /*# sourceMappingURL=general.css.map */

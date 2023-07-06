@@ -393,20 +393,6 @@ Template Name: Home
     localStorage.setItem('aboutProducts', JSON.stringify(aboutProducts));
   </script>
 
-  <section class="insta">
-    <div class="container">
-      <div class="insta__text">
-        <div class="insta__text-wrap">
-          <p class="insta__link-text">Долучайтесь до нас у інстаграмі</p>
-          <a class="insta__link" target="_blank" href="https://www.instagram.com/na_dobranich_ua">@na_dobranich_ua</a>
-        </div>
-      </div>
-      <div class="insta__gallery">
-        <ul class="insta__gallery-list js-insta-gallery">
-        </ul>
-      </div>
-    </div>
-  </section>
   <div class="animate__animated animate__faster modal-backdrop visually-hidden">
     <div class="modal">
       <div class="modal__dialog">
@@ -502,5 +488,7 @@ Template Name: Home
     </div>
   </div>
 </main>
+
+<?php echo do_shortcode('[insta_block]') ?>
 
 <?php get_footer();
