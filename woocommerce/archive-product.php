@@ -68,8 +68,8 @@ do_action('woocommerce_before_main_content');
 				echo '<h2 class="category-page__filter-title">Сортувати:</h2>';
 				do_action('woocommerce_before_shop_loop');
 				echo '</div>';
-				echo '</div>';
 				echo do_shortcode('[fe_chips]');
+				echo '</div>';
 				woocommerce_product_loop_start();
 
 				if (wc_get_loop_prop('total')) {

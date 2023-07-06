@@ -4430,6 +4430,7 @@ header button {
   }
 }
 .category-page__filter-wrap {
+  position: relative;
   border-bottom: 1px solid #1c1c1c;
   justify-content: space-between;
   margin-bottom: 20px;
@@ -4437,21 +4438,22 @@ header button {
 }
 @media screen and (min-width: 768px) {
   .category-page__filter-wrap {
-    margin-bottom: 30px;
+    margin-bottom: 45px;
   }
 }
 @media screen and (min-width: 1240px) {
   .category-page__filter-wrap {
-    margin-bottom: 60px;
+    margin-bottom: 70px;
   }
 }
 .category-page__filter-title {
-  color: #83b0e5;
+  font-weight: 600;
   font-size: 14px;
   line-height: 1.3;
 }
 @media screen and (min-width: 768px) {
   .category-page__filter-title {
+    color: #83b0e5;
     font-size: 16px;
     font-weight: 600;
   }
@@ -4463,12 +4465,16 @@ header button {
   }
 }
 .category-page__filter {
-  align-items: center;
   display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
 }
 @media screen and (min-width: 768px) {
   .category-page__filter {
     gap: 10px;
+    flex-direction: row;
+    width: unset;
   }
 }
 @media screen and (min-width: 1240px) {
@@ -4492,12 +4498,25 @@ header button {
   }
 }
 .category-page__sort {
-  align-items: center;
+  position: absolute;
+  right: 0px;
   display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  height: 48px;
+  padding: 3px 10px;
+  border: 1px solid #83b0e5;
+  border-radius: 5px;
 }
 @media screen and (min-width: 768px) {
   .category-page__sort {
+    position: relative;
+    align-items: center;
+    flex-direction: row;
     gap: 10px;
+    height: unset;
+    padding: unset;
+    border: none;
   }
 }
 @media screen and (min-width: 1240px) {
@@ -4512,6 +4531,19 @@ header button {
   .woocommerce-notices-wrapper {
     display: none;
   }
+}
+.orderby {
+  color: #83b0e5;
+  margin-left: -4px;
+}
+@media screen and (min-width: 768px) {
+  .orderby {
+    color: #000000;
+    margin-left: 0px;
+  }
+}
+.woocommerce .woocommerce-ordering {
+  margin: 0px;
 }
 .category-page__sort select {
   background-color: #fffcf8;
@@ -4543,11 +4575,10 @@ button .wpc-open-icon {
 .wpc-instead-of-posts-found {
   display: none;
 }
+.widget_wpc_filters_widget {
+  width: 100%;
+}
 @media screen and (min-width: 768px) {
-  .wpc-filters-range-wrapper input[type="number"] {
-    width: 60px;
-    height: 40px;
-  }
   .wpc-filter-collapsible-reverse .wpc-filter-content,
   .wpc-filter-collapsible.wpc-opened .wpc-filter-content,
   .wpc-filter-has-brands.wpc-filter-hidden-term-names .wpc-dropdown-default .wpc-term-name,
@@ -4593,11 +4624,84 @@ button .wpc-open-icon {
     ul.wpc-filters-ul-list {
     padding: 0;
   }
+  .filter-price-pick {
+    position: absolute;
+    padding: 15px 42px;
+    background-color: #ffffff;
+    border: 1px solid #000000;
+    border-radius: 0px 0px 5px 5px;
+    z-index: 1;
+  }
+}
+.wpc-filters-range-wrapper input[type="number"] {
+  width: 60px;
+  height: 40px;
+  border: 1px solid #7d7d7d;
+  border-radius: 5px;
+  text-align: center;
+}
+.wpc-filters-range-values-wrapper {
+  display: none;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 .wpc-filter-header {
-  padding: 11px 0;
-  line-height: 1.3;
-  position: relative;
+  padding: 0px;
+  margin-bottom: 10px;
+}
+.wpc-filters-section:not(:last-child) {
+  border-bottom: 1px solid;
+}
+@media screen and (min-width: 768px) {
+  .wpc-filters-section:not(:last-child) {
+    border-bottom: unset;
+  }
+}
+@media screen and (min-width: 768px) {
+  .wpc-filter-header {
+    padding: 10px 0 8px;
+    line-height: 1.3;
+    position: relative;
+    border-bottom: none;
+    margin-bottom: 0px;
+  }
+}
+@media screen and (min-width: 1240px) {
+  .wpc-filter-header {
+    padding: 11px 0 8px;
+  }
+}
+@media screen and (min-width: 768px) {
+  .wpc-filters-range-min-column::before {
+    content: "₴";
+    position: absolute;
+    top: 22px;
+    left: 15px;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+  .wpc-filters-range-max-column::before {
+    content: "-";
+    position: absolute;
+    top: 22px;
+    left: 112px;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+  .wpc-filters-range-max-column::after {
+    content: "₴";
+    position: absolute;
+    top: 22px;
+    right: 15px;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.3;
+  }
 }
 .category-page__filter-btn {
   display: none;
