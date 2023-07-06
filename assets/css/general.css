@@ -1896,6 +1896,7 @@ html {
   line-height: 1.15;
 }
 body {
+  overflow-x: hidden;
   margin: 0;
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif,
     Apple Color Emoji, Segoe UI Emoji;
@@ -3944,6 +3945,9 @@ header button {
 .modal__body-actions-add:disabled {
   color: #a4c9f5;
   background-color: #fff;
+}
+.woocommerce .loader::before {
+  content: none;
 }
 .loader {
   position: absolute;

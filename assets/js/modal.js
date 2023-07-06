@@ -251,7 +251,7 @@ function fetchAddToCart() {
   axios
     .post(`?add-to-cart=${variationId}`)
     .then(() => {
-      return axios.get(`wp-json/wc/store/cart`);
+      return axios.get(`/nadobranich/wp-json/wc/store/cart`);
     })
     .then((response) => {
       const data = response.data.items;

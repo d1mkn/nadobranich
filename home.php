@@ -19,7 +19,7 @@ Template Name: Home
     </button>
     <h6 class="to-cart__content-title">Товар додано до кошика!</h6>
     <div class="to-cart__added-goods">
-      <img class="to-cart__added-goods-img js-to-cart-modal-img" src="https://placehold.co/100x95" alt="" />
+      <img class="to-cart__added-goods-img js-to-cart-modal-img" width="100" height="95" src="#" alt="" />
       <div class="to-cart__added-goods-text">
         <p class="to-cart__added-goods-title js-to-cart-modal-title">*</p>
         <p class="js-to-cart-modal-variation">* / *</p>
