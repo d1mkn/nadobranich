@@ -3989,7 +3989,6 @@ header button {
     border-bottom-color: transparent;
   }
 }
-
 @keyframes rotation {
   0% {
     transform: rotate(0deg);
@@ -4457,7 +4456,7 @@ header button {
 }
 @media screen and (min-width: 1240px) {
   .category-page__filter-wrap {
-    margin-bottom: 70px;
+    margin-bottom: 60px;
   }
 }
 .category-page__filter-title {
