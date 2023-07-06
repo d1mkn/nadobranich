@@ -1901,8 +1901,8 @@ body {
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif,
     Apple Color Emoji, Segoe UI Emoji;
 }
-.wrapper {
-  height: calc(100vh - 315px);
+main {
+  min-height: 70vh;
 }
 hr {
   height: 0;
@@ -7130,14 +7130,5 @@ footer h3 {
   padding: 0;
   position: absolute;
   overflow: hidden;
-}
-html,
-body {
-  height: 100%;
-}
-
-body {
-  display: flex;
-  flex-direction: column;
 }
 /*# sourceMappingURL=general.css.map */
