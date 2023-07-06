@@ -23,6 +23,27 @@ options.forEach((option) => {
   }
 });
 
+const chips = document.querySelectorAll(".wpc-filter-chip-name");
+
+chips.forEach((chip) => {
+  let newText = chip.textContent;
+
+  if (newText.includes("Min price")) {
+    newText = newText.replace("Min price", "Від");
+  } else if (newText.includes("Max price")) {
+    newText = newText.replace("Max price", "До");
+  }
+
+  const result = newText.match(/\d+/);
+
+  if (result) {
+    const value = result[0];
+    newText = newText.replace(/\d+/, `${value} грн`);
+  }
+
+  chip.textContent = newText;
+});
+
 window.addEventListener("load", rerenderFilter);
 window.addEventListener("resize", rerenderFilter);
 
@@ -54,29 +75,9 @@ function rerenderFilter() {
     form.closest(".wpc-filters-section").classList.add("wpc-closed");
     form.closest(".wpc-filters-section").classList.add("wpc-filter-has-selected");
     form.classList.add("filter-price-pick");
+    form.setAttribute("style", "display: block;");
     priceFilter.innerHTML =
       '<button><span class="wpc-wrap-icons">Ціна</span><span class="wpc-open-icon"></span></button>';
-
-    const chips = document.querySelectorAll(".wpc-filter-chip-name");
-
-    chips.forEach((chip) => {
-      let newText = chip.textContent;
-
-      if (newText.includes("Min price")) {
-        newText = newText.replace("Min price", "Від");
-      } else if (newText.includes("Max price")) {
-        newText = newText.replace("Max price", "До");
-      }
-
-      const result = newText.match(/\d+/);
-
-      if (result) {
-        const value = result[0];
-        newText = newText.replace(/\d+/, `${value} грн`);
-      }
-
-      chip.textContent = newText;
-    });
   }
 
   if (screenWidth >= 1240) {
