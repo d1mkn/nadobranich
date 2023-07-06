@@ -3170,27 +3170,29 @@ header button {
   gap: 15px;
   display: flex;
 }
-.modal__body-color-item {
+a.modal__body-color-item {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 24px;
-  height: 24px;
+  width: 30px;
+  height: 30px;
   background-color: #fff;
   border: 1px solid #7d7d7d;
   border-radius: 50%;
 }
 @media screen and (min-width: 1240px) {
-  .modal__body-color-item {
+  a.modal__body-color-item {
     font-size: 20px;
     line-height: 1.2;
     cursor: pointer;
   }
 }
-.modal__body-color-item div {
-  width: 22px;
-  height: 22px;
+div.modal__body-color-item div {
+  width: 26px;
+  height: 26px;
+  border: 1px solid #7d7d7d;
   border-radius: 50%;
+  cursor: pointer;
 }
 .modal__body-color-item.active {
   display: flex;
@@ -3198,13 +3200,14 @@ header button {
   justify-content: center;
   width: 36px;
   height: 36px;
-  outline-offset: -6px;
-  outline: 1px solid #7d7d7d;
+  border: 1px solid #7d7d7d;
+  border-radius: 50%;
 }
 .modal__body-color-item.active div {
-  width: 24px;
-  height: 24px;
+  width: 26px;
+  height: 26px;
   border-radius: 50%;
+  cursor: auto;
 }
 .single-category__sale-item {
   z-index: 1;
