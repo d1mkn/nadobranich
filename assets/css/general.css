@@ -6960,13 +6960,6 @@ footer h3 {
   align-items: center;
   padding-bottom: 10px;
   display: flex;
-  transition: margin-bottom 0.5s;
-}
-.js-footer-section-parent.active .footer__catalog-title,
-.js-footer-section-parent.active .footer__info-title,
-.js-footer-section-parent.active .footer__contacts-title {
-  margin-bottom: 10px;
-  transition: margin-bottom 0.5s;
 }
 @media screen and (min-width: 768px) {
   .footer__catalog-title,
@@ -7009,8 +7002,17 @@ footer h3 {
     display: none;
   }
 }
+.js-footer-section-info::after {
+  content: "";
+  width: 100%;
+  height: 1px;
+  position: absolute;
+  bottom: 0;
+  background-color: #fff;
+}
 .footer__catalog-list,
 .footer__info-list {
+  position: relative;
   flex-direction: column;
   font-size: 16px;
   font-weight: 400;
@@ -7029,6 +7031,11 @@ footer h3 {
   .footer__info-list {
     gap: 10px;
   }
+}
+.footer__catalog.active .js-footer-section,
+.footer__info.active .js-footer-section,
+.footer__contacts.active .js-footer-section {
+  border: 0;
 }
 .footer__catalog.active .footer__section-arrow,
 .footer__info.active .footer__section-arrow,
@@ -7049,10 +7056,11 @@ footer h3 {
     max-height: fit-content;
   }
 }
-.footer__catalog.active .footer__catalog-list,
-.footer__info.active .footer__info-list,
-.footer__contacts.active .footer__contacts-wrap {
+.footer__catalog.active .js-footer-section-info,
+.footer__info.active .js-footer-section-info,
+.footer__contacts.active .js-footer-section-info {
   max-height: 1000px;
+  padding-bottom: 10px;
   transition: max-height 0.5s, padding-top 0.5s, padding-bottom 0.5s;
 }
 .footer__catalog-link,
