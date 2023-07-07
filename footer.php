@@ -22,8 +22,8 @@
         </div>
       </div>
       <div class="footer__sections">
-        <div class="footer__catalog js-footer-section">
-          <h3 class="footer__catalog-title">
+        <div class="footer__catalog js-footer-section-parent">
+          <h3 class="footer__catalog-title js-footer-section">
             Каталог<span class="footer__section-arrow">
               <svg width="13" height="8">
                 <use href="<?php echo get_template_directory_uri() ?>/assets/images/icons.svg#faq-arrow"></use>
@@ -58,8 +58,8 @@
             ?>
           </ul>
         </div>
-        <div class="footer__info js-footer-section">
-          <h3 class="footer__info-title">
+        <div class="footer__info js-footer-section-parent">
+          <h3 class="footer__info-title js-footer-section">
             Інформація<span class="footer__section-arrow">
               <svg width="13" height="8">
                 <use href="<?php echo get_template_directory_uri() ?>/assets/images/icons.svg#faq-arrow"></use>
@@ -83,8 +83,8 @@
             </li>
           </ul>
         </div>
-        <div class="footer__contacts js-footer-section">
-          <h3 class="footer__contacts-title">
+        <div class="footer__contacts js-footer-section-parent">
+          <h3 class="footer__contacts-title js-footer-section">
             Контакти<span class="footer__section-arrow">
               <svg width="13" height="8">
                 <use href="<?php echo get_template_directory_uri() ?>/assets/images/icons.svg#faq-arrow"></use>
@@ -134,4 +134,5 @@
   <?php wp_footer(); ?>
 </footer>
 </body>
+
 </html>

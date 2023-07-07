@@ -6958,9 +6958,15 @@ footer h3 {
   border-bottom: 0.5px solid #fff;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
   padding-bottom: 10px;
   display: flex;
+  transition: margin-bottom 0.5s;
+}
+.js-footer-section-parent.active .footer__catalog-title,
+.js-footer-section-parent.active .footer__info-title,
+.js-footer-section-parent.active .footer__contacts-title {
+  margin-bottom: 10px;
+  transition: margin-bottom 0.5s;
 }
 @media screen and (min-width: 768px) {
   .footer__catalog-title,
@@ -6969,6 +6975,7 @@ footer h3 {
     border: none;
     padding-bottom: 0;
     display: block;
+    margin-bottom: 10px;
   }
 }
 @media screen and (min-width: 1240px) {
@@ -7009,6 +7016,7 @@ footer h3 {
   font-weight: 400;
   line-height: 1.3;
   display: flex;
+  gap: 5px;
 }
 @media screen and (min-width: 768px) {
   .footer__catalog-list,

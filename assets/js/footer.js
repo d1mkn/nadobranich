@@ -20,21 +20,22 @@ let listenersAdded = false;
 
 function checkInnerWidth() {
   if (document.documentElement.clientWidth > 767) {
-    document.querySelector(".footer__catalog-list").classList.remove("visually-hidden");
-    document.querySelector(".footer__info-list").classList.remove("visually-hidden");
-    document.querySelector(".footer__contacts-wrap").classList.remove("visually-hidden");
+    infoBlocks.forEach((block) => {
+      block.classList.remove("visually-hidden");
+    });
 
     if (listenersAdded) {
-      removeFooterListeners(infoBlocks);
+      removeFooterListeners();
       listenersAdded = false;
     }
+    return;
   } else {
-    document.querySelector(".footer__catalog-list").classList.add("visually-hidden");
-    document.querySelector(".footer__info-list").classList.add("visually-hidden");
-    document.querySelector(".footer__contacts-wrap").classList.add("visually-hidden");
+    infoBlocks.forEach((block) => {
+      block.classList.add("visually-hidden");
+    });
 
     if (!listenersAdded) {
-      addFooterListeners(infoBlocks);
+      addFooterListeners();
       listenersAdded = true;
     }
   }
@@ -48,58 +49,33 @@ function handleOrientationChange() {
 
 function resetActiveSections() {
   sections.forEach((section) => {
-    if (section.classList.contains("active")) {
-      section.classList.remove("active");
-      const block = section.querySelector(".js-footer-section-info");
-      if (block) {
-        block.classList.add("visually-hidden");
-        section.removeAttribute("style");
-      }
+    const parentSection = section.parentNode;
+    parentSection.classList.remove("active");
+    const block = section.nextElementSibling;
+    if (block && block.classList.contains("js-footer-section-info")) {
+      block.classList.add("visually-hidden");
     }
   });
 }
 
 function sectionHandler(e) {
   const section = e.currentTarget;
-  const block = section.querySelector(".js-footer-section-info");
-
-  section.classList.toggle("active");
-
-  if (section.classList.contains("active")) {
-    section.style.pointerEvents = "none";
-    if (block) {
-      block.classList.toggle("visually-hidden");
-    }
-    setTimeout(() => {
-      section.style.pointerEvents = "auto";
-    }, 500);
-  } else {
-    section.style.pointerEvents = "none";
-    if (block) {
-      setTimeout(() => {
-        section.removeAttribute("style");
-        block.classList.toggle("visually-hidden");
-      }, 500);
-    }
+  const parentSection = section.parentNode;
+  parentSection.classList.toggle("active");
+  const block = section.nextElementSibling;
+  if (block && block.classList.contains("js-footer-section-info")) {
+    block.classList.toggle("visually-hidden");
   }
 }
 
-function addFooterListeners(blocks) {
-  blocks.forEach((block) => {
-    const section = block.closest(".js-footer-section");
-    if (section) {
-      section.addEventListener("click", sectionHandler);
-      block.dataset.sectionHandlerAdded = true;
-    }
+function addFooterListeners() {
+  sections.forEach((section) => {
+    section.addEventListener("click", sectionHandler);
   });
 }
 
-function removeFooterListeners(blocks) {
-  blocks.forEach((block) => {
-    const section = block.closest(".js-footer-section");
-    if (section && block.dataset.sectionHandlerAdded === "true") {
-      section.removeEventListener("click", sectionHandler);
-      delete block.dataset.sectionHandlerAdded;
-    }
+function removeFooterListeners() {
+  sections.forEach((section) => {
+    section.removeEventListener("click", sectionHandler);
   });
 }
