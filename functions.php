@@ -170,6 +170,10 @@ function nadobranich_scripts()
 		wp_enqueue_script('nadobranich-script-category', get_template_directory_uri() . '/dist/categoryPage.js', null, _S_VERSION, true);
 	}
 
+	if (is_product()) {
+		wp_enqueue_script('nadobranich-script-single', get_template_directory_uri() . '/dist/singlePage.js', null, _S_VERSION, true);
+	}
+
 	wp_enqueue_script('nadobranich-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true);
 
 

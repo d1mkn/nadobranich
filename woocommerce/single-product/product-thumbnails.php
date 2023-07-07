@@ -15,19 +15,22 @@
  * @version     3.5.1
  */
 
-defined( 'ABSPATH' ) || exit;
+defined('ABSPATH') || exit;
 
 // Note: `wc_get_gallery_image_html` was added in WC 3.3.2 and did not exist prior. This check protects against theme overrides being used on older versions of WC.
-if ( ! function_exists( 'wc_get_gallery_image_html' ) ) {
+if (!function_exists('wc_get_gallery_image_html')) {
 	return;
 }
 
 global $product;
 
-$attachment_ids = $product->get_gallery_image_ids();
+$productImagesIds = $product->get_gallery_image_ids();
 
-if ( $attachment_ids && $product->get_image_id() ) {
-	foreach ( $attachment_ids as $attachment_id ) {
-		echo apply_filters( 'woocommerce_single_product_image_thumbnail_html', wc_get_gallery_image_html( $attachment_id ), $attachment_id ); // phpcs:disable WordPress.XSS.EscapeOutput.OutputNotEscaped
-	}
+if ($product->get_image_id()) { ?>
+	<?php foreach ($productImagesIds as $image_id) {
+		$image_url = wp_get_attachment_url($image_id);
+		$image_alt = get_post_meta($image_id, '_wp_attachment_image_alt', true); ?>
+		<li class="item__images-item js-single-gallery"><a href="<?php echo $image_url ?>"><img src="<?php echo $image_url ?>"
+					alt="<?php echo $image_alt ?>"></a></li>
+	<?php }
 }

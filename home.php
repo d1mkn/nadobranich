@@ -455,23 +455,6 @@ Template Name: Home
                   <div class="modal__body-size-picker js-modal-size-list">
                     <button class="modal__body-size-btn active" type="button"> </button>
                   </div>
-                  <button class="modal__body-size-info">
-                    Розмірна сітка
-                  </button>
-                  <div class="modal__body-size-info-wrap">
-                    <p class="modal__body-size-text">
-                      Lorem ipsum dolor sit amet consectetur adipisicing
-                      elit. Neque, facere magni sed eius repudiandae ipsa
-                      quasi nemo pariatur hic harum aperiam laboriosam
-                      voluptas rem beatae doloremque perferendis
-                      necessitatibus itaque aliquid. Lorem, ipsum dolor sit
-                      amet consectetur adipisicing elit. Officia voluptatum
-                      quam ipsa, dolor soluta suscipit dolorum eligendi
-                      repudiandae voluptate voluptatem ipsum perferendis
-                      quibusdam error quisquam! Optio asperiores possimus
-                      voluptas consequuntur.
-                    </p>
-                  </div>
                 </div>
               </div>
               <div class="modal__body-actions-wrap">

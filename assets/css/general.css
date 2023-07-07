@@ -3690,6 +3690,7 @@ div.modal__body-color-item div {
 @media screen and (min-width: 768px) {
   .modal__body {
     display: block;
+    align-items: flex-start;
   }
 }
 @media screen and (min-width: 1240px) {
@@ -3830,6 +3831,11 @@ div.modal__body-color-item div {
     margin-bottom: 15px;
   }
 }
+@media screen and (min-width: 1240px) {
+  .modal__body-size-wrap {
+    margin-bottom: 23px;
+  }
+}
 .modal__body-size {
   margin-bottom: 5px;
   line-height: 1.25;
@@ -3886,7 +3892,7 @@ div.modal__body-color-item div {
 }
 .modal__body-size-info-wrap {
   width: 315px;
-  opacity: 0;
+  opacity: 1;
   background-color: #fff;
   border: 1px solid #7d7d7d;
   border-radius: 5px;
@@ -4712,6 +4718,7 @@ div.modal__body-color-item div {
   }
 }
 .item__content {
+  position: relative;
   border-radius: 5px;
   margin: 0 auto;
 }
@@ -5013,22 +5020,28 @@ div.modal__body-color-item div {
   }
 }
 .item__images-main {
+  background-color: #fff;
+  margin-right: 10px;
+}
+.item__images-main-wrap {
+  display: flex;
+  align-items: baseline;
   min-width: 270px;
   height: 196px;
   background-color: #fff;
   border: 1px solid #7d7d7d;
   border-radius: 5px;
-  margin-right: 10px;
+  overflow: hidden;
 }
 @media screen and (min-width: 768px) {
-  .item__images-main {
+  .item__images-main-wrap {
     width: 665px;
     height: 450px;
     margin-right: 0;
   }
 }
 @media screen and (min-width: 1240px) {
-  .item__images-main {
+  .item__images-main-wrap {
     width: 715px;
     height: 600px;
   }
@@ -5043,6 +5056,9 @@ div.modal__body-color-item div {
   }
 }
 .item__images-item {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
   width: 270px;
   height: 196px;
   background-color: #fff;
@@ -7002,13 +7018,15 @@ footer h3 {
     display: none;
   }
 }
-.js-footer-section-info::after {
-  content: "";
-  width: 100%;
-  height: 1px;
-  position: absolute;
-  bottom: 0;
-  background-color: #fff;
+@media screen and (max-width: 767px) {
+  .js-footer-section-info::after {
+    content: "";
+    width: 100%;
+    height: 1px;
+    position: absolute;
+    bottom: 0;
+    background-color: #fff;
+  }
 }
 .footer__catalog-list,
 .footer__info-list {

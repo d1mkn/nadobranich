@@ -39,6 +39,7 @@
     "clean": "rm -r dist/",
     "start": "parcel watch assets/js/index.js",
     "category": "parcel watch assets/js/categoryPage.js",
+    "single": "parcel watch assets/js/singlePage.js",
     "build": "parcel build assets/js/index.js"
   },
   "browserslist": "> 0.5%, last 2 versions, not dead",
