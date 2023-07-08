@@ -78,9 +78,18 @@ function renderInfoFromLocal(e) {
   // rating
   refs.ratingStars.setAttribute(
     "style",
-    `width: ${(parseInt(currProduct.rating.average) * 100) / 5}%;`
+    `width: ${(parseFloat(currProduct.rating.average) * 100) / 5 - 10}%;`
   );
-  refs.ratingLink.textContent = currProduct.rating.reviewCount;
+  if (currProduct.rating.average == 0) {
+    refs.ratingLink.textContent = "0";
+    refs.ratingStars.setAttribute("style", `width: 0%;`);
+  } else {
+    refs.ratingLink.textContent = currProduct.rating.reviewCount;
+    const ratingPercentage = (parseFloat(currProduct.rating.average) * 100) / 5;
+    const adjustedPercentage = ratingPercentage + Math.floor(ratingPercentage / 20) * 0.5;
+
+    refs.ratingStars.setAttribute("style", `width: ${adjustedPercentage}%;`);
+  }
   refs.ratingLink.setAttribute("href", `${currProduct.productLink}#reviews`);
 
   // price color size

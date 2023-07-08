@@ -69,4 +69,8 @@ export const refs = {
   infoList: document.querySelector(".footer__info-list"),
   contactsTitle: document.querySelector(".footer__contacts"),
   contactsList: document.querySelector(".footer__contacts-wrap"),
+
+  // single page
+  singleProductPrice: document.querySelector(".js-variation-price"),
+  wooVatiationPrice: document.querySelector(".woocommerce-variation.single_variation"),
 };

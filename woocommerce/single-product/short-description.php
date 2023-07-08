@@ -21,13 +21,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 global $post;
 
-$short_description = apply_filters( 'woocommerce_short_description', $post->post_excerpt );
+$short_description = apply_filters('woocommerce_short_description', $post->post_excerpt);
+$short_description_text = wp_strip_all_tags($short_description);
+
 
 if ( ! $short_description ) {
 	return;
 }
 
 ?>
-<div class="woocommerce-product-details__short-description">
-	<?php echo $short_description; // WPCS: XSS ok. ?>
+<p class="item__body-composition">
+	<?php echo $short_description_text; // WPCS: XSS ok. ?>
+</p>
 </div>

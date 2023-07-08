@@ -15,11 +15,28 @@
  * @version 3.0.0
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
+if (!defined('ABSPATH')) {
 	exit; // Exit if accessed directly
 }
 
-global $product;
+global $product; ?>
 
-?>
-<p class="<?php echo esc_attr( apply_filters( 'woocommerce_product_price_class', 'price' ) ); ?>"><?php echo $product->get_price_html(); ?></p>
+<?php if ($product->is_type('simple')) { ?>
+	<div class="body-price-wrap">
+		<p class="item__body-price">
+			<span class="item-price">
+				<?php echo $product->regular_price; ?> грн
+			</span>
+			<span class="item-new-price">
+				<?php echo $product->price; ?> грн
+			</span>
+
+		</p>
+	</div>
+<?php } else { ?>
+	<div class="body-price-wrap">
+		<p class="item__body-price js-variation-price">
+
+		</p>
+	</div>
+<?php }

@@ -31,7 +31,21 @@ get_header('shop'); ?>
 do_action('woocommerce_before_main_content');
 ?>
 <?php while (have_posts()): ?>
-	<?php the_post(); ?>
+	<?php the_post();
+	global $product;
+	$productPrice = $product->price;
+	$isSimple = $product->is_type('simple');
+	$_SESSION['aboutSingleProduct'] = array(
+		'isSimple' => $isSimple,
+		'price' => $productPrice
+	);
+	?>
+
+	<script>
+		const aboutSingleProduct = <?php echo json_encode($_SESSION['aboutSingleProduct']); ?>;
+		localStorage.setItem('aboutSingleProduct', JSON.stringify(aboutSingleProduct));
+	</script>
+
 
 	<?php wc_get_template_part('content', 'single-product'); ?>
 
@@ -81,8 +95,8 @@ do_action('woocommerce_sidebar');
 							<p class="modal__body-composition"> </p>
 						</div>
 						<div>
-							<div class="modal__body-price-wrap">
-								<p class="modal__body-price js-modal-price">###</p>
+							<div class="body-price-wrap">
+								<p class="body-price js-modal-price">###</p>
 							</div>
 							<div class="modal__body-raiting">
 								<svg class="rating-pack" width='145' height='33'>

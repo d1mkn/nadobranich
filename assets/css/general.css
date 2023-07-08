@@ -3235,7 +3235,8 @@ div.modal__body-color-item div {
   margin-right: 10px;
   text-decoration: line-through;
 }
-.modal .item-price {
+.modal .item-price,
+.item__body-price .item-price {
   margin-right: 5px;
   text-decoration: line-through;
 }
@@ -3738,19 +3739,19 @@ div.modal__body-color-item div {
     font-size: 16px;
   }
 }
-.modal__body-price {
+.body-price {
   margin-bottom: 5px;
   font-size: 20px;
   font-weight: 600;
   line-height: 1.2;
 }
 @media screen and (min-width: 768px) {
-  .modal__body-price {
+  .body-price {
     text-align: right;
   }
 }
 @media screen and (min-width: 1240px) {
-  .modal__body-price {
+  .body-price {
     text-align: left;
   }
 }
@@ -3759,6 +3760,7 @@ div.modal__body-color-item div {
   align-items: center;
   display: flex;
   margin-bottom: 10px;
+  gap: 10px;
 }
 @media screen and (min-width: 768px) {
   .modal__body-raiting {
@@ -3776,14 +3778,20 @@ div.modal__body-color-item div {
     right: unset;
   }
 }
+.rating-pack {
+  position: relative;
+  width: 145px;
+  height: 24.34px;
+}
 .js-modal-rating {
   position: absolute;
+  height: 24.34px;
   overflow: hidden;
-}
-.js-modal-rating svg {
-  max-width: 145px;
-  width: 145px;
-  height: 33px;
+  top: 0;
+  left: 0;
+  background: url("../images/rating-stars.png");
+  background-size: 145px 24.34px;
+  background-repeat: no-repeat;
 }
 .modal__body-raiting a {
   -webkit-text-decoration: revert;
@@ -5028,6 +5036,7 @@ div.modal__body-color-item div {
   align-items: baseline;
   min-width: 270px;
   height: 196px;
+  margin-right: 10px;
   background-color: #fff;
   border: 1px solid #7d7d7d;
   border-radius: 5px;

@@ -420,21 +420,16 @@ Template Name: Home
                 <p class="modal__body-composition"> </p>
               </div>
               <div>
-                <div class="modal__body-price-wrap">
-                  <p class="modal__body-price js-modal-price">###</p>
+                <div class="body-price-wrap">
+                  <p class="body-price js-modal-price">###</p>
                 </div>
                 <div class="modal__body-raiting">
-                  <svg class="rating-pack" width='145' height='33'>
-                    <use href="<?php bloginfo(
+                  <div class="rating-pack">
+                    <img src="<?php bloginfo(
                       "template_url",
-                    ); ?>/assets/images/icons.svg#stars-pack-nf"></use>
-                  </svg>
-                  <div class='js-modal-rating'>
-                    <svg width='145' height='33'>
-                      <use href="<?php bloginfo(
-                        "template_url",
-                      ); ?>/assets/images/icons.svg#stars-pack"></use>
-                    </svg>
+                    ); ?>/assets/images/rating-stars-nbg" alt="rating">
+                    <div class='js-modal-rating'>
+                    </div>
                   </div>
                   <a class="modal__body-raiting-link" href="#">25</a>
                 </div>
