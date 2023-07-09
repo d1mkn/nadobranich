@@ -35,9 +35,27 @@ do_action('woocommerce_before_main_content');
 	global $product;
 	$productPrice = $product->price;
 	$isSimple = $product->is_type('simple');
+	$productVariations = $product->get_children(
+		array(
+			'post_parent' => $product->ID,
+			'post_type' => 'product_variation',
+		)
+	);
+	$variations = array();
+	foreach ($productVariations as $variation_id) {
+		$variation = wc_get_product($variation_id);
+		$variationDesc = $variation->attribute_summary;
+		$variationQty = $variation->get_stock_quantity();
+
+		$variations[] = array(
+			'variationDesc' => $variationDesc . ", Кількісь: $variationQty",
+			'variationQty' => $variationQty,
+		);
+	}
 	$_SESSION['aboutSingleProduct'] = array(
 		'isSimple' => $isSimple,
-		'price' => $productPrice
+		'price' => $productPrice,
+		'variations' => $variations
 	);
 	?>
 

@@ -1,6 +1,6 @@
 import { refs } from "./refs";
 
-const { isSimple, price } = JSON.parse(localStorage.getItem("aboutSingleProduct"));
+const { isSimple, price, variations } = JSON.parse(localStorage.getItem("aboutSingleProduct"));
 
 if (!isSimple) {
   const variationPriceWrap = refs.wooVatiationPriceWrap;
@@ -80,6 +80,23 @@ if (!isSimple) {
         );
         if (activeSize) {
           activeSize.style.width = "100%";
+        }
+
+        if (activeColor && activeSize) {
+          const size = document.querySelector(".item__body-item-size");
+          const color = document.querySelector(".item__body-item-color");
+          let availableQuantity = null;
+          const sizeText = size.textContent.trim();
+          const colorText = color.textContent.trim();
+          const regex = new RegExp(`Розмір: ${sizeText}, Колір: ${colorText}, Кількісь: (\\d+)`);
+          const currVar = variations.find((variation) => variation.variationDesc.match(regex));
+          const currQty = currVar.variationQty;
+          const qtyEl = document.querySelector(".item__body-select");
+          qtyEl.setAttribute("max", currQty);
+          qtyEl.setAttribute("value", "1");
+          if (qtyEl < 1) {
+            qtyEl.setAttribute("value", currQty);
+          }
         }
       }
     });
