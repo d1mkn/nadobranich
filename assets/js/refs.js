@@ -72,5 +72,6 @@ export const refs = {
 
   // single page
   singleProductPrice: document.querySelector(".js-variation-price"),
-  wooVatiationPrice: document.querySelector(".woocommerce-variation.single_variation"),
+  wooVatiationPriceWrap: document.querySelector(".woocommerce-variation.single_variation"),
+  wooVatiationPrice: document.querySelector(".woocommerce-Price-amount.amount bdi"),
 };
