@@ -40,6 +40,7 @@ $label = ! empty( $args['product_name'] ) ? sprintf( esc_html__( '%s quantity', 
 		id="<?php echo esc_attr( $input_id ); ?>"
 		class="item__body-select"
 		name="<?php echo esc_attr( $input_name ); ?>"
+		value="<?php echo esc_attr( $input_value ); ?>"
 		aria-label="<?php esc_attr_e( 'Product quantity', 'woocommerce' ); ?>"
 		size="4"
 		min="<?php echo esc_attr( $min_value ); ?>"
