@@ -1,6 +1,8 @@
 import { refs } from "./refs";
 
-const { isSimple, price, variations } = JSON.parse(localStorage.getItem("aboutSingleProduct"));
+const { isSimple, price, variations, dir, aboutSizes } = JSON.parse(
+  localStorage.getItem("aboutSingleProduct")
+);
 
 if (!isSimple) {
   const variationPriceWrap = refs.wooVatiationPriceWrap;
@@ -17,12 +19,28 @@ if (!isSimple) {
   const sizes = document.querySelectorAll(
     '[aria-label="Розмір"] .variable-item.button-variable-item .variable-item-contents'
   );
+  const sizeNotation = `
+    <div class="item__body-size-info-wrap">
+      <div class="faq__items-wrap">
+        <div class="faq__item">
+          <div class="faq__question">
+            <h2 class="faq__question-title">Розміри</h2>
+          <div class="faq__question-icon">
+            <svg width="13" height="8"><use href="${dir}/assets/images/icons.svg#faq-arrow"></use></svg>
+          </div>
+        </div>
+        <div class="faq__answer visually-hidden">
+          ${aboutSizes}
+        </div>
+      </div>
+    </div>`;
   const resetLink = document.querySelector(".reset_variations");
 
   refs.singleProductPrice.textContent = `Від ${price} грн`;
   variationPriceWrap.classList.add("visually-hidden");
   colorPicker.classList.add("item__body-color-picker");
   sizePicker.classList.add("item__body-size-picker");
+  sizePicker.insertAdjacentHTML("afterend", sizeNotation);
   colorItems.forEach((item) => {
     item.classList.add("item__body-color-item");
     item.style.borderRadius = "50%";
@@ -85,7 +103,6 @@ if (!isSimple) {
         if (activeColor && activeSize) {
           const size = document.querySelector(".item__body-item-size");
           const color = document.querySelector(".item__body-item-color");
-          let availableQuantity = null;
           const sizeText = size.textContent.trim();
           const colorText = color.textContent.trim();
           const regex = new RegExp(`Розмір: ${sizeText}, Колір: ${colorText}, Кількісь: (\\d+)`);

@@ -35,6 +35,7 @@ do_action('woocommerce_before_main_content');
 	global $product;
 	$productPrice = $product->price;
 	$isSimple = $product->is_type('simple');
+	$aboutSizes = get_field('about_size');
 	$productVariations = $product->get_children(
 		array(
 			'post_parent' => $product->ID,
@@ -55,7 +56,9 @@ do_action('woocommerce_before_main_content');
 	$_SESSION['aboutSingleProduct'] = array(
 		'isSimple' => $isSimple,
 		'price' => $productPrice,
-		'variations' => $variations
+		'variations' => $variations,
+		'dir' => get_template_directory_uri(),
+		'aboutSizes' => $aboutSizes,
 	);
 	?>
 
