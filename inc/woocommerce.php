@@ -58,6 +58,26 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
     add_action('woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 40);
     add_action('woocommerce_single_product_summary', 'woocommerce_template_single_sharing', 50);
 
+    remove_action('woocommerce_after_single_product_summary', 'woocommerce_output_product_data_tabs', 10);
+    remove_action('woocommerce_after_single_product_summary', 'woocommerce_upsell_display', 15);
+
+    add_filter('woocommerce_product_tabs', 'remove_woocommerce_product_tabs', 98);
+    function remove_woocommerce_product_tabs($tabs)
+    {
+        unset($tabs['reviews']);
+        return $tabs;
+    }
+
+    function nadobranich_add_comment()
+    {
+        ?>
+        <div class="product-reviews reviews__wrap">
+            <?php comments_template(); ?>
+        </div>
+        <?php
+
+    }
+    add_action('woocommerce_after_main_content', 'nadobranich_add_comment', 11);
 
 
 }

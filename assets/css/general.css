@@ -4283,7 +4283,7 @@ div.modal__body-color-item div {
   }
 }
 .faq__item.active .faq__answer {
-  max-height: 1000px;
+  max-height: 2000px;
   padding: 5px 10px;
   transition: max-height 1s, padding-top 0.5s, padding-bottom 0.5s;
 }
@@ -5307,6 +5307,9 @@ div.modal__body-color-item div {
     margin-bottom: 30px;
   }
 }
+.reviews__top-left-wrap {
+  width: 145px;
+}
 .reviews__title {
   text-align: center;
   font-size: 24px;
@@ -5315,6 +5318,7 @@ div.modal__body-color-item div {
 }
 @media screen and (min-width: 768px) {
   .reviews__title {
+    margin-bottom: 10px;
     text-align: left;
     font-size: 32px;
     font-weight: 600;

@@ -24,11 +24,11 @@ if ( $related_products ) : ?>
 	<section class="related products">
 
 		<?php
-		$heading = apply_filters( 'woocommerce_product_related_products_heading', __( 'Related products', 'woocommerce' ) );
+		$heading = apply_filters( 'woocommerce_product_related_products_heading', __( 'Це може вам сподобатись', 'woocommerce' ) );
 
 		if ( $heading ) :
 			?>
-			<h2><?php echo esc_html( $heading ); ?></h2>
+			<h3><?php echo esc_html( $heading ); ?></h3>
 		<?php endif; ?>
 		
 		<?php woocommerce_product_loop_start(); ?>

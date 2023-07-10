@@ -31,53 +31,81 @@ if (post_password_required()) {
 	return;
 }
 ?>
-<div class="container item__container">
-	<div class="item__content" id="product-<?php the_ID(); ?>" <?php wc_product_class('', $product); ?>>
-		<div class="item__body">
 
-			<?php
-			/**
-			 * Hook: woocommerce_before_single_product_summary.
-			 *
-			 * @hooked woocommerce_show_product_sale_flash - 10
-			 * @hooked woocommerce_show_product_images - 20
-			 */
-			do_action('woocommerce_before_single_product_summary');
-			?>
-
-			<div class="item__body-right">
-				<div class="item__body-desc">
-					<?php
-					/**
-					 * Hook: woocommerce_single_product_summary.
-					 *
-					 * @hooked woocommerce_template_single_title - 5
-					 * @hooked woocommerce_template_single_rating - 10
-					 * @hooked woocommerce_template_single_price - 10
-					 * @hooked woocommerce_template_single_excerpt - 20
-					 * @hooked woocommerce_template_single_add_to_cart - 30
-					 * @hooked woocommerce_template_single_meta - 40
-					 * @hooked woocommerce_template_single_sharing - 50
-					 * @hooked WC_Structured_Data::generate_product_data() - 60
-					 */
-					do_action('woocommerce_single_product_summary');
-					?>
-				</div>
-			</div>
-		</div>
+<div class="item__content" id="product-<?php the_ID(); ?>" <?php wc_product_class('', $product); ?>>
+	<div class="item__body">
 
 		<?php
 		/**
-		 * Hook: woocommerce_after_single_product_summary.
+		 * Hook: woocommerce_before_single_product_summary.
 		 *
-		 * @hooked woocommerce_output_product_data_tabs - 10
-		 * @hooked woocommerce_upsell_display - 15
-		 * @hooked woocommerce_output_related_products - 20
+		 * @hooked woocommerce_show_product_sale_flash - 10
+		 * @hooked woocommerce_show_product_images - 20
 		 */
-		do_action('woocommerce_after_single_product_summary');
+		do_action('woocommerce_before_single_product_summary');
 		?>
+
+		<div class="item__body-right">
+			<div class="item__body-desc">
+				<?php
+				/**
+				 * Hook: woocommerce_single_product_summary.
+				 *
+				 * @hooked woocommerce_template_single_title - 5
+				 * @hooked woocommerce_template_single_rating - 10
+				 * @hooked woocommerce_template_single_price - 10
+				 * @hooked woocommerce_template_single_excerpt - 20
+				 * @hooked woocommerce_template_single_add_to_cart - 30
+				 * @hooked woocommerce_template_single_meta - 40
+				 * @hooked woocommerce_template_single_sharing - 50
+				 * @hooked WC_Structured_Data::generate_product_data() - 60
+				 */
+				do_action('woocommerce_single_product_summary');
+				?>
+			</div>
+		</div>
 	</div>
 
+	<div class="item__faq-wrap">
+		<div class="faq__items-wrap">
+			<div class="faq__item">
+				<div class="faq__question">
+					<h2 class="faq__question-title">Детальніше</h2>
+					<div class="faq__question-icon"> <svg width="13" height="8">
+							<use href="<?php bloginfo("template_url") ?>/assets/images/icons.svg#faq-arrow"></use>
+						</svg> </div>
+				</div>
+				<div class="faq__answer visually-hidden">
+					<?php echo $product->post->post_content; ?>
+				</div>
+			</div>
+			<div class="faq__item">
+				<div class="faq__question">
+					<h2 class="faq__question-title">Доставка + Оплата</h2>
+					<div class="faq__question-icon"> <svg width="13" height="8">
+							<use href="<?php bloginfo("template_url") ?>/assets/images/icons.svg#faq-arrow"></use>
+						</svg> </div>
+				</div>
+				<div class="faq__answer visually-hidden">
+					<?php echo get_field('about_delivery'); ?>
+				</div>
+			</div>
+			<div class="faq__item">
+				<div class="faq__question">
+					<h2 class="faq__question-title">Склад та догляд</h2>
+					<div class="faq__question-icon"> <svg width="13" height="8">
+							<use href="<?php bloginfo("template_url") ?>/assets/images/icons.svg#faq-arrow"></use>
+						</svg> </div>
+				</div>
+				<div class="faq__answer visually-hidden">
+					<?php echo get_field('about_care'); ?>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
+
+
+
 
 <?php do_action('woocommerce_after_single_product'); ?>

@@ -30,6 +30,7 @@ get_header('shop'); ?>
  */
 do_action('woocommerce_before_main_content');
 ?>
+
 <?php while (have_posts()): ?>
 	<?php the_post();
 	global $product;
@@ -67,9 +68,20 @@ do_action('woocommerce_before_main_content');
 		localStorage.setItem('aboutSingleProduct', JSON.stringify(aboutSingleProduct));
 	</script>
 
-
-	<?php wc_get_template_part('content', 'single-product'); ?>
-
+	<div class="container item__container">
+		<?php wc_get_template_part('content', 'single-product'); ?>
+	</div>
+	
+	<?php
+	/**
+	 * Hook: woocommerce_after_single_product_summary.
+	 *
+	 * @hooked woocommerce_output_product_data_tabs - 10
+	 * @hooked woocommerce_upsell_display - 15
+	 * @hooked woocommerce_output_related_products - 20
+	 */
+	do_action('woocommerce_after_single_product_summary');
+?>
 <?php endwhile; // end of the loop. ?>
 <?php
 /**
@@ -157,7 +169,7 @@ do_action('woocommerce_sidebar');
 							<button class="js-add-to-cart modal__body-actions-add" type="button">
 								Додати до кошика<span class="loader visually-hidden js-modal-loader"></span>
 							</button>
-							<a class="modal__body-actions-item-page js-to-item-page" href="/bedding/item.html">На
+							<a class="modal__body-actions-item-page js-to-item-page" href="#">На
 								сторінку
 								товару</a>
 						</div>
