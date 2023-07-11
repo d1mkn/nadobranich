@@ -33,7 +33,7 @@ $adjustedPercentage = $ratingPercentage + floor($ratingPercentage / 20) * 0.5;
 ?>
 
 
-<div class="modal__body-raiting">
+<div class="item__body-raiting">
 
 	<?php if ($rating_count > 0) { ?>
 

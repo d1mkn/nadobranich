@@ -30,7 +30,7 @@ if (!comments_open()) {
 			<div class="reviews__top-left-wrap">
 				<p class="reviews__title">Відгуки</p>
 				<span class="reviews__raiting">
-					<?php do_action('woocommerce_reviews_rating');?>
+					<?php do_action('woocommerce_reviews_rating'); ?>
 				</span>
 			</div> <button class="js-form-open-btn reviews__form-open-btn" type="button"> Написати відгук </button>
 		</div>

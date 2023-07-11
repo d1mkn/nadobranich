@@ -90,7 +90,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
         $ratingPercentage = ($average * 100) / 5;
         $adjustedPercentage = $ratingPercentage + floor($ratingPercentage / 20) * 0.5;
         ?>
-        <div class="modal__body-raiting">
+        <div>
             <?php if ($rating_count > 0) { ?>
                 <div class="rating-pack">
                     <img src="<?php bloginfo(
@@ -127,13 +127,13 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
         <div class="reviews__form-inputs-wrap">
             <div class="reviews__form-input-wrap">
                 <?php
-                echo $fields['author'] = '<input class="reviews__form-input" type="name" name="author" placeholder="Ім\'я" required>';
-                echo $fields['email'] = '<input class="reviews__form-input" type="email" name="email" placeholder="Електронна адреса" required>'
+                echo $fields['author'] = '<div class="validation-wrap"><input class="reviews__form-input" type="name" name="author" placeholder="Ім\'я" required="true"><span class="error visually-hidden">Вкажіть ім\'я</span></div>';
+                echo $fields['email'] = '<div class="validation-wrap"><input class="reviews__form-input" type="email" name="email" placeholder="Електронна адреса" required="true"><span class="error visually-hidden">Вкажіть коректний e-mail</span></div>'
                     ?>
             </div>
             <?php
-            echo $fields['title'] = '<input class="reviews__form-input w820p" type="text" name="title" placeholder="Заголовок відгука" required>';
-            echo $fields['comment'] = '<textarea class="reviews__form-textarea" name="comment" placeholder="Відгук" required></textarea>'
+            echo $fields['title'] = '<div class="validation-wrap"><input class="reviews__form-input w820p" type="text" name="title" placeholder="Заголовок відгука" required="true"><span class="error visually-hidden">Напишіть заголовок відгука</span></div>';
+            echo $fields['comment'] = '<div class="validation-wrap"><textarea class="reviews__form-textarea" name="comment" placeholder="Відгук" required="true"></textarea><span class="error visually-hidden">Напишіть відгук</span></div>'
                 ?>
         </div>
 
