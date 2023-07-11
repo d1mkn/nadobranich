@@ -79,5 +79,107 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
     }
     add_action('woocommerce_after_main_content', 'nadobranich_add_comment', 11);
 
+    function nadobranich_reviews_rating()
+    {
+        global $product;
+        if (!wc_review_ratings_enabled()) {
+            return;
+        }
+        $rating_count = $product->get_rating_count();
+        $average = $product->get_average_rating();
+        $ratingPercentage = ($average * 100) / 5;
+        $adjustedPercentage = $ratingPercentage + floor($ratingPercentage / 20) * 0.5;
+        ?>
+        <div class="modal__body-raiting">
+            <?php if ($rating_count > 0) { ?>
+                <div class="rating-pack">
+                    <img src="<?php bloginfo(
+                        "template_url",
+                    ); ?>/assets/images/rating-stars-nbg" alt="rating">
+                    <div class='js-modal-rating' style='width: <?php echo $adjustedPercentage ?>%'> </div>
+                </div>
 
+            <?php } else { ?>
+                <div class="rating-pack">
+                    <img src="<?php bloginfo(
+                        "template_url",
+                    ); ?>/assets/images/rating-stars-nbg" alt="rating">
+                    <div class='js-modal-rating' style='width: 0%'> </div>
+                </div>
+            <?php }
+            ?>
+        </div>
+        <?php
+    }
+    add_action('woocommerce_reviews_rating', 'nadobranich_reviews_rating', 30);
+
+    function nadobranich_remove_url_field($fields)
+    {
+        unset($fields['url']);
+        return $fields;
+    }
+    add_filter('comment_form_default_fields', 'nadobranich_remove_url_field', 25);
+
+    function get_extra_fields_html()
+    {
+        ob_start();
+        ?>
+        <div class="reviews__form-inputs-wrap">
+            <div class="reviews__form-input-wrap">
+                <?php
+                echo $fields['author'] = '<input class="reviews__form-input" type="name" name="author" placeholder="Ім\'я" required>';
+                echo $fields['email'] = '<input class="reviews__form-input" type="email" name="email" placeholder="Електронна адреса" required>'
+                    ?>
+            </div>
+            <?php
+            echo $fields['title'] = '<input class="reviews__form-input w820p" type="text" name="title" placeholder="Заголовок відгука" required>';
+            echo $fields['comment'] = '<textarea class="reviews__form-textarea" name="comment" placeholder="Відгук" required></textarea>'
+                ?>
+        </div>
+
+        <?php
+        return ob_get_clean();
+    }
+
+    function render_extra_fields($comment_field)
+    {
+        if (!is_product()) {
+            return $comment_field;
+        }
+
+        return $comment_field . get_extra_fields_html();
+    }
+    add_filter('comment_form_field_comment', 'render_extra_fields', 99, 1);
+
+    function save_review_title($comment_id, $approved, $commentdata)
+    {
+        $title = isset($_POST['title']) ? $_POST['title'] : '';
+
+        add_comment_meta($comment_id, 'title', esc_html($title));
+    }
+    add_action('comment_post', 'save_review_title', 10, 3);
+
+    function extend_comment_add_meta_box($comment)
+    {
+        $post_id = $comment->comment_post_ID;
+        $product = wc_get_product($post_id);
+
+        if ($product === null || $product === false) {
+            return;
+        }
+
+        add_meta_box('pcf_fields', 'Title', 'render_pcf_fields_metabox', 'comment', 'normal', 'high');
+    }
+    add_action('add_meta_boxes_comment', 'extend_comment_add_meta_box', 10, 1);
+
+    function render_pcf_fields_metabox($comment)
+    {
+        $title = get_comment_meta($comment->comment_ID, 'title', true); ?>
+
+        <p>
+            <label for="phone">Title:</label>
+            <input type="text" name="title" id="title" value="<?php echo esc_attr($title); ?>" class="widefat" />
+        </p>
+        <?php
+    }
 }

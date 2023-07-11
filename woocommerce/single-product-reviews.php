@@ -28,61 +28,34 @@ if (!comments_open()) {
 	<div id="comments">
 		<div class="reviews__top">
 			<div class="reviews__top-left-wrap">
-				<p class="reviews__title">Відгуки</p> <span class="reviews__raiting">
-					<img src="<?php bloginfo(
-						"template_url",
-					); ?>/assets/images/rating-stars" height="15" alt="rating"></span>
+				<p class="reviews__title">Відгуки</p>
+				<span class="reviews__raiting">
+					<?php do_action('woocommerce_reviews_rating');?>
+				</span>
 			</div> <button class="js-form-open-btn reviews__form-open-btn" type="button"> Написати відгук </button>
 		</div>
 
 		<?php if (get_option('woocommerce_review_rating_verification_required') === 'no' || wc_customer_bought_product('', get_current_user_id(), $product->get_id())): ?>
-			<div id="review_form_wrapper" class="js-review-form reviews__form h490">
+			<div id="review_form_wrapper" class="js-review-form reviews__form h0 o0 visually-hidden">
 				<div id="review_form">
 					<?php
 					$commenter = wp_get_current_commenter();
 					$comment_form = array(
 						/* translators: %s is product title */
-						'title_reply' => have_comments() ? esc_html__('Add a review', 'woocommerce') : sprintf(esc_html__('Be the first to review &ldquo;%s&rdquo;', 'woocommerce'), get_the_title()),
+						'title_reply' => 'Оцінка',
 						/* translators: %s is product title */
-						'title_reply_to' => esc_html__('Leave a Reply to %s', 'woocommerce'),
-						'title_reply_before' => '<span id="reply-title" class="comment-reply-title">',
-						'title_reply_after' => '</span>',
+						'title_reply_to' => 'Оцінка',
+						'title_reply_before' => '<div class="reviews__form-label"><label for="raiting">',
+						'title_reply_after' => '</label></div>',
 						'comment_notes_after' => '',
-						'label_submit' => esc_html__('Submit', 'woocommerce'),
+						'label_submit' => esc_html__('Надіслати відгук', 'woocommerce'),
 						'logged_in_as' => '',
 						'comment_field' => '',
-					);
-
-					$name_email_required = (bool) get_option('require_name_email', 1);
-					$fields = array(
-						'author' => array(
-							'label' => __('Name', 'woocommerce'),
-							'type' => 'text',
-							'value' => $commenter['comment_author'],
-							'required' => $name_email_required,
-						),
-						'email' => array(
-							'label' => __('Email', 'woocommerce'),
-							'type' => 'email',
-							'value' => $commenter['comment_author_email'],
-							'required' => $name_email_required,
-						),
+						'submit_button' => '<button name="%1$s" type="submit" class="reviews__form-submit-btn">%4$s</button>',
+						'submit_field' => '<div class="reviews__form-submit-btn-wrap">%1$s %2$s</div>',
 					);
 
 					$comment_form['fields'] = array();
-
-					foreach ($fields as $key => $field) {
-						$field_html = '<p class="comment-form-' . esc_attr($key) . '">';
-						$field_html .= '<label for="' . esc_attr($key) . '">' . esc_html($field['label']);
-
-						if ($field['required']) {
-							$field_html .= '&nbsp;<span class="required">*</span>';
-						}
-
-						$field_html .= '</label><input id="' . esc_attr($key) . '" name="' . esc_attr($key) . '" type="' . esc_attr($field['type']) . '" value="' . esc_attr($field['value']) . '" size="30" ' . ($field['required'] ? 'required' : '') . ' /></p>';
-
-						$comment_form['fields'][$key] = $field_html;
-					}
 
 					$account_page_url = wc_get_page_permalink('myaccount');
 					if ($account_page_url) {
@@ -91,7 +64,7 @@ if (!comments_open()) {
 					}
 
 					if (wc_review_ratings_enabled()) {
-						$comment_form['comment_field'] = '<div class="comment-form-rating"><label for="rating">' . esc_html__('Your rating', 'woocommerce') . (wc_review_ratings_required() ? '&nbsp;<span class="required">*</span>' : '') . '</label><select name="rating" id="rating" required>
+						$comment_form['comment_field'] = '<div class="reviews__form-raiting"><select name="rating" id="rating" required>
 						<option value="">' . esc_html__('Rate&hellip;', 'woocommerce') . '</option>
 						<option value="5">' . esc_html__('Perfect', 'woocommerce') . '</option>
 						<option value="4">' . esc_html__('Good', 'woocommerce') . '</option>
@@ -100,9 +73,6 @@ if (!comments_open()) {
 						<option value="1">' . esc_html__('Very poor', 'woocommerce') . '</option>
 					</select></div>';
 					}
-
-					$comment_form['comment_field'] .= '<p class="comment-form-comment"><label for="comment">' . esc_html__('Your review', 'woocommerce') . '&nbsp;<span class="required">*</span></label><textarea id="comment" name="comment" cols="45" rows="8" required></textarea></p>';
-
 					comment_form(apply_filters('woocommerce_product_review_comment_form_args', $comment_form));
 					?>
 				</div>
