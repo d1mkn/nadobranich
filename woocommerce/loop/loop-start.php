@@ -15,8 +15,16 @@
  * @version     3.3.0
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
+if (!defined('ABSPATH')) {
 	exit;
 }
 ?>
-<ul class="goods-list">
+<?php
+if (is_archive()): ?>
+	<ul class="goods-list">
+	<?php endif ?>
+
+	<?php
+	if (is_single()) { ?>
+		<ul class="single-category__list swiper-wrapper">
+		<?php }

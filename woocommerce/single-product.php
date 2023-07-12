@@ -54,17 +54,12 @@ do_action('woocommerce_before_main_content');
 			'variationQty' => $variationQty,
 		);
 	}
-	$comments = array(
-		wp_list_comments(apply_filters('woocommerce_product_review_list_args', array('callback' => 'woocommerce_comments')))
-	);
-	// var_dump($comments);
 	$_SESSION['aboutSingleProduct'] = array(
 		'isSimple' => $isSimple,
 		'price' => $productPrice,
 		'variations' => $variations,
 		'dir' => get_template_directory_uri(),
-		'aboutSizes' => $aboutSizes,
-		'comments' => $comments
+		'aboutSizes' => $aboutSizes
 	);
 	?>
 
@@ -96,6 +91,8 @@ do_action('woocommerce_before_main_content');
  */
 do_action('woocommerce_after_main_content');
 ?>
+
+<?php echo do_shortcode('[insta_block]') ?>
 
 <?php
 /**
@@ -136,20 +133,15 @@ do_action('woocommerce_sidebar');
 							<div class="body-price-wrap">
 								<p class="body-price js-modal-price">###</p>
 							</div>
-							<div class="modal__body-raiting">
-								<svg class="rating-pack" width='145' height='33'>
-									<use href="<?php bloginfo(
+							<div class="modal__body-rating">
+								<div class="rating-pack">
+									<img src="<?php bloginfo(
 										"template_url",
-									); ?>/assets/images/icons.svg#stars-pack-nf"></use>
-								</svg>
-								<div class='js-modal-rating'>
-									<svg width='145' height='33'>
-										<use href="<?php bloginfo(
-											"template_url",
-										); ?>/assets/images/icons.svg#stars-pack"></use>
-									</svg>
+									); ?>/assets/images/rating-stars-nbg" alt="rating">
+									<div class='js-modal-rating'>
+									</div>
 								</div>
-								<a class="modal__body-raiting-link" href="#">25</a>
+								<a class="modal__body-rating-link" href="#">25</a>
 							</div>
 						</div>
 						<div class="modal__body-color-wrap">

@@ -76,10 +76,6 @@ function renderInfoFromLocal(e) {
   refs.productDesc.textContent = currProduct.productDesc;
 
   // rating
-  refs.ratingStars.setAttribute(
-    "style",
-    `width: ${(parseFloat(currProduct.rating.average) * 100) / 5 - 10}%;`
-  );
   if (currProduct.rating.average == 0) {
     refs.ratingLink.textContent = "0";
     refs.ratingStars.setAttribute("style", `width: 0%;`);

@@ -96,7 +96,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                     <img src="<?php bloginfo(
                         "template_url",
                     ); ?>/assets/images/rating-stars-nbg" alt="rating">
-                    <div class='js-modal-rating' style='width: <?php echo $adjustedPercentage ?>%'> </div>
+                    <div class='js-item-rating' style='width: <?php echo $adjustedPercentage ?>%'> </div>
                 </div>
 
             <?php } else { ?>

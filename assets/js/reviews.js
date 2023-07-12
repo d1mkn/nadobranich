@@ -42,10 +42,10 @@ commentForm.addEventListener("submit", (e) => {
       return;
     }
     document
-      .querySelector(".reviews__form-raiting")
+      .querySelector(".reviews__form-rating")
       .insertAdjacentHTML("beforeend", '<span class="error">Оцініть товар</span>');
   } else {
-    document.querySelector(".reviews__form-raiting .error").classList.add("visually-hidden");
+    document.querySelector(".reviews__form-rating .error").classList.add("visually-hidden");
   }
 
   const authorField = document.querySelector("[name=author]");

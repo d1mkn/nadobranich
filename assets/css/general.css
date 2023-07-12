@@ -3350,18 +3350,18 @@ div.modal__body-color-item div {
     line-height: 1.2;
   }
 }
-.best-seller__raiting {
+.best-seller__rating {
   align-items: center;
   margin-bottom: 10px;
   display: flex;
 }
-.best-seller__raiting a {
+.best-seller__rating a {
   -webkit-text-decoration: revert;
   -webkit-text-decoration: revert;
   text-decoration: revert;
   font-size: 15px;
 }
-.best-seller__raiting-stars {
+.best-seller__rating-stars {
   display: flex;
 }
 .best-seller__desc {
@@ -3758,7 +3758,7 @@ div.modal__body-color-item div {
     text-align: left;
   }
 }
-.modal__body-raiting {
+.modal__body-rating {
   height: 26px;
   align-items: center;
   display: flex;
@@ -3766,7 +3766,7 @@ div.modal__body-color-item div {
   gap: 10px;
 }
 @media screen and (min-width: 768px) {
-  .modal__body-raiting {
+  .modal__body-rating {
     position: absolute;
     width: 169px;
     height: 33px;
@@ -3775,7 +3775,7 @@ div.modal__body-color-item div {
   }
 }
 @media screen and (min-width: 1240px) {
-  .modal__body-raiting {
+  .modal__body-rating {
     position: relative;
     margin-bottom: 10px;
     right: unset;
@@ -3783,7 +3783,7 @@ div.modal__body-color-item div {
 }
 .rating-pack {
   position: relative;
-  width: 145px;
+  width: 141px;
   height: 24.34px;
 }
 .js-modal-rating {
@@ -3793,15 +3793,25 @@ div.modal__body-color-item div {
   top: 0;
   left: 0;
   background: url("../images/rating-stars.png");
-  background-size: 145px 24.34px;
+  background-size: 142px 24.34px;
   background-repeat: no-repeat;
 }
-.modal__body-raiting a {
+.js-item-rating {
+  position: absolute;
+  height: 24.34px;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  background: url("../images/rating-stars.png");
+  background-size: 142px 24.34px;
+  background-repeat: no-repeat;
+}
+.modal__body-rating a {
   -webkit-text-decoration: revert;
   -webkit-text-decoration: revert;
   text-decoration: revert;
 }
-.modal__body-raiting-stars {
+.modal__body-rating-stars {
   position: relative;
   display: flex;
   font-family: star;
@@ -4819,24 +4829,24 @@ div.modal__body-color-item div {
     line-height: 1.20833;
   }
 }
-.item__body-raiting {
+.item__body-rating {
   align-items: center;
   gap: 5px;
   margin-bottom: 10px;
   display: flex;
 }
 @media screen and (min-width: 1240px) {
-  .item__body-raiting {
+  .item__body-rating {
     margin-bottom: 20px;
   }
 }
-.item__body-raiting a {
+.item__body-rating a {
   -webkit-text-decoration: revert;
   -webkit-text-decoration: revert;
   text-decoration: revert;
   font-size: 15px;
 }
-.item__body-raiting-stars {
+.item__body-rating-stars {
   display: flex;
 }
 .item__body-color-wrap {
@@ -5325,12 +5335,12 @@ div.modal__body-color-item div {
     line-height: 1.21875;
   }
 }
-.reviews__raiting {
+.reviews__rating {
   margin-bottom: 5px;
   display: flex;
 }
 @media screen and (min-width: 768px) {
-  .reviews__raiting {
+  .reviews__rating {
     margin-bottom: 0;
   }
 }
@@ -5415,14 +5425,14 @@ div.modal__body-color-item div {
     width: 785px;
   }
 }
-.reviews__item-raiting {
+.reviews__item-rating {
   position: relative;
   width: 112px;
   height: 18px;
   margin-bottom: 4px;
   display: flex;
 }
-.review__raiting {
+.review__rating {
   position: absolute;
   height: 20px;
   overflow: hidden;
@@ -5433,12 +5443,12 @@ div.modal__body-color-item div {
   background-repeat: no-repeat;
 }
 @media screen and (min-width: 768px) {
-  .reviews__item-raiting {
+  .reviews__item-rating {
     margin-bottom: 0;
     position: absolute;
     right: 15px;
   }
-  .review__raiting {
+  .review__rating {
     position: absolute;
     height: 20px;
     overflow: hidden;
@@ -5450,11 +5460,11 @@ div.modal__body-color-item div {
   }
 }
 @media screen and (min-width: 1240px) {
-  .reviews__item-raiting {
+  .reviews__item-rating {
     position: relative;
     right: 0px;
   }
-  .review__raiting {
+  .review__rating {
     background-size: 112px 18px;
   }
 }
@@ -5555,8 +5565,7 @@ div.modal__body-color-item div {
     line-height: 1.2;
   }
 }
-.btn.loadMoreBtn:hover,
-.btn.loadMoreBtn:focus {
+.btn.loadMoreBtn:hover {
   color: #83b0e5;
 }
 .reviews__form {
@@ -5620,13 +5629,13 @@ div.modal__body-color-item div {
     font-size: 20px;
   }
 }
-.reviews__form-raiting {
+.reviews__form-rating {
   margin-bottom: 10px;
   display: flex;
   gap: 10px;
 }
 @media screen and (min-width: 768px) {
-  .reviews__form-raiting {
+  .reviews__form-rating {
     margin-bottom: 20px;
   }
 }
@@ -7417,7 +7426,7 @@ footer h3 {
   color: #f51010;
   font-size: 10px;
 }
-.reviews__form-raiting .error {
+.reviews__form-rating .error {
   margin-top: 6px;
 }
 @media screen and (min-width: 768px) {
@@ -7430,7 +7439,7 @@ footer h3 {
   .error {
     font-size: 14px;
   }
-  .reviews__form-raiting .error {
+  .reviews__form-rating .error {
     margin-top: 3px;
   }
 }
@@ -7439,5 +7448,12 @@ footer h3 {
 }
 .comment-form-cookies-consent {
   display: none;
+}
+.woocommerce .products ul {
+  margin: 0;
+}
+.woocommerce .products ul::before,
+.woocommerce .products ul::after {
+  content: none;
 }
 /*# sourceMappingURL=general.css.map */

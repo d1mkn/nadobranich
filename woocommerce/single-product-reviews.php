@@ -29,7 +29,7 @@ if (!comments_open()) {
 		<div class="reviews__top">
 			<div class="reviews__top-left-wrap">
 				<p class="reviews__title">Відгуки</p>
-				<span class="reviews__raiting">
+				<span class="reviews__rating">
 					<?php do_action('woocommerce_reviews_rating'); ?>
 				</span>
 			</div> <button class="js-form-open-btn reviews__form-open-btn" type="button"> Написати відгук </button>
@@ -45,7 +45,7 @@ if (!comments_open()) {
 						'title_reply' => 'Оцінка',
 						/* translators: %s is product title */
 						'title_reply_to' => 'Оцінка',
-						'title_reply_before' => '<div class="reviews__form-label"><label for="raiting">',
+						'title_reply_before' => '<div class="reviews__form-label"><label for="rating">',
 						'title_reply_after' => '</label></div>',
 						'comment_notes_after' => '',
 						'label_submit' => esc_html__('Надіслати відгук', 'woocommerce'),
@@ -64,7 +64,7 @@ if (!comments_open()) {
 					}
 
 					if (wc_review_ratings_enabled()) {
-						$comment_form['comment_field'] = '<div class="reviews__form-raiting"><select name="rating" id="rating" required>
+						$comment_form['comment_field'] = '<div class="reviews__form-rating"><select name="rating" id="rating" required>
 						<option value="">' . esc_html__('Rate&hellip;', 'woocommerce') . '</option>
 						<option value="5">' . esc_html__('Perfect', 'woocommerce') . '</option>
 						<option value="4">' . esc_html__('Good', 'woocommerce') . '</option>

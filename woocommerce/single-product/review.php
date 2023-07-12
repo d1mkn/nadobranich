@@ -37,11 +37,11 @@ $updated_date = implode(' ', $parts);
 $comment_text = get_comment_text();
 ?>
 <li class="reviews__item" id="li-comment-<?php comment_ID(); ?>">
-	<div class="reviews__item-left"> <span class="reviews__item-raiting">
+	<div class="reviews__item-left"> <span class="reviews__item-rating">
 			<img src="<?php bloginfo(
 				"template_url",
 			); ?>/assets/images/rating-stars-nbg" alt="rating">
-			<div class='review__raiting' style='width: <?php echo $ratingPercentage - 1 ?>%'> </div>
+			<div class='review__rating' style='width: <?php echo $ratingPercentage - 1 ?>%'> </div>
 		</span>
 		<div class="reviews__item-info">
 			<div class="reviews__item-letter-wrap">

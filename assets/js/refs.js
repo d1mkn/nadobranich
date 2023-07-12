@@ -24,7 +24,7 @@ export const refs = {
   productTitle: document.querySelector(".modal__body-title"),
   productDesc: document.querySelector(".modal__body-composition"),
   ratingStars: document.querySelector(".js-modal-rating"),
-  ratingLink: document.querySelector(".modal__body-raiting-link"),
+  ratingLink: document.querySelector(".modal__body-rating-link"),
   productPrice: document.querySelector(".js-modal-price"),
   productColor: document.querySelector(".js-modal-color"),
   colorList: document.querySelector(".js-modal-color-list"),

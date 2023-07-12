@@ -33,7 +33,7 @@ $adjustedPercentage = $ratingPercentage + floor($ratingPercentage / 20) * 0.5;
 ?>
 
 
-<div class="item__body-raiting">
+<div class="item__body-rating">
 
 	<?php if ($rating_count > 0) { ?>
 
@@ -41,11 +41,11 @@ $adjustedPercentage = $ratingPercentage + floor($ratingPercentage / 20) * 0.5;
 			<img src="<?php bloginfo(
 				"template_url",
 			); ?>/assets/images/rating-stars-nbg" alt="rating">
-			<div class='js-modal-rating' style='width: <?php echo $adjustedPercentage ?>%'> </div>
+			<div class='js-item-rating' style='width: <?php echo $adjustedPercentage ?>%'> </div>
 		</div>
 		<?php if (comments_open()): ?>
 			<?php //phpcs:disable ?>
-			<a href="#reviews" class="modal__body-raiting-link" rel="nofollow">
+			<a href="#reviews" class="item__body-rating-link" rel="nofollow">
 				<?php echo $product->review_count ?>
 			</a>
 			<?php // phpcs:enable ?>
@@ -56,11 +56,11 @@ $adjustedPercentage = $ratingPercentage + floor($ratingPercentage / 20) * 0.5;
 			<img src="<?php bloginfo(
 				"template_url",
 			); ?>/assets/images/rating-stars-nbg" alt="rating">
-			<div class='js-modal-rating' style='width: 0%'> </div>
+			<div class='js-item-rating' style='width: 0%'> </div>
 		</div>
 		<?php if (comments_open()): ?>
 			<?php //phpcs:disable ?>
-			<a href="#reviews" class="modal__body-raiting-link" rel="nofollow">
+			<a href="#reviews" class="modal__body-rating-link" rel="nofollow">
 				0
 			</a>
 			<?php // phpcs:enable ?>

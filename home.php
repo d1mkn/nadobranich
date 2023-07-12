@@ -423,7 +423,7 @@ Template Name: Home
                 <div class="body-price-wrap">
                   <p class="body-price js-modal-price">###</p>
                 </div>
-                <div class="modal__body-raiting">
+                <div class="modal__body-rating">
                   <div class="rating-pack">
                     <img src="<?php bloginfo(
                       "template_url",
@@ -431,7 +431,7 @@ Template Name: Home
                     <div class='js-modal-rating'>
                     </div>
                   </div>
-                  <a class="modal__body-raiting-link" href="#">25</a>
+                  <a class="modal__body-rating-link" href="#">25</a>
                 </div>
               </div>
               <div class="modal__body-color-wrap">

@@ -117,7 +117,9 @@ $_SESSION['aboutProducts'][] = array(
 	'rating' => $productRating
 );
 ?>
-<li class="single-category__item" productid=<?php echo $productId ?>>
+<li class="single-category__item <?php if (is_single()) {
+	echo 'swiper-slide';
+} ?>" productid=<?php echo $productId ?>>
 	<?php
 	// Якщо товар акціний, то буде плашка
 	if ($is_on_sale): ?>
