@@ -91,7 +91,7 @@ do_action('woocommerce_before_main_content');
  */
 do_action('woocommerce_after_main_content');
 ?>
-
+<?php echo do_shortcode('[recently_viewed_products]') ?>
 <?php echo do_shortcode('[insta_block]') ?>
 
 <?php

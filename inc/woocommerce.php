@@ -184,4 +184,23 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
         </p>
         <?php
     }
+    function nadobranich_recently_viewed_product_cookie()
+    {
+        if (!is_product()) {
+            return;
+        }
+        if (empty($_COOKIE['woocommerce_recently_viewed_2'])) {
+            $viewed_products = array();
+        } else {
+            $viewed_products = (array) explode('|', $_COOKIE['woocommerce_recently_viewed_2']);
+        }
+        if (!in_array(get_the_ID(), $viewed_products)) {
+            $viewed_products[] = get_the_ID();
+        }
+        if (sizeof($viewed_products) > 10) {
+            array_shift($viewed_products);
+        }
+        wc_setcookie('woocommerce_recently_viewed_2', join('|', $viewed_products));
+    }
+    add_action('template_redirect', 'nadobranich_recently_viewed_product_cookie', 20);
 }
