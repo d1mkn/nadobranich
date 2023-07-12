@@ -43,7 +43,7 @@ function nadobranich_recently_viewed_products()
   ?>
   <section class="related products container single-category swiper-container">
     <div class="single-category__title-wrap">
-      <h3 class="single-category__title">Переглянуті товар</h3>
+      <h3 class="single-category__title">Переглянуті товари</h3>
       <div class="single-category__navigation">
         <div class="swiper-button-next"> <svg class="single-category__navigation-icon-next" width="30" height="30">
             <use href="<?php bloginfo(
