@@ -7510,4 +7510,9 @@ footer h3 {
   button.button.alt:disabled[disabled] {
   padding: 0;
 }
+.single_variation_wrap .woocommerce-variation.single_variation .woocommerce-variation-price,
+.single_variation_wrap .woocommerce-variation.single_variation .woocommerce-variation-availability {
+  display: none;
+}
+
 /*# sourceMappingURL=general.css.map */
