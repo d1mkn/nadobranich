@@ -145,10 +145,10 @@ function pickColor() {
     });
   });
 
-  // Якщо у товара немає варіацій (акційний)
-  if (currProduct.variations.length === 0) {
+  // Якщо у товара 1 варіація (акційний)
+  if (currProduct.variations.length < 2) {
     refs.productPrice.innerHTML = `<span class="item-price">
-                          ${currProduct.beforeSalePrice} грн
+                          ${currProduct.variations[0].regularPrice} грн
                         </span><span class="item-new-price">
                           ${currProduct.price} грн
                         </span>`;

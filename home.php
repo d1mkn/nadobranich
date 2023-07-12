@@ -198,6 +198,7 @@ Template Name: Home
             $productId = $product->get_id();
             $productTitle = get_the_title();
             $productPrice = $product->price;
+            $regular_price = null;
             $productBeforeSalePrice = $product->regular_price;
             $productDesc = $product->description;
             $productShortDesc = $product->get_short_description();
@@ -250,11 +251,13 @@ Template Name: Home
               $variationId = $variation->ID;
               $variation = wc_get_product($variationId);
               $variationPrice = $variation->get_price();
+              $regular_price = $variation->get_regular_price();
 
               $variations[] = array(
                 'variationId' => $variationId,
                 'variationDesc' => $variationDesc,
                 'variationPrice' => $variationPrice,
+                'regularPrice' => $regular_price,
               );
             }
 
@@ -317,7 +320,7 @@ Template Name: Home
                     // Якщо товар акціний, то буде стара та нова ціна
                     if ($is_on_sale): ?>
                       <span class="old-price single-category__item-price">Від <span class="item-price">
-                          <?php echo $productBeforeSalePrice ?> грн
+                          <?php echo $regular_price ?> грн
                         </span><span class="item-new-price">
                           <?php echo $productPrice ?> грн
                         </span></span>

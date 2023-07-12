@@ -36,7 +36,18 @@ if (!isSimple) {
     </div>`;
   const resetLink = document.querySelector(".reset_variations");
 
-  refs.singleProductPrice.textContent = `Від ${price} грн`;
+  if (variations.length < 2) {
+    document
+      .querySelector(".body-price-wrap")
+      .insertAdjacentHTML(
+        "afterbegin",
+        `<span class='single-item-price'> ${variations[0].regularPrice} грн </span>`
+      );
+    refs.singleProductPrice.textContent = `${price} грн`;
+    refs.singleProductPrice.style.color = "#f51010";
+  } else {
+    refs.singleProductPrice.textContent = `Від ${price} грн`;
+  }
   variationPriceWrap.classList.add("visually-hidden");
   colorPicker.classList.add("item__body-color-picker");
   sizePicker.classList.add("item__body-size-picker");
@@ -109,6 +120,7 @@ if (!isSimple) {
           const currVar = variations.find((variation) => variation.variationDesc.match(regex));
           const currQty = currVar.variationQty;
           const qtyEl = document.querySelector(".item__body-select");
+          qtyEl.setAttribute("type", "number");
           qtyEl.setAttribute("max", currQty);
           qtyEl.setAttribute("value", "1");
           if (qtyEl < 1) {

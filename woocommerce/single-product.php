@@ -48,10 +48,12 @@ do_action('woocommerce_before_main_content');
 		$variation = wc_get_product($variation_id);
 		$variationDesc = $variation->attribute_summary;
 		$variationQty = $variation->get_stock_quantity();
+		$regular_price = $variation->get_regular_price();
 
 		$variations[] = array(
 			'variationDesc' => $variationDesc . ", Кількісь: $variationQty",
 			'variationQty' => $variationQty,
+			'regularPrice' => $regular_price,
 		);
 	}
 	$_SESSION['aboutSingleProduct'] = array(
