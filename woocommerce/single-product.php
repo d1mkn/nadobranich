@@ -54,12 +54,17 @@ do_action('woocommerce_before_main_content');
 			'variationQty' => $variationQty,
 		);
 	}
+	$comments = array(
+		wp_list_comments(apply_filters('woocommerce_product_review_list_args', array('callback' => 'woocommerce_comments')))
+	);
+	// var_dump($comments);
 	$_SESSION['aboutSingleProduct'] = array(
 		'isSimple' => $isSimple,
 		'price' => $productPrice,
 		'variations' => $variations,
 		'dir' => get_template_directory_uri(),
 		'aboutSizes' => $aboutSizes,
+		'comments' => $comments
 	);
 	?>
 
@@ -71,7 +76,7 @@ do_action('woocommerce_before_main_content');
 	<div class="container item__container">
 		<?php wc_get_template_part('content', 'single-product'); ?>
 	</div>
-	
+
 	<?php
 	/**
 	 * Hook: woocommerce_after_single_product_summary.

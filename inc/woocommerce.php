@@ -154,8 +154,10 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
     function save_review_title($comment_id, $approved, $commentdata)
     {
         $title = isset($_POST['title']) ? $_POST['title'] : '';
+        $author = isset($_POST['author']) ? $_POST['author'] : '';
 
         add_comment_meta($comment_id, 'title', esc_html($title));
+        add_comment_meta($comment_id, 'author', esc_html($author));
     }
     add_action('comment_post', 'save_review_title', 10, 3);
 

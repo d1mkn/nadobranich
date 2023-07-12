@@ -5370,6 +5370,8 @@ div.modal__body-color-item div {
   }
 }
 .reviews__item {
+  display: flex;
+  flex-direction: column;
   background-color: #fff;
   border: 1px solid #7d7d7d;
   border-radius: 5px;
@@ -5385,11 +5387,11 @@ div.modal__body-color-item div {
 }
 @media screen and (min-width: 1240px) {
   .reviews__item {
+    flex-direction: row;
     justify-content: space-between;
     align-items: flex-end;
     margin-bottom: 20px;
     padding: 15px 35px 25px 15px;
-    display: flex;
   }
 }
 .reviews__item:last-child {
@@ -5414,8 +5416,21 @@ div.modal__body-color-item div {
   }
 }
 .reviews__item-raiting {
+  position: relative;
+  width: 112px;
+  height: 18px;
   margin-bottom: 4px;
   display: flex;
+}
+.review__raiting {
+  position: absolute;
+  height: 20px;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  background: url(../images/rating-stars.png);
+  background-size: 107px 18px;
+  background-repeat: no-repeat;
 }
 @media screen and (min-width: 768px) {
   .reviews__item-raiting {
@@ -5423,10 +5438,24 @@ div.modal__body-color-item div {
     position: absolute;
     right: 15px;
   }
+  .review__raiting {
+    position: absolute;
+    height: 20px;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    background: url(../images/rating-stars.png);
+    background-size: 107px 18px;
+    background-repeat: no-repeat;
+  }
 }
 @media screen and (min-width: 1240px) {
   .reviews__item-raiting {
-    position: unset;
+    position: relative;
+    right: 0px;
+  }
+  .review__raiting {
+    background-size: 112px 18px;
   }
 }
 .reviews__item-info {
@@ -5467,6 +5496,7 @@ div.modal__body-color-item div {
   line-height: 1.2;
 }
 .reviews__item-name {
+  max-width: 160px;
   font-weight: 600;
 }
 .reviews__item-date {
@@ -5510,7 +5540,8 @@ div.modal__body-color-item div {
     font-size: 16px;
   }
 }
-.reviews__show-more-btn {
+.btn.loadMoreBtn {
+  display: block;
   width: fit-content;
   margin: 0 auto;
   font-size: 15px;
@@ -5519,13 +5550,13 @@ div.modal__body-color-item div {
   text-decoration: underline;
 }
 @media screen and (min-width: 768px) {
-  .reviews__show-more-btn {
+  .btn.loadMoreBtn {
     font-size: 20px;
     line-height: 1.2;
   }
 }
-.reviews__show-more-btn:hover,
-.reviews__show-more-btn:focus {
+.btn.loadMoreBtn:hover,
+.btn.loadMoreBtn:focus {
   color: #83b0e5;
 }
 .reviews__form {
