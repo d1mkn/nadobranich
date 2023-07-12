@@ -51,6 +51,7 @@ do_action('woocommerce_before_main_content');
 		$regular_price = $variation->get_regular_price();
 
 		$variations[] = array(
+			'variationId' => $variation_id,
 			'variationDesc' => $variationDesc . ", Кількісь: $variationQty",
 			'variationQty' => $variationQty,
 			'regularPrice' => $regular_price,

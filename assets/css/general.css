@@ -3998,6 +3998,10 @@ div.modal__body-color-item div {
   border: 3px solid #a4c9f5;
   border-bottom-color: transparent;
 }
+.item__body-to-cart-btn.single_add_to_cart_button .loader {
+  top: 9px;
+  right: 17px;
+}
 @media screen and (min-width: 768px) {
   .loader {
     top: 19px;
@@ -4006,6 +4010,10 @@ div.modal__body-color-item div {
     height: 15px;
     border: 3px solid #a4c9f5;
     border-bottom-color: transparent;
+  }
+  .item__body-to-cart-btn.single_add_to_cart_button .loader {
+    top: 17px;
+    right: 18px;
   }
 }
 @media screen and (min-width: 1240px) {
@@ -4016,6 +4024,10 @@ div.modal__body-color-item div {
     height: 30px;
     border: 5px solid #a4c9f5;
     border-bottom-color: transparent;
+  }
+  .item__body-to-cart-btn.single_add_to_cart_button .loader {
+    top: 10px;
+    right: 24px;
   }
 }
 @keyframes rotation {
@@ -7475,5 +7487,27 @@ footer h3 {
   .variable-item:not(.radio-variable-item) {
   border-radius: 50%;
   outline: unset;
+}
+.woocommerce:where(body:not(.woocommerce-block-theme-has-button-styles)) button.button.added::after,
+.woocommerce a.added_to_cart,
+.added_to_cart.wc-forward {
+  display: none;
+}
+.woocommerce:where(body:not(.woocommerce-block-theme-has-button-styles))
+  button.button.alt:disabled[disabled],
+.woocommerce:where(body:not(.woocommerce-block-theme-has-button-styles))
+  button.button.alt:disabled[disabled]:hover,
+.woocommerce:where(body:not(.woocommerce-block-theme-has-button-styles))
+  #respond
+  input#submit.alt.disabled,
+.woocommerce:where(body:not(.woocommerce-block-theme-has-button-styles))
+  #respond
+  input#submit.alt.disabled:hover {
+  color: #a4c9f5;
+  background-color: #ffffff;
+}
+.woocommerce:where(body:not(.woocommerce-block-theme-has-button-styles))
+  button.button.alt:disabled[disabled] {
+  padding: 0;
 }
 /*# sourceMappingURL=general.css.map */

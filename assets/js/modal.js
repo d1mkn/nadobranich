@@ -2,7 +2,7 @@ import { refs } from "./refs";
 import axios from "axios";
 import SimpleLightbox from "simplelightbox";
 
-let isToCartOpened = false;
+export let isToCartOpened = false;
 
 function openModal() {
   refs.modal.classList.remove("visually-hidden");
@@ -22,13 +22,13 @@ function closeModal() {
   }, 500);
 }
 
-function openToCartModal() {
+export function openToCartModal() {
   isToCartOpened = true;
   refs.toCartWrap.classList.toggle("animate__fadeInRight");
   refs.toCartWrap.classList.toggle("visually-hidden");
 }
 
-function closeToCartModal() {
+export function closeToCartModal() {
   refs.toCartWrap.classList.toggle("animate__fadeInRight");
   refs.toCartWrap.classList.toggle("animate__fadeOutRight");
 

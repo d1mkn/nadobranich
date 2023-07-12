@@ -118,8 +118,11 @@ if (!isSimple) {
           const colorText = color.textContent.trim();
           const regex = new RegExp(`Розмір: ${sizeText}, Колір: ${colorText}, Кількісь: (\\d+)`);
           const currVar = variations.find((variation) => variation.variationDesc.match(regex));
+          const currId = currVar.variationId;
           const currQty = currVar.variationQty;
           const qtyEl = document.querySelector(".item__body-select");
+          localStorage.setItem("singleVariationId", currId);
+          localStorage.setItem("singleCombination", `${colorText} / ${sizeText}`);
           qtyEl.setAttribute("type", "number");
           qtyEl.setAttribute("max", currQty);
           qtyEl.setAttribute("value", "1");
