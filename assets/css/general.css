@@ -5419,7 +5419,7 @@ div.modal__body-color-item div {
   .reviews__item {
     flex-direction: row;
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: flex-start;
     margin-bottom: 20px;
     padding: 15px 35px 25px 15px;
   }
