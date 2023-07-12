@@ -7386,6 +7386,9 @@ footer h3 {
   color: #f51010;
   font-size: 10px;
 }
+.reviews__form-raiting .error {
+  margin-top: 6px;
+}
 @media screen and (min-width: 768px) {
   .validation-wrap .error {
     position: absolute;
@@ -7395,6 +7398,9 @@ footer h3 {
   }
   .error {
     font-size: 14px;
+  }
+  .reviews__form-raiting .error {
+    margin-top: 3px;
   }
 }
 .comment-notes {
