@@ -3169,6 +3169,7 @@ header button {
   }
 }
 .modal__body-color-picker {
+  height: 32px;
   align-items: center;
   gap: 15px;
   display: flex;
