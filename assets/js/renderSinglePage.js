@@ -112,17 +112,19 @@ if (!isSimple) {
         }
 
         if (activeColor && activeSize) {
+          const qtyWrap = document.querySelector(".item__body-select-wrap.quantity");
           const size = document.querySelector(".item__body-item-size");
           const color = document.querySelector(".item__body-item-color");
           const sizeText = size.textContent.trim();
           const colorText = color.textContent.trim();
-          const regex = new RegExp(`Розмір: ${sizeText}, Колір: ${colorText}, Кількісь: (\\d+)`);
+          const regex = new RegExp(`Розмір: ${sizeText}, Колір: ${colorText}`);
           const currVar = variations.find((variation) => variation.variationDesc.match(regex));
           const currId = currVar.variationId;
           const currQty = currVar.variationQty;
           const qtyEl = document.querySelector(".item__body-select");
           localStorage.setItem("singleVariationId", currId);
           localStorage.setItem("singleCombination", `${colorText} / ${sizeText}`);
+          qtyWrap.setAttribute("title", `В наявності ${currQty} од.`);
           qtyEl.setAttribute("type", "number");
           qtyEl.setAttribute("max", currQty);
           qtyEl.setAttribute("value", "1");
