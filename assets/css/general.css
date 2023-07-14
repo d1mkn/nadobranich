@@ -2535,7 +2535,7 @@ header button {
 .to-cart__content-title {
   margin-bottom: 15px;
   text-align: center;
-  font-size: 15px;
+  font-size: 20px;
   font-weight: 600;
   line-height: 1.3;
 }
@@ -5201,6 +5201,10 @@ div.modal__body-color-item div {
     gap: 20px;
   }
 }
+.product-quantity .item__body-select-wrap {
+  width: 50px;
+  height: 25px;
+}
 .item__body-select-wrap {
   width: 60px;
   height: 40px;
@@ -5212,6 +5216,10 @@ div.modal__body-color-item div {
 }
 @media screen and (min-width: 768px) {
   .item__body-select-wrap {
+    width: 70px;
+    height: 50px;
+  }
+  .product-quantity .item__body-select-wrap {
     width: 70px;
     height: 50px;
   }
@@ -5917,7 +5925,7 @@ div.modal__body-color-item div {
 }
 .cart__item {
   border-top: 1px solid #7d7d7d;
-  gap: 11px;
+  gap: 0px 11px;
   padding: 15px 0;
   display: flex;
   position: relative;
@@ -6020,7 +6028,12 @@ div.modal__body-color-item div {
   }
 }
 .cart__item-color {
-  margin-bottom: 10px;
+  margin-bottom: 5px;
+}
+@media screen and (min-width: 768px) {
+  .cart__item-color {
+    margin-bottom: 10px;
+  }
 }
 .cart__item-color,
 .cart__item-size {
@@ -7615,5 +7628,41 @@ footer h3 {
 .woocommerce table.shop_table_responsive tr td::before,
 .woocommerce-page table.shop_table_responsive tr td::before {
   content: none;
+}
+.empty-td {
+  display: none;
+}
+@media screen and (max-width: 767px) {
+  .woocommerce table.shop_table_responsive tr,
+  .woocommerce-page table.shop_table_responsive tr {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .woocommerce table.shop_table_responsive tr td,
+  .woocommerce-page table.shop_table_responsive tr td {
+    text-align: left !important;
+  }
+  .shop_table .cart__item .cart__item-details {
+    width: calc(100% - 91px);
+  }
+  .shop_table .cart__item .product-quantity {
+    width: calc(100% - 91px);
+  }
+  .empty-td {
+    display: block;
+    width: 80px;
+    height: 25px;
+  }
+}
+.woocommerce table.shop_table th,
+.woocommerce table.shop_table td {
+  padding: 0px;
+  border-top: 0px;
+}
+.woocommerce table.shop_table tbody th,
+.woocommerce table.shop_table tfoot td,
+.woocommerce table.shop_table tfoot th {
+  font-weight: normal;
+  border-top: 0px;
 }
 /*# sourceMappingURL=general.css.map */

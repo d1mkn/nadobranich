@@ -48,63 +48,66 @@ do_action('woocommerce_before_cart'); ?>
 								?>
 								<tr
 									class="cart__item woocommerce-cart-form__cart-item <?php echo esc_attr(apply_filters('woocommerce_cart_item_class', 'cart_item', $cart_item, $cart_item_key)); ?>">
+									<div>
+										<td class="product-thumbnail">
+											<div class="cart__item-img">
+												<?php
+												$thumbnail = apply_filters('woocommerce_cart_item_thumbnail', $_product->get_image(), $cart_item, $cart_item_key);
 
-									<td class="product-thumbnail">
-										<div class="cart__item-img">
+												if (!$product_permalink) {
+													echo $thumbnail; // PHPCS: XSS ok.
+												} else {
+													printf('<a href="%s">%s</a>', esc_url($product_permalink), $thumbnail); // PHPCS: XSS ok.
+												}
+												?>
+											</div>
+										</td>
+										<td class="product-name cart__item-details"
+											data-title="<?php esc_attr_e('Product', 'woocommerce'); ?>">
 											<?php
-											$thumbnail = apply_filters('woocommerce_cart_item_thumbnail', $_product->get_image(), $cart_item, $cart_item_key);
-
 											if (!$product_permalink) {
-												echo $thumbnail; // PHPCS: XSS ok.
+												/**
+												 * Filter the product name.
+												 *
+												 * @since 7.8.0
+												 * @param string $product_name Name of the product in the cart.
+												 * @param array $cart_item The product in the cart.
+												 * @param string $cart_item_key Key for the product in the cart.
+												 */
+												echo wp_kses_post(apply_filters('woocommerce_cart_item_name', $_product->get_title(), $cart_item, $cart_item_key) . '&nbsp;');
 											} else {
-												printf('<a href="%s">%s</a>', esc_url($product_permalink), $thumbnail); // PHPCS: XSS ok.
+												/**
+												 * Filter the product name.
+												 *
+												 * @since 7.8.0
+												 * @param string $product_url URL the product in the cart.
+												 */
+												echo wp_kses_post(apply_filters('woocommerce_cart_item_name', sprintf('<a class="cart__item-title" href="%s">%s</a>', esc_url($product_permalink), $_product->get_title()), $cart_item, $cart_item_key));
+											}
+
+											do_action('woocommerce_after_cart_item_name', $cart_item, $cart_item_key);
+
+											$variation_desc = $_product->attribute_summary;
+											preg_match('/Колір: ([^,]+)/u', $variation_desc, $color_matches);
+											$color = isset($color_matches[1]) ? trim($color_matches[1]) : '';
+											echo "<p class='cart__item-color'> Колір: <span class='cart__item-span'>$color</span></p>";
+
+											preg_match('/Розмір: ([^,]+)/u', $variation_desc, $size_matches);
+											$size = isset($size_matches[1]) ? trim($size_matches[1]) : '';
+											echo "<p class='cart__item-size'> Розмір: <span class='cart__item-span'>$size</span></p>";
+
+											// Meta data.
+											echo wc_get_formatted_cart_item_data($cart_item); // PHPCS: XSS ok.
+									
+											// Backorder notification.
+											if ($_product->backorders_require_notification() && $_product->is_on_backorder($cart_item['quantity'])) {
+												echo wp_kses_post(apply_filters('woocommerce_cart_item_backorder_notification', '<p class="backorder_notification">' . esc_html__('Available on backorder', 'woocommerce') . '</p>', $product_id));
 											}
 											?>
-										</div>
-									</td>
-									<td class="product-name cart__item-details"
-										data-title="<?php esc_attr_e('Product', 'woocommerce'); ?>">
-										<?php
-										if (!$product_permalink) {
-											/**
-											 * Filter the product name.
-											 *
-											 * @since 7.8.0
-											 * @param string $product_name Name of the product in the cart.
-											 * @param array $cart_item The product in the cart.
-											 * @param string $cart_item_key Key for the product in the cart.
-											 */
-											echo wp_kses_post(apply_filters('woocommerce_cart_item_name', $_product->get_title(), $cart_item, $cart_item_key) . '&nbsp;');
-										} else {
-											/**
-											 * Filter the product name.
-											 *
-											 * @since 7.8.0
-											 * @param string $product_url URL the product in the cart.
-											 */
-											echo wp_kses_post(apply_filters('woocommerce_cart_item_name', sprintf('<a class="cart__item-title" href="%s">%s</a>', esc_url($product_permalink), $_product->get_title()), $cart_item, $cart_item_key));
-										}
+										</td>
+									</div>
 
-										do_action('woocommerce_after_cart_item_name', $cart_item, $cart_item_key);
-
-										$variation_desc = $_product->attribute_summary;
-										preg_match('/Колір: ([^,]+)/u', $variation_desc, $color_matches);
-										$color = isset($color_matches[1]) ? trim($color_matches[1]) : '';
-										echo "<p class='cart__item-color'> Колір: <span class='cart__item-span'>$color</span></p>";
-
-										preg_match('/Розмір: ([^,]+)/u', $variation_desc, $size_matches);
-										$size = isset($size_matches[1]) ? trim($size_matches[1]) : '';
-										echo "<p class='cart__item-size'> Розмір: <span class='cart__item-span'>$size</span></p>";
-
-										// Meta data.
-										echo wc_get_formatted_cart_item_data($cart_item); // PHPCS: XSS ok.
-								
-										// Backorder notification.
-										if ($_product->backorders_require_notification() && $_product->is_on_backorder($cart_item['quantity'])) {
-											echo wp_kses_post(apply_filters('woocommerce_cart_item_backorder_notification', '<p class="backorder_notification">' . esc_html__('Available on backorder', 'woocommerce') . '</p>', $product_id));
-										}
-										?>
-									</td>
+									<td class="empty-td"></td>
 
 									<td class="product-quantity" data-title="<?php esc_attr_e('Quantity', 'woocommerce'); ?>">
 										<?php

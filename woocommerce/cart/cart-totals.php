@@ -18,46 +18,52 @@
 defined('ABSPATH') || exit;
 
 ?>
-<div class="cart_totals <?php echo (WC()->customer->has_calculated_shipping()) ? 'calculated_shipping' : ''; ?>">
+<div class="cart_totals<?php echo (WC()->customer->has_calculated_shipping()) ? 'calculated_shipping' : ''; ?>">
+	<div class="cart__total-wrap ">
+		<?php do_action('woocommerce_before_cart_totals'); ?>
 
-	<?php do_action('woocommerce_before_cart_totals'); ?>
+		<table cellspacing="0" class="shop_table shop_table_responsive">
+			<tbody class="cart__total">
+				<tr class="cart-subtotal">
+					<th>
+						<?php esc_html_e('Subtotal', 'woocommerce'); ?>
+					</th>
+					<td data-title="<?php esc_attr_e('Subtotal', 'woocommerce'); ?>"><?php wc_cart_totals_subtotal_html(); ?>
+					</td>
+				</tr>
 
-	<table cellspacing="0" class="shop_table shop_table_responsive">
-
-		<tr class="cart-subtotal">
-			<th>
-				<?php esc_html_e('Subtotal', 'woocommerce'); ?>
-			</th>
-			<td data-title="<?php esc_attr_e('Subtotal', 'woocommerce'); ?>"><?php wc_cart_totals_subtotal_html(); ?>
-			</td>
-		</tr>
-
-		<?php foreach (WC()->cart->get_coupons() as $code => $coupon): ?>
-			<tr class="cart-discount coupon-<?php echo esc_attr(sanitize_title($code)); ?>">
-				<th>
-					<?php wc_cart_totals_coupon_label($coupon); ?>
-				</th>
-				<td data-title="<?php echo esc_attr(wc_cart_totals_coupon_label($coupon, false)); ?>"><?php wc_cart_totals_coupon_html($coupon); ?></td>
-			</tr>
-		<?php endforeach; ?>
+				<?php foreach (WC()->cart->get_coupons() as $code => $coupon): ?>
+					<tr class="cart-discount coupon-<?php echo esc_attr(sanitize_title($code)); ?>">
+						<th>
+							<?php wc_cart_totals_coupon_label($coupon); ?>
+						</th>
+						<td data-title="<?php echo esc_attr(wc_cart_totals_coupon_label($coupon, false)); ?>"><?php wc_cart_totals_coupon_html($coupon); ?></td>
+					</tr>
+				<?php endforeach; ?>
 
 
-		<?php do_action('woocommerce_cart_totals_before_order_total'); ?>
+				<?php do_action('woocommerce_cart_totals_before_order_total'); ?>
 
-		<tr class="order-total">
-			<th>
-				<?php esc_html_e('Total', 'woocommerce'); ?>
-			</th>
-			<td data-title="<?php esc_attr_e('Total', 'woocommerce'); ?>"><?php wc_cart_totals_order_total_html(); ?>
-			</td>
-		</tr>
+				<tr class="order-total cart__total-item">
+					<?php
+					$total = WC()->cart->total;
+					$total_price = str_replace('.00', '', $total);
+					?>
+					<th>
+						<?php esc_html_e('Загальна сума:', 'woocommerce'); ?>
+					</th>
+					<td data-title="<?php esc_attr_e('Total', 'woocommerce'); ?>"><?php echo $total_price . ' грн' ?>
+					</td>
+				</tr>
 
-		<?php do_action('woocommerce_cart_totals_after_order_total'); ?>
+				<?php do_action('woocommerce_cart_totals_after_order_total'); ?>
+			</tbody>
+		</table>
 
-	</table>
 
-	<div class="wc-proceed-to-checkout">
-		<?php do_action('woocommerce_proceed_to_checkout'); ?>
+		<div class="wc-proceed-to-checkout">
+			<?php do_action('woocommerce_proceed_to_checkout'); ?>
+		</div>
 	</div>
 
 	<?php do_action('woocommerce_after_cart_totals'); ?>

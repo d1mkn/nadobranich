@@ -32,5 +32,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 
 </main><!-- #main -->
 
+<?php echo do_shortcode('[modal_markup]') ?>
+<?php echo do_shortcode('[insta_block]') ?>
 <?php
 get_footer();
