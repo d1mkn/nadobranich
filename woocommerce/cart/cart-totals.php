@@ -17,6 +17,11 @@
 
 defined('ABSPATH') || exit;
 
+$cart_quantity = null;
+foreach (WC()->cart->get_cart() as $cart_item_key => $cart_item) {
+	$cart_quantity += $cart_item['quantity'];
+}
+;
 ?>
 <div class="cart_totals<?php echo (WC()->customer->has_calculated_shipping()) ? 'calculated_shipping' : ''; ?>">
 	<div class="cart__total-wrap ">
@@ -24,11 +29,12 @@ defined('ABSPATH') || exit;
 
 		<table cellspacing="0" class="shop_table shop_table_responsive">
 			<tbody class="cart__total">
-				<tr class="cart-subtotal">
+				<tr class="cart__total-item">
 					<th>
-						<?php esc_html_e('Subtotal', 'woocommerce'); ?>
+						<?php esc_html_e('Кількість товарів:', 'woocommerce'); ?>
 					</th>
-					<td data-title="<?php esc_attr_e('Subtotal', 'woocommerce'); ?>"><?php wc_cart_totals_subtotal_html(); ?>
+					<td data-title="<?php esc_attr_e('Кількість товарів', 'woocommerce'); ?>">
+					<?php echo $cart_quantity ?>
 					</td>
 				</tr>
 
@@ -48,11 +54,12 @@ defined('ABSPATH') || exit;
 					<?php
 					$total = WC()->cart->total;
 					$total_price = str_replace('.00', '', $total);
+					$formatted_price = number_format(floatval($total_price), 0, '', ' ');
 					?>
 					<th>
 						<?php esc_html_e('Загальна сума:', 'woocommerce'); ?>
 					</th>
-					<td data-title="<?php esc_attr_e('Total', 'woocommerce'); ?>"><?php echo $total_price . ' грн' ?>
+					<td data-title="<?php esc_attr_e('Total', 'woocommerce'); ?>"><?php echo $formatted_price . ' грн' ?>
 					</td>
 				</tr>
 
@@ -61,7 +68,7 @@ defined('ABSPATH') || exit;
 		</table>
 
 
-		<div class="wc-proceed-to-checkout">
+		<div class="wc-proceed-to-checkout cart__total-buy-wrap">
 			<?php do_action('woocommerce_proceed_to_checkout'); ?>
 		</div>
 	</div>

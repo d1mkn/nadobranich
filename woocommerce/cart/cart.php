@@ -139,7 +139,7 @@ do_action('woocommerce_before_cart'); ?>
 										<?php
 										$subtotal = apply_filters('woocommerce_cart_item_subtotal', WC()->cart->get_product_subtotal($_product, $cart_item['quantity']), $cart_item, $cart_item_key); // PHPCS: XSS ok.
 								
-										echo $_product->get_price() * $cart_item['quantity'] . ' грн';
+										echo number_format(floatval($_product->get_price() * $cart_item['quantity']), 0, '', ' ') . ' грн';
 										?>
 									</td>
 
