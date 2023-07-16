@@ -203,4 +203,17 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
         wc_setcookie('woocommerce_recently_viewed_2', join('|', $viewed_products));
     }
     add_action('template_redirect', 'nadobranich_recently_viewed_product_cookie', 20);
+    function cart_update_qty_script()
+    {
+        if (is_cart()):
+            ?>
+            <script>
+                jQuery('.woocommerce').on('change', '.item__body-select', function () {
+                    jQuery("[name='update_cart']").trigger("click");
+                });
+            </script>
+            <?php
+        endif;
+    }
+    add_action('wp_footer', 'cart_update_qty_script');
 }

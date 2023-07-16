@@ -7676,5 +7676,25 @@ footer h3 {
     top: 90px;
   }
 }
-
+.woocommerce-notices-wrapper{
+  display: none;
+}
+.woocommerce-page table.cart td.actions .button[name="update_cart"]{
+  display: none;
+}
+.woocommerce .blockUI.blockOverlay::before {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+  border: 3px solid #a4c9f5;
+  border-bottom-color: transparent;
+  background: none;
+}
+.woocommerce table.shop_table_responsive tbody th, .woocommerce-page table.shop_table_responsive tbody th{
+  display: block;
+}
 /*# sourceMappingURL=general.css.map */
