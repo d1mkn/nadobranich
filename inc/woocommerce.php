@@ -211,6 +211,16 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                 jQuery('.woocommerce').on('change', '.item__body-select', function () {
                     jQuery("[name='update_cart']").trigger("click");
                 });
+                const main = document.querySelector('main');
+                const observer = new MutationObserver((mutations) => {
+                    mutations.forEach((mutation) => {
+                        const cartTotal = document.querySelector('[data-title="Кількість товарів"]')
+                        const cartCounter = document.querySelector('.js-cart-counter');
+                        cartCounter.textContent = cartTotal.textContent;
+                    });
+                });
+                const config = { childList: true, subtree: true };
+                observer.observe(main, config);
             </script>
             <?php
         endif;
