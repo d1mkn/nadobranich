@@ -208,7 +208,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
         if (is_cart()):
             ?>
             <script>
-                jQuery('.woocommerce').on('change', '.item__body-select', function () {
+                jQuery('.woocommerce').on('change', '.old-selector', function () {
                     jQuery("[name='update_cart']").trigger("click");
                 });
                 const main = document.querySelector('main');

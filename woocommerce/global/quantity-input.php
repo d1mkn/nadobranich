@@ -24,7 +24,7 @@ defined('ABSPATH') || exit;
 $label = !empty($args['product_name']) ? sprintf(esc_html__('%s quantity', 'woocommerce'), wp_strip_all_tags($args['product_name'])) : esc_html__('Quantity', 'woocommerce');
 
 ?>
-<div class="item__body-select-wrap quantity" <?php if (is_cart()):
+<div class="quantity" <?php if (is_cart()):
 	echo "title='В наявності $max_value од.'";
 endif ?>>
 	<?php
@@ -37,12 +37,11 @@ endif ?>>
 	?>
 	<label class="screen-reader-text" for="<?php echo esc_attr($input_id); ?>"><?php echo esc_attr($label); ?></label>
 	<input type="<?php echo esc_attr($type); ?>" <?php echo $readonly ? 'readonly="readonly"' : ''; ?>
-		id="<?php echo esc_attr($input_id); ?>" class="item__body-select" name="<?php echo esc_attr($input_name); ?>"
+		id="<?php echo esc_attr($input_id); ?>" class="old-selector" name="<?php echo esc_attr($input_name); ?>"
 		value="<?php echo esc_attr($input_value); ?>"
 		aria-label="<?php esc_attr_e('Product quantity', 'woocommerce'); ?>" size="4"
-		min="<?php echo $max_value > 0 ? '1' : '0' ?>" max="<?php echo esc_attr(0 < $max_value ? $max_value : ''); ?>"
-		<?php if (!$readonly): ?> step="<?php echo esc_attr($step); ?>"
-			placeholder="<?php echo esc_attr($placeholder); ?>" inputmode="<?php echo esc_attr($inputmode); ?>"
+		min="<?php echo esc_attr($min_value); ?>" max="<?php echo esc_attr(0 < $max_value ? $max_value : ''); ?>" <?php if (!$readonly): ?> step="<?php echo esc_attr($step); ?>" placeholder="<?php echo esc_attr($placeholder); ?>"
+			inputmode="<?php echo esc_attr($inputmode); ?>"
 			autocomplete="<?php echo esc_attr(isset($autocomplete) ? $autocomplete : 'on'); ?>" <?php endif; ?> />
 	<?php
 	/**
@@ -53,3 +52,26 @@ endif ?>>
 	do_action('woocommerce_after_quantity_input_field');
 	?>
 </div>
+<?php
+if (is_cart()): ?>
+	<div class="item__body-select-wrap">
+		<span class="selected-option">
+			<?php echo esc_attr($input_value) ?>
+		</span>
+		<div class="select-options-wrap visually-hidden">
+			<?php
+			for ($i = 1; $i <= $max_value; $i++) {
+				echo '<div class="item__body-select">' . $i . '</div>';
+			}
+			?>
+		</div>
+	</div>
+
+<?php else: ?>
+	<div class="item__body-select-wrap">
+		<span class="selected-option"></span>
+		<div class="select-options-wrap visually-hidden">
+			<div class="item__body-select">-</div>
+		</div>
+	</div>
+<?php endif ?>

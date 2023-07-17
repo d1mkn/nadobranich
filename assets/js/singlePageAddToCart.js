@@ -15,7 +15,7 @@ variationForm.addEventListener("submit", (e) => {
 
 function singlefetchAddToCart() {
   const singleVariationId = localStorage.getItem("singleVariationId");
-  const qty = document.querySelector(".item__body-select").value;
+  const qty = document.querySelector(".old-selector").value;
   document
     .querySelector(".item__body-to-cart-btn.single_add_to_cart_button")
     .setAttribute("disabled", "true");

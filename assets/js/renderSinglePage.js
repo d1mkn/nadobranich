@@ -1,4 +1,5 @@
 import { refs } from "./refs";
+import "./customSelect.js";
 
 const { isSimple, price, variations, dir, aboutSizes } = JSON.parse(
   localStorage.getItem("aboutSingleProduct")
@@ -6,7 +7,7 @@ const { isSimple, price, variations, dir, aboutSizes } = JSON.parse(
 
 if (!isSimple) {
   const variationPriceWrap = refs.wooVatiationPriceWrap;
-  const variationPicker = document.querySelector(".variations");
+  const variationPicker = document.querySelector(".js-variations-select");
   const colorPicker = document.querySelector(
     ".variable-items-wrapper.color-variable-items-wrapper.wvs-style-squared"
   );
@@ -54,9 +55,7 @@ if (!isSimple) {
   sizePicker.insertAdjacentHTML("afterend", sizeNotation);
   colorItems.forEach((item) => {
     item.classList.add("item__body-color-item");
-    item.style.borderRadius = "50%";
     item.style.boxShadow = "unset";
-    item.style.margin = "0px";
   });
   colors.forEach((color) => {
     color.style.borderRadius = "50%";
@@ -78,8 +77,14 @@ if (!isSimple) {
   resetLink.classList.add("visually-hidden");
 
   const observer = new MutationObserver((mutations) => {
+    const selectedColor = document.querySelector(".item__body-color-wrap .selected");
+    const selectedSize = document.querySelector(".item__body-size-wrap .selected");
+    const activeColor = document.querySelector(".variable-item.color-variable-item.selected");
+    const activeSize = document.querySelector(
+      '[aria-label="Розмір"] .variable-item.button-variable-item.selected .variable-item-contents'
+    );
     mutations.forEach((mutation) => {
-      if (mutation.type === "childList") {
+      if (mutation.type == "childList") {
         const variationPrice = document.querySelector(".woocommerce-Price-amount.amount bdi");
         if (variationPrice) {
           const newPrice = variationPrice.textContent;
@@ -87,32 +92,27 @@ if (!isSimple) {
           refs.singleProductPrice.textContent = priceCleaning;
         }
 
-        const selectedColor = document.querySelector(".item__body-color-wrap .selected");
         if (selectedColor) {
           const currColor = selectedColor.dataset.title;
           document.querySelector(".item__body-item-color").textContent = currColor;
         }
 
-        const selectedSize = document.querySelector(".item__body-size-wrap .selected");
         if (selectedSize) {
           const currSize = selectedSize.dataset.title;
           document.querySelector(".item__body-item-size").textContent = currSize;
         }
 
-        const activeColor = document.querySelector(".variable-item.color-variable-item.selected");
         if (activeColor) {
           activeColor.classList.add("active");
         }
 
-        const activeSize = document.querySelector(
-          '[aria-label="Розмір"] .variable-item.button-variable-item.selected .variable-item-contents'
-        );
         if (activeSize) {
           activeSize.style.width = "100%";
         }
 
-        if (activeColor && activeSize) {
-          const qtyWrap = document.querySelector(".item__body-select-wrap.quantity");
+        if (activeColor && selectedSize) {
+          const optionsList = document.querySelector(".select-options-wrap");
+          const qtyWrap = document.querySelector(".quantity");
           const size = document.querySelector(".item__body-item-size");
           const color = document.querySelector(".item__body-item-color");
           const sizeText = size.textContent.trim();
@@ -121,16 +121,43 @@ if (!isSimple) {
           const currVar = variations.find((variation) => variation.variationDesc.match(regex));
           const currId = currVar.variationId;
           const currQty = currVar.variationQty;
-          const qtyEl = document.querySelector(".item__body-select");
+          const qtyEl = document.querySelector(".old-selector");
+          document.querySelector(".selected-option").textContent = "";
+          optionsList.classList.add("visually-hidden");
           localStorage.setItem("singleVariationId", currId);
           localStorage.setItem("singleCombination", `${colorText} / ${sizeText}`);
           qtyWrap.setAttribute("title", `В наявності ${currQty} од.`);
           qtyEl.setAttribute("type", "number");
           qtyEl.setAttribute("max", currQty);
           qtyEl.setAttribute("value", "1");
-          if (qtyEl < 1) {
-            qtyEl.setAttribute("value", currQty);
+          if (qtyEl.value < 1) {
+            qtyEl.value = currQty;
+            document.querySelector(".selected-option").textContent = currQty;
+          } else { 
+            document.querySelector(".selected-option").textContent = '1';
           }
+          let selectMarkup = "";
+          for (let i = 1; i <= currQty; i += 1) {
+            selectMarkup += `<div class="item__body-select">${i}</div>`;
+          }
+          document.querySelector(".select-options-wrap").innerHTML = selectMarkup;
+          document.querySelectorAll(".item__body-select").forEach((option) => {
+            option.addEventListener("click", (e) => {
+              const clickedOption = e.currentTarget;
+              if (clickedOption.classList.contains("active")) {
+                return;
+              }
+              const activeOption = document
+                .querySelector(".select-options-wrap")
+                .querySelector(".item__body-select.active");
+              if (activeOption) {
+                activeOption.classList.remove("active");
+              }
+              clickedOption.classList.add("active");
+              document.querySelector(".selected-option").textContent = clickedOption.textContent;
+              qtyEl.setAttribute("value", clickedOption.textContent);
+            });
+          });
         }
       }
     });

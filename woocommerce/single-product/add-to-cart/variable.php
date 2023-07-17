@@ -37,40 +37,43 @@ do_action('woocommerce_before_add_to_cart_form'); ?>
 		</p>
 	<?php else: ?>
 		<div class="variations" cellspacing="0" role="presentation">
-			<?php
-			$attributes_order = array('pa_color', 'pa_size');
-			foreach ($attributes_order as $attribute_name) {
-				if (isset($attributes[$attribute_name])) {
-					$options = $attributes[$attribute_name];
-					?>
-					<div <?php if ($attribute_name === 'pa_color') { ?> class="item__body-color-wrap" <?php }
-					if ($attribute_name === 'pa_size') { ?> class="item__body-size-wrap" <?php } ?>>
-						<div <?php if ($attribute_name === 'pa_color') { ?> class="item__body-color" <?php }
-						if ($attribute_name === 'pa_size') { ?> class="item__body-size" <?php } ?>>
-							<label for="<?php echo esc_attr(sanitize_title($attribute_name)); ?>"><?php echo wc_attribute_label($attribute_name); // WPCS: XSS ok. ?>: <?php if ($attribute_name === 'pa_color') { ?>
-									<span class="item__body-item-color"></span>
-								<?php }
-								  if ($attribute_name === 'pa_size') { ?> <span class="item__body-item-size"></span>
-								<?php } ?>
-							</label>
+			<div class="js-variations-select">
+				<?php
+				$attributes_order = array('pa_color', 'pa_size');
+				foreach ($attributes_order as $attribute_name) {
+					if (isset($attributes[$attribute_name])) {
+						$options = $attributes[$attribute_name];
+						?>
+						<div <?php if ($attribute_name === 'pa_color') { ?> class="item__body-color-wrap" <?php }
+						if ($attribute_name === 'pa_size') { ?> class="item__body-size-wrap" <?php } ?>>
+							<div <?php if ($attribute_name === 'pa_color') { ?> class="item__body-color" <?php }
+							if ($attribute_name === 'pa_size') { ?> class="item__body-size" <?php } ?>>
+								<label for="<?php echo esc_attr(sanitize_title($attribute_name)); ?>"><?php echo wc_attribute_label($attribute_name); // WPCS: XSS ok. ?>: <?php if ($attribute_name === 'pa_color') { ?>
+										<span class="item__body-item-color"></span>
+									<?php }
+									  if ($attribute_name === 'pa_size') { ?> <span class="item__body-item-size"></span>
+									<?php } ?>
+								</label>
+							</div>
+							<div class="value">
+								<?php
+								wc_dropdown_variation_attribute_options(
+									array(
+										'options' => $options,
+										'attribute' => $attribute_name,
+										'product' => $product,
+									)
+								);
+								echo end($attributes_order) === $attribute_name ? wp_kses_post(apply_filters('woocommerce_reset_variations_link', '<a class="reset_variations" href="#">' . esc_html__('Clear', 'woocommerce') . '</a>')) : '';
+								?>
+							</div>
 						</div>
-						<div class="value">
-							<?php
-							wc_dropdown_variation_attribute_options(
-								array(
-									'options' => $options,
-									'attribute' => $attribute_name,
-									'product' => $product,
-								)
-							);
-							echo end($attributes_order) === $attribute_name ? wp_kses_post(apply_filters('woocommerce_reset_variations_link', '<a class="reset_variations" href="#">' . esc_html__('Clear', 'woocommerce') . '</a>')) : '';
-							?>
-						</div>
-					</div>
-					<?php
+
+						<?php
+					}
 				}
-			}
-			?>
+				?>
+			</div>
 
 
 			<?php do_action('woocommerce_after_variations_table');
