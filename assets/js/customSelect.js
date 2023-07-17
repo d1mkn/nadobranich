@@ -28,3 +28,9 @@ selects.forEach((select) => {
     });
   });
 });
+
+document.addEventListener("click", (e) => {
+  if (!e.target.closest(".item__body-select-wrap")) {
+    optionsList.classList.add("visually-hidden");
+  }
+});

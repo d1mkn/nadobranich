@@ -65,6 +65,11 @@ if (is_cart()): ?>
 			}
 			?>
 		</div>
+		<div class="select-icon">
+			<svg width="13" height="8">
+				<use href="<?php bloginfo("template_url") ?>/assets/images/icons.svg#faq-arrow"></use>
+			</svg>
+		</div>
 	</div>
 
 <?php else: ?>
@@ -72,6 +77,11 @@ if (is_cart()): ?>
 		<span class="selected-option"></span>
 		<div class="select-options-wrap visually-hidden">
 			<div class="item__body-select">-</div>
+		</div>
+		<div class="select-icon">
+			<svg width="13" height="8">
+				<use href="<?php bloginfo("template_url") ?>/assets/images/icons.svg#faq-arrow"></use>
+			</svg>
 		</div>
 	</div>
 <?php endif ?>

@@ -249,11 +249,15 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                             qtyEl.dispatchEvent(new Event("change"));
                         });
                     });
+                    document.addEventListener("click", (e) => {
+                        if (!e.target.closest(".item__body-select-wrap")) {
+                            optionsList.classList.add("visually-hidden");
+                        }
+                    });
                 });
                 const main = document.querySelector('.cart__content-right');
                 const observer = new MutationObserver((mutations) => {
                     mutations.forEach((mutation) => {
-                        console.log(mutation);
                         const cartTotal = document.querySelector('[data-title="Кількість товарів"]')
                         const cartCounter = document.querySelector('.js-cart-counter');
                         cartCounter.textContent = cartTotal.textContent;
@@ -264,9 +268,8 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                             let selectedOption = select.querySelector(".selected-option");
                             const qtyEl = select.closest(".cart__item").querySelector(".old-selector");
 
-                            console.log(select);
                             select.addEventListener("click", (e) => {
-                                selects.forEach((otherSelect) => {
+                                document.querySelectorAll(".item__body-select-wrap").forEach((otherSelect) => {
                                     if (otherSelect !== select) {
                                         otherSelect.querySelector(".select-options-wrap").classList.add("visually-hidden");
                                     }
@@ -290,6 +293,11 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                                     qtyEl.setAttribute("value", clickedOption.textContent);
                                     qtyEl.dispatchEvent(new Event("change"));
                                 });
+                            });
+                            document.addEventListener("click", (e) => {
+                                if (!e.target.closest(".item__body-select-wrap")) {
+                                    optionsList.classList.add("visually-hidden");
+                                }
                             });
                         });
                     });
