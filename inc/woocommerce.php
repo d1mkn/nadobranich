@@ -208,15 +208,90 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
         if (is_cart()):
             ?>
             <script>
-                jQuery('.woocommerce').on('change', '.old-selector', function () {
-                    jQuery("[name='update_cart']").trigger("click");
+                jQuery('body').on('click', '.item__body-select', function () {
+                    var input = jQuery(this).closest('.cart__item').find('.old-selector');
+                    var quantity = input[0].defaultValue;
+                    jQuery("[name='update_cart']").removeAttr('disabled');
+                    input.val(quantity).trigger('change');
+                    jQuery('[name="update_cart"]').trigger('click');
                 });
-                const main = document.querySelector('main');
+                const selects = document.querySelectorAll(".item__body-select-wrap");
+
+                selects.forEach((select) => {
+                    const optionsList = select.querySelector(".select-options-wrap");
+                    const options = select.querySelectorAll(".item__body-select");
+                    let selectedOption = select.querySelector(".selected-option");
+                    const qtyEl = select.closest(".cart__item").querySelector(".old-selector");
+
+                    select.addEventListener("click", (e) => {
+                        selects.forEach((otherSelect) => {
+                            if (otherSelect !== select) {
+                                otherSelect.querySelector(".select-options-wrap").classList.add("visually-hidden");
+                            }
+                        });
+
+                        optionsList.classList.toggle("visually-hidden");
+                    });
+
+                    options.forEach((option) => {
+                        option.addEventListener("click", (e) => {
+                            const clickedOption = e.currentTarget;
+                            if (clickedOption.classList.contains("active")) {
+                                return;
+                            }
+                            const activeOption = select.querySelector(".item__body-select.active");
+                            if (activeOption) {
+                                activeOption.classList.remove("active");
+                            }
+                            clickedOption.classList.add("active");
+                            selectedOption.textContent = clickedOption.textContent;
+                            qtyEl.setAttribute("value", clickedOption.textContent);
+                            qtyEl.dispatchEvent(new Event("change"));
+                        });
+                    });
+                });
+                const main = document.querySelector('.cart__content-right');
                 const observer = new MutationObserver((mutations) => {
                     mutations.forEach((mutation) => {
+                        console.log(mutation);
                         const cartTotal = document.querySelector('[data-title="Кількість товарів"]')
                         const cartCounter = document.querySelector('.js-cart-counter');
                         cartCounter.textContent = cartTotal.textContent;
+
+                        document.querySelectorAll(".item__body-select-wrap").forEach((select) => {
+                            const optionsList = select.querySelector(".select-options-wrap");
+                            const options = select.querySelectorAll(".item__body-select");
+                            let selectedOption = select.querySelector(".selected-option");
+                            const qtyEl = select.closest(".cart__item").querySelector(".old-selector");
+
+                            console.log(select);
+                            select.addEventListener("click", (e) => {
+                                selects.forEach((otherSelect) => {
+                                    if (otherSelect !== select) {
+                                        otherSelect.querySelector(".select-options-wrap").classList.add("visually-hidden");
+                                    }
+                                });
+
+                                optionsList.classList.toggle("visually-hidden");
+                            });
+
+                            options.forEach((option) => {
+                                option.addEventListener("click", (e) => {
+                                    const clickedOption = e.currentTarget;
+                                    if (clickedOption.classList.contains("active")) {
+                                        return;
+                                    }
+                                    const activeOption = select.querySelector(".item__body-select.active");
+                                    if (activeOption) {
+                                        activeOption.classList.remove("active");
+                                    }
+                                    clickedOption.classList.add("active");
+                                    selectedOption.textContent = clickedOption.textContent;
+                                    qtyEl.setAttribute("value", clickedOption.textContent);
+                                    qtyEl.dispatchEvent(new Event("change"));
+                                });
+                            });
+                        });
                     });
                 });
                 const config = { childList: true, subtree: true };

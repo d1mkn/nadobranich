@@ -5233,9 +5233,6 @@ div.modal__body-color-item div {
   border-radius: 5px;
 }
 @media screen and (min-width: 768px) {
-  .select-options-wrap {
-    padding-right: 2px;
-  }
   .select-options-wrap::-webkit-scrollbar {
     width: 3px;
     height: 3px;
