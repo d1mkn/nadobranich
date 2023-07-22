@@ -24,13 +24,20 @@ if (!function_exists('wc_get_gallery_image_html')) {
 
 global $product;
 
+$productId = $product->get_id();
 $productImagesIds = $product->get_gallery_image_ids();
+$post_thumbnail_id = $product->get_image_id();
+$mainImageId = get_post_thumbnail_id($productId);
+$mainImageLink = wp_get_attachment_url(get_post_thumbnail_id($productId));
+$mainImageAlt = get_post_meta($mainImageId, '_wp_attachment_image_alt', true);
 
 if ($product->get_image_id()) { ?>
+	<li class="item__images-item js-single-gallery swiper-slide"><a href="<?php echo $mainImageLink ?>"><img
+				src="<?php echo $mainImageLink ?>" alt="<?php echo $mainImageAlt ?>"></a></li>
 	<?php foreach ($productImagesIds as $image_id) {
 		$image_url = wp_get_attachment_url($image_id);
 		$image_alt = get_post_meta($image_id, '_wp_attachment_image_alt', true); ?>
-		<li class="item__images-item js-single-gallery"><a href="<?php echo $image_url ?>"><img src="<?php echo $image_url ?>"
-					alt="<?php echo $image_alt ?>"></a></li>
-	<?php }
-}
+		<li class="item__images-item js-single-gallery swiper-slide"><a href="<?php echo $image_url ?>"><img
+					src="<?php echo $image_url ?>" alt="<?php echo $image_alt ?>"></a></li>
+	<?php } ?>
+<?php } ?>

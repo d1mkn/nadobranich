@@ -29,15 +29,34 @@ $post_thumbnail_id = $product->get_image_id();
 $mainImageId = get_post_thumbnail_id($productId);
 $mainImageLink = wp_get_attachment_url(get_post_thumbnail_id($productId));
 $mainImageAlt = get_post_meta($mainImageId, '_wp_attachment_image_alt', true);
+
+$productImagesIds = $product->get_gallery_image_ids();
 ?>
 <div class="item__body-left">
 
 	<div class="item__images">
 		<?php
 		if ($post_thumbnail_id) { ?>
-			<div class="item__images-main-wrap js-single-gallery">
-				<a href="<?php echo $mainImageLink ?>"><img class="item__images-main" src="<?php echo $mainImageLink ?>"
-						alt="<?php echo $mainImageAlt ?>"></a>
+			<div class="gallery-top">
+				<div class="swiper-container item__images-main-wrap js-single-gallery">
+					<div class="gallery-nav swiper-button-next">next</div>
+					<div class="gallery-nav swiper-button-prev">prev</div>
+
+					<div class="swiper-wrapper">
+						<div class="swiper-slide">
+							<a href="<?php echo $mainImageLink ?>"><img class="item__images-main"
+									src="<?php echo $mainImageLink ?>" alt="<?php echo $mainImageAlt ?>"></a>
+						</div>
+
+						<?php foreach ($productImagesIds as $image_id) {
+							$image_url = wp_get_attachment_url($image_id);
+							$image_alt = get_post_meta($image_id, '_wp_attachment_image_alt', true); ?>
+							<div class="swiper-slide"><a href="<?php echo $image_url ?>"><img class="item__images-main"
+										src="<?php echo $image_url ?>" alt="<?php echo $image_alt ?>"></a></div>
+						<?php } ?>
+					</div>
+				</div>
+
 			</div>
 		<?php } else {
 			echo '<div class="item__images-main">';
@@ -45,9 +64,11 @@ $mainImageAlt = get_post_meta($mainImageId, '_wp_attachment_image_alt', true);
 			echo '</div>';
 		} ?>
 
-		<ul class="item__images-list">
-			<?php do_action('woocommerce_product_thumbnails');
-			?>
+		<ul class="item__images-list swiper-container gallery-thumbs">
+			<div class="swiper-wrapper">
+				<?php do_action('woocommerce_product_thumbnails');
+				?>
+			</div>
 		</ul>
 
 	</div>

@@ -1,7 +1,7 @@
 import Swiper, { Navigation } from "swiper";
 
 Swiper.use([Navigation]);
-const swiper = new Swiper(".swiper-container", {
+const swiper = new Swiper(".single-category.swiper-container", {
   loop: false,
 
   on: {
@@ -31,8 +31,28 @@ const swiper = new Swiper(".swiper-container", {
   },
 });
 
-const nextIcons = document.querySelectorAll(".single-category__navigation-icon-next");
-const prevIcons = document.querySelectorAll(".single-category__navigation-icon-prev");
+const galleryThumbs = new Swiper(".gallery-thumbs.swiper-container", {
+  loop: true,
+  watchSlidesVisibility: true,
+  watchSlidesProgress: true,
+});
+const galleryTop = new Swiper(".gallery-top .swiper-container", {
+  loop: true,
+  navigation: {
+    nextEl: ".swiper-button-next",
+    prevEl: ".swiper-button-prev",
+  },
+  thumbs: {
+    swiper: galleryThumbs,
+  },
+});
+
+const nextIcons = document.querySelectorAll(
+  ".single-category__navigation .single-category__navigation-icon-next"
+);
+const prevIcons = document.querySelectorAll(
+  ".single-category__navigation .single-category__navigation-icon-prev"
+);
 
 nextIcons.forEach((icon) => {
   const nextEl = icon.closest(".swiper-button-next");
