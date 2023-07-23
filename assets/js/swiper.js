@@ -1,6 +1,6 @@
-import Swiper, { Navigation } from "swiper";
+import Swiper, { Navigation, Thumbs } from "swiper";
 
-Swiper.use([Navigation]);
+Swiper.use([Navigation, Thumbs]);
 const swiper = new Swiper(".single-category.swiper-container", {
   loop: false,
 
@@ -31,12 +31,14 @@ const swiper = new Swiper(".single-category.swiper-container", {
   },
 });
 
-const galleryThumbs = new Swiper(".gallery-thumbs.swiper-container", {
+let galleryThumbs = new Swiper(".gallery-thumbs.swiper-container", {
+  slidesPerView: "auto",
   loop: true,
+  freeMode: true,
   watchSlidesVisibility: true,
   watchSlidesProgress: true,
 });
-const galleryTop = new Swiper(".gallery-top .swiper-container", {
+let galleryTop = new Swiper(".gallery-top.swiper-container", {
   loop: true,
   navigation: {
     nextEl: ".swiper-button-next",
@@ -46,6 +48,40 @@ const galleryTop = new Swiper(".gallery-top .swiper-container", {
     swiper: galleryThumbs,
   },
 });
+
+function initSwiper() {
+  const screenWidth = window.innerWidth;
+
+  if (screenWidth >= 768 && !galleryThumbs && !galleryTop) {
+    let galleryThumbs = new Swiper(".gallery-thumbs.swiper-container", {
+      slidesPerView: "auto",
+      loop: true,
+      freeMode: true,
+      watchSlidesVisibility: true,
+      watchSlidesProgress: true,
+    });
+    let galleryTop = new Swiper(".gallery-top.swiper-container", {
+      loop: true,
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+      thumbs: {
+        swiper: galleryThumbs,
+      },
+    });
+  } else if (screenWidth < 768 && galleryThumbs && galleryTop) {
+    galleryThumbs.destroy();
+    galleryThumbs = null;
+
+    galleryTop.destroy();
+    galleryTop = null;
+  }
+}
+
+window.addEventListener("load", initSwiper);
+window.addEventListener("resize", initSwiper);
+window.addEventListener("orientationchange", initSwiper);
 
 const nextIcons = document.querySelectorAll(
   ".single-category__navigation .single-category__navigation-icon-next"

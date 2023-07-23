@@ -37,26 +37,31 @@ $productImagesIds = $product->get_gallery_image_ids();
 	<div class="item__images">
 		<?php
 		if ($post_thumbnail_id) { ?>
-			<div class="gallery-top">
-				<div class="swiper-container item__images-main-wrap js-single-gallery">
-					<div class="gallery-nav swiper-button-next">next</div>
-					<div class="gallery-nav swiper-button-prev">prev</div>
+			<div class="swiper-container item__images-main-wrap js-single-gallery gallery-top">
+				<div class="gallery-nav swiper-button-next"><svg width="15" height="30">
+						<use href="<?php bloginfo(
+							"template_url",
+						); ?>/assets/images/icons.svg#gallery-arrow-next"></use>
+					</svg></div>
+				<div class="gallery-nav swiper-button-prev"><svg width="15" height="30">
+						<use href="<?php bloginfo(
+							"template_url",
+						); ?>/assets/images/icons.svg#gallery-arrow-prev"></use>
+					</svg></div>
 
-					<div class="swiper-wrapper">
-						<div class="swiper-slide">
-							<a href="<?php echo $mainImageLink ?>"><img class="item__images-main"
-									src="<?php echo $mainImageLink ?>" alt="<?php echo $mainImageAlt ?>"></a>
-						</div>
-
-						<?php foreach ($productImagesIds as $image_id) {
-							$image_url = wp_get_attachment_url($image_id);
-							$image_alt = get_post_meta($image_id, '_wp_attachment_image_alt', true); ?>
-							<div class="swiper-slide"><a href="<?php echo $image_url ?>"><img class="item__images-main"
-										src="<?php echo $image_url ?>" alt="<?php echo $image_alt ?>"></a></div>
-						<?php } ?>
+				<div class="swiper-wrapper">
+					<div class="swiper-slide">
+						<a href="<?php echo $mainImageLink ?>"><img class="item__images-main"
+								src="<?php echo $mainImageLink ?>" alt="<?php echo $mainImageAlt ?>"></a>
 					</div>
-				</div>
 
+					<?php foreach ($productImagesIds as $image_id) {
+						$image_url = wp_get_attachment_url($image_id);
+						$image_alt = get_post_meta($image_id, '_wp_attachment_image_alt', true); ?>
+						<div class="swiper-slide"><a href="<?php echo $image_url ?>"><img class="item__images-main"
+									src="<?php echo $image_url ?>" alt="<?php echo $image_alt ?>"></a></div>
+					<?php } ?>
+				</div>
 			</div>
 		<?php } else {
 			echo '<div class="item__images-main">';
@@ -70,6 +75,5 @@ $productImagesIds = $product->get_gallery_image_ids();
 				?>
 			</div>
 		</ul>
-
 	</div>
 </div>
