@@ -77,6 +77,26 @@ function initSwiper() {
     galleryTop.destroy();
     galleryTop = null;
   }
+  if (screenWidth < 768) {
+    document
+      .querySelector(".item__images-list")
+      .classList.remove(
+        "swiper-backface-hidden",
+        "swiper-thumbs",
+        "swiper-initialized",
+        "swiper-horizontal",
+        "swiper-watch-progress"
+      );
+
+    document.querySelectorAll(".swiper-slide").forEach((slide) => {
+      slide.classList.remove(
+        "swiper-slide-active",
+        "swiper-slide-thumb-active",
+        "swiper-slide-prev",
+        "swiper-slide-next"
+      );
+    });
+  }
 }
 
 window.addEventListener("load", initSwiper);

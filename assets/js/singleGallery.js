@@ -1,28 +1,31 @@
 import simpleLightbox from "simplelightbox";
 
-const singleGallery = new SimpleLightbox(".js-single-gallery a", {
+let singleGallery = new SimpleLightbox(".js-single-gallery a", {
   captionsData: "alt",
   captionDelay: 250,
   scrollZoom: false,
 });
 
-let singleGalleryThumbs = new SimpleLightbox(".item__images-list a", {
-  captionsData: "alt",
-  captionDelay: 250,
-  scrollZoom: false,
-});
+let singleGalleryThumbs = null;
 
 function initThumbs() {
   const screenWidth = window.innerWidth;
   if (screenWidth < 768 && !singleGalleryThumbs) {
-    let singleGalleryThumbs = new SimpleLightbox(".item__images-list a", {
+    singleGalleryThumbs = new SimpleLightbox(".item__images-list a", {
       captionsData: "alt",
       captionDelay: 250,
       scrollZoom: false,
     });
-  } else if (screenWidth >= 768 && singleGalleryThumbs) {
+    singleGallery.destroy();
+    singleGallery = null;
+  } else if (screenWidth >= 768 && singleGalleryThumbs && !singleGallery) {
     singleGalleryThumbs.destroy();
     singleGalleryThumbs = null;
+    singleGallery = new SimpleLightbox(".js-single-gallery a", {
+      captionsData: "alt",
+      captionDelay: 250,
+      scrollZoom: false,
+    });
   }
 }
 
