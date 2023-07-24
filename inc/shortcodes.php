@@ -112,11 +112,26 @@ function modal_markup()
           </button>
           <div class="modal__body">
             <div class="modal__images">
-              <div class="modal__images-main-wrap">
+              <div class="modal__images-main-wrap swiper-container gallery-top js-modal-main-img">
+                <div class="modal-gallery-nav swiper-button-next">
+                  <svg width="15" height="30">
+						        <use href="' . $template_url . '/assets/images/icons.svg#gallery-arrow-next"></use>
+					        </svg>
+                </div>
+				      <div class="modal-gallery-nav swiper-button-prev">
+                <svg width="15" height="30">
+						      <use href="' . $template_url . '/assets/images/icons.svg#gallery-arrow-prev"></use>
+					      </svg>
+				      </div>
+              <div class="swiper-wrapper">
+                <div class="modal__images-main swiper-slide">
+                  <a href="#"><img src="#" alt="#"></a>
+                </div>
               </div>
-              <div class="modal__images-list-wrap">
-                <ul class="modal__images-list js-modal-gallery">
-                  <li class="modal__images-item"><a href="#"><img src="#" alt="#"></a></li>
+            </div>
+              <div class="modal__images-list-wrap swiper-container gallery-thumbs">
+                <ul class="modal__images-list js-modal-gallery swiper-wrapper">
+                    <li class="modal__images-item swiper-slide"><a href="#"><img src="#" alt="#"></a></li>
                 </ul>
               </div>
             </div>

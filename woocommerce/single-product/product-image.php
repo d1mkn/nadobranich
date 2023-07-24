@@ -47,7 +47,8 @@ $productImagesIds = $product->get_gallery_image_ids();
 						<use href="<?php bloginfo(
 							"template_url",
 						); ?>/assets/images/icons.svg#gallery-arrow-prev"></use>
-					</svg></div>
+					</svg>
+				</div>
 
 				<div class="swiper-wrapper">
 					<div class="swiper-slide">

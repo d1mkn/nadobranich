@@ -1,5 +1,6 @@
 import { refs } from "./refs";
 import axios from "axios";
+import Swiper, { Navigation, Thumbs } from "swiper";
 import SimpleLightbox from "simplelightbox";
 
 export let isToCartOpened = false;
@@ -53,17 +54,27 @@ function renderInfoFromLocal(e) {
 
   // main img
   const mainImg = currProduct.productImages.mainImg;
-  refs.mainImgWrap.innerHTML = `<img class="modal__images-main js-modal-main-img" src="${mainImg.url}" alt="${mainImg.alt}">`;
+  refs.mainImgWrap.innerHTML = topImgMarkup();
+
+  function topImgMarkup() {
+    let markup = `<div class="modal__images-main swiper-slide"><a href="${mainImg.url}"><img src="${mainImg.url}" alt="${mainImg.alt}"></a></div>`;
+    const imagesList = currProduct.productImages.gallery;
+
+    imagesList.forEach((image) => {
+      markup += `<div class="modal__images-main swiper-slide"><a href="${image.url}"><img src="${image.url}" alt="${image.alt}"></a></div>`;
+    });
+    return markup;
+  }
 
   // image gallery
   refs.modalGallery.innerHTML = galleryMarkup();
 
   function galleryMarkup() {
-    let markup = `<li class="modal__images-item"><a href="${mainImg.url}"><img src="${mainImg.url}" alt="${mainImg.alt}"></a></li>`;
+    let markup = `<li class="modal__images-item swiper-slide"><a href="${mainImg.url}"><img class="modal__images-item" src="${mainImg.url}" alt="${mainImg.alt}"></a></li>`;
     const imagesList = currProduct.productImages.gallery;
 
     imagesList.forEach((image) => {
-      markup += `<li class="modal__images-item"><a href="${image.url}"><img src="${image.url}" alt="${image.alt}"></a></li>`;
+      markup += `<li class="modal__images-item swiper-slide"><a href="${image.url}"><img src="${image.url}" alt="${image.alt}"></a></li>`;
     });
     return markup;
   }
@@ -122,6 +133,78 @@ function renderInfoFromLocal(e) {
 
   // Nav buttons
   refs.toItemBtn.setAttribute("href", currProduct.productLink);
+
+  Swiper.use([Navigation, Thumbs]);
+  let modalGalleryThumbs = new Swiper(".modal__images-list-wrap.gallery-thumbs.swiper-container", {
+    slidesPerView: "auto",
+    loop: true,
+    freeMode: true,
+    watchSlidesVisibility: true,
+    watchSlidesProgress: true,
+  });
+  let modalGalleryTop = new Swiper(".modal__images-main-wrap.gallery-top.swiper-container", {
+    loop: true,
+    navigation: {
+      nextEl: ".modal-gallery-nav.swiper-button-next",
+      prevEl: ".modal-gallery-nav.swiper-button-prev",
+    },
+    thumbs: {
+      swiper: modalGalleryThumbs,
+    },
+  });
+
+  function initModalSwiper() {
+    const screenWidth = window.innerWidth;
+
+    if (screenWidth >= 768 && !modalGalleryThumbs && !modalGalleryTop) {
+      let modalGalleryThumbs = new Swiper(".modal__images-list-wrap.swiper-container", {
+        slidesPerView: 7,
+        loopedSlides: 4,
+        loop: true,
+        freeMode: true,
+        watchSlidesVisibility: true,
+        watchSlidesProgress: true,
+      });
+      let modalGalleryTop = new Swiper(".modal__images-main-wrap.swiper-container", {
+        loop: true,
+        loopedSlides: 4,
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+        thumbs: {
+          swiper: modalGalleryThumbs,
+        },
+      });
+    } else if (screenWidth < 768 && modalGalleryThumbs && modalGalleryTop) {
+      modalGalleryThumbs.destroy();
+      modalGalleryThumbs = null;
+
+      modalGalleryTop.destroy();
+      modalGalleryTop = null;
+    }
+    if (screenWidth < 768) {
+      document
+        .querySelector(".modal__images-list")
+        .classList.remove(
+          "swiper-backface-hidden",
+          "swiper-thumbs",
+          "swiper-initialized",
+          "swiper-horizontal",
+          "swiper-watch-progress"
+        );
+
+      document.querySelectorAll(".modal__images-item.swiper-slide").forEach((slide) => {
+        slide.classList.remove(
+          "swiper-slide-active",
+          "swiper-slide-thumb-active",
+          "swiper-slide-prev",
+          "swiper-slide-next"
+        );
+      });
+    }
+  }
+  initModalSwiper();
 }
 
 function pickColor() {
@@ -236,16 +319,49 @@ function pickSize() {
 }
 
 function initGallery() {
-  const mainImg = document.querySelector(".js-modal-main-img");
-  const gallery = new SimpleLightbox(".js-modal-gallery a", {
+  let gallery = new SimpleLightbox(".js-modal-main-img a", {
     captionsData: "alt",
     captionDelay: 250,
     scrollZoom: false,
   });
 
-  mainImg.addEventListener("click", (e) => {
-    e.preventDefault;
-    gallery.open();
+  let modalThumbs = null;
+
+  function initThumbs() {
+    const screenWidth = window.innerWidth;
+    if (screenWidth < 768 && !modalThumbs) {
+      modalThumbs = new SimpleLightbox(".modal__images-list a", {
+        captionsData: "alt",
+        captionDelay: 250,
+        scrollZoom: false,
+      });
+      gallery.destroy();
+      gallery = null;
+    } else if (screenWidth >= 768 && modalThumbs && !gallery) {
+      modalThumbs.destroy();
+      modalThumbs = null;
+      gallery = new SimpleLightbox(".js-single-gallery a", {
+        captionsData: "alt",
+        captionDelay: 250,
+        scrollZoom: false,
+      });
+    }
+  }
+
+  initThumbs();
+
+  const galleryThumbs = document.querySelectorAll(".modal__images-list a");
+  galleryThumbs.forEach((thumb) => {
+    thumb.addEventListener("click", (e) => {
+      e.preventDefault();
+    });
+  });
+
+  const modalGalleryThumbs = document.querySelectorAll(".modal__images-list a");
+  galleryThumbs.forEach((thumb) => {
+    thumb.addEventListener("click", (e) => {
+      e.preventDefault();
+    });
   });
 }
 

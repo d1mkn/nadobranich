@@ -31,15 +31,17 @@ const swiper = new Swiper(".single-category.swiper-container", {
   },
 });
 
-let galleryThumbs = new Swiper(".gallery-thumbs.swiper-container", {
-  slidesPerView: "auto",
+let galleryThumbs = new Swiper(".item__images-list.gallery-thumbs.swiper-container", {
   loop: true,
   freeMode: true,
   watchSlidesVisibility: true,
   watchSlidesProgress: true,
+  slidesPerView: 7,
+  loopedSlides: 4,
 });
-let galleryTop = new Swiper(".gallery-top.swiper-container", {
+let galleryTop = new Swiper(".item__images-main-wrap.gallery-top.swiper-container", {
   loop: true,
+  loopedSlides: 4,
   navigation: {
     nextEl: ".swiper-button-next",
     prevEl: ".swiper-button-prev",
@@ -53,14 +55,14 @@ function initSwiper() {
   const screenWidth = window.innerWidth;
 
   if (screenWidth >= 768 && !galleryThumbs && !galleryTop) {
-    let galleryThumbs = new Swiper(".gallery-thumbs.swiper-container", {
+    let galleryThumbs = new Swiper(".item__images-list.gallery-thumbs.swiper-container", {
       slidesPerView: "auto",
       loop: true,
       freeMode: true,
       watchSlidesVisibility: true,
       watchSlidesProgress: true,
     });
-    let galleryTop = new Swiper(".gallery-top.swiper-container", {
+    let galleryTop = new Swiper(".item__images-main-wrap.gallery-top.swiper-container", {
       loop: true,
       navigation: {
         nextEl: ".swiper-button-next",
@@ -88,7 +90,7 @@ function initSwiper() {
         "swiper-watch-progress"
       );
 
-    document.querySelectorAll(".swiper-slide").forEach((slide) => {
+    document.querySelectorAll(".item__images-list .swiper-slide").forEach((slide) => {
       slide.classList.remove(
         "swiper-slide-active",
         "swiper-slide-thumb-active",
