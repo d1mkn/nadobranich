@@ -1,6 +1,10 @@
-import Swiper, { Navigation, Thumbs } from "swiper";
+import Swiper, { Navigation } from "swiper";
 
-Swiper.use([Navigation, Thumbs]);
+Swiper.use([Navigation]);
+const categoryListSwiper = new Swiper(".categories-wrap.swiper-container", {
+  slidesPerView: "auto",
+});
+
 const swiper = new Swiper(".single-category.swiper-container", {
   loop: false,
 
@@ -30,80 +34,6 @@ const swiper = new Swiper(".single-category.swiper-container", {
     },
   },
 });
-
-let galleryThumbs = new Swiper(".item__images-list.gallery-thumbs.swiper-container", {
-  loop: true,
-  freeMode: true,
-  watchSlidesVisibility: true,
-  watchSlidesProgress: true,
-  slidesPerView: 7,
-  loopedSlides: 4,
-});
-let galleryTop = new Swiper(".item__images-main-wrap.gallery-top.swiper-container", {
-  loop: true,
-  loopedSlides: 4,
-  navigation: {
-    nextEl: ".swiper-button-next",
-    prevEl: ".swiper-button-prev",
-  },
-  thumbs: {
-    swiper: galleryThumbs,
-  },
-});
-
-function initSwiper() {
-  const screenWidth = window.innerWidth;
-
-  if (screenWidth >= 768 && !galleryThumbs && !galleryTop) {
-    let galleryThumbs = new Swiper(".item__images-list.gallery-thumbs.swiper-container", {
-      slidesPerView: "auto",
-      loop: true,
-      freeMode: true,
-      watchSlidesVisibility: true,
-      watchSlidesProgress: true,
-    });
-    let galleryTop = new Swiper(".item__images-main-wrap.gallery-top.swiper-container", {
-      loop: true,
-      navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-      },
-      thumbs: {
-        swiper: galleryThumbs,
-      },
-    });
-  } else if (screenWidth < 768 && galleryThumbs && galleryTop) {
-    galleryThumbs.destroy();
-    galleryThumbs = null;
-
-    galleryTop.destroy();
-    galleryTop = null;
-  }
-  if (screenWidth < 768) {
-    document
-      .querySelector(".item__images-list")
-      .classList.remove(
-        "swiper-backface-hidden",
-        "swiper-thumbs",
-        "swiper-initialized",
-        "swiper-horizontal",
-        "swiper-watch-progress"
-      );
-
-    document.querySelectorAll(".item__images-list .swiper-slide").forEach((slide) => {
-      slide.classList.remove(
-        "swiper-slide-active",
-        "swiper-slide-thumb-active",
-        "swiper-slide-prev",
-        "swiper-slide-next"
-      );
-    });
-  }
-}
-
-window.addEventListener("load", initSwiper);
-window.addEventListener("resize", initSwiper);
-window.addEventListener("orientationchange", initSwiper);
 
 const nextIcons = document.querySelectorAll(
   ".single-category__navigation .single-category__navigation-icon-next"

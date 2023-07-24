@@ -1,8 +1,8 @@
 import "./refs.js";
 import "./header.js";
 import "./renderSinglePage.js";
-import "./singleGallery.js";
 import "./singlePageAddToCart.js";
+import "./singleGallery.js";
 import "./faq.js";
 import "./reviews.js";
 import "./swiper.js";

@@ -2794,6 +2794,7 @@ header button {
   .categories__list {
     min-width: 0;
     gap: 15px;
+    justify-content: center;
   }
 }
 @media screen and (min-width: 1240px) {
