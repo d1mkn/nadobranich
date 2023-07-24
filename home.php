@@ -364,11 +364,6 @@ Template Name: Home
     }
   }
   ?>
-
-  <script>
-    const aboutProducts = <?php echo json_encode($_SESSION['aboutProducts']); ?>;
-    localStorage.setItem('aboutProducts', JSON.stringify(aboutProducts));
-  </script>
 </main>
 
 <?php echo do_shortcode('[modal_markup]') ?>

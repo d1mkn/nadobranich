@@ -131,6 +131,14 @@
       </div>
     </div>
   </div>
+  <?php
+  if ($_SESSION['aboutProducts']) { ?>
+    <script>
+      const aboutProducts = <?php echo json_encode($_SESSION['aboutProducts']); ?>;
+      localStorage.setItem('aboutProducts', JSON.stringify(aboutProducts));
+    </script>
+  <?php }
+  ?>
   <?php wp_footer(); ?>
 </footer>
 </body>

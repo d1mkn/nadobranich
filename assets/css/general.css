@@ -4076,13 +4076,13 @@ div.modal__body-color-item div {
   width: 100%;
   height: 100%;
 }
-.woocommerce .modal__images-main.swiper-slide img {
+.modal__images-main.swiper-slide img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: top;
 }
-.woocommerce img.modal__images-main {
+img.modal__images-main {
   width: 100%;
   height: 100%;
   object-fit: cover;
