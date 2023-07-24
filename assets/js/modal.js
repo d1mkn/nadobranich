@@ -12,6 +12,7 @@ function openModal() {
   refs.modalBackdrop.classList.remove("visually-hidden");
   refs.modalBackdrop.classList.add("animate__fadeIn");
   document.body.classList.add("modal-open");
+  document.querySelector(".modal__images-main-wrap .swiper-wrapper").removeAttribute("style");
 }
 
 function closeModal() {
