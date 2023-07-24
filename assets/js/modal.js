@@ -4,6 +4,8 @@ import Swiper, { Navigation, Thumbs } from "swiper";
 import SimpleLightbox from "simplelightbox";
 
 export let isToCartOpened = false;
+let modalGalleryThumbs = null;
+let modalGalleryTop = null;
 
 function openModal() {
   refs.modal.classList.remove("visually-hidden");
@@ -15,6 +17,14 @@ function openModal() {
 function closeModal() {
   refs.modalBackdrop.classList.remove("animate__fadeIn");
   refs.modalBackdrop.classList.add("animate__fadeOut");
+  if (modalGalleryThumbs) {
+    modalGalleryThumbs.destroy();
+    modalGalleryThumbs = null;
+  }
+  if (modalGalleryTop) {
+    modalGalleryTop.destroy();
+    modalGalleryTop = null;
+  }
   setTimeout(() => {
     refs.modalBackdrop.classList.add("visually-hidden");
     refs.modal.classList.add("visually-hidden");
@@ -135,14 +145,14 @@ function renderInfoFromLocal(e) {
   refs.toItemBtn.setAttribute("href", currProduct.productLink);
 
   Swiper.use([Navigation, Thumbs]);
-  let modalGalleryThumbs = new Swiper(".modal__images-list-wrap.gallery-thumbs.swiper-container", {
+  modalGalleryThumbs = new Swiper(".modal__images-list-wrap.gallery-thumbs.swiper-container", {
     slidesPerView: "auto",
     loop: true,
     freeMode: true,
     watchSlidesVisibility: true,
     watchSlidesProgress: true,
   });
-  let modalGalleryTop = new Swiper(".modal__images-main-wrap.gallery-top.swiper-container", {
+  modalGalleryTop = new Swiper(".modal__images-main-wrap.gallery-top.swiper-container", {
     loop: true,
     navigation: {
       nextEl: ".modal-gallery-nav.swiper-button-next",
