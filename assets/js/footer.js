@@ -19,6 +19,11 @@ window.addEventListener("orientationchange", handleOrientationChange);
 let listenersAdded = false;
 
 function checkInnerWidth() {
+  if (document.documentElement.clientWidth > 1240) {
+    document.querySelector(".mobile-menu__container").classList.remove("is-open");
+    document.querySelector(".backdrop").classList.add("visually-hidden");
+  }
+
   if (document.documentElement.clientWidth > 767) {
     infoBlocks.forEach((block) => {
       block.classList.remove("visually-hidden");

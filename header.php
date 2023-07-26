@@ -136,7 +136,9 @@ session_unset();
     <div class="mobile-menu__content">
       <div class="mobile-menu__content-wrap">
         <div class="container">
-          <?php echo do_shortcode('[fibosearch]'); ?>
+          <div class="mobile-search">
+            <?php echo do_shortcode('[fibosearch]'); ?>
+          </div>
           <nav class="mobile-menu__nav">
             <ul class="mobile-menu__list">
               <li>
@@ -198,7 +200,9 @@ session_unset();
                 </a></li>
             </ul>
           </div>
-
+          <div class="mobile-menu__login">
+            <a href="#">Вхід / Реєстрація</a>
+          </div>
         </div>
       </div>
     </div>

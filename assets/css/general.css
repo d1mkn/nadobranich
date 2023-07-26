@@ -2105,6 +2105,9 @@ button {
     width: 768px;
     padding: 0 51px;
   }
+  .header__container.container {
+    width: unset;
+  }
 }
 @media screen and (min-width: 1240px) {
   .container {
@@ -2456,6 +2459,14 @@ header button {
 }
 .mobile-menu__content-wrap {
   margin-top: 55px;
+  margin-bottom: 50px;
+  overflow-y: auto;
+}
+@media screen and (min-width: 768px) {
+  .mobile-menu__content-wrap {
+    margin-top: 90px;
+    margin-bottom: 65px;
+  }
 }
 .mobile-menu__content {
   width: 265px;
@@ -2463,30 +2474,90 @@ header button {
   background-color: #fff;
   display: flex;
 }
+@media screen and (min-width: 768px) {
+  .mobile-menu__content {
+    width: 457px;
+  }
+}
+@media screen and (min-width: 768px) {
+  .mobile-search {
+    display: none;
+  }
+}
 .mobile-menu__content .container {
   width: 100%;
 }
-.mobile-menu__nav{
+.mobile-menu__nav {
   margin-bottom: 15px;
+}
+@media screen and (min-width: 768px) {
+  .mobile-menu__nav {
+    margin-bottom: 20px;
+  }
 }
 .mobile-menu__list {
   flex-direction: column;
   gap: 15px;
   display: flex;
 }
+@media screen and (min-width: 768px) {
+  .mobile-menu__list {
+    gap: 20px;
+  }
+}
 .mobile-menu__title {
   margin-bottom: 5px;
   font-size: 16px;
   font-weight: 600;
+}
+@media screen and (min-width: 768px) {
+  .mobile-menu__title {
+    margin-bottom: 5px;
+    font-size: 20px;
+    font-weight: 600;
+  }
 }
 .mobile-menu__item {
   font-size: 15px;
   line-height: 19.5px;
   transition: color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
+@media screen and (min-width: 768px) {
+  .mobile-menu__item {
+    font-size: 20px;
+    line-height: 26px;
+  }
+}
 .mobile-menu__item:hover,
 .mobile-menu__item:focus {
   color: #a4c9f5;
+}
+.mobile-menu__login {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  left: 0;
+  bottom: 0;
+  height: 50px;
+  width: 100%;
+  background-color: #a4c9f5;
+}
+@media screen and (min-width: 768px) {
+  .mobile-menu__login {
+    height: 65px;
+  }
+}
+.mobile-menu__login a {
+  padding-left: 15px;
+  font-size: 16px;
+  line-height: 21px;
+}
+@media screen and (min-width: 768px) {
+  .mobile-menu__login a {
+    padding-left: 52px;
+    font-size: 20px;
+    line-height: 26px;
+  }
 }
 .to-cart__wrap {
   z-index: 3;
