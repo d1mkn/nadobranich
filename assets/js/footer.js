@@ -21,6 +21,7 @@ let listenersAdded = false;
 function checkInnerWidth() {
   if (document.documentElement.clientWidth > 1240) {
     document.querySelector(".mobile-menu__container").classList.remove("is-open");
+    document.querySelector("body").classList.remove("modal-open");
     document.querySelector(".backdrop").classList.add("visually-hidden");
   }
 

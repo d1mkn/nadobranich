@@ -2114,6 +2114,9 @@ button {
     width: 1240px;
     padding: 0;
   }
+  .header__container.container {
+    width: 1240px;
+  }
 }
 header {
   z-index: 3;
