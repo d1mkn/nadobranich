@@ -33,22 +33,17 @@
             <?php
             $args = array(
               'taxonomy' => 'product_cat',
-              // вказуємо таксономію товарних категорій
-              'hide_empty' => false, // показуємо всі категорії, включаючи порожні
+              'hide_empty' => false,
             );
-
-            $categories = get_terms($args); // список категорій товарів
-            
+            $categories = get_terms($args);
             foreach ($categories as $category) {
               $category_id = $category->term_id;
               $category_name = $category->name;
 
               if ($category_name === 'Uncategorized') {
-                continue; // пропускаємо ітерацію циклу та переходимо до наступної категорії
+                continue; //
               }
-
               $category_link = get_term_link($category_id, 'product_cat'); // посилання на сторінку категорії товарів
-            
               ?>
               <li>
                 <a class="footer__catalog-link" href=<?php echo $category_link ?>><?php echo $category_name ?></a>
@@ -134,7 +129,7 @@
   <?php
   if (!empty($_SESSION['aboutProducts'])) { ?>
     <script>
-      const aboutProducts = <?php echo json_encode($_SESSION['aboutProducts']); ?>;
+      let aboutProducts = <?php echo json_encode($_SESSION['aboutProducts']); ?>;
       localStorage.setItem('aboutProducts', JSON.stringify(aboutProducts));
     </script>
   <?php }

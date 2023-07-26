@@ -205,8 +205,8 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
     add_action('template_redirect', 'nadobranich_recently_viewed_product_cookie', 20);
     function cart_update_qty_script()
     {
-        if (is_cart()):
-            ?>
+        if (is_cart() && !WC()->cart->is_empty()):
+                ?>
             <script>
                 jQuery('body').on('click', '.item__body-select', function () {
                     var input = jQuery(this).closest('.cart__item').find('.old-selector');

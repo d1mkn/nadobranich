@@ -21,18 +21,12 @@ function headerSearchForm() {
 headerSearchForm();
 
 refs.menuBtn.addEventListener("click", () => {
-  refs.backdrop.classList.remove("visually-hidden");
-  refs.menuContainer.classList.add("is-open");
-  document.body.classList.add("modal-open");
+  refs.backdrop.classList.toggle("visually-hidden");
+  refs.menuContainer.classList.toggle("is-open");
+  document.body.classList.toggle("modal-open");
 });
 
 refs.backdrop.addEventListener("click", () => {
-  refs.backdrop.classList.add("visually-hidden");
-  refs.menuContainer.classList.remove("is-open");
-  document.body.classList.remove("modal-open");
-});
-
-refs.closeBtn.addEventListener("click", () => {
   refs.backdrop.classList.add("visually-hidden");
   refs.menuContainer.classList.remove("is-open");
   document.body.classList.remove("modal-open");

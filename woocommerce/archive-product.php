@@ -196,14 +196,6 @@ do_action('woocommerce_before_main_content');
 
 		</div>
 
-
-		<script>
-			const aboutProducts = <?php echo json_encode($_SESSION['aboutProducts']); ?>;
-			localStorage.setItem('aboutProducts', JSON.stringify(aboutProducts));
-		</script>
-
-
-
 		<?php
 		/**
 		 * Hook: woocommerce_after_main_content.

@@ -136,36 +136,29 @@ session_unset();
     <div class="mobile-menu__content">
       <div class="mobile-menu__content-wrap">
         <div class="container">
-          <button class="mobile-menu__close-btn">
-            <svg width="24" height="70">
-              <use href="<?php bloginfo('template_url') ?>/assets/images/icons.svg#close"></use>
-            </svg>
-          </button>
+          <?php echo do_shortcode('[fibosearch]'); ?>
           <nav class="mobile-menu__nav">
             <ul class="mobile-menu__list">
               <li>
                 <p class="mobile-menu__title">Каталог</p>
                 <div class="mobile-menu__items-wrap">
-                  <ul>
+                  <ul class="mobile-menu__items">
                     <?php
                     $args = array(
                       'taxonomy' => 'product_cat',
-                      // вказуємо таксономію товарних категорій
-                      'hide_empty' => false, // показуємо всі категорії, включаючи порожні
+                      'hide_empty' => false,
                     );
 
-                    $categories = get_terms($args); // список категорій товарів
-                    
+                    $categories = get_terms($args);
+
                     foreach ($categories as $category) {
                       $category_id = $category->term_id;
                       $category_name = $category->name;
 
                       if ($category_name === 'Uncategorized') {
-                        continue; // пропускаємо ітерацію циклу та переходимо до наступної категорії
+                        continue;
                       }
-
-                      $category_link = get_term_link($category_id, 'product_cat'); // посилання на сторінку категорії товарів
-                    
+                      $category_link = get_term_link($category_id, 'product_cat');
                       ?>
                       <li>
                         <a class="mobile-menu__item" href=<?php echo $category_link ?>><?php echo $category_name ?></a>
@@ -179,7 +172,7 @@ session_unset();
               <li>
                 <p class="mobile-menu__title">Інформація</p>
                 <div class="mobile-menu__items-wrap">
-                  <ul>
+                  <ul class="mobile-menu__items">
                     <li>
                       <a class="mobile-menu__item" href="#">Популярні питання</a>
                     </li>
@@ -197,6 +190,15 @@ session_unset();
               </li>
             </ul>
           </nav>
+          <div class="mobile-menu__contacts">
+            <p class="mobile-menu__title">Контакти</p>
+            <ul class="mobile-menu__items-wrap">
+              <li><a class="mobile-menu__item" href="tel:+380983363028">(098) 33-63-028</a></li>
+              <li><a class="mobile-menu__item" href="mailto:rendez-vous-elite@ukr.net">rendez-vous-elite@ukr.net
+                </a></li>
+            </ul>
+          </div>
+
         </div>
       </div>
     </div>
