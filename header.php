@@ -135,10 +135,12 @@ session_unset();
   <div class="auth-modal__container visually-hidden">
     <div class="auth-modal__content">
       <div class="auth-modal__login">
-        <form method="post" action="http://localhost/nadobranich/wp-login.php">
+        <form method="post" action="<?php bloginfo('url') ?>/wp-login.php">
           <input type="text" name="log" id="user_login" required>
           <input type="password" name="pwd" id="user_pass" required>
           <input type="submit" name="wp-submit" id="wp-submit" value="Увійти">
+          <input type="hidden" name="redirect_to"
+            value="<?php echo 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] ?>" />
         </form>
       </div>
     </div>
