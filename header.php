@@ -113,10 +113,10 @@ session_unset();
             <div class="user-menu navigation__dropdown-wrap">
               <ul class="navigation__dropdown">
                 <li class="navigation__dropdown-item">
-                  <a href="#">Вхід</a>
+                  <a href="#" data-type="login">Вхід</a>
                 </li>
                 <li class="navigation__dropdown-item">
-                  <a href="#">Реєстрація</a>
+                  <a href="#" data-type="register">Реєстрація</a>
                 </li>
               </ul>
             </div>
@@ -131,6 +131,18 @@ session_unset();
   </header>
 
   <div class="backdrop visually-hidden"></div>
+
+  <div class="auth-modal__container visually-hidden">
+    <div class="auth-modal__content">
+      <div class="auth-modal__login">
+        <form method="post" action="http://localhost/nadobranich/wp-login.php">
+          <input type="text" name="log" id="user_login" required>
+          <input type="password" name="pwd" id="user_pass" required>
+          <input type="submit" name="wp-submit" id="wp-submit" value="Увійти">
+        </form>
+      </div>
+    </div>
+  </div>
 
   <div class="mobile-menu__container">
     <div class="mobile-menu__content">

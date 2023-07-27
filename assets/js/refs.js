@@ -7,6 +7,10 @@ export const refs = {
   // backdrop
   backdrop: document.querySelector(".backdrop"),
 
+  // auth
+  userMenu: document.querySelector(".user-menu"),
+  authContainer: document.querySelector(".auth-modal__container"),
+
   // mobile menu
   menuBtn: document.querySelector(".mobile-menu-btn"),
   menuContainer: document.querySelector(".mobile-menu__container"),

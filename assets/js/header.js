@@ -1,4 +1,5 @@
 import { refs } from "./refs";
+import "./auth";
 
 function headerSearchForm() {
   const searchBtn = refs.searchBtn;

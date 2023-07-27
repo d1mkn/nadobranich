@@ -7,7 +7,7 @@ export let isToCartOpened = false;
 let modalGalleryThumbs = null;
 let modalGalleryTop = null;
 
-function openModal() {
+export function openModal() {
   refs.modal.classList.remove("visually-hidden");
   refs.modalBackdrop.classList.remove("visually-hidden");
   refs.modalBackdrop.classList.add("animate__fadeIn");
@@ -18,6 +18,7 @@ function openModal() {
 function closeModal() {
   refs.modalBackdrop.classList.remove("animate__fadeIn");
   refs.modalBackdrop.classList.add("animate__fadeOut");
+  refs.authContainer.classList.add("visually-hidden");
   if (modalGalleryThumbs) {
     modalGalleryThumbs.destroy();
     modalGalleryThumbs = null;
