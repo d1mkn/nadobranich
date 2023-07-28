@@ -8,8 +8,9 @@ export const refs = {
   backdrop: document.querySelector(".backdrop"),
 
   // auth
-  userMenu: document.querySelector(".user-menu"),
+  openLogin: document.querySelectorAll("[data-type=login]"),
   authContainer: document.querySelector(".auth-modal__container"),
+  authCloseBtn: document.querySelector(".js-auth-close-btn"),
 
   // mobile menu
   menuBtn: document.querySelector(".mobile-menu-btn"),

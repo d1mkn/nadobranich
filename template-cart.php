@@ -32,7 +32,13 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 
 </main><!-- #main -->
 
-<?php echo do_shortcode('[modal_markup]') ?>
+<div class="animate__animated animate__faster modal-backdrop visually-hidden">
+  <?php echo do_shortcode('[modalAuth_markup]') ?>
+    <?php echo do_shortcode('[modal_markup]') ?>
+</div>
+
+<?php echo do_shortcode('[modalToCart_markup]') ?>
 <?php echo do_shortcode('[insta_block]') ?>
+
 <?php
 get_footer();

@@ -132,20 +132,6 @@ session_unset();
 
   <div class="backdrop visually-hidden"></div>
 
-  <div class="auth-modal__container visually-hidden">
-    <div class="auth-modal__content">
-      <div class="auth-modal__login">
-        <form method="post" action="<?php bloginfo('url') ?>/wp-login.php">
-          <input type="text" name="log" id="user_login" required>
-          <input type="password" name="pwd" id="user_pass" required>
-          <input type="submit" name="wp-submit" id="wp-submit" value="Увійти">
-          <input type="hidden" name="redirect_to"
-            value="<?php echo 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] ?>" />
-        </form>
-      </div>
-    </div>
-  </div>
-
   <div class="mobile-menu__container">
     <div class="mobile-menu__content">
       <div class="mobile-menu__content-wrap">
@@ -215,7 +201,7 @@ session_unset();
             </ul>
           </div>
           <div class="mobile-menu__login">
-            <a href="#">Вхід / Реєстрація</a>
+            <a href="#" data-type="login">Вхід / Реєстрація</a>
           </div>
         </div>
       </div>

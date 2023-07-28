@@ -206,7 +206,14 @@ do_action('woocommerce_before_main_content');
 
 		<?php
 		do_action('woocommerce_after_main_content');
-		echo do_shortcode('[modal_markup]');
-		echo do_shortcode('[insta_block]');
+		?>
 
-		get_footer();
+		<div class="animate__animated animate__faster modal-backdrop visually-hidden">
+			<?php echo do_shortcode('[modalAuth_markup]') ?>
+			<?php echo do_shortcode('[modal_markup]') ?>
+		</div>
+
+		<?php echo do_shortcode('[modalToCart_markup]') ?>
+		<?php echo do_shortcode('[insta_block]') ?>
+
+		<?php get_footer(); ?>
