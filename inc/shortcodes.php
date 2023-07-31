@@ -221,25 +221,24 @@ function modalAuth_markup()
           </div>
         </a>
         <span class="auth-modal__span-text">Або:</span>
-        <form method="post" action="' . $template_url . '/wp-login.php">
+        <form method="post" action="#">
           <div class="auth-modal__form-input-wrap">
             <input class="auth-modal__form-input" type="text" name="log" id="user_login" placeholder="&#32;" required>
             <label class="auth-modal__form-label" for="log">Електронна пошта</label>
-            <p class="invalid-input-message">Вкажіть електронну пошту</p>
           </div>
+          <p class="invalid-input-message visually-hidden email">Вкажіть електронну пошту</p>
           <div class="auth-modal__form-input-wrap">
             <input class="auth-modal__form-input" type="password" name="pwd" id="user_pass" placeholder="&#32;"
               required>
             <label class="auth-modal__form-label" for="pwd">Пароль</label>
-            <p class="invalid-input-message">Вкажіть пароль</p>
           </div>
+          <p class="invalid-input-message visually-hidden password">Вкажіть пароль</p>
           <div class="auth-modal__form-link">
             <a href="#">Забули пароль?</a>
           </div>
           <div class="auth-modal__form-input-wrap">
             <input class="auth-modal__form-submit" type="submit" name="wp-submit" id="wp-submit" value="Увійти">
-            <input type="hidden" name="redirect_to"
-              value="http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] . '" />
+            <p class="invalid-input-message visually-hidden req-error">Користувач з такою електронною поштою не існує або пароль вказано невірно</p>
           </div>
         </form>
         <div class="auth-modal__bottom">

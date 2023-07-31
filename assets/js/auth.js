@@ -1,3 +1,4 @@
+import axios from "axios";
 import { refs } from "./refs";
 
 refs.openLogin.forEach((loginLink) => {
@@ -21,4 +22,27 @@ refs.authCloseBtn.addEventListener("click", () => {
     refs.modalBackdrop.classList.remove("animate__fadeOut");
     document.body.classList.remove("modal-open");
   }, 500);
-})
+});
+
+refs.authSubmit.addEventListener("click", (e) => {
+  e.preventDefault();
+
+  const payload = new FormData();
+  payload.append("log", refs.emailLoginField.value);
+  payload.append("pwd", refs.passwordLoginField.value);
+  axios.post("wp-login.php", payload).then((response) => {
+    console.log(response.data.length);
+    if (response.data.length > 1) {
+      document
+        .querySelector(".invalid-input-message.req-error")
+        .classList.remove("visually-hidden");
+    } else {
+      document
+        .querySelector(".invalid-input-message.req-error")
+        .classList.remove("visually-hidden");
+      document.querySelector(".invalid-input-message.req-error").textContent =
+        "Ви успішно авторизувалися!";
+      document.querySelector(".invalid-input-message.req-error").style.color = "green";
+    }
+  });
+});

@@ -206,7 +206,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
     function cart_update_qty_script()
     {
         if (is_cart() && !WC()->cart->is_empty()):
-                ?>
+            ?>
             <script>
                 jQuery('body').on('click', '.item__body-select', function () {
                     var input = jQuery(this).closest('.cart__item').find('.old-selector');
@@ -309,4 +309,9 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
         endif;
     }
     add_action('wp_footer', 'cart_update_qty_script');
+    function disable_login_redirect($redirect, $request, $user)
+    {
+        return false;
+    }
+    add_filter('login_redirect', 'disable_login_redirect', 10, 3);
 }

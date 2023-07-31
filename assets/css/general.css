@@ -2525,6 +2525,9 @@ header button {
   margin-top: 15px;
 }
 .auth-modal__form-input-wrap:last-child {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin-bottom: 30px;
 }
 .auth-modal__form-input {
@@ -6760,18 +6763,12 @@ img.modal__images-main {
   transform: translateY(-20px);
 }
 .invalid-input-message {
+  margin-top: 5px;
+  max-width: 280px;
   color: #f51010;
-  display: none;
-}
-@media screen and (min-width: 768px) {
-  .invalid-input-message {
-    opacity: 0;
-    font-size: 15px;
-    transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-    position: absolute;
-    bottom: -5px;
-    transform: translateY(100%);
-  }
+  font-size: 15px;
+  line-height: 19.5px;
+  transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .ordering__form-input:not(:placeholder-shown):invalid {
   border: 1px solid #f51010;

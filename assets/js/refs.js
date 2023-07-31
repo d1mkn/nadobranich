@@ -11,6 +11,9 @@ export const refs = {
   openLogin: document.querySelectorAll("[data-type=login]"),
   authContainer: document.querySelector(".auth-modal__container"),
   authCloseBtn: document.querySelector(".js-auth-close-btn"),
+  authSubmit: document.querySelector(".auth-modal__form-submit"),
+  emailLoginField: document.querySelector('[name="log"]'),
+  passwordLoginField: document.querySelector('[name="pwd"]'),
 
   // mobile menu
   menuBtn: document.querySelector(".mobile-menu-btn"),

@@ -437,7 +437,11 @@ refs.modalTriggerList.forEach((item) => {
   });
 });
 
-refs.modalBackdrop.addEventListener("click", closeModal);
+refs.modalBackdrop.addEventListener("click", (e) => {
+  if (e.currentTarget === e.target) {
+    closeModal();
+  }
+});
 
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") {
