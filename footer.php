@@ -133,7 +133,15 @@
       localStorage.setItem('aboutProducts', JSON.stringify(aboutProducts));
     </script>
   <?php }
-  ?>
+
+  $logout_url = wp_logout_url();
+  $_SESSION['logoutUrl'] = $logout_url;
+  if (!empty($_SESSION['logoutUrl'])) { ?>
+    <script>
+      let logoutUrl = <?php echo json_encode($_SESSION['logoutUrl']); ?>;
+      localStorage.setItem('logoutUrl', JSON.stringify(logoutUrl));
+    </script>
+  <?php } ?>
   <?php wp_footer(); ?>
 </footer>
 </body>

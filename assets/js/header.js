@@ -1,5 +1,8 @@
+import axios from "axios";
 import { refs } from "./refs";
 import "./auth";
+
+const logoutLink = refs.logoutLink;
 
 function headerSearchForm() {
   const searchBtn = refs.searchBtn;
@@ -20,6 +23,13 @@ function headerSearchForm() {
   });
 }
 headerSearchForm();
+
+if (logoutLink) {
+  logoutLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    axios.post(logoutLink.attributes.href.value).then((data) => location.reload(true));
+  });
+}
 
 refs.menuBtn.addEventListener("click", () => {
   refs.backdrop.classList.toggle("visually-hidden");

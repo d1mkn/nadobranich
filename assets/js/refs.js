@@ -3,6 +3,7 @@ export const refs = {
   searchBtn: document.querySelector(".js-search-btn"),
   searchForm: document.querySelector(".js-search-form"),
   cartCounter: document.querySelector(".js-cart-counter"),
+  logoutLink: document.querySelector(".js-logout"),
 
   // backdrop
   backdrop: document.querySelector(".backdrop"),

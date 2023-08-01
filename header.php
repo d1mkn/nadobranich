@@ -112,12 +112,24 @@ session_unset();
             </button>
             <div class="user-menu navigation__dropdown-wrap">
               <ul class="navigation__dropdown">
-                <li class="navigation__dropdown-item">
-                  <a href="#" data-type="login">Вхід</a>
-                </li>
-                <li class="navigation__dropdown-item">
-                  <a href="#" data-type="register">Реєстрація</a>
-                </li>
+                <?php
+                if (is_user_logged_in()) { ?>
+                  <li class="navigation__dropdown-item">
+                    <a href="#">Особистий кабінет</a>
+                  </li>
+                  <li class="navigation__dropdown-item">
+                    <a class="js-logout"
+                      href="<?php echo wp_logout_url() ?>">Вихід</a>
+                  </li>
+                <?php } else { ?>
+                  <li class="navigation__dropdown-item">
+                    <a href="#" data-type="login">Вхід</a>
+                  </li>
+                  <li class="navigation__dropdown-item">
+                    <a href="#" data-type="register">Реєстрація</a>
+                  </li>
+                <?php }
+                ?>
               </ul>
             </div>
           </li>
@@ -201,7 +213,13 @@ session_unset();
             </ul>
           </div>
           <div class="mobile-menu__login">
-            <a href="#" data-type="login">Вхід / Реєстрація</a>
+            <?php
+            if (is_user_logged_in()) { ?>
+              <a href="#">Особистий кабінет</a>
+            <?php } else { ?>
+              <a href="#" data-type="login">Вхід / Реєстрація</a>
+            <?php }
+            ?>
           </div>
         </div>
       </div>
