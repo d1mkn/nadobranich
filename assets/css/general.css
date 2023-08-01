@@ -2461,9 +2461,9 @@ header button {
 }
 @media screen and (min-width: 768px) {
   .auth-modal__close-btn {
-  width: 15px;
-  height: 15px;
-}
+    width: 15px;
+    height: 15px;
+  }
 }
 @media screen and (min-width: 768px) {
   .auth-modal__content {
@@ -2608,6 +2608,10 @@ header button {
 .auth-modal__form-submit:hover,
 .auth-modal__form-submit:focus {
   background-color: #83b0e5;
+}
+.auth-modal__form-submit:disabled {
+  background-color: #c6e0fe;
+  cursor: not-allowed;
 }
 .auth-modal__bottom-item-wrap {
   display: flex;
