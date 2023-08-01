@@ -271,23 +271,31 @@ function modalAuth_markup()
             </div>
           </a>
           <span class="auth-modal__span-text">Або:</span>
-          <form method="post" action="#">
+          <form method="post" action="http://localhost/nadobranich/wp-login.php?action=register">
             <div class="auth-modal__form-input-wrap">
-              <input class="auth-modal__form-input" type="text" name="log" id="user_login" placeholder="&#32;" required>
-              <label class="auth-modal__form-label" for="log">Електронна пошта</label>
+              <input class="auth-modal__form-input" type="text" name="billing_first_name" id="user_name" placeholder="&#32;" required>
+              <label class="auth-modal__form-label" for="billing_first_name">Ім\'я</label>
+            </div>
+            <p class="invalid-input-message visually-hidden first-name">Це поле є обов’язковим</p>
+            <div class="auth-modal__form-input-wrap">
+              <input class="auth-modal__form-input" type="text" name="billing_last_name" id="user_last_name" placeholder="&#32;" required>
+              <label class="auth-modal__form-label" for="billing_last_name">Прізвище</label>
+            </div>
+            <p class="invalid-input-message visually-hidden last-name">Це поле є обов’язковим</p>
+            <div class="auth-modal__form-input-wrap">
+              <input class="auth-modal__form-input" type="text" name="user_email" id="user_email" placeholder="&#32;" required>
+              <label class="auth-modal__form-label" for="user_email">Електронна пошта</label>
             </div>
             <p class="invalid-input-message visually-hidden email">Це поле є обов’язковим</p>
             <div class="auth-modal__form-input-wrap">
-              <input class="auth-modal__form-input" type="password" name="pwd" id="user_pass" placeholder="&#32;"
+              <input class="auth-modal__form-input" type="password" name="billing_user_password" id="user_password" placeholder="&#32;"
                 required>
-              <label class="auth-modal__form-label" for="pwd">Пароль</label>
+              <label class="auth-modal__form-label" for="billing_user_password">Пароль</label>
             </div>
             <p class="invalid-input-message visually-hidden password">Це поле є обов’язковим</p>
-            <div class="auth-modal__form-link">
-              <a href="#">Забули пароль?</a>
-            </div>
             <div class="auth-modal__form-input-wrap">
-              <input class="auth-modal__form-submit" type="submit" value="Увійти">
+              <input class="auth-modal__form-submit" type="submit" value="Зареєструватися">
+              <input type="hidden" name="user_login" id="user_login_reg">
               <p class="invalid-input-message visually-hidden req-error">Користувач з такою електронною поштою не існує або пароль вказано невірно</p>
             </div>
           </form>

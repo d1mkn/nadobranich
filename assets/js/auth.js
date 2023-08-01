@@ -71,7 +71,7 @@ refs.authSubmit.addEventListener("click", (e) => {
     const payload = new FormData();
     payload.append("log", refs.emailLoginField.value);
     payload.append("pwd", refs.passwordLoginField.value);
-    axios.post("wp-login.php", payload).then((response) => {
+    axios.post("http://localhost/nadobranich/wp-login.php", payload).then((response) => {
       document.querySelector(".auth-modal__form-submit").removeAttribute("disabled");
       if (response.data.length > 1) {
         document
@@ -88,4 +88,9 @@ refs.authSubmit.addEventListener("click", (e) => {
       }
     });
   }
+});
+
+refs.registerUserEmail.addEventListener("change", () => {
+  console.log(refs.registerUserEmail.value.split("@")[0]);
+  refs.registerUserLogin.setAttribute("value", `${refs.registerUserEmail.value.split("@")[0]}`);
 });

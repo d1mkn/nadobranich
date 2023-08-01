@@ -20,6 +20,8 @@ export const refs = {
   passwordLoginValidation: document.querySelector(".invalid-input-message.password"),
   openRegister: document.querySelectorAll('[data-type="register"]'),
   registerForm: document.querySelector(".auth-modal__register"),
+  registerUserLogin: document.getElementById("user_login_reg"),
+  registerUserEmail: document.getElementById("user_email"),
 
   // mobile menu
   menuBtn: document.querySelector(".mobile-menu-btn"),

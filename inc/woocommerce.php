@@ -314,10 +314,55 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
         return false;
     }
     add_filter('login_redirect', 'nadobranich_disable_login_redirect', 10, 3);
+    function nadobranich_customer_login_redirect($redirect, $user)
+    {
+        wp_redirect('');
+        exit();
+    }
+    add_action('wp_login', 'nadobranich_customer_login_redirect', 9999, 2);
     function nadobranich_logout_function()
     {
         wp_redirect('');
         exit();
     }
     add_action('wp_logout', 'nadobranich_logout_function');
+    function nadobranich_form_registration_fields()
+    {
+        $billing_first_name = !empty($_POST['billing_first_name']) ? $_POST['billing_first_name'] : '';
+        echo '<p class="form-row form-row-first">
+		<label for="billing_first_name">Ім\'я<span class="required">*</span></label>
+		<input type="text" class="input-text" name="billing_first_name" id="billing_first_name" value="' . esc_attr($billing_first_name) . '" />
+	</p>';
+        $billing_last_name = !empty($_POST['billing_last_name']) ? $_POST['billing_last_name'] : '';
+        echo '<p class="form-row form-row-last">
+		<label for="billing_last_name">Прізвище<span class="required">*</span></label>
+		<input type="text" class="input-text" name="billing_last_name" id="billing_last_name" value="' . esc_attr($billing_last_name) . '" />
+	</p>';
+        $billing_password = !empty($_POST['billing_user_password']) ? $_POST['billing_user_password'] : '';
+        echo '<p class="form-row form-row-last">
+		<label for="billing_user_password">Пароль<span class="required">*</span></label>
+		<input type="password" class="input-text" name="billing_user_password" id="billing_user_password" value="' . esc_attr($billing_password) . '" />
+	</p>';
+        echo '<div class="clear"></div>';
+    }
+    add_action('register_form', 'nadobranich_form_registration_fields', 25);
+    function nadobranich_save_register_fields($user_id)
+    {
+        $userdata = [];
+        $userdata['ID'] = $user_id;
+        if (isset($_POST['billing_first_name'])) {
+            update_user_meta($user_id, 'first_name', sanitize_text_field($_POST['billing_first_name']));
+            update_user_meta($user_id, 'billing_first_name', sanitize_text_field($_POST['billing_first_name']));
+        }
+        if (isset($_POST['billing_last_name'])) {
+            update_user_meta($user_id, 'last_name', sanitize_text_field($_POST['billing_last_name']));
+            update_user_meta($user_id, 'billing_last_name', sanitize_text_field($_POST['billing_last_name']));
+        }
+        if (isset($_POST['billing_user_password'])) {
+            $userdata['user_pass'] = $_POST['billing_user_password'];
+            wp_update_user($userdata);
+            wp_set_auth_cookie($user_id);
+        }
+    }
+    add_action('user_register', 'nadobranich_save_register_fields', 100);
 }
