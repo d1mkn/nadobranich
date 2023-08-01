@@ -209,7 +209,7 @@ function modalAuth_markup()
               alt="Google Auth Icon">
       </div>
       <div class="auth-modal__content-right">
-        <div class="auth-modal__login">
+        <div class="auth-modal__login visually-hidden">
           <div class="auth-modal__top-wrap">
             <div class="auth-modal__top">
               <svg class="auth-modal__icon" width="26" height="26">
@@ -242,14 +242,59 @@ function modalAuth_markup()
               <a href="#">Забули пароль?</a>
             </div>
             <div class="auth-modal__form-input-wrap">
-              <input class="auth-modal__form-submit" type="submit" name="wp-submit" id="wp-submit" value="Увійти">
+              <input class="auth-modal__form-submit" type="submit" value="Увійти">
               <p class="invalid-input-message visually-hidden req-error">Користувач з такою електронною поштою не існує або пароль вказано невірно</p>
             </div>
           </form>
           <div class="auth-modal__bottom">
             <div class="auth-modal__bottom-item-wrap">
               <p class="auth-modal__bottom-item-text">Немає акаунту?</p>
-              <a class="auth-modal__bottom-item-link" href="#">Зареєструватися</a>
+              <a class="auth-modal__bottom-item-link" data-type="register" href="#">Зареєструватися</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="auth-modal__register visually-hidden">
+          <div class="auth-modal__top-wrap">
+            <div class="auth-modal__top">
+              <svg class="auth-modal__icon" width="36" height="26">
+                <use href="' . $template_url . '/assets/images/icons.svg#user-reg"></use>
+              </svg>
+            </div>
+            <p class="auth-modal__title">Реєстрація</p>
+          </div>
+          <a class="auth-modal__social-auth-link" href="#">
+            <img class="auth-modal__social-auth-icon" src="' . $template_url . '/assets/images/gicon.png"
+              alt="Google Auth Icon">
+            <div class="auth-modal__social-auth">
+              Google
+            </div>
+          </a>
+          <span class="auth-modal__span-text">Або:</span>
+          <form method="post" action="#">
+            <div class="auth-modal__form-input-wrap">
+              <input class="auth-modal__form-input" type="text" name="log" id="user_login" placeholder="&#32;" required>
+              <label class="auth-modal__form-label" for="log">Електронна пошта</label>
+            </div>
+            <p class="invalid-input-message visually-hidden email">Це поле є обов’язковим</p>
+            <div class="auth-modal__form-input-wrap">
+              <input class="auth-modal__form-input" type="password" name="pwd" id="user_pass" placeholder="&#32;"
+                required>
+              <label class="auth-modal__form-label" for="pwd">Пароль</label>
+            </div>
+            <p class="invalid-input-message visually-hidden password">Це поле є обов’язковим</p>
+            <div class="auth-modal__form-link">
+              <a href="#">Забули пароль?</a>
+            </div>
+            <div class="auth-modal__form-input-wrap">
+              <input class="auth-modal__form-submit" type="submit" value="Увійти">
+              <p class="invalid-input-message visually-hidden req-error">Користувач з такою електронною поштою не існує або пароль вказано невірно</p>
+            </div>
+          </form>
+          <div class="auth-modal__bottom">
+            <div class="auth-modal__bottom-item-wrap">
+              <p class="auth-modal__bottom-item-text">Маєте акаунт?</p>
+              <a class="auth-modal__bottom-item-link" href="#" data-type="login">Увійти</a>
             </div>
           </div>
         </div>

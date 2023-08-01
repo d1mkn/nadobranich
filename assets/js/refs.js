@@ -13,10 +13,13 @@ export const refs = {
   authContainer: document.querySelector(".auth-modal__container"),
   authCloseBtn: document.querySelector(".js-auth-close-btn"),
   authSubmit: document.querySelector(".auth-modal__form-submit"),
+  loginForm: document.querySelector(".auth-modal__login"),
   emailLoginField: document.querySelector('[name="log"]'),
-  emailLoginValidation: document.querySelector('.invalid-input-message.email'),
+  emailLoginValidation: document.querySelector(".invalid-input-message.email"),
   passwordLoginField: document.querySelector('[name="pwd"]'),
-  passwordLoginValidation: document.querySelector('.invalid-input-message.password'),
+  passwordLoginValidation: document.querySelector(".invalid-input-message.password"),
+  openRegister: document.querySelectorAll('[data-type="register"]'),
+  registerForm: document.querySelector(".auth-modal__register"),
 
   // mobile menu
   menuBtn: document.querySelector(".mobile-menu-btn"),

@@ -2491,6 +2491,8 @@ header button {
   display: flex;
   flex-direction: column;
   align-items: center;
+  opacity: 1;
+  transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .auth-modal__top-wrap {
   display: flex;
@@ -2615,7 +2617,7 @@ header button {
 }
 .auth-modal__bottom-item-wrap {
   display: flex;
-  justify-content: space-between;
+  gap: 10px;
   min-width: 271px;
 }
 .auth-modal__bottom-item-text {
@@ -2633,6 +2635,13 @@ header button {
 .auth-modal__bottom-item-link:hover,
 .auth-modal__bottom-item-link:focus {
   color: #628cbe;
+}
+.auth-modal__register {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 1;
+  transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .backdrop {
   z-index: 2;

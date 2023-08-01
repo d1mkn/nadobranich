@@ -19,6 +19,8 @@ function closeModal() {
   refs.modalBackdrop.classList.remove("animate__fadeIn");
   refs.modalBackdrop.classList.add("animate__fadeOut");
   refs.authContainer.classList.add("visually-hidden");
+  refs.loginForm.classList.add("visually-hidden");
+  refs.registerForm.classList.add("visually-hidden");
   if (modalGalleryThumbs) {
     modalGalleryThumbs.destroy();
     modalGalleryThumbs = null;

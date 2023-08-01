@@ -27,7 +27,9 @@ headerSearchForm();
 if (logoutLink) {
   logoutLink.addEventListener("click", (e) => {
     e.preventDefault();
-    axios.post(logoutLink.attributes.href.value).then((data) => location.reload(true));
+    e.currentTarget.style.cursor = "progress";
+    document.querySelector("body").style.cursor = "progress";
+    axios.post(logoutLink.attributes.href.value).then((data) => location.reload());
   });
 }
 
