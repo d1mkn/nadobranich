@@ -13,7 +13,9 @@ export const refs = {
   authCloseBtn: document.querySelector(".js-auth-close-btn"),
   authSubmit: document.querySelector(".auth-modal__form-submit"),
   emailLoginField: document.querySelector('[name="log"]'),
+  emailLoginValidation: document.querySelector('.invalid-input-message.email'),
   passwordLoginField: document.querySelector('[name="pwd"]'),
+  passwordLoginValidation: document.querySelector('.invalid-input-message.password'),
 
   // mobile menu
   menuBtn: document.querySelector(".mobile-menu-btn"),

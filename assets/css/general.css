@@ -2441,7 +2441,7 @@ header button {
 }
 .auth-modal__container {
   position: absolute;
-  z-index: 4;
+  z-index: 3;
   min-width: 320px;
   padding: 25px 20px;
   top: 50%;
@@ -2450,6 +2450,7 @@ header button {
   background-color: #fff;
   border: 0.5px solid #7d7d7d;
   border-radius: 5px;
+  overflow: hidden;
 }
 .auth-modal__close-btn {
   position: absolute;
@@ -2457,6 +2458,34 @@ header button {
   right: 20px;
   width: 10px;
   height: 10px;
+}
+@media screen and (min-width: 768px) {
+  .auth-modal__close-btn {
+  width: 15px;
+  height: 15px;
+}
+}
+@media screen and (min-width: 768px) {
+  .auth-modal__content {
+    display: flex;
+  }
+}
+.auth-modal__content-left {
+  display: none;
+}
+@media screen and (min-width: 768px) {
+  .auth-modal__content-left {
+    display: block;
+    width: 370px;
+  }
+}
+.auth-modal__img {
+  position: absolute;
+  top: 0px;
+  left: 0;
+  width: 370px;
+  height: 100%;
+  object-fit: cover;
 }
 .auth-modal__login {
   display: flex;
@@ -2574,6 +2603,7 @@ header button {
   font-weight: 600;
   line-height: 26px;
   transition: background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
 }
 .auth-modal__form-submit:hover,
 .auth-modal__form-submit:focus {

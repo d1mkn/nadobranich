@@ -26,12 +26,26 @@ refs.authCloseBtn.addEventListener("click", () => {
 
 refs.authSubmit.addEventListener("click", (e) => {
   e.preventDefault();
+  refs.emailLoginValidation.classList.add('visually-hidden')
+  refs.passwordLoginValidation.classList.add('visually-hidden')
 
-  const payload = new FormData();
+  let isFormValidated = true
+
+  if (!refs.emailLoginField.value) {
+    refs.emailLoginValidation.classList.remove('visually-hidden');
+    isFormValidated = false
+  }
+
+  if (!refs.passwordLoginField.value) {
+    refs.passwordLoginValidation.classList.remove('visually-hidden');
+    isFormValidated = false
+  }
+
+  if (isFormValidated == true) {
+    const payload = new FormData();
   payload.append("log", refs.emailLoginField.value);
   payload.append("pwd", refs.passwordLoginField.value);
   axios.post("wp-login.php", payload).then((response) => {
-    console.log(response.data.length);
     if (response.data.length > 1) {
       document
         .querySelector(".invalid-input-message.req-error")
@@ -43,6 +57,8 @@ refs.authSubmit.addEventListener("click", (e) => {
       document.querySelector(".invalid-input-message.req-error").textContent =
         "Ви успішно авторизувалися!";
       document.querySelector(".invalid-input-message.req-error").style.color = "green";
+      location.reload()
     }
-  });
+  })
+  }
 });
