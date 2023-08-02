@@ -8254,5 +8254,24 @@ footer h3 {
     right: -7px !important;
   }
 }
-
+html body #nsl-redirect-overlay-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  padding: 0px;
+  border-radius: 10px;
+}
+html body #nsl-redirect-overlay-spinner {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+  border: 3px solid #a4c9f5;
+  border-bottom-color: transparent;
+}
 /*# sourceMappingURL=general.css.map */

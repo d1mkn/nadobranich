@@ -218,11 +218,11 @@ function modalAuth_markup()
             </div>
             <p class="auth-modal__title">Вхід до акаунту</p>
           </div>
-          <a class="auth-modal__social-auth-link" href="#">
+          <a class="auth-modal__social-auth-link" href="http://localhost/nadobranich/wp-login.php?loginSocial=google" data-plugin="nsl" data-action="connect" data-redirect="current" data-provider="google" data-popupwidth="600" data-popupheight="600">
             <img class="auth-modal__social-auth-icon" src="' . $template_url . '/assets/images/gicon.png"
               alt="Google Auth Icon">
             <div class="auth-modal__social-auth">
-              Google
+            Google
             </div>
           </a>
           <span class="auth-modal__span-text">Або:</span>
@@ -263,11 +263,11 @@ function modalAuth_markup()
             </div>
             <p class="auth-modal__title">Реєстрація</p>
           </div>
-          <a class="auth-modal__social-auth-link" href="#">
+          <a class="auth-modal__social-auth-link" href="http://localhost/nadobranich/wp-login.php?loginSocial=google" data-plugin="nsl" data-action="connect" data-redirect="current" data-provider="google" data-popupwidth="600" data-popupheight="600">
             <img class="auth-modal__social-auth-icon" src="' . $template_url . '/assets/images/gicon.png"
               alt="Google Auth Icon">
             <div class="auth-modal__social-auth">
-              Google
+            Google
             </div>
           </a>
           <span class="auth-modal__span-text">Або:</span>
