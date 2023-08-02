@@ -49,48 +49,133 @@ refs.authCloseBtn.addEventListener("click", () => {
   }, 500);
 });
 
-refs.authSubmit.addEventListener("click", (e) => {
-  e.preventDefault();
-  refs.emailLoginValidation.classList.add("visually-hidden");
-  refs.passwordLoginValidation.classList.add("visually-hidden");
+refs.authSubmits.forEach((submit) => {
+  submit.addEventListener("click", (e) => {
+    e.preventDefault();
+    let isFormValidated = true;
 
-  let isFormValidated = true;
+    if (!refs.loginForm.classList.contains("visually-hidden")) {
+      refs.emailLoginValidation.classList.add("visually-hidden");
+      refs.emailLoginField.style.borderColor = "#7d7d7d";
+      refs.passwordLoginValidation.classList.add("visually-hidden");
+      refs.passwordLoginField.style.borderColor = "#7d7d7d";
 
-  if (!refs.emailLoginField.value) {
-    refs.emailLoginValidation.classList.remove("visually-hidden");
-    isFormValidated = false;
-  }
-
-  if (!refs.passwordLoginField.value) {
-    refs.passwordLoginValidation.classList.remove("visually-hidden");
-    isFormValidated = false;
-  }
-
-  if (isFormValidated == true) {
-    document.querySelector(".auth-modal__form-submit").setAttribute("disabled", "true");
-    const payload = new FormData();
-    payload.append("log", refs.emailLoginField.value);
-    payload.append("pwd", refs.passwordLoginField.value);
-    axios.post("http://localhost/nadobranich/wp-login.php", payload).then((response) => {
-      document.querySelector(".auth-modal__form-submit").removeAttribute("disabled");
-      if (response.data.length > 1) {
-        document
-          .querySelector(".invalid-input-message.req-error")
-          .classList.remove("visually-hidden");
-      } else {
-        document
-          .querySelector(".invalid-input-message.req-error")
-          .classList.remove("visually-hidden");
-        document.querySelector(".invalid-input-message.req-error").textContent =
-          "Ви успішно авторизувалися!";
-        document.querySelector(".invalid-input-message.req-error").style.color = "green";
-        location.reload();
+      if (!refs.emailLoginField.value) {
+        refs.emailLoginValidation.classList.remove("visually-hidden");
+        refs.emailLoginField.style.borderColor = "#f51010";
+        isFormValidated = false;
       }
-    });
-  }
-});
 
-refs.registerUserEmail.addEventListener("change", () => {
-  console.log(refs.registerUserEmail.value.split("@")[0]);
-  refs.registerUserLogin.setAttribute("value", `${refs.registerUserEmail.value.split("@")[0]}`);
+      if (!refs.passwordLoginField.value) {
+        refs.passwordLoginValidation.classList.remove("visually-hidden");
+        refs.passwordLoginField.style.borderColor = "#f51010";
+        isFormValidated = false;
+      }
+
+      if (isFormValidated == true) {
+        submit.setAttribute("disabled", "true");
+        const payload = new FormData();
+        payload.append("log", refs.emailLoginField.value);
+        payload.append("pwd", refs.passwordLoginField.value);
+        axios
+          .post("http://localhost/nadobranich/wp-login.php", payload)
+          .then((response) => {
+            submit.removeAttribute("disabled");
+            if (response.data.length > 1) {
+              refs.loginRequestAnswer.classList.remove("visually-hidden");
+            } else {
+              refs.loginRequestAnswer.classList.remove("visually-hidden");
+              refs.loginRequestAnswer.textContent = "Ви успішно авторизувалися!";
+              refs.loginRequestAnswer.style.color = "green";
+              location.reload();
+            }
+          })
+          .catch((error) => {
+            if (error) {
+              console.log("Error:", error.message);
+              submit.removeAttribute("disabled");
+              document.querySelector(".invalid-input-message.req-error").textContent =
+                "Під час запиту відбулася помилка. Будь ласка, спробуйте ще раз пізніше";
+            }
+          });
+      }
+    } else {
+      refs.registerUserName.style.borderColor = "#7d7d7d";
+      refs.registerUserNameValidation.classList.add("visually-hidden");
+      refs.registerUserLastName.style.borderColor = "#7d7d7d";
+      refs.registerUserLastNameValidation.classList.add("visually-hidden");
+      refs.registerUserPassword.style.borderColor = "#7d7d7d";
+      refs.registerUserPasswordValidation.classList.add("visually-hidden");
+
+      if (!refs.registerUserName.value) {
+        refs.registerUserName.style.borderColor = "#f51010";
+        refs.registerUserNameValidation.classList.remove("visually-hidden");
+        isFormValidated = false;
+      }
+
+      if (!refs.registerUserLastName.value) {
+        refs.registerUserLastName.style.borderColor = "#f51010";
+        refs.registerUserLastNameValidation.classList.remove("visually-hidden");
+        isFormValidated = false;
+      }
+
+      if (!refs.registerUserEmail.value) {
+        refs.registerUserEmail.style.borderColor = "#f51010";
+        refs.registerUserEmailValidation.classList.remove("visually-hidden");
+        isFormValidated = false;
+      } else {
+        const re =
+          /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+        if (!re.test(String(refs.registerUserEmail.value).toLowerCase())) {
+          refs.registerUserEmailValidation.textContent = "Вкажіть існуючий e-mail";
+          isFormValidated = false;
+        } else {
+          refs.registerUserEmail.style.borderColor = "#7d7d7d";
+          refs.registerUserEmailValidation.classList.add("visually-hidden");
+        }
+      }
+
+      if (refs.registerUserPassword.value.length < 6) {
+        refs.registerUserPassword.style.borderColor = "#f51010";
+        refs.registerUserPasswordValidation.textContent =
+          "Мінімальна довжина пароля складає 6 символів";
+        refs.registerUserPasswordValidation.classList.remove("visually-hidden");
+        isFormValidated = false;
+      }
+
+      if (isFormValidated) {
+        submit.setAttribute("disabled", "true");
+        const payload = new FormData();
+        payload.append("billing_first_name", refs.registerUserName.value);
+        payload.append("billing_last_name", refs.registerUserLastName.value);
+        payload.append("user_email", refs.registerUserEmail.value);
+        payload.append("user_login", refs.registerUserEmail.value.split("@")[0]);
+        payload.append("user_password", refs.registerUserPassword.value);
+
+        axios
+          .post("http://localhost/nadobranich/wp-login.php?action=register", payload)
+          .then((response) => {
+            submit.removeAttribute("disabled");
+            if (response.data.indexOf('<div id="login_error">') != "-1") {
+              document.querySelector(".reg-req-error").classList.remove("visually-hidden");
+              document.querySelector(".reg-req-error").textContent =
+                "Користувач з такою електронною поштою вже існує. Вкажіть іншу пошту або увійдіть використовуючи пароль";
+            } else {
+              document.querySelector(".reg-req-error").classList.remove("visually-hidden");
+              document.querySelector(".reg-req-error").textContent = "Дякуємо за реєстрацію!";
+              document.querySelector(".reg-req-error").style.color = "green";
+              location.reload();
+            }
+          })
+          .catch((error) => {
+            if (error) {
+              console.log("Error:", error.message);
+              submit.removeAttribute("disabled");
+              document.querySelector(".reg-req-error").textContent =
+                "Під час запиту відбулася помилка. Будь ласка, спробуйте ще раз пізніше";
+            }
+          });
+      }
+    }
+  });
 });

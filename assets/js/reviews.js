@@ -76,7 +76,7 @@ commentForm.addEventListener("submit", (e) => {
       /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
     if (!re.test(String(emailField.value).toLowerCase())) {
       document.querySelector(".validation-wrap [name=email] + .error").textContent =
-        "Ведіть існуючий e-mail";
+        "Вкажіть існуючий e-mail";
       isFormValidated = false;
     } else {
       emailField.style.borderColor = "#7d7d7d";

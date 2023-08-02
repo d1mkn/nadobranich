@@ -338,10 +338,10 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 		<label for="billing_last_name">Прізвище<span class="required">*</span></label>
 		<input type="text" class="input-text" name="billing_last_name" id="billing_last_name" value="' . esc_attr($billing_last_name) . '" />
 	</p>';
-        $billing_password = !empty($_POST['billing_user_password']) ? $_POST['billing_user_password'] : '';
+        $user_password = !empty($_POST['user_password']) ? $_POST['user_password'] : '';
         echo '<p class="form-row form-row-last">
-		<label for="billing_user_password">Пароль<span class="required">*</span></label>
-		<input type="password" class="input-text" name="billing_user_password" id="billing_user_password" value="' . esc_attr($billing_password) . '" />
+		<label for="user_password">Пароль<span class="required">*</span></label>
+		<input type="password" class="input-text" name="user_password" id="user_password" value="' . esc_attr($user_password) . '" />
 	</p>';
         echo '<div class="clear"></div>';
     }
@@ -358,8 +358,8 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
             update_user_meta($user_id, 'last_name', sanitize_text_field($_POST['billing_last_name']));
             update_user_meta($user_id, 'billing_last_name', sanitize_text_field($_POST['billing_last_name']));
         }
-        if (isset($_POST['billing_user_password'])) {
-            $userdata['user_pass'] = $_POST['billing_user_password'];
+        if (isset($_POST['user_password'])) {
+            $userdata['user_pass'] = $_POST['user_password'];
             wp_update_user($userdata);
             wp_set_auth_cookie($user_id);
         }
