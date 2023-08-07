@@ -28,7 +28,6 @@ const swiper = new Swiper(".single-category.swiper-container", {
         nextEl: ".swiper-button-next",
         prevEl: ".swiper-button-prev",
       },
-
       slidesPerView: "auto",
       slidesPerGroup: 1,
     },

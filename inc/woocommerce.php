@@ -37,7 +37,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
             $cat_id = $wp_query->get_queried_object_id();
             $prod_term = get_term($cat_id, 'product_cat');
             $description = $prod_term->description;
-            echo '<p class="category-page__desc">' . $description . '</p>';
+            echo '<p class="page-desc">' . $description . '</p>';
         }
     }
     add_action('woocommerce_archive_description', 'custom_woocommerce_archive_description', 10);

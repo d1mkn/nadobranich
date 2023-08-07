@@ -33,7 +33,7 @@ do_action('woocommerce_before_main_content');
 <div class="container">
 	<div class="category-page__text">
 		<?php if (apply_filters('woocommerce_show_page_title', true)): ?>
-			<h1 class="category-page__title">
+			<h1 class="page-title">
 				<?php woocommerce_page_title(); ?>
 			</h1>
 		<?php endif; ?>

@@ -139,7 +139,6 @@ session_unset();
         <?php echo do_shortcode('[fibosearch]'); ?>
       </div>
     </div>
-
   </header>
 
   <div class="backdrop visually-hidden"></div>

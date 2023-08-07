@@ -120,8 +120,8 @@ $_SESSION['aboutProducts'][] = array(
 	'rating' => $productRating
 );
 ?>
-<li class="single-category__item <?php if (is_single()) {
-	echo 'swiper-slide';
+<li class="single-category__item<?php if (is_single() || is_404()) {
+	echo ' swiper-slide';
 } ?>" productid=<?php echo $productId ?>>
 	<?php
 	// Якщо товар акціний, то буде плашка
