@@ -30,21 +30,20 @@ session_unset();
                 <?php
                 $args = array(
                   'taxonomy' => 'product_cat',
-                  // вказуємо таксономію товарних категорій
-                  'hide_empty' => false, // показуємо всі категорії, включаючи порожні
+                  'hide_empty' => false,
                 );
 
-                $categories = get_terms($args); // список категорій товарів
+                $categories = get_terms($args);
                 
                 foreach ($categories as $category) {
                   $category_id = $category->term_id;
                   $category_name = $category->name;
 
                   if ($category_name === 'Uncategorized') {
-                    continue; // пропускаємо ітерацію циклу та переходимо до наступної категорії
+                    continue;
                   }
 
-                  $category_link = get_term_link($category_id, 'product_cat'); // посилання на сторінку категорії товарів
+                  $category_link = get_term_link($category_id, 'product_cat');
                 
                   ?>
                   <li class="navigation__dropdown-item">
@@ -115,7 +114,7 @@ session_unset();
                 <?php
                 if (is_user_logged_in()) { ?>
                   <li class="navigation__dropdown-item">
-                    <a href="#">Особистий кабінет</a>
+                    <a href="<?php echo wc_get_account_endpoint_url('dashboard') ?>">Особистий кабінет</a>
                   </li>
                   <li class="navigation__dropdown-item">
                     <a class="js-logout"
