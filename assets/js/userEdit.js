@@ -1,8 +1,9 @@
 import axios from "axios";
+import { refs } from "./refs";
 
-document.querySelector(".personal-data__btn").addEventListener("click", (e) => {
+refs.submitInfoEdit.addEventListener("click", (e) => {
   e.preventDefault();
-  document.querySelector(".personal-data__btn").setAttribute("disabled", true);
+  refs.submitInfoEdit.setAttribute("disabled", true);
   const payload = new FormData();
   payload.append("account_first_name", document.getElementById("account_first_name").value);
   payload.append("account_last_name", document.getElementById("account_last_name").value);

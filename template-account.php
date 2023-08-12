@@ -22,16 +22,29 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
     <div class="cabinet-content">
         <div class="cabinet-navigation__wrap">
             <ul class="cabinet-navigation__list">
-                <li class="cabinet-navigation__item"> <button class="active cabinet-navigation__button"
-                        data-target="section1" type="button"> Особисті дані </button> </li>
-                <li class="cabinet-navigation__item"> <button class="cabinet-navigation__button" data-target="section2"
-                        type="button"> Історія замовлень </button> </li>
-                <li class="cabinet-navigation__item"> <button class="cabinet-navigation__button" data-target="section3"
-                        type="button"> Змінити пароль </button> </li>
-                <li class="cabinet-navigation__item"> <button class="cabinet-navigation__button" type="button"> <svg
-                            width="13" height="8">
+                <li class="cabinet-navigation__item">
+                    <button class="active cabinet-navigation__button js-cabinet-nav-item" data-target="section1"
+                        type="button"> Особисті
+                        дані <button>
+                </li>
+                <li class="cabinet-navigation__item">
+                    <button class="cabinet-navigation__button js-cabinet-nav-item" data-target="section2" type="button">
+                        Історія замовлень
+                    </button>
+                </li>
+                <li class="cabinet-navigation__item">
+                    <button class="cabinet-navigation__button js-cabinet-nav-item" data-target="section3" type="button">
+                        Змінити пароль
+                    </button>
+                </li>
+                <li class="cabinet-navigation__item">
+                    <button class="cabinet-navigation__button" type="button">
+                        <svg width="13" height="8">
                             <use href="<?php bloginfo('template_url') ?>/assets/images/icons.svg#faq-arrow"></use>
-                        </svg> Вийти з акаунту </button> </li>
+                        </svg>
+                        Вийти з акаунту
+                    </button>
+                </li>
             </ul>
             <div class="cabinet-content__block">
                 <div id="section1" class="cabinet-content__personal-data cabinet-section cabinet-section-active">
@@ -49,7 +62,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                         <label class="personal-data__label" for="phone">Номер телефону</label>
                         <input class="personal-data__input" type="text" name="phone" placeholder="+38 (___) ___-__-__">
 
-                        <label class="personal-data__label" for="account_email">Електрона адреса</label>
+                        <label class="personal-data__label" for="account_email">Електронна адреса</label>
                         <input class="personal-data__input" type="email" name="account_email"
                             placeholder="your@email.com" name="account_email" id="account_email"
                             autocomplete="family-name" value="<?php echo esc_attr($user->user_email); ?>">
