@@ -183,7 +183,7 @@ function nadobranich_scripts()
 	}
 
 	if (is_account_page()) {
-		wp_enqueue_script('nadobranich-script', get_template_directory_uri() . '/dist/index.js', null, _S_VERSION, true);
+		wp_enqueue_script('nadobranich-script', get_template_directory_uri() . '/dist/accountPage.js', null, _S_VERSION, true);
 	}
 
 	wp_enqueue_script('nadobranich-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true);

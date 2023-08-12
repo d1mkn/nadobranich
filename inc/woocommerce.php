@@ -365,4 +365,27 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
         }
     }
     add_action('user_register', 'nadobranich_save_register_fields', 100);
+
+    function nadobranich_save_edit_user()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if (is_user_logged_in()) {
+                $current_user = wp_get_current_user();
+                $first_name = sanitize_text_field($_POST['account_first_name']);
+                $last_name = sanitize_text_field($_POST['account_last_name']);
+                $email = sanitize_text_field($_POST['account_email']);
+                wp_update_user(
+                    array(
+                        'ID' => $current_user->ID,
+                        'first_name' => $first_name,
+                        'last_name' => $last_name,
+                        'user_email' => $email,
+                    )
+                );
+                wp_redirect($_SERVER['REQUEST_URI']);
+                exit;
+            }
+        }
+    }
+    add_action('template_redirect', 'nadobranich_save_edit_user');
 }

@@ -6,6 +6,7 @@ get_header();
 ?>
 
 <?php
+$user = wp_get_current_user();
 if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')))) {
     do_action('woocommerce_before_main_content');
 }
@@ -34,15 +35,31 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
             </ul>
             <div class="cabinet-content__block">
                 <div id="section1" class="cabinet-content__personal-data cabinet-section cabinet-section-active">
-                    <form class="personal-data__form" method="post" action="http://localhost/nadobranich/my-account/edit-account/"> <label class="personal-data__label"
-                            for="name">Ім'я</label> <input class="personal-data__input" type="text" name="name"
-                            placeholder="Ім'я"> <label class="personal-data__label" for="phone">Номер
-                            телефону</label> <input class="personal-data__input" type="text" name="phone"
-                            placeholder="+38 (___) ___-__-__"> <label class="personal-data__label" for="email">Електрона
-                            адреса</label> <input class="personal-data__input" type="email" name="email"
-                            placeholder="your@email.com"> </form>
-                    <div class="personal-data__btn-wrap"> <button type="button" class="personal-data__btn"> Зберегти
-                            зміни </button> </div>
+                    <form class="personal-data__form" action="http://localhost/nadobranich/my-account/edit-account/"
+                        method="post" id="edit-form">
+                        <label class="personal-data__label" for="account_first_name">Ім'я</label>
+                        <input class="personal-data__input" type="text" name="account_first_name"
+                            id="account_first_name" placeholder="Ім'я"
+                            value="<?php echo esc_attr($user->first_name); ?>">
+
+                        <label class="personal-data__label" for="account_last_name">Прізвище</label>
+                        <input class="personal-data__input" type="text" name="account_last_name" id="account_last_name"
+                            autocomplete="family-name" value="<?php echo esc_attr($user->last_name); ?>" />
+
+                        <label class="personal-data__label" for="phone">Номер телефону</label>
+                        <input class="personal-data__input" type="text" name="phone" placeholder="+38 (___) ___-__-__">
+
+                        <label class="personal-data__label" for="account_email">Електрона адреса</label>
+                        <input class="personal-data__input" type="email" name="account_email"
+                            placeholder="your@email.com" name="account_email" id="account_email"
+                            autocomplete="family-name" value="<?php echo esc_attr($user->user_email); ?>">
+                    </form>
+                    <div class="personal-data__btn-wrap">
+                        <?php wp_nonce_field('save_account_details', 'save-account-details-nonce'); ?>
+                        <input type="hidden" name="action" value="save_account_details" />
+                        <button form="edit-form" type="submit" class="personal-data__btn" name="save_account_details">
+                            Зберегти зміни </button>
+                    </div>
                 </div>
                 <div id="section2" class="cabinet-content__history cabinet-section">
                     <p>Історія замовлень</p>
@@ -79,7 +96,6 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
     <?php echo do_shortcode('[modal_markup]') ?>
 </div>
 
-<?php echo do_shortcode('[modalToCart_markup]') ?>
 <?php echo do_shortcode('[insta_block]') ?>
 
 <?php
