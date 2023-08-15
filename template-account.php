@@ -37,12 +37,10 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                     </button>
                 </li>
                 <li class="cabinet-navigation__item">
-                    <button class="cabinet-navigation__button" type="button">
+                    <a class="cabinet-navigation__button js-cabinet-logout" href="<?php echo wp_logout_url() ?>">
                         <svg width="13" height="8">
                             <use href="<?php bloginfo('template_url') ?>/assets/images/icons.svg#faq-arrow"></use>
-                        </svg>
-                        Вийти з акаунту
-                    </button>
+                        </svg>Вийти з акаунту</a>
                 </li>
             </ul>
             <div class="cabinet-content__block">

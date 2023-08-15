@@ -1,3 +1,6 @@
+import axios from "axios";
+import { refs } from "./refs";
+
 const buttons = document.querySelectorAll(".js-cabinet-nav-item");
 const sections = document.querySelectorAll(".cabinet-section");
 
@@ -21,4 +24,11 @@ buttons.forEach((button) => {
 
     button.classList.add("active");
   });
+});
+
+refs.userLogout.addEventListener("click", (e) => {
+  e.preventDefault();
+  e.currentTarget.style.cursor = "progress";
+  document.querySelector("body").style.cursor = "progress";
+  axios.post(refs.userLogout.attributes.href.value).then((data) => location.reload());
 });

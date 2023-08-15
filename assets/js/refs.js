@@ -101,4 +101,5 @@ export const refs = {
   // user page
   submitInfoEdit: document.querySelector(".js-edit-user"),
   submitChangePass: document.querySelector(".js-change-pass"),
+  userLogout: document.querySelector(".js-cabinet-logout"),
 };
