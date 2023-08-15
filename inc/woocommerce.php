@@ -371,18 +371,49 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (is_user_logged_in()) {
                 $current_user = wp_get_current_user();
-                $first_name = sanitize_text_field($_POST['account_first_name']);
-                $last_name = sanitize_text_field($_POST['account_last_name']);
-                $email = sanitize_text_field($_POST['account_email']);
-                wp_update_user(
-                    array(
-                        'ID' => $current_user->ID,
-                        'first_name' => $first_name,
-                        'last_name' => $last_name,
-                        'user_email' => $email,
-                    )
-                );
-                wp_redirect($_SERVER['REQUEST_URI']);
+                if (isset($_POST['account_first_name'])) {
+                    $first_name = sanitize_text_field($_POST['account_first_name']);
+                    wp_update_user(
+                        array(
+                            'ID' => $current_user->ID,
+                            'first_name' => $first_name,
+                        )
+                    );
+                }
+                if (isset($_POST['account_first_name'])) {
+                    $last_name = sanitize_text_field($_POST['account_last_name']);
+                    wp_update_user(
+                        array(
+                            'ID' => $current_user->ID,
+                            'last_name' => $last_name,
+                        )
+                    );
+                }
+                if (isset($_POST['account_email'])) {
+                    $email = sanitize_text_field($_POST['account_email']);
+                    wp_update_user(
+                        array(
+                            'ID' => $current_user->ID,
+                            'user_email' => $email,
+                        )
+                    );
+                }
+                if (isset($_POST['password_2'])) {
+                    $current_password = sanitize_text_field($_POST['password_current']);
+                    $password = sanitize_text_field($_POST['password_2']);
+                    $password_match = wp_check_password($current_password, $current_user->user_pass, $current_user->ID);
+                    if ($password_match) {
+                        wp_update_user(
+                            array(
+                                'ID' => $current_user->ID,
+                                'user_pass' => $password,
+                            )
+                        );
+                        echo '<div class="pass-error">Пароль успішно змінено</div>';
+                    } else {
+                        echo '<div class="pass-error">Вказано невірний пароль</div>';
+                    }
+                }
                 exit;
             }
         }

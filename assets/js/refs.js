@@ -99,5 +99,6 @@ export const refs = {
   wooVatiationPrice: document.querySelector(".woocommerce-Price-amount.amount bdi"),
 
   // user page
-  submitInfoEdit: document.querySelector(".personal-data__btn"),
+  submitInfoEdit: document.querySelector(".js-edit-user"),
+  submitChangePass: document.querySelector(".js-change-pass"),
 };

@@ -18,7 +18,6 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
             <?php the_title() ?>
         </h1>
     </div>
-
     <div class="cabinet-content">
         <div class="cabinet-navigation__wrap">
             <ul class="cabinet-navigation__list">
@@ -70,7 +69,8 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                     <div class="personal-data__btn-wrap">
                         <?php wp_nonce_field('save_account_details', 'save-account-details-nonce'); ?>
                         <input type="hidden" name="action" value="save_account_details" />
-                        <button form="edit-form" type="submit" class="personal-data__btn" name="save_account_details">
+                        <button form="edit-form" type="submit" class="personal-data__btn js-edit-user"
+                            name="save_account_details">
                             Зберегти зміни </button>
                     </div>
                 </div>
@@ -78,13 +78,26 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                     <p>Історія замовлень</p>
                 </div>
                 <div id="section3" class="cabinet-content__password cabinet-section">
-                    <form class="personal-data__form" action="submit"> <label class="personal-data__label"
-                            for="old-password">Старий пароль</label> <input class="personal-data__input" type="text"
-                            name="old-password" placeholder="Введіть свій пароль"> <label class="personal-data__label"
-                            for="new-password">Новий пароль</label> <input class="personal-data__input" type="text"
-                            name="new-password" placeholder="Введіть новий пароль"> </form>
-                    <div class="personal-data__btn-wrap"> <button type="button" class="personal-data__btn"> Змінити
-                            пароль </button> </div>
+                    <form class="personal-data__form" action="http://localhost/nadobranich/my-account/edit-account/"
+                        method="post" id="change-pass">
+                        <label class="personal-data__label" for="password_current">Старий пароль</label>
+                        <input class="personal-data__input" type="password" name="password_current"
+                            id="password_current" autocomplete="off" placeholder="Введіть свій пароль">
+
+                        <label class="personal-data__label" for="password_1">Новий пароль</label>
+                        <input class="personal-data__input" type="password" name="password_1" id="password_1"
+                            autocomplete="off" placeholder="Введіть новий пароль">
+
+                        <label class="personal-data__label" for="password_2">Повторіть новий пароль</label>
+                        <input class="personal-data__input" type="password" name="password_2" id="password_2"
+                            autocomplete="off" placeholder="Введіть новий пароль">
+                    </form>
+                    <div class="personal-data__btn-wrap">
+                        <?php wp_nonce_field('save_account_details', 'save-account-details-nonce'); ?>
+                        <input type="hidden" name="action" value="save_account_details" />
+                        <button form="change-pass" type="submit" class="personal-data__btn js-change-pass"
+                            name="save_account_details">Змінити пароль</button>
+                    </div>
                 </div>
             </div>
         </div>
