@@ -7392,6 +7392,11 @@ img.modal__images-main {
   gap: 10px;
   display: flex;
 }
+@media screen and (max-width: 767px) {
+  .cabinet-navigation__item:last-child .cabinet-navigation__button {
+    justify-content: center;
+  }
+}
 .cabinet-navigation__item:last-child .cabinet-navigation__button svg {
   transform: rotate(90deg);
 }
@@ -8418,6 +8423,14 @@ footer h3 {
   .dgwt-wcas-style-pirx .dgwt-wcas-preloader {
     right: -7px !important;
   }
+}
+.shop_table.shop_table_responsive.my_account_orders {
+  width: 100%;
+  text-align: left;
+}
+.woocommerce table.shop_table_responsive tr,
+.woocommerce-page table.shop_table_responsive tr {
+  justify-content: space-between;
 }
 html body #nsl-redirect-overlay-container {
   display: flex;
