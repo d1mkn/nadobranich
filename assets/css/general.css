@@ -2263,7 +2263,6 @@ header button {
   }
 }
 .header__controls-list {
-  gap: 15px;
   display: flex;
 }
 .header__controls-item {
@@ -2275,6 +2274,16 @@ header button {
 @media screen and (min-width: 768px) {
   .header__controls-item {
     height: 70px;
+  }
+  .header__controls-item:first-child {
+    margin-right: 15px;
+  }
+  .header__controls-item:last-child {
+    margin-left: 15px;
+  }
+  .header__controls-item:last-child:hover {
+    margin-left: 0px;
+    padding-left: 15px;
   }
 }
 .header__controls-item-icon {
