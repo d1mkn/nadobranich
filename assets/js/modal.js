@@ -15,7 +15,7 @@ export function openModal() {
   document.querySelector(".modal__images-main-wrap .swiper-wrapper").removeAttribute("style");
 }
 
-function closeModal() {
+export function closeModal() {
   refs.modalBackdrop.classList.remove("animate__fadeIn");
   refs.modalBackdrop.classList.add("animate__fadeOut");
   refs.authContainer.classList.add("visually-hidden");

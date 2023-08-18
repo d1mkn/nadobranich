@@ -34,7 +34,7 @@ session_unset();
                 );
 
                 $categories = get_terms($args);
-                
+
                 foreach ($categories as $category) {
                   $category_id = $category->term_id;
                   $category_name = $category->name;
@@ -44,7 +44,7 @@ session_unset();
                   }
 
                   $category_link = get_term_link($category_id, 'product_cat');
-                
+
                   ?>
                   <li class="navigation__dropdown-item">
                     <a href=<?php echo $category_link ?>><?php echo $category_name ?></a>
@@ -53,6 +53,7 @@ session_unset();
                 }
                 ?>
               </ul>
+            </div>
           <li class="navigation__item">
             <button class="navigation__item-button">Інформація</button>
             <div class="navigation__dropdown-wrap">
@@ -117,8 +118,7 @@ session_unset();
                     <a href="<?php echo wc_get_account_endpoint_url('dashboard') ?>">Особистий кабінет</a>
                   </li>
                   <li class="navigation__dropdown-item">
-                    <a class="js-logout"
-                      href="<?php echo wp_logout_url() ?>">Вихід</a>
+                    <a class="js-logout" href="<?php echo wp_logout_url() ?>">Вихід</a>
                   </li>
                 <?php } else { ?>
                   <li class="navigation__dropdown-item">

@@ -229,13 +229,13 @@ function modalAuth_markup()
           <form method="post" action="' . site_url('') . '/wp-login.php">
             <div class="auth-modal__form-input-wrap">
               <input class="auth-modal__form-input" type="text" name="log" id="user_login" placeholder="&#32;" required>
-              <label class="auth-modal__form-label" for="log">Електронна пошта</label>
+              <label class="auth-modal__form-label" for="user_login">Електронна пошта</label>
             </div>
             <p class="invalid-input-message visually-hidden email">Це поле є обов’язковим</p>
             <div class="auth-modal__form-input-wrap">
               <input class="auth-modal__form-input" type="password" name="pwd" id="user_pass" placeholder="&#32;"
                 required>
-              <label class="auth-modal__form-label" for="pwd">Пароль</label>
+              <label class="auth-modal__form-label" for="user_pass">Пароль</label>
             </div>
             <p class="invalid-input-message visually-hidden password">Це поле є обов’язковим</p>
             <div class="auth-modal__form-link">
@@ -274,12 +274,12 @@ function modalAuth_markup()
           <form method="post" action="' . site_url('') . '/wp-login.php?action=register">
             <div class="auth-modal__form-input-wrap">
               <input class="auth-modal__form-input" type="text" name="billing_first_name" id="user_name" placeholder="&#32;" required>
-              <label class="auth-modal__form-label" for="billing_first_name">Ім\'я</label>
+              <label class="auth-modal__form-label" for="user_name">Ім\'я</label>
             </div>
             <p class="invalid-input-message visually-hidden reg-first-name">Це поле є обов’язковим</p>
             <div class="auth-modal__form-input-wrap">
               <input class="auth-modal__form-input" type="text" name="billing_last_name" id="user_last_name" placeholder="&#32;" required>
-              <label class="auth-modal__form-label" for="billing_last_name">Прізвище</label>
+              <label class="auth-modal__form-label" for="user_last_name">Прізвище</label>
             </div>
             <p class="invalid-input-message visually-hidden reg-last-name">Це поле є обов’язковим</p>
             <div class="auth-modal__form-input-wrap">
@@ -290,7 +290,7 @@ function modalAuth_markup()
             <div class="auth-modal__form-input-wrap">
               <input class="auth-modal__form-input" type="password" name="billing_user_password" id="user_password" placeholder="&#32;"
                 required>
-              <label class="auth-modal__form-label" for="billing_user_password">Пароль</label>
+              <label class="auth-modal__form-label" for="user_password">Пароль</label>
             </div>
             <p class="invalid-input-message visually-hidden reg-password">Це поле є обов’язковим</p>
             <div class="auth-modal__form-input-wrap">
