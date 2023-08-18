@@ -218,7 +218,7 @@ function modalAuth_markup()
             </div>
             <p class="auth-modal__title">Вхід до акаунту</p>
           </div>
-          <a class="auth-modal__social-auth-link" href="http://localhost/nadobranich/wp-login.php?loginSocial=google" data-plugin="nsl" data-action="connect" data-redirect="current" data-provider="google" data-popupwidth="600" data-popupheight="600">
+          <a class="auth-modal__social-auth-link" href="' . site_url('') . '/wp-login.php?loginSocial=google" data-plugin="nsl" data-action="connect" data-redirect="current" data-provider="google" data-popupwidth="600" data-popupheight="600">
             <img class="auth-modal__social-auth-icon" src="' . $template_url . '/assets/images/gicon.png"
               alt="Google Auth Icon">
             <div class="auth-modal__social-auth">
@@ -226,7 +226,7 @@ function modalAuth_markup()
             </div>
           </a>
           <span class="auth-modal__span-text">Або:</span>
-          <form method="post" action="#">
+          <form method="post" action="' . site_url('') . '/wp-login.php">
             <div class="auth-modal__form-input-wrap">
               <input class="auth-modal__form-input" type="text" name="log" id="user_login" placeholder="&#32;" required>
               <label class="auth-modal__form-label" for="log">Електронна пошта</label>
@@ -263,7 +263,7 @@ function modalAuth_markup()
             </div>
             <p class="auth-modal__title">Реєстрація</p>
           </div>
-          <a class="auth-modal__social-auth-link" href="http://localhost/nadobranich/wp-login.php?loginSocial=google" data-plugin="nsl" data-action="connect" data-redirect="current" data-provider="google" data-popupwidth="600" data-popupheight="600">
+          <a class="auth-modal__social-auth-link" href="' . site_url('') . '/wp-login.php?loginSocial=google" data-plugin="nsl" data-action="connect" data-redirect="current" data-provider="google" data-popupwidth="600" data-popupheight="600">
             <img class="auth-modal__social-auth-icon" src="' . $template_url . '/assets/images/gicon.png"
               alt="Google Auth Icon">
             <div class="auth-modal__social-auth">
@@ -271,7 +271,7 @@ function modalAuth_markup()
             </div>
           </a>
           <span class="auth-modal__span-text">Або:</span>
-          <form method="post" action="#">
+          <form method="post" action="' . site_url('') . '/wp-login.php?action=register">
             <div class="auth-modal__form-input-wrap">
               <input class="auth-modal__form-input" type="text" name="billing_first_name" id="user_name" placeholder="&#32;" required>
               <label class="auth-modal__form-label" for="billing_first_name">Ім\'я</label>

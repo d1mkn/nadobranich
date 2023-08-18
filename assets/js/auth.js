@@ -53,6 +53,7 @@ refs.authSubmits.forEach((submit) => {
   submit.addEventListener("click", (e) => {
     e.preventDefault();
     let isFormValidated = true;
+    const actionLink = e.currentTarget.closest("form").action;
 
     if (!refs.loginForm.classList.contains("visually-hidden")) {
       refs.emailLoginValidation.classList.add("visually-hidden");
@@ -78,7 +79,7 @@ refs.authSubmits.forEach((submit) => {
         payload.append("log", refs.emailLoginField.value);
         payload.append("pwd", refs.passwordLoginField.value);
         axios
-          .post("http://localhost/nadobranich/wp-login.php", payload)
+          .post(actionLink, payload)
           .then((response) => {
             submit.removeAttribute("disabled");
             if (response.data.length > 1) {
@@ -153,7 +154,7 @@ refs.authSubmits.forEach((submit) => {
         payload.append("user_password", refs.registerUserPassword.value);
 
         axios
-          .post("http://localhost/nadobranich/wp-login.php?action=register", payload)
+          .post(actionLink, payload)
           .then((response) => {
             submit.removeAttribute("disabled");
             if (response.data.indexOf('<div id="login_error">') != "-1") {
