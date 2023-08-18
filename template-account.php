@@ -23,24 +23,24 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
             <ul class="cabinet-navigation__list">
                 <li class="cabinet-navigation__item">
                     <button class="active cabinet-navigation__button js-cabinet-nav-item" data-target="section1"
-                        type="button"> Особисті
-                        дані <button>
+                        type="button"><span class="cabinet-navigation__button-text">Особисті
+                            дані</span></button>
                 </li>
                 <li class="cabinet-navigation__item">
                     <button class="cabinet-navigation__button js-cabinet-nav-item" data-target="section2" type="button">
-                        Історія замовлень
+                        <span class="cabinet-navigation__button-text">Історія замовлень</spam>
                     </button>
                 </li>
                 <li class="cabinet-navigation__item">
                     <button class="cabinet-navigation__button js-cabinet-nav-item" data-target="section3" type="button">
-                        Змінити пароль
+                        <span class="cabinet-navigation__button-text">Змінити пароль</spam>
                     </button>
                 </li>
                 <li class="cabinet-navigation__item">
                     <a class="cabinet-navigation__button js-cabinet-logout" href="<?php echo wp_logout_url() ?>">
                         <svg width="13" height="8">
                             <use href="<?php bloginfo('template_url') ?>/assets/images/icons.svg#faq-arrow"></use>
-                        </svg>Вийти з акаунту</a>
+                        </svg><span class="cabinet-navigation__button-text">Вийти з акаунту</spam></a>
                 </li>
             </ul>
             <div class="cabinet-content__block">

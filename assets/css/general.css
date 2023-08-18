@@ -7362,6 +7362,7 @@ img.modal__images-main {
   }
 }
 .cabinet-navigation__item {
+  position: relative;
   width: 50%;
   background-color: #fff;
   border-bottom: 1px solid #7d7d7d;
@@ -7413,15 +7414,20 @@ img.modal__images-main {
   width: 100%;
   text-align: center;
   padding: 8.5px 0;
+  transition: background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.cabinet-navigation__button-text {
   font-size: 14px;
   line-height: 1.3;
-  transition: background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 @media screen and (min-width: 768px) {
   .cabinet-navigation__button {
     text-align: left;
     padding: 12px 25px;
+  }
+  .cabinet-navigation__button-text {
     font-size: 16px;
+    line-height: inherit;
   }
 }
 @media screen and (min-width: 1240px) {
