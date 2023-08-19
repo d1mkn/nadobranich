@@ -10,6 +10,8 @@ if (document.querySelector(".cabinet-navigation__wrap")) {
     payload.append("password_current", document.getElementById("password_current").value);
     payload.append("password_1", document.getElementById("password_1").value);
     payload.append("password_2", document.getElementById("password_2").value);
-    axios.post(actionLink, payload).then((response) => location.reload());
+    axios.post(actionLink, payload).then((response) => {
+      // location.reload()
+    });
   });
 }
