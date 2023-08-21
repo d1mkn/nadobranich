@@ -108,4 +108,9 @@ export const refs = {
   userLastNameField: document.getElementById("account_last_name"),
   userPhoneField: document.getElementById("account_phone"),
   userEmailField: document.getElementById("account_email"),
+  userOldPasswordField: document.getElementById("password_current"),
+  userNewPasswordFirstField: document.getElementById("password_1"),
+  userNewPasswordSecondField: document.getElementById("password_2"),
+  userOldPasswordValidation: document.querySelector(".js-old-password"),
+  userNewPasswordValidation: document.querySelector(".js-new-password"),
 };

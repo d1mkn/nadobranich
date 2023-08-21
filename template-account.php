@@ -59,7 +59,8 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                                 value="<?php echo esc_attr($user->last_name); ?>" />
 
                             <label class="personal-data__label" for="account_phone">Номер телефону</label>
-                            <input class="personal-data__input" type="text" name="account_phone" id="account_phone" placeholder="+38 (___) ___-__-__" value="<?php echo esc_attr($user->billing_phone); ?>">
+                            <input class="personal-data__input" type="text" name="account_phone" id="account_phone"
+                                placeholder="+38 (___) ___-__-__" value="<?php echo esc_attr($user->billing_phone); ?>">
 
                             <label class="personal-data__label" for="account_email">Електронна адреса</label>
                             <input class="personal-data__input" type="email" name="account_email"
@@ -167,6 +168,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                             <label class="personal-data__label" for="password_current">Старий пароль</label>
                             <input class="personal-data__input" type="password" name="password_current"
                                 id="password_current" autocomplete="off" placeholder="Введіть свій пароль">
+                            <p class="invalid-input-message visually-hidden js-old-password">Вказаний пароль не є вірним</p>
 
                             <label class="personal-data__label" for="password_1">Новий пароль</label>
                             <input class="personal-data__input" type="password" name="password_1" id="password_1"
@@ -175,6 +177,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                             <label class="personal-data__label" for="password_2">Повторіть новий пароль</label>
                             <input class="personal-data__input" type="password" name="password_2" id="password_2"
                                 autocomplete="off" placeholder="Повторіть новий пароль">
+                            <p class="invalid-input-message visually-hidden js-new-password">Паролі мають бути однаковими</p>
 
                             <div class="personal-data__btn-wrap">
                                 <button form="change-pass" type="submit" class="personal-data__btn js-change-pass"

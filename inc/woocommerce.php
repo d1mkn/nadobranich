@@ -413,7 +413,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                                 'user_pass' => $password,
                             )
                         );
-                        echo '<div class="pass-error">Пароль успішно змінено</div>';
+                        echo '<div class="pass-success">Пароль успішно змінено</div>';
                     } else {
                         echo '<div class="pass-error">Вказано невірний пароль</div>';
                     }

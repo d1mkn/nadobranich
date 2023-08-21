@@ -6841,6 +6841,9 @@ img.modal__images-main {
   line-height: 19.5px;
   transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
+.personal-data__form .invalid-input-message {
+  margin: 0px;
+}
 .ordering__form-input:not(:placeholder-shown):invalid {
   border: 1px solid #f51010;
 }
@@ -8461,10 +8464,6 @@ footer h3 {
 .shop_table.shop_table_responsive.my_account_orders {
   width: 100%;
   text-align: left;
-}
-.woocommerce table.shop_table_responsive tr,
-.woocommerce-page table.shop_table_responsive tr {
-  justify-content: space-between;
 }
 html body #nsl-redirect-overlay-container {
   display: flex;
