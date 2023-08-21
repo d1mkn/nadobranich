@@ -39,6 +39,13 @@ if (document.querySelector(".cabinet-navigation__wrap")) {
     if (!userEmailField.value) {
       userEmailField.style.borderColor = "#f51010";
       isFormValidated = false;
+    } else {
+      const re =
+        /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+      if (!re.test(String(userEmailField.value).toLowerCase())) {
+        userEmailField.style.borderColor = "#f51010";
+        isFormValidated = false;
+      }
     }
 
     if (isFormValidated) {
