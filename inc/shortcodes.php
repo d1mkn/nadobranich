@@ -239,7 +239,7 @@ function modalAuth_markup()
             </div>
             <p class="invalid-input-message visually-hidden password">Це поле є обов’язковим</p>
             <div class="auth-modal__form-link">
-              <a href="#">Забули пароль?</a>
+              <a data-type="recover-password" href="#">Забули пароль?</a>
             </div>
             <div class="auth-modal__form-input-wrap">
               <input class="auth-modal__form-submit" type="submit" value="Увійти">
@@ -304,6 +304,41 @@ function modalAuth_markup()
             <div class="auth-modal__bottom-item-wrap">
               <p class="auth-modal__bottom-item-text">Маєте акаунт?</p>
               <a class="auth-modal__bottom-item-link" href="#" data-type="login">Увійти</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="auth-modal__recover-password visually-hidden">
+          <div class="auth-modal__top-wrap">
+            <div class="auth-modal__top">
+              <svg class="auth-modal__icon" width="26" height="26">
+                <use href="' . $template_url . '/assets/images/icons.svg#user"></use>
+              </svg>
+            </div>
+            <p class="auth-modal__title">Вхід до акаунту</p>
+          </div>
+          <a class="auth-modal__social-auth-link" href="' . site_url('') . '/wp-login.php?loginSocial=google" data-plugin="nsl" data-action="connect" data-redirect="current" data-provider="google" data-popupwidth="600" data-popupheight="600">
+            <img class="auth-modal__social-auth-icon" src="' . $template_url . '/assets/images/gicon.png"
+              alt="Google Auth Icon">
+            <div class="auth-modal__social-auth">
+            Google
+            </div>
+          </a>
+          <span class="auth-modal__span-text">Або:</span>
+          <form method="post" action="' . site_url('') . '/wp-login.php">
+            <div class="auth-modal__form-input-wrap">
+              <input class="auth-modal__form-input" type="text" name="recover_password" id="recover_password" placeholder="&#32;" required>
+              <label class="auth-modal__form-label" for="recover_password">Електронна пошта</label>
+            </div>
+            <div class="auth-modal__form-input-wrap">
+              <input class="auth-modal__form-submit" type="submit" value="Відновити пароль">
+              <p class="invalid-input-message visually-hidden req-error">Користувач з такою електронною поштою не існує</p>
+            </div>
+          </form>
+          <div class="auth-modal__bottom">
+            <div class="auth-modal__bottom-item-wrap">
+              <p class="auth-modal__bottom-item-text">Немає акаунту?</p>
+              <a class="auth-modal__bottom-item-link" data-type="register" href="#">Зареєструватися</a>
             </div>
           </div>
         </div>

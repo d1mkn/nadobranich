@@ -12,7 +12,7 @@ refs.openLogin.forEach((loginLink) => {
       refs.modalBackdrop.classList.remove("visually-hidden");
       refs.modalBackdrop.classList.add("animate__fadeIn");
       document.body.classList.add("modal-open");
-      refs.authContainer.classList.toggle("visually-hidden");
+      refs.authContainer.classList.remove("visually-hidden");
       refs.loginForm.classList.remove("visually-hidden");
     }
   });
@@ -23,16 +23,27 @@ refs.openRegister.forEach((registerLink) => {
     e.preventDefault();
     if (!refs.loginForm.classList.contains("visually-hidden")) {
       refs.loginForm.classList.add("visually-hidden");
+      refs.recoverPasswordForm.classList.add("visually-hidden");
       refs.registerForm.classList.remove("visually-hidden");
     } else {
       refs.modal.classList.add("visually-hidden");
       refs.modalBackdrop.classList.remove("visually-hidden");
       refs.modalBackdrop.classList.add("animate__fadeIn");
       document.body.classList.add("modal-open");
-      refs.authContainer.classList.toggle("visually-hidden");
+      refs.authContainer.classList.remove("visually-hidden");
       refs.registerForm.classList.remove("visually-hidden");
+      refs.recoverPasswordForm.classList.add("visually-hidden");
     }
   });
+});
+
+refs.openRecoverPassword.addEventListener("click", (e) => {
+  e.preventDefault();
+  if (refs.recoverPasswordForm.classList.contains("visually-hidden")) {
+    refs.recoverPasswordForm.classList.remove("visually-hidden");
+    refs.loginForm.classList.add("visually-hidden");
+    refs.registerForm.classList.add("visually-hidden");
+  }
 });
 
 refs.authCloseBtn.addEventListener("click", () => {

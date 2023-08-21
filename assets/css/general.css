@@ -2515,7 +2515,9 @@ header button {
   height: 100%;
   object-fit: cover;
 }
-.auth-modal__login {
+.auth-modal__login,
+.auth-modal__register,
+.auth-modal__recover-password {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -2663,13 +2665,6 @@ header button {
 .auth-modal__bottom-item-link:hover,
 .auth-modal__bottom-item-link:focus {
   color: #628cbe;
-}
-.auth-modal__register {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  opacity: 1;
-  transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .backdrop {
   z-index: 2;
