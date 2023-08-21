@@ -102,4 +102,10 @@ export const refs = {
   submitInfoEdit: document.querySelector(".js-edit-user"),
   submitChangePass: document.querySelector(".js-change-pass"),
   userLogout: document.querySelector(".js-cabinet-logout"),
+
+  // user edit
+  userNameField: document.getElementById("account_first_name"),
+  userLastNameField: document.getElementById("account_last_name"),
+  userPhoneField: document.getElementById("account_phone"),
+  userEmailField: document.getElementById("account_email"),
 };

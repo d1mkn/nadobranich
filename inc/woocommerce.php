@@ -398,6 +398,10 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                         )
                     );
                 }
+                if (isset($_POST['account_phone'])) {
+                    $phone = sanitize_text_field($_POST['account_phone']);
+                    update_user_meta($current_user->ID, 'billing_phone', $phone);
+                }
                 if (isset($_POST['password_2'])) {
                     $current_password = sanitize_text_field($_POST['password_current']);
                     $password = sanitize_text_field($_POST['password_2']);

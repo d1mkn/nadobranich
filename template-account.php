@@ -58,8 +58,8 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                                 autocomplete="family-name" placeholder="Прізвище"
                                 value="<?php echo esc_attr($user->last_name); ?>" />
 
-                            <label class="personal-data__label" for="phone">Номер телефону</label>
-                            <input class="personal-data__input" type="text" name="phone" placeholder="+38 (___) ___-__-__">
+                            <label class="personal-data__label" for="account_phone">Номер телефону</label>
+                            <input class="personal-data__input" type="text" name="account_phone" id="account_phone" placeholder="+38 (___) ___-__-__" value="<?php echo esc_attr($user->billing_phone); ?>">
 
                             <label class="personal-data__label" for="account_email">Електронна адреса</label>
                             <input class="personal-data__input" type="email" name="account_email"
