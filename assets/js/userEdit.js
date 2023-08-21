@@ -4,14 +4,14 @@ import { refs } from "./refs";
 
 const { userNameField, userLastNameField, userPhoneField, userEmailField } = refs;
 
-const phoneMaskOptions = {
-  mask: "+38 (000) 000-00-00",
-  lazy: false,
-};
-
-const phoneMask = new IMask(userPhoneField, phoneMaskOptions);
-
 if (document.querySelector(".cabinet-navigation__wrap")) {
+  const phoneMaskOptions = {
+    mask: "+38 (000) 000-00-00",
+    lazy: false,
+  };
+
+  const phoneMask = new IMask(userPhoneField, phoneMaskOptions);
+
   refs.submitInfoEdit.addEventListener("click", (e) => {
     e.preventDefault();
     let isFormValidated = true;
