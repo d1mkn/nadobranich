@@ -325,7 +325,8 @@ function modalAuth_markup()
             </div>
           </a>
           <span class="auth-modal__span-text">Або:</span>
-          <form method="post" action="' . site_url('') . '/wp-login.php">
+          <form method="post" action="' . site_url('') . '/wp-login.php?action=lostpassword">
+          <p class="invalid-input-message js-password-recover-message">Вкажіть адресу електронної пошти, на яку ми надішлемо інстукцію для відновлення паролю</p>
             <div class="auth-modal__form-input-wrap">
               <input class="auth-modal__form-input" type="text" name="recover_password" id="recover_password" placeholder="&#32;" required>
               <label class="auth-modal__form-label" for="recover_password">Електронна пошта</label>

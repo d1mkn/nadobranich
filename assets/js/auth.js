@@ -111,7 +111,9 @@ refs.authSubmits.forEach((submit) => {
             }
           });
       }
-    } else {
+    }
+
+    if (!refs.registerForm.classList.contains("visually-hidden")) {
       refs.registerUserName.style.borderColor = "#7d7d7d";
       refs.registerUserNameValidation.classList.add("visually-hidden");
       refs.registerUserLastName.style.borderColor = "#7d7d7d";
@@ -177,6 +179,52 @@ refs.authSubmits.forEach((submit) => {
               document.querySelector(".reg-req-error").textContent = "Дякуємо за реєстрацію!";
               document.querySelector(".reg-req-error").style.color = "green";
               location.reload();
+            }
+          })
+          .catch((error) => {
+            if (error) {
+              console.log("Error:", error.message);
+              submit.removeAttribute("disabled");
+              document.querySelector(".reg-req-error").textContent =
+                "Під час запиту відбулася помилка. Будь ласка, спробуйте ще раз пізніше";
+            }
+          });
+      }
+    }
+
+    if (!refs.recoverPasswordForm.classList.contains("visually-hidden")) {
+      let isFormValidated = true;
+
+      if (!refs.recoverPasswordField.value) {
+        refs.recoverPasswordField.style.borderColor = "#f51010";
+        isFormValidated = false;
+      } else {
+        const re =
+          /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+        if (!re.test(String(refs.recoverPasswordField.value).toLowerCase())) {
+          refs.recoverPasswordField.style.borderColor = "#f51010";
+          isFormValidated = false;
+        } else {
+          refs.recoverPasswordField.style.borderColor = "#7d7d7d";
+        }
+      }
+
+      if (isFormValidated) {
+        submit.setAttribute("disabled", "true");
+        const payload = new FormData();
+        payload.append("user_login", refs.recoverPasswordField.value);
+        axios
+          .post(actionLink, payload)
+          .then((response) => {
+            if (response.data.indexOf("login_error") === -1) {
+              refs.recoverPasswordMessage.style.color = "green";
+              refs.recoverPasswordMessage.textContent =
+                "Перевірте вашу пошту! Ми надіслали вам листа для зміни паролю";
+            } else {
+              submit.removeAttribute("disabled");
+              refs.recoverPasswordMessage.style.color = "#f51010";
+              refs.recoverPasswordMessage.textContent =
+                "Користувача з такою електронною поштою не знайдено";
             }
           })
           .catch((error) => {

@@ -177,7 +177,8 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                             <label class="personal-data__label" for="password_2">Повторіть новий пароль</label>
                             <input class="personal-data__input" type="password" name="password_2" id="password_2"
                                 autocomplete="off" placeholder="Повторіть новий пароль">
-                            <p class="invalid-input-message visually-hidden js-new-password">Паролі мають бути однаковими</p>
+                            <p class="invalid-input-message visually-hidden js-new-password">Паролі мають бути однаковими
+                            </p>
 
                             <div class="personal-data__btn-wrap">
                                 <button form="change-pass" type="submit" class="personal-data__btn js-change-pass"

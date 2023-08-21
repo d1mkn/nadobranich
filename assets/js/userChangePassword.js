@@ -91,5 +91,4 @@ function arePasswordsSame() {
     userNewPasswordValidation.classList.add("visually-hidden");
     isFormValidated = true;
   }
-  console.log(isFormValidated);
 }

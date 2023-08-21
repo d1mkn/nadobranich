@@ -31,7 +31,9 @@ export const refs = {
   registerUserEmailValidation: document.querySelector(".reg-email"),
   registerUserPasswordValidation: document.querySelector(".reg-password"),
   openRecoverPassword: document.querySelector('[data-type="recover-password"]'),
-  recoverPasswordForm: document.querySelector('.auth-modal__recover-password'),
+  recoverPasswordForm: document.querySelector(".auth-modal__recover-password"),
+  recoverPasswordField: document.getElementById("recover_password"),
+  recoverPasswordMessage: document.querySelector(".js-password-recover-message"),
 
   // mobile menu
   menuBtn: document.querySelector(".mobile-menu-btn"),
