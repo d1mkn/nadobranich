@@ -1,7 +1,15 @@
 import axios from "axios";
+import IMask from "imask";
 import { refs } from "./refs";
 
 const { userNameField, userLastNameField, userPhoneField, userEmailField } = refs;
+
+const phoneMaskOptions = {
+  mask: "+38 (000) 000-00-00",
+  lazy: false,
+};
+
+const phoneMask = new IMask(userPhoneField, phoneMaskOptions);
 
 if (document.querySelector(".cabinet-navigation__wrap")) {
   refs.submitInfoEdit.addEventListener("click", (e) => {
