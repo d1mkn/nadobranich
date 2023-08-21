@@ -18,7 +18,6 @@ if (document.querySelector(".cabinet-navigation__wrap")) {
 
   submitChangePass.addEventListener("click", (e) => {
     e.preventDefault();
-    console.log(isFormValidated);
     userOldPasswordField.removeAttribute("style");
     userNewPasswordFirstField.removeAttribute("style");
     userNewPasswordSecondField.removeAttribute("style");
@@ -75,8 +74,15 @@ if (document.querySelector(".cabinet-navigation__wrap")) {
 function arePasswordsSame() {
   const firstNewPassword = userNewPasswordFirstField.value;
   const secondNewPassword = userNewPasswordSecondField.value;
-
-  if (firstNewPassword !== secondNewPassword) {
+  if (firstNewPassword.length < 6 || secondNewPassword.length < 6) {
+    userNewPasswordFirstField.style.borderColor = "#f51010";
+    userNewPasswordSecondField.style.borderColor = "#f51010";
+    isFormValidated = false;
+    userNewPasswordValidation.classList.remove("visually-hidden");
+    userNewPasswordValidation.style.color = "#f51010";
+    userNewPasswordValidation.textContent = "Мінімальна довжина паролю складає 6 символів";
+    userNewPasswordSecondField.style.margin = "0px";
+  } else if (firstNewPassword !== secondNewPassword) {
     userNewPasswordFirstField.style.borderColor = "#f51010";
     userNewPasswordSecondField.style.borderColor = "#f51010";
     isFormValidated = false;
