@@ -27,26 +27,26 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                             <p class="ordering__form-title">Контактні дані</p>
                             <div class="ordering__form-inputs-group">
                                 <div class="ordering__form-input-wrap">
-                                    <input class="ordering__form-input" type="text" id="first-name" name="first-name"
+                                    <input class="ordering__form-input" type="text" id="billing_first_name" name="billing_first_name"
                                         placeholder=" " pattern="^[A-ZА-ЯЄІЇҐ][a-zA-Zа-яА-Яєіїґ]{1,}$" required=""
                                         value="<?php echo esc_attr($user->first_name) ?>">
-                                    <label class="ordering__form-label" for="first-name">Ім'я</label>
+                                    <label class="ordering__form-label" for="billing_first_name">Ім'я</label>
                                     <p class="invalid-input-message">Ім'я має починатися з великої літери</p>
                                 </div>
 
                                 <div class="ordering__form-input-wrap">
-                                    <input class="ordering__form-input" type="text" id="last-name" name="last-name"
+                                    <input class="ordering__form-input" type="text" id="billing_last_name" name="billing_last_name"
                                         placeholder=" " pattern="^[A-ZА-ЯЄІЇҐ][a-zA-Zа-яА-Яєіїґ]{1,}$" required=""
                                         value="<?php echo esc_attr($user->last_name) ?>">
-                                    <label class="ordering__form-label" for="last-name">Прізвище</label>
+                                    <label class="ordering__form-label" for="billing_last_name">Прізвище</label>
                                     <p class="invalid-input-message">Прізвище має починатися з великої літери</p>
                                 </div>
 
                                 <div class="ordering__form-input-wrap">
-                                    <input class="ordering__form-input" type="tel" id="phone" name="phone"
+                                    <input class="ordering__form-input" type="tel" id="billing_phone" name="billing_phone"
                                         placeholder=" " required=""
                                         value="<?php echo esc_attr($user->billing_phone); ?>">
-                                    <label class="ordering__form-label" for="phone">Телефон</label>
+                                    <label class="ordering__form-label" for="billing_phone">Телефон</label>
                                     <p class="invalid-input-message">Це поле є обов'язковим</p>
                                 </div>
                                 <div class="ordering__form-input-wrap">
@@ -127,7 +127,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                                     for="online-payment">Оплата картою онлайн (через LiqPay)</label> </div>
                         </div>
                         <p class="ordering__form-title">Додати коментар до замовлення</p> <textarea
-                            class="ordering__form-input-comment" id="comment" name="comment"></textarea>
+                            class="ordering__form-input-comment" id="order_comments" name="order_comments"></textarea>
                         <div class="ordering__form-submit-wrap"> <button class="ordering__form-submit"
                                 type="submit">Купити</button> </div>
                     </form>

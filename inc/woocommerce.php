@@ -429,7 +429,6 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
         unset($fields['billing']['billing_postcode']);
         unset($fields['billing']['billing_country']);
         unset($fields['billing']['billing_state']);
-        unset($fields['billing']['billing_email']);
         unset($fields['account']['account_username']);
         unset($fields['account']['account_password']);
         unset($fields['account']['account_password-2']);

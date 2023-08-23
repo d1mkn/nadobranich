@@ -83,6 +83,7 @@ export const refs = {
   orderingCheckbox2: document.querySelector(".js-checkbox2"),
   orderingSummary: document.querySelector(".ordering-details-js"),
   orderingDetails: document.querySelector(".ordering-items-js"),
+  billingPhoneField: document.querySelector(".ordering__form #billing_phone"),
 
   // item
   formShowBtn: document.querySelector(".js-form-open-btn"),

@@ -1,5 +1,7 @@
+import IMask from "imask";
 import { refs } from "./refs";
 
+const { billingPhoneField } = refs;
 // animations
 
 const checkbox1 = refs.orderingCheckbox1;
@@ -8,6 +10,13 @@ const orderingMethod1 = document.querySelector(".js-ordering-data1");
 const orderingMethod2 = document.querySelector(".js-ordering-data2");
 const orderingSummary = refs.orderingSummary;
 const orderingDetails = refs.orderingDetails;
+
+const phoneMaskOptions = {
+  mask: "+38 (000) 000-00-00",
+  lazy: false,
+};
+
+const phoneMask = new IMask(billingPhoneField, phoneMaskOptions);
 
 checkbox1.addEventListener("click", () => {
   orderingMethod1.classList.toggle("visually-hidden");
