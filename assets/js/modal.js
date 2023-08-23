@@ -451,21 +451,29 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
-refs.closeButton.addEventListener("click", closeModal);
+if (refs.closeButton) {
+  refs.closeButton.addEventListener("click", closeModal);
+}
 
-refs.modal.addEventListener("click", (e) => {
-  e.stopPropagation();
-});
+if (refs.modal) {
+  refs.modal.addEventListener("click", (e) => {
+    e.stopPropagation();
+  });
+}
 
-refs.addToCartButton.addEventListener("click", fetchAddToCart);
+if (refs.addToCartButton) {
+  refs.addToCartButton.addEventListener("click", fetchAddToCart);
+}
 
-refs.toCartClsBtn.addEventListener("click", () => {
-  isToCartOpened = false;
-  refs.toCartWrap.classList.toggle("animate__fadeInRight");
-  refs.toCartWrap.classList.toggle("animate__fadeOutRight");
-
-  setTimeout(() => {
-    refs.toCartWrap.classList.toggle("visually-hidden");
+if (refs.toCartClsBtn) {
+  refs.toCartClsBtn.addEventListener("click", () => {
+    isToCartOpened = false;
+    refs.toCartWrap.classList.toggle("animate__fadeInRight");
     refs.toCartWrap.classList.toggle("animate__fadeOutRight");
-  }, 1000);
-});
+
+    setTimeout(() => {
+      refs.toCartWrap.classList.toggle("visually-hidden");
+      refs.toCartWrap.classList.toggle("animate__fadeOutRight");
+    }, 1000);
+  });
+}
