@@ -31,28 +31,33 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                                         placeholder=" " pattern="^[A-ZА-ЯЄІЇҐ][a-zA-Zа-яА-Яєіїґ]{1,}$" required=""
                                         value="<?php echo esc_attr($user->first_name) ?>">
                                     <label class="ordering__form-label" for="first-name">Ім'я</label>
+                                    <p class="invalid-input-message">Ім'я має починатися з великої літери</p>
                                 </div>
-                                <p class="invalid-input-message"> Ім'я має починатися з великої літери</p>
+
                                 <div class="ordering__form-input-wrap">
                                     <input class="ordering__form-input" type="text" id="last-name" name="last-name"
-                                        placeholder=" " pattern="^[A-ZА-ЯЄІЇҐ][a-zA-Zа-яА-Яєіїґ]{1,}$" required="" value="<?php echo esc_attr($user->last_name) ?>">
+                                        placeholder=" " pattern="^[A-ZА-ЯЄІЇҐ][a-zA-Zа-яА-Яєіїґ]{1,}$" required=""
+                                        value="<?php echo esc_attr($user->last_name) ?>">
                                     <label class="ordering__form-label" for="last-name">Прізвище</label>
+                                    <p class="invalid-input-message">Прізвище має починатися з великої літери</p>
                                 </div>
-                                <p class="invalid-input-message">Прізвище має починатися з великої літери</p>
+
                                 <div class="ordering__form-input-wrap">
                                     <input class="ordering__form-input" type="tel" id="phone" name="phone"
-                                        placeholder=" " required="" value="<?php echo esc_attr($user->billing_phone); ?>">
+                                        placeholder=" " required=""
+                                        value="<?php echo esc_attr($user->billing_phone); ?>">
                                     <label class="ordering__form-label" for="phone">Телефон</label>
                                     <p class="invalid-input-message">Це поле є обов'язковим</p>
                                 </div>
                                 <div class="ordering__form-input-wrap">
-                                    <input class="ordering__form-input" type="email" id="billing_email" name="billing_email"
-                                        placeholder=" "
-                                        pattern="[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
-                                        required="" value="<?php echo esc_attr($user->user_email); ?>">
-                                    <label class="ordering__form-label" for="billing_email" >Електронна адреса</label>
+                                    <input class="ordering__form-input" type="email" id="billing_email"
+                                        name="billing_email" placeholder=" " required=""
+                                        value="<?php echo esc_attr($user->user_email); ?>">
+                                    <label class="ordering__form-label" for="billing_email">Електронна адреса</label>
+                                    <p class="invalid-input-message"> Перевірте правильність вказаної електронної адреси
+                                    </p>
                                 </div>
-                                <p class="invalid-input-message"> Перевірте правильність вказаної електронної адреси</p>
+
                             </div>
                         </div>
                         <div class="ordering__form-section">

@@ -6716,7 +6716,7 @@ img.modal__images-main {
 }
 @media screen and (min-width: 768px) {
   .ordering__form-inputs-group {
-    gap: 40px 15px;
+    gap: 15px;
   }
 }
 @media screen and (min-width: 1240px) {
@@ -6752,13 +6752,12 @@ img.modal__images-main {
   pointer-events: none;
   transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   position: absolute;
-  top: 50%;
+  top: 24px;
   left: 15px;
   transform: translateY(-45%);
 }
 @media screen and (min-width: 768px) {
   .ordering__form-label {
-    font-size: 14px;
     left: 25px;
   }
 }
@@ -6766,6 +6765,7 @@ img.modal__images-main {
   .ordering__form-label {
     font-size: 16px;
     left: 25px;
+    bottom: 24px;
   }
 }
 .ordering__form-checkbox-wrap {
@@ -6826,7 +6826,13 @@ img.modal__images-main {
   color: #7d7d7d;
   font-size: 14px;
   transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  transform: translateY(-20px);
+  transform: translateY(-18px);
+}
+@media screen and (min-width: 1240px) {
+  .ordering__form-input:focus + .ordering__form-label,
+  .ordering__form-input:not(:placeholder-shown) + .ordering__form-label {
+    transform: translateY(-14px);
+  }
 }
 .invalid-input-message {
   margin-top: 5px;
@@ -6837,7 +6843,6 @@ img.modal__images-main {
   transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .ordering__content .invalid-input-message {
-  position: absolute;
   display: none;
 }
 .personal-data__form .invalid-input-message {
