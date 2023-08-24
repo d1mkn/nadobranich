@@ -141,6 +141,8 @@ refs.authSubmits.forEach((submit) => {
         const re =
           /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
         if (!re.test(String(refs.registerUserEmail.value).toLowerCase())) {
+          refs.registerUserEmail.style.borderColor = "#f51010";
+          refs.registerUserEmailValidation.classList.remove("visually-hidden");
           refs.registerUserEmailValidation.textContent = "Вкажіть існуючий e-mail";
           isFormValidated = false;
         } else {

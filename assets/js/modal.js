@@ -60,7 +60,7 @@ let prevActiveColor;
 let prevActiveSize;
 
 function renderInfoFromLocal(e) {
-  const productId = e.target.closest(".single-category__item").attributes.productid.value;
+  const productId = e.target.closest(".single-category__item").dataset.productid;
   localStorage.setItem("productId", productId);
   const aboutProducts = JSON.parse(localStorage.getItem("aboutProducts"));
   currProduct = aboutProducts.find((product) => product.id == productId);
@@ -114,18 +114,29 @@ function renderInfoFromLocal(e) {
   refs.ratingLink.setAttribute("href", `${currProduct.productLink}#reviews`);
 
   // price color size
+  let colorListTemp = [];
   let colorList = [];
   let sizeList = [];
   function colorListMarkup() {
     currProduct.attributes.forEach((attribute) => {
       if (attribute.hasOwnProperty("pa_color")) {
-        colorList = attribute.pa_color;
+        colorListTemp = attribute.pa_color;
       }
       if (attribute.hasOwnProperty("pa_size")) {
         singleSize = attribute.pa_size[0].name;
         sizeList = attribute.pa_size;
       }
     });
+
+    for (var i = 0; i < colorListTemp.length; i++) {
+      var colorName = colorListTemp[i].name;
+      var matchingVariation = currProduct.variations.find((item) =>
+        item.variationDesc.includes(`Колір: ${colorName}`)
+      );
+      if (matchingVariation) {
+        colorList.push(colorListTemp[i]);
+      }
+    }
 
     let markup = "";
     for (let i = 0; i < colorList.length; i++) {
@@ -143,6 +154,7 @@ function renderInfoFromLocal(e) {
     return markup;
   }
   refs.colorList.innerHTML = colorListMarkup();
+  console.log(colorList);
   refs.productColor.textContent = prevActiveColor;
 
   // Nav buttons
@@ -242,8 +254,8 @@ function pickColor() {
     });
   });
 
-  // Якщо у товара 1 варіація (акційний)
-  if (currProduct.variations.length < 2) {
+  // Якщо акційний
+  if (currProduct.isOnSale) {
     refs.productPrice.innerHTML = `<span class="item-price">
                           ${currProduct.variations[0].regularPrice} грн
                         </span><span class="item-new-price">

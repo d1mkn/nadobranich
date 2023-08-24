@@ -2,11 +2,144 @@ import axios from "axios";
 import IMask from "imask";
 import { refs } from "./refs";
 
-const { billingPhoneField, orderingSubmitBtn, deliveryText, deliveryOptions } = refs;
+const {
+  billingFirstNameField,
+  billingLastNameField,
+  billingPhoneField,
+  billingEmailField,
+  orderingSubmitBtn,
+  deliveryText,
+  deliveryOptions,
+  orderingSummary,
+  orderingDetails,
+  deliveryMethod,
+  deliveryCityPickerText,
+  deliveryCityPickerBorder,
+  deliveryPostOfficeText,
+  deliveryPostOfficeBorder,
+} = refs;
+
+orderingSubmitBtn.addEventListener("click", (e) => {
+  let isFormValidated = true;
+  billingFirstNameField.removeAttribute("style");
+  billingLastNameField.removeAttribute("style");
+  billingPhoneField.removeAttribute("style");
+  billingEmailField.removeAttribute("style");
+  deliveryCityPickerBorder.removeAttribute("style");
+
+  if (!billingFirstNameField.value) {
+    billingFirstNameField.scrollIntoView(false);
+    billingFirstNameField.style.borderColor = "#f51010";
+    isFormValidated = false;
+  } else {
+    const re = /^[A-ZА-ЯЄІЇҐ][a-zA-Zа-яА-Яєіїґ]{1,}$/;
+    if (!re.test(String(billingFirstNameField.value))) {
+      billingFirstNameField.scrollIntoView(false);
+      billingFirstNameField.style.borderColor = "#f51010";
+      isFormValidated = false;
+    }
+  }
+
+  if (!billingLastNameField.value) {
+    billingLastNameField.scrollIntoView(false);
+    billingLastNameField.style.borderColor = "#f51010";
+    isFormValidated = false;
+  } else {
+    const re = /^[A-ZА-ЯЄІЇҐ][a-zA-Zа-яА-Яєіїґ]{1,}$/;
+    if (!re.test(String(billingLastNameField.value))) {
+      billingLastNameField.scrollIntoView(false);
+      billingLastNameField.style.borderColor = "#f51010";
+      isFormValidated = false;
+    }
+  }
+
+  if (!billingPhoneField.value || billingPhoneField.value.indexOf("_") !== -1) {
+    billingPhoneField.scrollIntoView(false);
+    billingPhoneField.style.borderColor = "#f51010";
+    isFormValidated = false;
+  }
+
+  if (!billingEmailField.value) {
+    billingEmailField.scrollIntoView(false);
+    billingEmailField.style.borderColor = "#f51010";
+    isFormValidated = false;
+  } else {
+    const re =
+      /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+    if (!re.test(String(billingEmailField.value).toLowerCase())) {
+      billingEmailField.scrollIntoView(false);
+      billingEmailField.style.borderColor = "#f51010";
+      isFormValidated = false;
+    }
+  }
+
+  if (deliveryMethod.textContent === "Відділення Нової Пошти") {
+    if (deliveryCityPickerText.textContent === "Оберіть місто") {
+      deliveryCityPickerBorder.scrollIntoView(false);
+      deliveryCityPickerBorder.style.borderColor = "#f51010";
+      isFormValidated = false;
+    }
+    if (deliveryPostOfficeText.textContent === "Оберіть відділення") {
+      deliveryPostOfficeBorder.scrollIntoView(false);
+      deliveryPostOfficeBorder.style.borderColor = "#f51010";
+      isFormValidated = false;
+    }
+  }
+
+  e.preventDefault();
+  const actionLink = e.currentTarget.closest("form").action;
+  // refs.submitInfoEdit.setAttribute("disabled", true);
+  const payload = new FormData();
+  payload.append("billing_first_name", document.getElementById("billing_first_name").value);
+  payload.append("billing_last_name", document.getElementById("billing_last_name").value);
+  payload.append("billing_company", "");
+  payload.append("billing_country", "UA");
+  payload.append(
+    "billing_address_1",
+    document.getElementById("wcus_np_billing_custom_address").value
+  );
+  payload.append("billing_address_2", "");
+  payload.append("billing_city", document.querySelector("[name=wcus_np_billing_city_name]").value);
+  payload.append("billing_state", "");
+  payload.append("billing_postcode", "");
+  payload.append("billing_phone", document.getElementById("billing_phone").value);
+  payload.append("billing_email", document.getElementById("billing_email").value);
+  payload.append(
+    "wcus_np_billing_custom_address_active",
+    document.querySelector("[name=wcus_np_billing_custom_address_active]").value
+  );
+  payload.append(
+    "wcus_np_billing_city",
+    document.querySelector("[name=wcus_np_billing_city]").value
+  );
+  payload.append(
+    "wcus_np_billing_city_name",
+    document.querySelector("[name=wcus_np_billing_city_name]").value
+  );
+  payload.append(
+    "wcus_np_billing_warehouse",
+    document.querySelector("[name=wcus_np_billing_warehouse]").value
+  );
+  payload.append(
+    "wcus_np_billing_warehouse_name",
+    document.querySelector("[name=wcus_np_billing_warehouse_name]").value
+  );
+  payload.append(
+    "wcus_np_billing_custom_address",
+    document.querySelector("[name=wcus_np_billing_custom_address]").value
+  );
+  payload.append("order_comments", document.getElementById("order_comments").value);
+  payload.append("shipping_method[0]", "nova_poshta_shipping:2");
+  payload.append("payment_method", "cod");
+  payload.append(
+    "woocommerce-process-checkout-nonce",
+    document.getElementById("woocommerce-process-checkout-nonce").value
+  );
+  payload.append("_wp_http_referer", document.querySelector("[name=_wp_http_referer]").value);
+  // axios.post(`${actionLink}/?wc-ajax=checkout`, payload).then((response) => console.log(response));
+});
 
 // animations
-const orderingSummary = refs.orderingSummary;
-const orderingDetails = refs.orderingDetails;
 
 const phoneMaskOptions = {
   mask: "+38 (000) 000-00-00",
@@ -62,14 +195,30 @@ document
     ).textContent;
   });
 
-orderingSubmitBtn.addEventListener("click", (e) => {
-  e.preventDefault();
-  const actionLink = e.currentTarget.closest("form").action;
-  // refs.submitInfoEdit.setAttribute("disabled", true);
-  const payload = new FormData();
-  // payload.append("account_first_name", document.getElementById("account_first_name").value);
-  // payload.append("account_last_name", document.getElementById("account_last_name").value);
-  // payload.append("account_email", document.getElementById("account_email").value);
-  // payload.append("account_phone", document.getElementById("account_phone").value);
-  axios.post(`${actionLink}/?wc-ajax=checkout`, payload).then((response) => console.log(response));
+document
+  .querySelector(".zen-ui-select-2 .zen-ui-select__options")
+  .addEventListener("mouseleave", () => {
+    if (
+      document.querySelector(".zen-ui-select-2 .zen-ui-select__value-text").textContent !==
+      "Оберіть місто"
+    ) {
+      deliveryCityPickerBorder.removeAttribute("style");
+    }
+  });
+
+document
+  .querySelector(".zen-ui-select-3 .zen-ui-select__options")
+  .addEventListener("mouseleave", () => {
+    if (
+      document.querySelector(".zen-ui-select-3 .zen-ui-select__value-text").textContent !==
+      "Оберіть відділення"
+    ) {
+      deliveryPostOfficeBorder.removeAttribute("style");
+    }
+  });
+
+document.querySelector(".ordering__form-inputs-group").childNodes.forEach((element) => {
+  element.addEventListener("click", () => {
+    element.querySelector(".ordering__form-input").removeAttribute("style");
+  });
 });

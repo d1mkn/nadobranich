@@ -79,12 +79,20 @@ export const refs = {
   categoryDrop: document.querySelectorAll(".category-page__filter-drop"),
 
   // ordering
-  deliveryText: document.querySelector('.zen-ui-select__value-text'),
-  deliveryOptions: document.querySelectorAll('.zen-ui-select__dropdown .zen-ui-select__option'),
+  deliveryText: document.querySelector(".zen-ui-select__value-text"),
+  deliveryOptions: document.querySelectorAll(".zen-ui-select__dropdown .zen-ui-select__option"),
   orderingSummary: document.querySelector(".ordering-details-js"),
   orderingDetails: document.querySelector(".ordering-items-js"),
   orderingSubmitBtn: document.querySelector(".ordering__form-submit"),
+  billingFirstNameField: document.getElementById("billing_first_name"),
+  billingLastNameField: document.getElementById("billing_last_name"),
+  billingEmailField: document.getElementById("billing_email"),
   billingPhoneField: document.querySelector(".ordering__form #billing_phone"),
+  deliveryMethod: document.querySelector(".zen-ui-select-1 .zen-ui-select__option--current"),
+  deliveryCityPickerText: document.querySelector(".zen-ui-select-2 .zen-ui-select__value-text"),
+  deliveryCityPickerBorder: document.querySelector(".zen-ui-select-2 .zen-ui-select__value"),
+  deliveryPostOfficeText: document.querySelector(".zen-ui-select-3 .zen-ui-select__value-text"),
+  deliveryPostOfficeBorder: document.querySelector(".zen-ui-select-3 .zen-ui-select__value"),
 
   // item
   formShowBtn: document.querySelector(".js-form-open-btn"),
