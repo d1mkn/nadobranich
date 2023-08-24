@@ -79,6 +79,7 @@ export const refs = {
   categoryDrop: document.querySelectorAll(".category-page__filter-drop"),
 
   // ordering
+  odreringForm: document.querySelector(".ordering__form"),
   deliveryText: document.querySelector(".zen-ui-select__value-text"),
   deliveryOptions: document.querySelectorAll(".zen-ui-select__dropdown .zen-ui-select__option"),
   orderingSummary: document.querySelector(".ordering-details-js"),
@@ -88,11 +89,14 @@ export const refs = {
   billingLastNameField: document.getElementById("billing_last_name"),
   billingEmailField: document.getElementById("billing_email"),
   billingPhoneField: document.querySelector(".ordering__form #billing_phone"),
-  deliveryMethod: document.querySelector(".zen-ui-select-1 .zen-ui-select__option--current"),
   deliveryCityPickerText: document.querySelector(".zen-ui-select-2 .zen-ui-select__value-text"),
   deliveryCityPickerBorder: document.querySelector(".zen-ui-select-2 .zen-ui-select__value"),
   deliveryPostOfficeText: document.querySelector(".zen-ui-select-3 .zen-ui-select__value-text"),
   deliveryPostOfficeBorder: document.querySelector(".zen-ui-select-3 .zen-ui-select__value"),
+  deliveryAddressField: document.getElementById("wcus_np_billing_custom_address"),
+  codMethod: document.getElementById("pay-on-delivery"),
+  liqpayMethod: document.getElementById("online-payment"),
+  radioLabel: document.querySelectorAll(".js-radio"),
 
   // item
   formShowBtn: document.querySelector(".js-form-open-btn"),

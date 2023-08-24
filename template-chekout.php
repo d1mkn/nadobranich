@@ -68,8 +68,8 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                     <div class="ordering__form-section">
                         <p class="ordering__form-title">Спосіб оплати</p>
                         <div class="ordering__form-checkbox-wrap">
-                            <input class="ordering__form-checkbox" type="radio" id="pay-on-delivery" name="how-to-pay">
-                            <label for="pay-on-delivery">Оплата при отриманні</label>
+                            <input class="ordering__form-checkbox" type="radio" id="pay-on-delivery" name="how-to-pay" value="cod">
+                            <label class="animate__animated js-radio" for="pay-on-delivery">Оплата при отриманні</label>
                         </div>
                         <div class="pay-on-delivery-info">
                             <p class="pay-on-delivery-info-text"> Готівкою кур`єру або на відділенні Нової Пошти
@@ -78,12 +78,16 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                                 кур`єра або на відділенні Нової Пошти. </p>
                         </div>
                         <div class="m0 ordering__form-checkbox-wrap">
-                            <input class="ordering__form-checkbox" type="radio" id="online-payment" name="how-to-pay">
-                            <label for="online-payment">Оплата картою онлайн (через LiqPay)</label>
+                            <input class="ordering__form-checkbox" type="radio" id="online-payment" name="how-to-pay" value="liqpay-webplus">
+                            <label class="animate__animated js-radio" for="online-payment">Оплата картою онлайн (через
+                                LiqPay)</label>
                         </div>
+                        <p class="invalid-input-message visually-hidden" id='pick-payment'
+                            style='display:block; position:absolute;'>
+                            Оберіть спосіб оплати</p>
                     </div>
-                    <p class="ordering__form-title">Додати коментар до замовлення</p> <textarea
-                        class="ordering__form-input-comment" id="order_comments" name="order_comments"></textarea>
+                    <p class="ordering__form-title">Додати коментар до замовлення</p>
+                    <textarea class="ordering__form-input-comment" id="order_comments" name="order_comments"></textarea>
                     <div class="ordering__form-submit-wrap">
                         <button class="ordering__form-submit" type="submit">Купити</button>
                         <?php wp_nonce_field('woocommerce-process_checkout', 'woocommerce-process-checkout-nonce'); ?>
@@ -163,6 +167,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 
 <div class="animate__animated animate__faster modal-backdrop visually-hidden">
     <?php echo do_shortcode('[modalAuth_markup]') ?>
+    <?php echo do_shortcode('[modal_markup]') ?>
 </div>
 
 <?php

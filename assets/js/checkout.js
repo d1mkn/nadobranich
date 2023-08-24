@@ -3,29 +3,35 @@ import IMask from "imask";
 import { refs } from "./refs";
 
 const {
+  odreringForm,
   billingFirstNameField,
   billingLastNameField,
   billingPhoneField,
   billingEmailField,
-  orderingSubmitBtn,
   deliveryText,
   deliveryOptions,
   orderingSummary,
   orderingDetails,
-  deliveryMethod,
   deliveryCityPickerText,
   deliveryCityPickerBorder,
   deliveryPostOfficeText,
   deliveryPostOfficeBorder,
+  deliveryAddressField,
+  codMethod,
+  liqpayMethod,
+  radioLabel,
+  orderingSubmitBtn,
 } = refs;
 
-orderingSubmitBtn.addEventListener("click", (e) => {
+odreringForm.addEventListener("submit", (e) => {
   let isFormValidated = true;
+  let deliveryMethod = document.querySelector(".zen-ui-select-1 .zen-ui-select__option--current");
   billingFirstNameField.removeAttribute("style");
   billingLastNameField.removeAttribute("style");
   billingPhoneField.removeAttribute("style");
   billingEmailField.removeAttribute("style");
   deliveryCityPickerBorder.removeAttribute("style");
+  deliveryAddressField.removeAttribute("style");
 
   if (!billingFirstNameField.value) {
     billingFirstNameField.scrollIntoView(false);
@@ -86,57 +92,97 @@ orderingSubmitBtn.addEventListener("click", (e) => {
     }
   }
 
+  if (deliveryMethod.textContent === "Кур'єр Нової Пошти") {
+    if (deliveryCityPickerText.textContent === "Оберіть місто") {
+      deliveryCityPickerBorder.scrollIntoView(false);
+      deliveryCityPickerBorder.style.borderColor = "#f51010";
+      isFormValidated = false;
+    }
+    if (deliveryAddressField.value === "") {
+      deliveryAddressField.scrollIntoView(false);
+      deliveryAddressField.style.borderColor = "#f51010";
+      isFormValidated = false;
+    }
+  }
+
+  if (!codMethod.checked && !liqpayMethod.checked) {
+    isFormValidated = false;
+    radioLabel.forEach((element) => {
+      element.classList.add("animate__flash");
+      element.classList.add("animate__repeat-2");
+    });
+
+    setTimeout(() => {
+      radioLabel.forEach((element) => {
+        element.classList.remove("animate__flash");
+        element.classList.remove("animate__repeat-2");
+      });
+    }, 2000);
+  }
+
   e.preventDefault();
-  const actionLink = e.currentTarget.closest("form").action;
-  // refs.submitInfoEdit.setAttribute("disabled", true);
-  const payload = new FormData();
-  payload.append("billing_first_name", document.getElementById("billing_first_name").value);
-  payload.append("billing_last_name", document.getElementById("billing_last_name").value);
-  payload.append("billing_company", "");
-  payload.append("billing_country", "UA");
-  payload.append(
-    "billing_address_1",
-    document.getElementById("wcus_np_billing_custom_address").value
-  );
-  payload.append("billing_address_2", "");
-  payload.append("billing_city", document.querySelector("[name=wcus_np_billing_city_name]").value);
-  payload.append("billing_state", "");
-  payload.append("billing_postcode", "");
-  payload.append("billing_phone", document.getElementById("billing_phone").value);
-  payload.append("billing_email", document.getElementById("billing_email").value);
-  payload.append(
-    "wcus_np_billing_custom_address_active",
-    document.querySelector("[name=wcus_np_billing_custom_address_active]").value
-  );
-  payload.append(
-    "wcus_np_billing_city",
-    document.querySelector("[name=wcus_np_billing_city]").value
-  );
-  payload.append(
-    "wcus_np_billing_city_name",
-    document.querySelector("[name=wcus_np_billing_city_name]").value
-  );
-  payload.append(
-    "wcus_np_billing_warehouse",
-    document.querySelector("[name=wcus_np_billing_warehouse]").value
-  );
-  payload.append(
-    "wcus_np_billing_warehouse_name",
-    document.querySelector("[name=wcus_np_billing_warehouse_name]").value
-  );
-  payload.append(
-    "wcus_np_billing_custom_address",
-    document.querySelector("[name=wcus_np_billing_custom_address]").value
-  );
-  payload.append("order_comments", document.getElementById("order_comments").value);
-  payload.append("shipping_method[0]", "nova_poshta_shipping:2");
-  payload.append("payment_method", "cod");
-  payload.append(
-    "woocommerce-process-checkout-nonce",
-    document.getElementById("woocommerce-process-checkout-nonce").value
-  );
-  payload.append("_wp_http_referer", document.querySelector("[name=_wp_http_referer]").value);
-  // axios.post(`${actionLink}/?wc-ajax=checkout`, payload).then((response) => console.log(response));
+  if (isFormValidated) {
+    const actionLink = e.currentTarget.closest("form").action;
+    orderingSubmitBtn.setAttribute("disabled", true);
+    const payload = new FormData();
+    payload.append("billing_first_name", document.getElementById("billing_first_name").value);
+    payload.append("billing_last_name", document.getElementById("billing_last_name").value);
+    payload.append("billing_company", "");
+    payload.append("billing_country", "UA");
+    payload.append(
+      "billing_address_1",
+      document.getElementById("wcus_np_billing_custom_address").value
+    );
+    payload.append("billing_address_2", "");
+    payload.append(
+      "billing_city",
+      document.querySelector("[name=wcus_np_billing_city_name]").value
+    );
+    payload.append("billing_state", "");
+    payload.append("billing_postcode", "");
+    payload.append("billing_phone", document.getElementById("billing_phone").value);
+    payload.append("billing_email", document.getElementById("billing_email").value);
+    payload.append(
+      "wcus_np_billing_custom_address_active",
+      document.querySelector("[name=wcus_np_billing_custom_address_active]").value
+    );
+    payload.append(
+      "wcus_np_billing_city",
+      document.querySelector("[name=wcus_np_billing_city]").value
+    );
+    payload.append(
+      "wcus_np_billing_city_name",
+      document.querySelector("[name=wcus_np_billing_city_name]").value
+    );
+    payload.append(
+      "wcus_np_billing_warehouse",
+      document.querySelector("[name=wcus_np_billing_warehouse]").value
+    );
+    payload.append(
+      "wcus_np_billing_warehouse_name",
+      document.querySelector("[name=wcus_np_billing_warehouse_name]").value
+    );
+    payload.append(
+      "wcus_np_billing_custom_address",
+      document.querySelector("[name=wcus_np_billing_custom_address]").value
+    );
+    payload.append("order_comments", document.getElementById("order_comments").value);
+    payload.append("shipping_method[0]", "nova_poshta_shipping:2");
+    if (codMethod.checked) {
+      payload.append("payment_method", "cod");
+    }
+    if (liqpayMethod.checked) {
+      payload.append("payment_method", "liqpay-webplus");
+    }
+    payload.append(
+      "woocommerce-process-checkout-nonce",
+      document.getElementById("woocommerce-process-checkout-nonce").value
+    );
+    payload.append("_wp_http_referer", document.querySelector("[name=_wp_http_referer]").value);
+    axios
+      .post(`${actionLink}/?wc-ajax=checkout`, payload)
+      .then((response) => console.log(response));
+  }
 });
 
 // animations
@@ -216,6 +262,10 @@ document
       deliveryPostOfficeBorder.removeAttribute("style");
     }
   });
+
+deliveryAddressField.addEventListener("input", () => {
+  deliveryAddressField.removeAttribute("style");
+});
 
 document.querySelector(".ordering__form-inputs-group").childNodes.forEach((element) => {
   element.addEventListener("click", () => {
