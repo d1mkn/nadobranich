@@ -27,24 +27,26 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                             <p class="ordering__form-title">Контактні дані</p>
                             <div class="ordering__form-inputs-group">
                                 <div class="ordering__form-input-wrap">
-                                    <input class="ordering__form-input" type="text" id="billing_first_name" name="billing_first_name"
-                                        placeholder=" " pattern="^[A-ZА-ЯЄІЇҐ][a-zA-Zа-яА-Яєіїґ]{1,}$" required=""
+                                    <input class="ordering__form-input" type="text" id="billing_first_name"
+                                        name="billing_first_name" placeholder=" "
+                                        pattern="^[A-ZА-ЯЄІЇҐ][a-zA-Zа-яА-Яєіїґ]{1,}$" required=""
                                         value="<?php echo esc_attr($user->first_name) ?>">
                                     <label class="ordering__form-label" for="billing_first_name">Ім'я</label>
                                     <p class="invalid-input-message">Ім'я має починатися з великої літери</p>
                                 </div>
 
                                 <div class="ordering__form-input-wrap">
-                                    <input class="ordering__form-input" type="text" id="billing_last_name" name="billing_last_name"
-                                        placeholder=" " pattern="^[A-ZА-ЯЄІЇҐ][a-zA-Zа-яА-Яєіїґ]{1,}$" required=""
+                                    <input class="ordering__form-input" type="text" id="billing_last_name"
+                                        name="billing_last_name" placeholder=" "
+                                        pattern="^[A-ZА-ЯЄІЇҐ][a-zA-Zа-яА-Яєіїґ]{1,}$" required=""
                                         value="<?php echo esc_attr($user->last_name) ?>">
                                     <label class="ordering__form-label" for="billing_last_name">Прізвище</label>
                                     <p class="invalid-input-message">Прізвище має починатися з великої літери</p>
                                 </div>
 
                                 <div class="ordering__form-input-wrap">
-                                    <input class="ordering__form-input" type="tel" id="billing_phone" name="billing_phone"
-                                        placeholder=" " required=""
+                                    <input class="ordering__form-input" type="tel" id="billing_phone"
+                                        name="billing_phone" placeholder=" " required=""
                                         value="<?php echo esc_attr($user->billing_phone); ?>">
                                     <label class="ordering__form-label" for="billing_phone">Телефон</label>
                                     <p class="invalid-input-message">Це поле є обов'язковим</p>
@@ -61,70 +63,29 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                             </div>
                         </div>
                         <div class="ordering__form-section">
-                            <p class="ordering__form-title">Адреса доставки</p>
+                            <p class="ordering__form-title">Адреса та спосіб доставки</p>
                             <div>
-                                <div class="ordering__form-inputs-group">
-                                    <div class="ordering__form-select-wrap"> <select class="ordering__form-select"
-                                            id="region" name="region" required="">
-                                            <option value="">Область</option>
-                                        </select> </div>
-                                    <div class="ordering__form-select-wrap"> <select class="ordering__form-select"
-                                            id="city" name="city" required="">
-                                            <option value="">Місто</option>
-                                        </select> </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="ordering__form-section">
-                            <p class="ordering__form-title">Спосіб доставки</p>
-                            <div class="ordering__form-checkbox-wrap"> <input
-                                    class="js-checkbox1 ordering__form-checkbox" type="checkbox" id="post-office"
-                                    name="post-office"> <label for="post-office"> Відділення Нової Пошти</label> </div>
-                            <div class="js-ordering-data1 visually-hidden">
-                                <div class="ordering__form-inputs-group">
-                                    <div class="ordering__form-select-wrap w100"> <select
-                                            class="ordering__form-select w98" id="post-office-address"
-                                            name="post-office-address">
-                                            <option value="">Адреса відділення</option>
-                                        </select> </div>
-                                </div>
-                            </div>
-                            <div class="m0 ordering__form-checkbox-wrap"> <input
-                                    class="js-checkbox2 ordering__form-checkbox" type="checkbox" id="courier"
-                                    name="courier"> <label for="courier">Кур'єр Нової Пошти</label> </div>
-                            <div class="js-ordering-data2 visually-hidden">
-                                <div class="ordering__form-inputs-group">
-                                    <div class="ordering__form-input-wrap w100"> <input
-                                            class="ordering__form-input w100" type="text" id="street" name="street"
-                                            placeholder=" "> <label class="ordering__form-label" for="email">Назва
-                                            вулиці</label> </div>
-                                    <div class="ordering__form-inputs-group">
-                                        <div class="ordering__form-input-wrap"> <input class="ordering__form-input"
-                                                type="text" id="house-number" name="house-number" placeholder=" ">
-                                            <label class="ordering__form-label" for="email">Номер будинку</label>
-                                        </div>
-                                        <div class="ordering__form-input-wrap"> <input class="ordering__form-input"
-                                                type="text" id="apartment-number" name="apartment-number"
-                                                placeholder=" "> <label class="ordering__form-label" for="email">Номер
-                                                квартири</label> </div>
-                                    </div>
-                                </div>
+                                <?php do_action('woocommerce_after_checkout_billing_form') ?>
                             </div>
                         </div>
                         <div class="ordering__form-section">
                             <p class="ordering__form-title">Спосіб оплати</p>
-                            <div class="ordering__form-checkbox-wrap"> <input class="ordering__form-checkbox"
-                                    type="checkbox" id="pay-on-delivery" name="pay-on-delivery"> <label
-                                    for="pay-on-delivery">Оплата при отриманні</label> </div>
+                            <div class="ordering__form-checkbox-wrap">
+                                <input class="ordering__form-checkbox" type="radio" id="pay-on-delivery"
+                                    name="how-to-pay">
+                                <label for="pay-on-delivery">Оплата при отриманні</label>
+                            </div>
                             <div class="pay-on-delivery-info">
                                 <p class="pay-on-delivery-info-text"> Готівкою кур`єру або на відділенні Нової Пошти
                                     (враховуйте комісію за накладений платіж). </p>
                                 <p class="pay-on-delivery-info-text"> Карткою Visa/MasterCard за допомогою термінала у
                                     кур`єра або на відділенні Нової Пошти. </p>
                             </div>
-                            <div class="m0 ordering__form-checkbox-wrap"> <input class="ordering__form-checkbox"
-                                    type="checkbox" id="online-payment" name="online-payment"> <label
-                                    for="online-payment">Оплата картою онлайн (через LiqPay)</label> </div>
+                            <div class="m0 ordering__form-checkbox-wrap">
+                                <input class="ordering__form-checkbox" type="radio" id="online-payment"
+                                    name="how-to-pay">
+                                <label for="online-payment">Оплата картою онлайн (через LiqPay)</label>
+                            </div>
                         </div>
                         <p class="ordering__form-title">Додати коментар до замовлення</p> <textarea
                             class="ordering__form-input-comment" id="order_comments" name="order_comments"></textarea>

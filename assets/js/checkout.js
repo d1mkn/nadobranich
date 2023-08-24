@@ -1,13 +1,10 @@
+import axios from "axios";
 import IMask from "imask";
 import { refs } from "./refs";
 
-const { billingPhoneField } = refs;
-// animations
+const { billingPhoneField, orderingSubmitBtn, deliveryText, deliveryOptions } = refs;
 
-const checkbox1 = refs.orderingCheckbox1;
-const checkbox2 = refs.orderingCheckbox2;
-const orderingMethod1 = document.querySelector(".js-ordering-data1");
-const orderingMethod2 = document.querySelector(".js-ordering-data2");
+// animations
 const orderingSummary = refs.orderingSummary;
 const orderingDetails = refs.orderingDetails;
 
@@ -17,14 +14,6 @@ const phoneMaskOptions = {
 };
 
 const phoneMask = new IMask(billingPhoneField, phoneMaskOptions);
-
-checkbox1.addEventListener("click", () => {
-  orderingMethod1.classList.toggle("visually-hidden");
-});
-
-checkbox2.addEventListener("click", () => {
-  orderingMethod2.classList.toggle("visually-hidden");
-});
 
 orderingSummary.addEventListener("click", () => {
   orderingSummary.classList.toggle("active");
@@ -45,4 +34,42 @@ orderingSummary.addEventListener("click", () => {
       orderingSummary.removeAttribute("style");
     }, 1000);
   }
+});
+
+// logic
+
+deliveryOptions.forEach((option) => {
+  if (option.textContent == "\n          на відділення\n        ") {
+    option.innerHTML = "Відділення Нової Пошти";
+  }
+  if (option.textContent == "\n          до дверей\n        ") {
+    option.textContent = "Кур'єр Нової Пошти";
+  }
+});
+deliveryText.textContent = document.querySelector(".zen-ui-select__option--current").textContent;
+document
+  .querySelectorAll(".zen-ui-select__options .zen-ui-select__option")[0]
+  .addEventListener("click", () => {
+    deliveryText.textContent = document.querySelector(
+      ".zen-ui-select__option--current"
+    ).textContent;
+  });
+document
+  .querySelectorAll(".zen-ui-select__options .zen-ui-select__option")[1]
+  .addEventListener("click", () => {
+    deliveryText.textContent = document.querySelector(
+      ".zen-ui-select__option--current"
+    ).textContent;
+  });
+
+orderingSubmitBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  const actionLink = e.currentTarget.closest("form").action;
+  // refs.submitInfoEdit.setAttribute("disabled", true);
+  const payload = new FormData();
+  // payload.append("account_first_name", document.getElementById("account_first_name").value);
+  // payload.append("account_last_name", document.getElementById("account_last_name").value);
+  // payload.append("account_email", document.getElementById("account_email").value);
+  // payload.append("account_phone", document.getElementById("account_phone").value);
+  axios.post(`${actionLink}/?wc-ajax=checkout`, payload).then((response) => console.log(response));
 });

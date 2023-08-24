@@ -283,12 +283,19 @@ function renderVariations(selectedColor) {
 
   let markup = "";
 
+  let isFirst = true;
+
   for (const size in variationPrices) {
     if (variationPrices.hasOwnProperty(size)) {
       const { price, variationId } = variationPrices[size];
-      prevActiveSize = prevActiveSize || size; // Перший розмір за замовчуванням
-      prevActivePrice = prevActivePrice || price; // Ціна за замовчуванням
-      prevActiveId = variationId; // Варіація за замовчуванням
+      if (isFirst) {
+        prevActiveSize = prevActiveSize || size; // Перший розмір за замовчуванням
+        prevActivePrice = prevActivePrice || price; // Ціна за замовчуванням
+        prevActiveId = variationId; // Варіація за замовчуванням
+        localStorage.setItem("variationId", prevActiveId);
+        localStorage.setItem("combination", `${prevActiveColor} / ${prevActiveSize}`);
+        isFirst = false;
+      }
       markup += `<button class="modal__body-size-btn${
         size === prevActiveSize ? " active" : ""
       }" data-size="${size}" data-price="${price}" data-variation-id="${variationId}" type="button">
@@ -299,8 +306,6 @@ function renderVariations(selectedColor) {
   refs.sizeList.innerHTML = markup;
   refs.productSize.textContent = prevActiveSize;
   pickSize();
-  localStorage.setItem("variationId", prevActiveId);
-  localStorage.setItem("combination", `${prevActiveColor} / ${prevActiveSize}`);
 }
 
 function pickSize() {

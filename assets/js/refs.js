@@ -79,10 +79,11 @@ export const refs = {
   categoryDrop: document.querySelectorAll(".category-page__filter-drop"),
 
   // ordering
-  orderingCheckbox1: document.querySelector(".js-checkbox1"),
-  orderingCheckbox2: document.querySelector(".js-checkbox2"),
+  deliveryText: document.querySelector('.zen-ui-select__value-text'),
+  deliveryOptions: document.querySelectorAll('.zen-ui-select__dropdown .zen-ui-select__option'),
   orderingSummary: document.querySelector(".ordering-details-js"),
   orderingDetails: document.querySelector(".ordering-items-js"),
+  orderingSubmitBtn: document.querySelector(".ordering__form-submit"),
   billingPhoneField: document.querySelector(".ordering__form #billing_phone"),
 
   // item

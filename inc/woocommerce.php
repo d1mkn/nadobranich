@@ -423,17 +423,4 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
         }
     }
     add_action('template_redirect', 'nadobranich_save_edit_user');
-    function custom_override_checkout_fields($fields)
-    {
-        unset($fields['billing']['billing_company']); // компания
-        unset($fields['billing']['billing_postcode']);
-        unset($fields['billing']['billing_country']);
-        unset($fields['billing']['billing_state']);
-        unset($fields['account']['account_username']);
-        unset($fields['account']['account_password']);
-        unset($fields['account']['account_password-2']);
-        unset($fields['shipping']['shipping_company']);
-        return $fields;
-    }
-    add_filter('woocommerce_checkout_fields', 'custom_override_checkout_fields');
 }
