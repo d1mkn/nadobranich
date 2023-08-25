@@ -11,7 +11,6 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
     $user = wp_get_current_user();
 }
 ?>
-
 <?php
 $currentURL = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 $urlParts = explode('/', $currentURL);
@@ -22,7 +21,7 @@ $orderNumber; ?>
     <div class="ordering-title__wrap">
         <h1 class="ordering-title">
             <?php if ($orderReceivedIndex !== false && isset($urlParts[$orderReceivedIndex + 1])) { ?>
-                Замовлення отримано
+                Замовлення в обробці
             <?php } else { ?>
                 <?php the_title() ?>
             <?php } ?>
@@ -32,10 +31,10 @@ $orderNumber; ?>
     if ($orderReceivedIndex !== false && isset($urlParts[$orderReceivedIndex + 1])) {
         $orderNumber = $urlParts[$orderReceivedIndex + 1]; ?>
         <div class="woocommerce">
-            <div class="woocommerce-order">
-                <?php do_action('woocommerce_before_thankyou', $orderNumber);
+            
+                <?php 
                 do_action('woocommerce_thankyou', $orderNumber); ?>
-            </div>
+            
         </div>
     <?php } else { ?>
         <div class="ordering__content">

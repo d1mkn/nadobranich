@@ -85,12 +85,12 @@ if (odreringForm) {
 
     if (deliveryMethod.textContent === "Відділення Нової Пошти") {
       if (deliveryCityPickerText.textContent === "Оберіть місто") {
-        deliveryCityPickerBorder.scrollIntoView(false);
+        billingPhoneField.scrollIntoView(true);
         deliveryCityPickerBorder.style.borderColor = "#f51010";
         isFormValidated = false;
       }
       if (deliveryPostOfficeText.textContent === "Оберіть відділення") {
-        deliveryPostOfficeBorder.scrollIntoView(false);
+        billingPhoneField.scrollIntoView(true);
         deliveryPostOfficeBorder.style.borderColor = "#f51010";
         isFormValidated = false;
       }
@@ -98,12 +98,12 @@ if (odreringForm) {
 
     if (deliveryMethod.textContent === "Кур'єр Нової Пошти") {
       if (deliveryCityPickerText.textContent === "Оберіть місто") {
-        deliveryCityPickerBorder.scrollIntoView(false);
+        billingPhoneField.scrollIntoView(true);
         deliveryCityPickerBorder.style.borderColor = "#f51010";
         isFormValidated = false;
       }
       if (deliveryAddressField.value === "") {
-        deliveryAddressField.scrollIntoView(false);
+        billingPhoneField.scrollIntoView(true);
         deliveryAddressField.style.borderColor = "#f51010";
         isFormValidated = false;
       }
