@@ -61,20 +61,13 @@
               </svg></span>
           </h3>
           <ul class="footer__info-list js-footer-section-info">
-            <li><a class="footer__info-link" href="#">Про нас</a></li>
             <li>
               <a class="footer__info-link"
-                href="<?php echo get_template_directory_uri() ?>/assets/images/faq.html">Популярні питання</a>
-            </li>
-            <li>
-              <a class="footer__info-link" href="#">Доставка та оплата</a>
-            </li>
-            <li>
-              <a class="footer__info-link" href="#">Обмін та поверення</a>
+                href="<?php echo site_url('') ?>/faq">Популярні питання</a>
             </li>
             <li>
               <a class="footer__info-link"
-                href="<?php echo get_template_directory_uri() ?>/assets/images/fabrics.html">Тканини</a>
+                href="<?php echo site_url('') ?>/about-fabrics">Тканини</a>
             </li>
           </ul>
         </div>

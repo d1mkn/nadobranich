@@ -59,14 +59,10 @@ session_unset();
             <div class="navigation__dropdown-wrap">
               <ul class="navigation__dropdown">
                 <li class="navigation__dropdown-item">
-                  <a href="./faq.html">Популярні питання</a>
+                  <a href="<?php echo site_url('') ?>/faq">Популярні питання</a>
                 </li>
                 <li class="navigation__dropdown-item">
-                  <a href="#">Контакти</a>
-                </li>
-                <li class="navigation__dropdown-item"><a href="#">Про нас</a></li>
-                <li class="navigation__dropdown-item">
-                  <a href="./fabrics.html">Тканини</a>
+                  <a href="<?php echo site_url('') ?>/about-fabrics">Тканини</a>
                 </li>
               </ul>
             </div>
@@ -186,16 +182,10 @@ session_unset();
                 <div class="mobile-menu__items-wrap">
                   <ul class="mobile-menu__items">
                     <li>
-                      <a class="mobile-menu__item" href="#">Популярні питання</a>
+                      <a class="mobile-menu__item" href="<?php echo site_url('') ?>/faq">Популярні питання</a>
                     </li>
                     <li>
-                      <a class="mobile-menu__item" href="#">Контакти</a>
-                    </li>
-                    <li>
-                      <a class="mobile-menu__item" href="#">Про нас</a>
-                    </li>
-                    <li>
-                      <a class="mobile-menu__item" href="#">Тканини</a>
+                      <a class="mobile-menu__item" href="<?php echo site_url('') ?>/about-fabrics">Тканини</a>
                     </li>
                   </ul>
                 </div>
@@ -213,7 +203,7 @@ session_unset();
           <div class="mobile-menu__login">
             <?php
             if (is_user_logged_in()) { ?>
-              <a href="#">Особистий кабінет</a>
+              <a href="<?php echo wc_get_account_endpoint_url('dashboard') ?>">Особистий кабінет</a>
             <?php } else { ?>
               <a href="#" data-type="login">Вхід / Реєстрація</a>
             <?php }
