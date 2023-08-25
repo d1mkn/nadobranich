@@ -191,7 +191,7 @@ function nadobranich_scripts()
 	}
 
 	$template_slug = get_page_template_slug();
-	if ($template_slug === "template-information-page.php") {
+	if ($template_slug === "template-information-page.php" || $template_slug === "template-fabrics-page.php") {
 		wp_enqueue_script('nadobranich-script', get_template_directory_uri() . '/dist/faqPage.js', null, _S_VERSION, true);
 	}
 
