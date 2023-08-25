@@ -189,12 +189,7 @@ if (odreringForm) {
           if (response.data.result === "failure") {
             throw Error;
           }
-          if (liqpayMethod.checked) {
-            window.open(response.data.redirect, "_blank");
-          }
-          if (codMethod.checked) {
-            window.location.replace(response.data.redirect);
-          }
+          window.location.replace(response.data.redirect);
         })
         .catch((error) => {
           if (error) {
