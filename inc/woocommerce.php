@@ -423,4 +423,25 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
         }
     }
     add_action('template_redirect', 'nadobranich_save_edit_user');
+    function nadobranich_check_cart_items_availability()
+    {
+        $cart = WC()->cart;
+
+        foreach ($cart->get_cart() as $cart_item_key => $cart_item) {
+            $product_id = $cart_item['product_id'];
+            $variation_id = $cart_item['variation_id'];
+
+            if ($variation_id > 0) {
+                $product = wc_get_product($variation_id);
+            } else {
+                $product = wc_get_product($product_id);
+            }
+
+            if (!$product || !$product->is_in_stock()) {
+                $cart->remove_cart_item($cart_item_key);
+            }
+        }
+    }
+    add_action('woocommerce_before_cart', 'nadobranich_check_cart_items_availability');
+
 }

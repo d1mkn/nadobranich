@@ -97,6 +97,7 @@ export const refs = {
   codMethod: document.getElementById("pay-on-delivery"),
   liqpayMethod: document.getElementById("online-payment"),
   radioLabel: document.querySelectorAll(".js-radio"),
+  requestErrorMessage: document.querySelector(".ordering__form-submit-wrap .invalid-input-message"),
 
   // item
   formShowBtn: document.querySelector(".js-form-open-btn"),

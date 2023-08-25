@@ -122,78 +122,77 @@ $_SESSION['aboutProducts'][] = array(
 	'variations' => $variations,
 	'rating' => $productRating
 );
+?>
 
-if (!empty($variations)) { ?>
-	<li class="single-category__item<?php if (is_single() || is_404()) {
-		echo ' swiper-slide';
-	} ?>" data-productid=<?php echo $productId ?>>
-		<?php
-		// Якщо товар акціний, то буде плашка
-		if ($is_on_sale): ?>
-			<div class="single-category__sale-item">
-				<p>Aкція</p>
-			</div>
+<li class="single-category__item<?php if (is_single() || is_404()) {
+	echo ' swiper-slide';
+} ?>" data-productid=<?php echo $productId ?>>
+	<?php
+	// Якщо товар акціний, то буде плашка
+	if ($is_on_sale): ?>
+		<div class="single-category__sale-item">
+			<p>Aкція</p>
+		</div>
+		<div class="single-category__item-link">
+			<?php
+		// Якщо не акціний, то буде звичайна картка
+	else: ?>
 			<div class="single-category__item-link">
-				<?php
-			// Якщо не акціний, то буде звичайна картка
-		else: ?>
-				<div class="single-category__item-link">
-				<?php endif; ?>
-				<div class="js-quick-view single-category__item-overlay">
-					<p class="single-category__item-overlay-text">Швидкий перегляд</p>
-					<p class="single-category__item-overlay-text-tab">+</p>
-				</div>
-				<div class="single-category__item-about">
-					<a href="<?php echo get_permalink() ?>">
-						<div class="single-category__item-img">
-							<?php echo get_the_post_thumbnail() ?>
-						</div>
-					</a>
-					<h4 class="single-category__item-title">
-						<?php echo $productTitle ?>
-					</h4>
-					<p class="single-category__item-desc">
-						<?php echo $productShortDesc ?>
-					</p>
-
-					<?php
-					// Якщо товар акціний, то буде стара та нова ціна
-					if ($is_on_sale): ?>
-						<span class="old-price single-category__item-price">Від <span class="item-price">
-								<?php echo $regular_price ?> грн
-							</span><span class="item-new-price">
-								<?php echo $productPrice ?> грн
-							</span></span>
-
-						<?php
-						// Якщо товар не акціний, то буде звичайна мінімальна ціна
-					else: ?>
-						<span class="single-category__item-price">Від
-							<?php echo $productPrice ?> грн
-						</span>
-					<?php endif; ?>
-					<?php
-					// Якщо атрибути є, шукаємо атрибут "Color"
-					if ($productAttributes) {
-						foreach ($attributes as $attribute) {
-							$attributeName = $attribute->get_name();
-							if ($attributeName === 'pa_color') {
-								$terms = get_the_terms($product->id, 'pa_color');
-								?>
-								<div class="modal__body-color-picker">
-									<?php
-									// Підставляємо значення кольору як bg для кружечків
-									foreach ($terms as $term) {
-										$color = $term->slug; ?>
-										<a class="modal__body-color-item" href="<?php echo get_permalink() ?>"
-											style="background-color: <?php echo $color ?>;">
-										</a>
-									<?php } ?>
-								</div>
-							<?php }
-						}
-					} ?>
-				</div>
+			<?php endif; ?>
+			<div class="js-quick-view single-category__item-overlay">
+				<p class="single-category__item-overlay-text">Швидкий перегляд</p>
+				<p class="single-category__item-overlay-text-tab">+</p>
 			</div>
-	</li>
-<?php }
+			<div class="single-category__item-about">
+				<a href="<?php echo get_permalink() ?>">
+					<div class="single-category__item-img">
+						<?php echo get_the_post_thumbnail() ?>
+					</div>
+				</a>
+				<h4 class="single-category__item-title">
+					<?php echo $productTitle ?>
+				</h4>
+				<p class="single-category__item-desc">
+					<?php echo $productShortDesc ?>
+				</p>
+
+				<?php
+				// Якщо товар акціний, то буде стара та нова ціна
+				if ($is_on_sale): ?>
+					<span class="old-price single-category__item-price">Від <span class="item-price">
+							<?php echo $regular_price ?> грн
+						</span><span class="item-new-price">
+							<?php echo $productPrice ?> грн
+						</span></span>
+
+					<?php
+					// Якщо товар не акціний, то буде звичайна мінімальна ціна
+				else: ?>
+					<span class="single-category__item-price">Від
+						<?php echo $productPrice ?> грн
+					</span>
+				<?php endif; ?>
+				<?php
+				// Якщо атрибути є, шукаємо атрибут "Color"
+				if ($productAttributes) {
+					foreach ($attributes as $attribute) {
+						$attributeName = $attribute->get_name();
+						if ($attributeName === 'pa_color') {
+							$terms = get_the_terms($product->id, 'pa_color');
+							?>
+							<div class="modal__body-color-picker">
+								<?php
+								// Підставляємо значення кольору як bg для кружечків
+								foreach ($terms as $term) {
+									$color = $term->slug; ?>
+									<a class="modal__body-color-item" href="<?php echo get_permalink() ?>"
+										style="background-color: <?php echo $color ?>;">
+									</a>
+								<?php } ?>
+							</div>
+						<?php }
+					}
+				} ?>
+			</div>
+		</div>
+</li>

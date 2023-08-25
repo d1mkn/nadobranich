@@ -33,7 +33,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 </main><!-- #main -->
 
 <div class="animate__animated animate__faster modal-backdrop visually-hidden">
-  <?php echo do_shortcode('[modalAuth_markup]') ?>
+    <?php echo do_shortcode('[modalAuth_markup]') ?>
     <?php echo do_shortcode('[modal_markup]') ?>
 </div>
 

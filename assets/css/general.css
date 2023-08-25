@@ -6942,7 +6942,21 @@ img.modal__images-main {
   }
 }
 .ordering__form-submit-wrap {
+  position: relative;
   text-align: right;
+}
+.ordering__form-submit-wrap .invalid-input-message {
+  display: block;
+  position: absolute;
+  top: 0px;
+  margin: 0px;
+  text-align: left;
+}
+.ordering__form-submit:disabled,
+.ordering__form-submit:disabled:hover,
+.ordering__form-submit:disabled:focus {
+  background-color: #c6e0fe;
+  cursor: not-allowed;
 }
 .ordering__form-submit {
   color: #fff;
