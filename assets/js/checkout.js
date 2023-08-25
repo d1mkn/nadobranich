@@ -35,6 +35,7 @@ if (odreringForm) {
     deliveryCityPickerBorder.removeAttribute("style");
     deliveryAddressField.removeAttribute("style");
     requestErrorMessage.classList.add("visually-hidden");
+    document.querySelector(".ordering__form .backdrop").classList.add("visually-hidden");
 
     if (!billingFirstNameField.value) {
       billingFirstNameField.scrollIntoView(false);
@@ -128,6 +129,7 @@ if (odreringForm) {
     if (isFormValidated) {
       const actionLink = e.currentTarget.closest("form").action;
       orderingSubmitBtn.setAttribute("disabled", true);
+      document.querySelector(".ordering__form .backdrop").classList.remove("visually-hidden");
       const payload = new FormData();
       payload.append("billing_first_name", document.getElementById("billing_first_name").value);
       payload.append("billing_last_name", document.getElementById("billing_last_name").value);
@@ -186,6 +188,7 @@ if (odreringForm) {
       axios
         .post(`${actionLink}/?wc-ajax=checkout`, payload)
         .then((response) => {
+          document.querySelector(".ordering__form .backdrop").classList.add("visually-hidden");
           if (response.data.result === "failure") {
             throw Error;
           }

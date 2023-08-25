@@ -6679,8 +6679,21 @@ img.modal__images-main {
   }
 }
 .ordering__form {
+  position: relative;
   flex-direction: column;
   display: flex;
+}
+.ordering__form .backdrop {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  opacity: 0.5;
+}
+.ordering__form .loader {
+  position: unset;
+  width: 100px;
+  height: 100px;
 }
 .ordering__form-section {
   margin-bottom: 20px;

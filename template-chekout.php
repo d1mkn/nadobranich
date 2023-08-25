@@ -12,17 +12,23 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 }
 ?>
 
+<?php
+$currentURL = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+$urlParts = explode('/', $currentURL);
+$orderReceivedIndex = array_search('order-received', $urlParts);
+$orderNumber; ?>
+
 <div class="container">
     <div class="ordering-title__wrap">
         <h1 class="ordering-title">
-            <?php the_title() ?>
+            <?php if ($orderReceivedIndex !== false && isset($urlParts[$orderReceivedIndex + 1])) { ?>
+                Замовлення отримано
+            <?php } else { ?>
+                <?php the_title() ?>
+            <?php } ?>
         </h1>
     </div>
     <?php
-    $currentURL = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-    $urlParts = explode('/', $currentURL);
-    $orderReceivedIndex = array_search('order-received', $urlParts);
-    $orderNumber;
     if ($orderReceivedIndex !== false && isset($urlParts[$orderReceivedIndex + 1])) {
         $orderNumber = $urlParts[$orderReceivedIndex + 1]; ?>
         <div class="woocommerce">
@@ -110,6 +116,9 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                                 спробуйте пізніше
                                 або зверніться до менеджера</p>
                             <?php wp_nonce_field('woocommerce-process_checkout', 'woocommerce-process-checkout-nonce'); ?>
+                        </div>
+                        <div class="backdrop visually-hidden">
+                            <div class="loader"></div>
                         </div>
                     </form>
                 </div>
