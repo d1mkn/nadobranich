@@ -43,6 +43,7 @@
     "cart": "parcel watch assets/js/cartPage.js",
     "account": "parcel watch assets/js/accountPage.js",
     "checkout": "parcel watch assets/js/checkoutPage.js",
+    "faq": "parcel watch assets/js/faqPage.js",
     "build": "parcel build assets/js/index.js"
   },
   "browserslist": "> 0.5%, last 2 versions, not dead",

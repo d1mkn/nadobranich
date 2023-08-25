@@ -190,6 +190,11 @@ function nadobranich_scripts()
 		wp_enqueue_script('nadobranich-script', get_template_directory_uri() . '/dist/checkoutPage.js', null, _S_VERSION, true);
 	}
 
+	$template_slug = get_page_template_slug();
+	if ($template_slug === "template-information-page.php") {
+		wp_enqueue_script('nadobranich-script', get_template_directory_uri() . '/dist/faqPage.js', null, _S_VERSION, true);
+	}
+
 	wp_enqueue_script('nadobranich-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true);
 
 
