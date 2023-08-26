@@ -9,13 +9,16 @@
             </svg>
           </a>
           <div class="footer__socials_links">
-            <a class="footer__socials_link" href="#"><svg class="footer__socials_icon" width="22" height="23">
+            <a class="footer__socials_link" href="<?php the_field('instagram_link', '131') ?>"><svg
+                class="footer__socials_icon" width="22" height="23">
                 <use href="<?php echo get_template_directory_uri() ?>/assets/images/icons.svg#insta"></use>
               </svg></a>
-            <a class="footer__socials_link" href="#"><svg class="footer__socials_icon" width="22" height="21">
+            <a class="footer__socials_link" href="<?php the_field('telegram_link', '131') ?>"><svg
+                class="footer__socials_icon" width="22" height="21">
                 <use href="<?php echo get_template_directory_uri() ?>/assets/images/icons.svg#tg"></use>
               </svg></a>
-            <a class="footer__socials_link" href="#"><svg class="footer__socials_icon" width="23" height="23">
+            <a class="footer__socials_link" href="<?php the_field('viber_link', '131') ?>"><svg
+                class="footer__socials_icon" width="23" height="23">
                 <use href="<?php echo get_template_directory_uri() ?>/assets/images/icons.svg#viber"></use>
               </svg></a>
           </div>
@@ -62,12 +65,10 @@
           </h3>
           <ul class="footer__info-list js-footer-section-info">
             <li>
-              <a class="footer__info-link"
-                href="<?php echo site_url('') ?>/faq">Популярні питання</a>
+              <a class="footer__info-link" href="<?php echo site_url('') ?>/faq">Популярні питання</a>
             </li>
             <li>
-              <a class="footer__info-link"
-                href="<?php echo site_url('') ?>/about-fabrics">Тканини</a>
+              <a class="footer__info-link" href="<?php echo site_url('') ?>/about-fabrics">Тканини</a>
             </li>
           </ul>
         </div>
@@ -85,10 +86,10 @@
               </svg>
               <ul class="footer__contacts-list">
                 <li>
-                  <a class="footer__contacts-link" href="tel:+380983363028">(098) 33-63-028</a>
+                  <a class="footer__contacts-link" href="tel:+380983363028"><?php the_field('first_phone', '131') ?></a>
                 </li>
                 <li>
-                  <a class="footer__contacts-link" href="tel:+380983363028">(098) 33-63-028</a>
+                  <a class="footer__contacts-link" href="tel:+380983363028"><?php the_field('second_phone', '131') ?></a>
                 </li>
               </ul>
             </div>
@@ -96,7 +97,7 @@
               <svg class="footer__contacts-icon" width="15" heigth="10">
                 <use href="<?php echo get_template_directory_uri() ?>/assets/images/icons.svg#mail"></use>
               </svg>
-              <a class="footer__contacts-link" href="mailto:rendez-vous-elite@ukr.net">rendez-vous-elite@ukr.net
+              <a class="footer__contacts-link" href="mailto:rendez-vous-elite@ukr.net"><?php the_field('footer_email', '131') ?>
               </a>
             </div>
             <div class="footer__contacts-location">
@@ -104,8 +105,8 @@
                 <use href="<?php echo get_template_directory_uri() ?>/assets/images/icons.svg#location"></use>
               </svg>
               <div class="footer__contacts-location-text">
-                <p>м. Умань, Черкаська обл.</p>
-                <p>пн.-нд. 9.00-19.00</p>
+                <p><?php the_field('footer_address', '131') ?></p>
+                <p><?php the_field('footer_work_schedule', '131') ?></p>
               </div>
             </div>
           </div>

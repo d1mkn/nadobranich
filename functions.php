@@ -21,6 +21,7 @@ if (!defined('_S_VERSION')) {
  */
 function nadobranich_setup()
 {
+	add_theme_support('menus');
 	/*
 	 * Make theme available for translation.
 	 * Translations can be filed in the /languages/ directory.

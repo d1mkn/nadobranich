@@ -8130,6 +8130,9 @@ footer h3 {
   gap: 15px;
   display: flex;
 }
+.footer__contacts-mail .footer__contacts-icon {
+  height: 10px;
+}
 .footer__contacts-icon {
   width: fit-content;
   height: 15px;
