@@ -3,6 +3,8 @@ import IMask from "imask";
 import { refs } from "./refs";
 
 const {
+  orderingBreadcrumbs,
+  orderingTitle,
   odreringForm,
   billingFirstNameField,
   billingLastNameField,
@@ -23,6 +25,11 @@ const {
   orderingSubmitBtn,
   requestErrorMessage,
 } = refs;
+
+if (orderingTitle.textContent.trim() === "Замовлення в обробці") {
+  orderingBreadcrumbs.childNodes[orderingBreadcrumbs.childNodes.length - 1].textContent =
+    "Замовлення в обробці";
+}
 
 if (odreringForm) {
   odreringForm.addEventListener("submit", (e) => {
@@ -236,10 +243,10 @@ if (odreringForm) {
   // logic
 
   deliveryOptions.forEach((option) => {
-    if (option.textContent == "\n          на відділення\n        ") {
+    if (option.textContent.trim() === "на відділення") {
       option.innerHTML = "Відділення Нової Пошти";
     }
-    if (option.textContent == "\n          до дверей\n        ") {
+    if (option.textContent.trim() === "до дверей") {
       option.textContent = "Кур'єр Нової Пошти";
     }
   });

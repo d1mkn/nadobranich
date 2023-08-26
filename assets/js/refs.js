@@ -79,6 +79,8 @@ export const refs = {
   categoryDrop: document.querySelectorAll(".category-page__filter-drop"),
 
   // ordering
+  orderingBreadcrumbs: document.querySelector(".breadcrumbs"),
+  orderingTitle: document.querySelector(".ordering-title"),
   odreringForm: document.querySelector(".ordering__form"),
   deliveryText: document.querySelector(".zen-ui-select__value-text"),
   deliveryOptions: document.querySelectorAll(".zen-ui-select__dropdown .zen-ui-select__option"),
