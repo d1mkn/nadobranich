@@ -53,10 +53,10 @@ function rerenderFilter() {
   const mediaQuery = window.matchMedia("(max-width: 767px) and (orientation: portrait)");
 
   if (mediaQuery.matches && screenWidth < 768) {
-    const filterMobileBtn = document.querySelector(".wpc-filters-button-text");
+    const filterMobileBtn = document.querySelector(".wpc-button-inner");
     const standartFilter = document.querySelector(".category-page__filter-title");
     standartFilter.setAttribute("style", "display: none;");
-    filterMobileBtn.outerText = "Фільтр";
+    filterMobileBtn.textContent = "Фільтр";
     document.querySelector(".wpc-button-inner").setAttribute("style", "font-weight: 600;");
     document
       .querySelector(".wpc-button-inner")
