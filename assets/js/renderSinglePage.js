@@ -88,7 +88,7 @@ if (!isSimple) {
         const variationPrice = document.querySelector(".woocommerce-Price-amount.amount bdi");
         if (variationPrice) {
           const newPrice = variationPrice.textContent;
-          const priceCleaning = newPrice.replace(/,/g, "").replace(/\.\d+/g, "");
+          var priceCleaning = newPrice.replace(/,/g, "").replace(/\.\d+/g, "");
           refs.singleProductPrice.textContent = priceCleaning;
         }
 
@@ -119,6 +119,7 @@ if (!isSimple) {
           const colorText = color.textContent.trim();
           const regex = new RegExp(`Розмір: ${sizeText}, Колір: ${colorText}`);
           const currVar = variations.find((variation) => variation.variationDesc.match(regex));
+          const currVarSalePrice = currVar.salePrice;
           const currId = currVar.variationId;
           const currQty = currVar.variationQty;
           const qtyEl = document.querySelector(".old-selector");
@@ -130,11 +131,16 @@ if (!isSimple) {
           qtyEl.setAttribute("type", "number");
           qtyEl.setAttribute("max", currQty);
           qtyEl.setAttribute("value", "1");
+          if (currVarSalePrice !== "") {
+            refs.singleProductPriceWrap.innerHTML = `<span class="single-item-price"> ${currVar.regularPrice} грн</span><p class="item__body-price js-variation-price" style="color: rgb(245, 16, 16);">${currVarSalePrice} грн</p>`;
+          } else {
+            refs.singleProductPriceWrap.innerHTML = `<p class="item__body-price js-variation-price">${priceCleaning}</p>`;
+          }
           if (qtyEl.value < 1) {
             qtyEl.value = currQty;
             document.querySelector(".selected-option").textContent = currQty;
-          } else { 
-            document.querySelector(".selected-option").textContent = '1';
+          } else {
+            document.querySelector(".selected-option").textContent = "1";
           }
           let selectMarkup = "";
           for (let i = 1; i <= currQty; i += 1) {

@@ -115,6 +115,7 @@ export const refs = {
   contactsList: document.querySelector(".footer__contacts-wrap"),
 
   // single page
+  singleProductPriceWrap: document.querySelector(".item__body-desc .body-price-wrap"),
   singleProductPrice: document.querySelector(".js-variation-price"),
   wooVatiationPriceWrap: document.querySelector(".woocommerce-variation.single_variation"),
   wooVatiationPrice: document.querySelector(".woocommerce-Price-amount.amount bdi"),
