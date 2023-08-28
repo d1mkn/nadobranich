@@ -254,18 +254,6 @@ function pickColor() {
     });
   });
 
-  // Якщо акційний
-  if (currProduct.isOnSale) {
-    refs.productPrice.innerHTML = `<span class="item-price">
-                          ${currProduct.variations[0].regularPrice} грн
-                        </span><span class="item-new-price">
-                          ${currProduct.price} грн
-                        </span>`;
-    refs.sizeList.innerHTML = `<button class="modal__body-size-btn active" data-size="${singleSize}" type="button">
-                    ${singleSize}</button>`;
-    refs.productSize.textContent = singleSize;
-    return;
-  }
   renderVariations(refs.productColor.textContent);
 }
 
@@ -287,9 +275,10 @@ function renderVariations(selectedColor) {
 
     if (sizeStartIndex !== -1 && sizeEndIndex !== -1) {
       const size = variationDesc.substring(sizeStartIndex, sizeEndIndex).trim();
-      const price = variation.variationPrice;
+      const salePrice = variation.variationPrice;
+      const price = variation.regularPrice;
       const variationId = variation.variationId;
-      variationPrices[size] = { price, variationId };
+      variationPrices[size] = { salePrice, price, variationId };
     }
   });
 
@@ -299,10 +288,16 @@ function renderVariations(selectedColor) {
 
   for (const size in variationPrices) {
     if (variationPrices.hasOwnProperty(size)) {
-      const { price, variationId } = variationPrices[size];
+      const { salePrice, price, variationId } = variationPrices[size];
       if (isFirst) {
         prevActiveSize = prevActiveSize || size; // Перший розмір за замовчуванням
-        prevActivePrice = prevActivePrice || price; // Ціна за замовчуванням
+        if (price === salePrice) {
+          prevActivePrice = prevActivePrice || price; // Ціна за замовчуванням
+          refs.productPrice.textContent = prevActivePrice + " грн";
+        } else {
+          refs.productPrice.innerHTML = `<span class="item-price">${price} грн</span>
+                                          <span class="item-new-price">${salePrice} грн</span>`;
+        }
         prevActiveId = variationId; // Варіація за замовчуванням
         localStorage.setItem("variationId", prevActiveId);
         localStorage.setItem("combination", `${prevActiveColor} / ${prevActiveSize}`);
@@ -310,11 +305,10 @@ function renderVariations(selectedColor) {
       }
       markup += `<button class="modal__body-size-btn${
         size === prevActiveSize ? " active" : ""
-      }" data-size="${size}" data-price="${price}" data-variation-id="${variationId}" type="button">
+      }" data-size="${size}" data-price="${price}" data-sale="${salePrice}" data-variation-id="${variationId}" type="button">
                     ${size}</button>`;
     }
   }
-  refs.productPrice.textContent = prevActivePrice + " грн";
   refs.sizeList.innerHTML = markup;
   refs.productSize.textContent = prevActiveSize;
   pickSize();
@@ -337,7 +331,13 @@ function pickSize() {
         prevActiveSize = targetSize.dataset.size;
 
         // Оновлення інформації про ціну
-        refs.productPrice.textContent = targetSize.dataset.price + " грн";
+        console.log(targetSize.dataset.sale);
+        if (targetSize.dataset.sale === targetSize.dataset.price) {
+          refs.productPrice.innerHTML = `<p class="body-price js-modal-price">${targetSize.dataset.price} грн</p>`;
+        } else {
+          refs.productPrice.innerHTML = `<span class="item-price">${targetSize.dataset.price} грн</span>
+                                          <span class="item-new-price">${targetSize.dataset.sale} грн</span>`;
+        }
 
         // ID варіації для додавання у кошик
         prevActiveId = targetSize.dataset.variationId;
