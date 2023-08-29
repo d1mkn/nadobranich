@@ -9,10 +9,14 @@ Template Name: Home
 <main>
 
   <section class="hero">
-    <div class="hero__overlay">
+    <div class="hero__overlay" style="background-image: url(<?php the_field('hero_bg') ?>)">
       <div class="hero__content-wrap">
-        <h1 class="hero__title">Ласкаво просимо до "На добраніч"</h1>
-        <p class="hero__subtitle">Ідеального магазину постільної білизни</p>
+        <h1 class="hero__title">
+          <?php the_field('hero_title') ?>
+        </h1>
+        <p class="hero__subtitle">
+          <?php the_field('hero_subtitle') ?>
+        </p>
         <div class="hero__button-wrap">
           <a class="hero__button" href="#catalog">Каталог</a>
         </div>

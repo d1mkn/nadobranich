@@ -333,7 +333,7 @@ function pickSize() {
         // Оновлення інформації про ціну
         console.log(targetSize.dataset.sale);
         if (targetSize.dataset.sale === targetSize.dataset.price) {
-          refs.productPrice.innerHTML = `<p class="body-price js-modal-price">${targetSize.dataset.price} грн</p>`;
+          refs.productPrice.innerHTML = `${targetSize.dataset.price} грн`;
         } else {
           refs.productPrice.innerHTML = `<span class="item-price">${targetSize.dataset.price} грн</span>
                                           <span class="item-new-price">${targetSize.dataset.sale} грн</span>`;
