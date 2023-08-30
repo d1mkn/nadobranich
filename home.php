@@ -81,7 +81,7 @@ Template Name: Home
           echo '<li class="category__item swiper-slide">';
           echo '<a class="category__item-link" href="' .
             $category_link .
-            '">';
+            '" aria-label="Посилання на категорію товару">';
           echo '<div class="category__item-img-wrap">';
           echo '<img class="category__item-img" src="' .
             $category_image .
@@ -145,7 +145,7 @@ Template Name: Home
           <h3 class="single-category__title">
             <?php echo $category_name ?>
           </h3>
-          <a href="<?php echo $category_link ?>">
+          <a href="<?php echo $category_link ?>" aria-label="Посилання на сторінку категорії">
             <svg width="20" height="18">
               <use href="<?php bloginfo("template_url") ?>/assets/images/icons.svg#to-category"></use>
             </svg>
@@ -285,7 +285,7 @@ Template Name: Home
                     <p class="single-category__item-overlay-text-tab">+</p>
                   </div>
                   <div class="single-category__item-about">
-                    <a href="<?php echo get_permalink() ?>">
+                    <a href="<?php echo get_permalink() ?>" aria-label="Посилання на сторінку товару">
                       <div class="single-category__item-img">
                         <?php echo get_the_post_thumbnail() ?>
                       </div>
@@ -327,7 +327,7 @@ Template Name: Home
                             foreach ($terms as $term) {
                               $color = $term->slug; ?>
                               <a class="modal__body-color-item" href="<?php echo get_permalink() ?>"
-                                style="background-color: <?php echo $color ?>;">
+                                style="background-color: <?php echo $color ?>;" aria-label="Посилання на сторінку товару">
                               </a>
                             <?php } ?>
                           </div>

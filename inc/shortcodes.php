@@ -79,7 +79,7 @@ function modal_markup()
   <div class="modal">
     <div class="modal__dialog">
       <div class="modal__content">
-        <button class="modal__dialog-close" type="button">
+        <button class="modal__dialog-close" type="button" aria-label="Кнопка закриття модального віконця">
           <svg class="modal__dialog-close-icon" width="15" height="15">
             <use href="' . $template_url . '/assets/images/icons.svg#close"></use>
           </svg>
@@ -132,7 +132,7 @@ function modal_markup()
                 Колір:<span class="modal__body-item-color js-modal-color">###</span>
               </p>
               <div class="modal__body-color-picker js-modal-color-list">
-                <a class="modal__body-color-item active" href="#"></a>
+                <a class="modal__body-color-item active" href="#" aria-label="Активний колір"></a>
               </div>
             </div>
             <div class="modal__body-size-wrap">
@@ -141,7 +141,7 @@ function modal_markup()
                   Розмір:<span class="modal__body-item-size js-modal-size">###</span>
                 </p>
                 <div class="modal__body-size-picker js-modal-size-list">
-                  <button class="modal__body-size-btn active" type="button"> </button>
+                  <button class="modal__body-size-btn active" type="button" aria-label="Кнопка вибору розміру"> </button>
                 </div>
               </div>
             </div>
@@ -170,7 +170,7 @@ function modalToCart_markup()
   $markup = '
     <div class="animate__animated js-to-cart-modal to-cart__wrap visually-hidden">
     <div class="to-cart__content">
-      <button class="js-to-cart-close-btn to-cart__close-btn">
+      <button class="js-to-cart-close-btn to-cart__close-btn" aria-label="Кнопка закриття модального віконця">
         <svg width="15" height="15">
           <use href="' . $template_url . '/assets/images/icons.svg#close"></use>
         </svg>
@@ -199,7 +199,7 @@ function modalAuth_markup()
   $markup = '
     <div class="auth-modal__container visually-hidden">
     <div class="auth-modal__content">
-      <button class="auth-modal__close-btn js-auth-close-btn">
+      <button class="auth-modal__close-btn js-auth-close-btn" aria-label="Кнопка закриття модального віконця">
         <svg width="15" height="15">
           <use href="' . $template_url . '/assets/images/icons.svg#close"></use>
         </svg>

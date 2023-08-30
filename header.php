@@ -16,7 +16,7 @@ session_unset();
   <?php wp_body_open(); ?>
   <header>
     <div class="container header__container">
-      <button class="mobile-menu-btn" type="button">
+      <button class="mobile-menu-btn" type="button" aria-label="Кнопка мобільного меню">
         <svg class="mobile-menu-icon" width="25" height="20">
           <use href="<?php bloginfo('template_url') ?>/assets/images/icons.svg#mobile-menu"></use>
         </svg>
@@ -24,7 +24,7 @@ session_unset();
       <nav>
         <ul class="navigation__list">
           <li class="navigation__item">
-            <button class="navigation__item-button">Каталог</button>
+            <button class="navigation__item-button" aria-label="Кнопка каталогу">Каталог</button>
             <div class="navigation__dropdown-wrap">
               <ul class="navigation__dropdown">
                 <?php
@@ -55,7 +55,7 @@ session_unset();
               </ul>
             </div>
           <li class="navigation__item">
-            <button class="navigation__item-button">Інформація</button>
+            <button class="navigation__item-button" aria-label="Кнопка інформації">Інформація</button>
             <div class="navigation__dropdown-wrap">
               <ul class="navigation__dropdown">
                 <li class="navigation__dropdown-item">
@@ -70,7 +70,7 @@ session_unset();
         </ul>
       </nav>
       <div class="logo-wrap">
-        <a href="<?php echo site_url('') ?>">
+        <a href="<?php echo site_url('') ?>" aria-label="Посилання на головну сторінку">
           <svg class="header__logo" width="188" height="50">
             <use href='<?php bloginfo('template_url') ?>/assets/images/icons.svg#logo'></use>
           </svg>
@@ -80,14 +80,14 @@ session_unset();
       <div class="header__controls">
         <ul class="header__controls-list">
           <li class="header__controls-item search">
-            <button class="js-search-btn">
+            <button class="js-search-btn" aria-label="Кнопка пошуку на сайті">
               <svg class="header__controls-item-icon" width="24" height="24">
                 <use href="<?php bloginfo('template_url') ?>/assets/images/icons.svg#search"></use>
               </svg>
             </button>
           </li>
           <li class="header__controls-item cart">
-            <a class="cart-link" href="<?php echo wc_get_cart_url() ?>">
+            <a class="cart-link" href="<?php echo wc_get_cart_url() ?>" aria-label="Посилання на кошик">
               <svg class="header__controls-item-icon" width="24" height="70">
                 <use href="<?php bloginfo('template_url') ?>/assets/images/icons.svg#cart"></use>
               </svg>
@@ -101,7 +101,7 @@ session_unset();
             </a>
           </li>
           <li class="header__controls-item user">
-            <button>
+            <button aria-label="Кнопка особистого кабінету">
               <svg class="header__controls-item-icon" width="24" height="24">
                 <use href="<?php bloginfo('template_url') ?>/assets/images/icons.svg#user"></use>
               </svg>

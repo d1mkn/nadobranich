@@ -144,7 +144,7 @@ $_SESSION['aboutProducts'][] = array(
 				<p class="single-category__item-overlay-text-tab">+</p>
 			</div>
 			<div class="single-category__item-about">
-				<a href="<?php echo get_permalink() ?>">
+				<a href="<?php echo get_permalink() ?>" aria-label="Посилання на сторінку товару">
 					<div class="single-category__item-img">
 						<?php echo get_the_post_thumbnail() ?>
 					</div>
