@@ -185,8 +185,9 @@ $_SESSION['aboutProducts'][] = array(
 								// Підставляємо значення кольору як bg для кружечків
 								foreach ($terms as $term) {
 									$color = $term->slug; ?>
-									<a class="modal__body-color-item" href="<?php echo get_permalink() ?>"
-										style="background-color: <?php echo $color ?>;">
+									<a class="modal__body-color-item"
+										href="<?php echo get_permalink() ?>?attribute_pa_color=<?php echo $color ?>""
+										style=" background-color: <?php echo $color ?>;">
 									</a>
 								<?php } ?>
 							</div>

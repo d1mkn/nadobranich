@@ -71,7 +71,9 @@ if (!comments_open()) {
 						<option value="3">' . esc_html__('Average', 'woocommerce') . '</option>
 						<option value="2">' . esc_html__('Not that bad', 'woocommerce') . '</option>
 						<option value="1">' . esc_html__('Very poor', 'woocommerce') . '</option>
-					</select></div>';
+					</select>
+					<span class="error visually-hidden">Оцініть товар</span>
+					</div>';
 					}
 					comment_form(apply_filters('woocommerce_product_review_comment_form_args', $comment_form));
 					?>

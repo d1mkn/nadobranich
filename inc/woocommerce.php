@@ -128,7 +128,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
             <div class="reviews__form-input-wrap">
                 <?php
                 echo $fields['author'] = '<div class="validation-wrap"><input class="reviews__form-input" type="name" name="author" placeholder="Ім\'я" required="true"><span class="error visually-hidden">Вкажіть ім\'я</span></div>';
-                echo $fields['email'] = '<div class="validation-wrap"><input class="reviews__form-input" type="email" name="email" placeholder="Електронна адреса" required="true"><span class="error visually-hidden">Вкажіть коректний e-mail</span></div>'
+                echo $fields['email'] = '<div class="validation-wrap"><input class="reviews__form-input" type="email" name="email" placeholder="Електронна адреса" required="true"><span class="error visually-hidden">Вкажіть e-mail</span></div>'
                     ?>
             </div>
             <?php

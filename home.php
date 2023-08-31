@@ -326,7 +326,8 @@ Template Name: Home
                             // Підставляємо значення кольору як bg для кружечків
                             foreach ($terms as $term) {
                               $color = $term->slug; ?>
-                              <a class="modal__body-color-item" href="<?php echo get_permalink() ?>"
+                              <a class="modal__body-color-item"
+                                href="<?php echo get_permalink() ?>?attribute_pa_color=<?php echo $color ?>"
                                 style="background-color: <?php echo $color ?>;" aria-label="Посилання на сторінку товару">
                               </a>
                             <?php } ?>

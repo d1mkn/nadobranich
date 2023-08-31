@@ -35,15 +35,9 @@ commentForm.addEventListener("submit", (e) => {
   const rating = document.querySelector(".stars.selected");
   let isFormValidated = true;
 
-  if (rating == null) {
+  if (!rating) {
     isFormValidated = false;
-    if (document.querySelector(".error").textContent === "Оцініть товар") {
-      e.preventDefault();
-      return;
-    }
-    document
-      .querySelector(".reviews__form-rating")
-      .insertAdjacentHTML("beforeend", '<span class="error">Оцініть товар</span>');
+    document.querySelector(".reviews__form-rating .error").classList.remove("visually-hidden");
   } else {
     document.querySelector(".reviews__form-rating .error").classList.add("visually-hidden");
   }
