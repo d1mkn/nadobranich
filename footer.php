@@ -89,12 +89,18 @@
               </svg>
               <ul class="footer__contacts-list">
                 <li>
-                  <a class="footer__contacts-link" href="tel:+38<?php the_field('first_phone', '131') ?>"
-                    aria-label="Посилання на телефон"><?php the_field('first_phone', '131') ?></a>
+                  <a class="footer__contacts-link" href="tel:+38<?php
+                  $number = get_field('first_phone', 131);
+                  $cleaned_number = preg_replace('/\D/', '', $number);
+                  echo $cleaned_number;
+                  ?>" aria-label="Посилання на телефон"><?php the_field('first_phone', '131') ?></a>
                 </li>
                 <li>
-                  <a class="footer__contacts-link" href="tel:+38<?php the_field('second_phone', '131') ?>"
-                    aria-label="Посилання на телефон"><?php the_field('second_phone', '131') ?></a>
+                  <a class="footer__contacts-link" href="tel:+38<?php
+                  $number = get_field('second_phone', 131);
+                  $cleaned_number = preg_replace('/\D/', '', $number);
+                  echo $cleaned_number;
+                  ?>" aria-label="Посилання на телефон"><?php the_field('second_phone', '131') ?></a>
                 </li>
               </ul>
             </div>
