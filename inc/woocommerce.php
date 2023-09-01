@@ -443,5 +443,41 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
         }
     }
     add_action('woocommerce_before_cart', 'nadobranich_check_cart_items_availability');
+    function hide_core_update_notification()
+    {
+        remove_action('admin_notices', 'update_nag', 3);
+    }
+    add_action('admin_head', 'hide_core_update_notification');
+    add_action('admin_bar_menu', function ($wp_adminbar) {
+        $wp_adminbar->remove_node('updates');
+    }, 999);
 
+    add_action('admin_menu', function () {
+
+        remove_action('admin_notices', 'update_nag', 3);
+
+        remove_action('network_admin_notices', 'update_nag', 3);
+
+        remove_action('update_footer', 'core_update_footer');
+
+        remove_submenu_page('index.php', 'update-core.php');
+
+        $GLOBALS['menu'][65][0] = __('Plugins');
+
+        remove_menu_page("edit.php?post_type=acf-field-group"); # ACF
+        remove_menu_page("WP-Optimize"); # WP-Optimize
+        remove_menu_page("getwooplugins"); # 
+        remove_menu_page("ald_setting"); # load more anything
+
+    }, 999);
+
+    add_action('admin_head-index.php', function () {
+        ?>
+                <style>
+                    #wp-version-message .button {
+                        display: none;
+                    }
+                </style>
+                <?php
+    });
 }
