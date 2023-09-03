@@ -195,8 +195,18 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                         <use href="<?php bloginfo('template_url') ?>/assets/images/icons.svg#phone"></use>
                     </svg>
                     <ul class="cabinet-contacts__list">
-                        <li> <a class="cabinet-contacts__link" href="tel:+380983363028">(098) 33-63-028</a> </li>
-                        <li> <a class="cabinet-contacts__link" href="tel:+380983363028">(098) 33-63-028</a> </li>
+                        <li> <a class="cabinet-contacts__link" href="tel:+38<?php
+                        $number = get_field('first_phone', 131);
+                        $cleaned_number = preg_replace('/\D/', '', $number);
+                        echo $cleaned_number;
+                        ?>" aria-label="Посилання на телефон"><?php the_field('first_phone', '131') ?></a> </li>
+                        <?php if (get_field('second_phone', 131)): ?>
+                            <li><a class="cabinet-contacts__link" href="tel:+38<?php
+                            $number = get_field('second_phone', 131);
+                            $cleaned_number = preg_replace('/\D/', '', $number);
+                            echo $cleaned_number;
+                            ?>" aria-label="Посилання на телефон"><?php the_field('second_phone', '131') ?></a> </li>
+                        <?php endif ?>
                     </ul>
                 </div>
             </div>
